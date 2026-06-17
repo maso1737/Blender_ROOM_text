@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLENDER ROOM // LEC_01 – Blenderの第一歩と「鉄の掟」</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,900;1,700;1,900&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;800&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
+<script src="./image-slot.js"></script>
+<style>
+  html{scrollbar-color:rgba(255,79,168,0.6) rgba(20,10,40,0.6)}
+  body{margin:0;color:#F8EFFF;
+    background:
+      radial-gradient(ellipse 80% 55% at 88% -10%, rgba(184,80,255,0.32), transparent 60%),
+      radial-gradient(ellipse 65% 50% at -10% 18%, rgba(255,122,194,0.17), transparent 60%),
+      radial-gradient(ellipse 70% 55% at 50% 115%, rgba(90,233,255,0.14), transparent 65%),
+      linear-gradient(180deg,#2b1852 0%,#190d34 100%);
+    background-attachment:fixed;}
+  ::selection{background:rgba(255,79,168,0.5)}
+  @keyframes kfTwinkle{0%,100%{opacity:0.5}50%{opacity:0.95}}
+  @keyframes kfFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @keyframes kfKeyPress{0%,13%,100%{transform:none;background-color:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none}4%,9%{transform:translateY(2px) scale(0.96);background-color:#FF4FA8;color:#22103d;box-shadow:0 0 16px rgba(255,79,168,0.85)}}
+  @keyframes kfKeyPressIce{0%,13%,100%{transform:none;background-color:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none}4%,9%{transform:translateY(2px) scale(0.96);background-color:#5AE9FF;color:#103040;box-shadow:0 0 16px rgba(90,233,255,0.85)}}
+  @keyframes kfHeroCube{0%,6%{transform:translateY(-78px);opacity:0}10%{opacity:1}30%{transform:translateY(0)}36%{transform:translateY(0) scale(1.06,0.92)}44%,100%{transform:translateY(0) scale(1,1);opacity:1}}
+  @keyframes kfHeroSpark{0%,42%{opacity:0;transform:scale(0.3) rotate(0deg)}52%,68%{opacity:1;transform:scale(1) rotate(20deg)}80%,100%{opacity:0;transform:scale(0.6) rotate(40deg)}}
+  @keyframes kfHeroShadow{0%,8%{transform:scale(0.3);opacity:0}30%{transform:scale(1);opacity:1}36%{transform:scale(1.12)}44%,100%{transform:scale(1);opacity:1}}
+  @keyframes kfOopsCube{0%,5%{transform:scale(1) rotate(0deg)}11%,46%{transform:scale(1.5,0.82) rotate(-2deg)}58%{transform:scale(1)}63%{transform:scale(1.07)}68%,100%{transform:scale(1)}}
+  @keyframes kfOopsBad{0%,10%{opacity:0}14%,46%{opacity:1}54%,100%{opacity:0}}
+  @keyframes kfOopsGood{0%,56%{opacity:0}63%,90%{opacity:1}98%,100%{opacity:0}}
+  @keyframes kfOopsS{0%,3%,14%,100%{transform:none;background-color:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none}6%,11%{transform:translateY(2px) scale(0.96);background-color:#FF4FA8;color:#22103d;box-shadow:0 0 16px rgba(255,79,168,0.85)}}
+  @keyframes kfOopsCtrl{0%,46%,61%,100%{transform:none;background-color:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none}50%,57%{transform:translateY(2px) scale(0.96);background-color:#5AE9FF;color:#103040;box-shadow:0 0 16px rgba(90,233,255,0.85)}}
+  @keyframes kfOopsA{0%,49%,63%,100%{transform:none;background-color:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none}53%,59%{transform:translateY(2px) scale(0.96);background-color:#5AE9FF;color:#103040;box-shadow:0 0 16px rgba(90,233,255,0.85)}}
+  @keyframes kfGzG{0%,4%,16%,100%{transform:none;background-color:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none}7%,13%{transform:translateY(2px) scale(0.96);background-color:#FF4FA8;color:#22103d;box-shadow:0 0 16px rgba(255,79,168,0.85)}}
+  @keyframes kfGzZ{0%,16%,30%,100%{transform:none;background-color:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none}20%,26%{transform:translateY(2px) scale(0.96);background-color:#FF4FA8;color:#22103d;box-shadow:0 0 16px rgba(255,79,168,0.85)}}
+  @keyframes kfGzCube{0%,28%{transform:translateY(-58px)}42%{transform:translateY(0)}46%{transform:translateY(-3px)}50%,100%{transform:translateY(0)}}
+  @keyframes kfGzFlash{0%,42%{opacity:0;transform:scale(0.6)}48%,72%{opacity:1;transform:scale(1)}84%,100%{opacity:0;transform:scale(0.8)}}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001s !important;animation-iteration-count:1 !important}}
+</style>
+</head>
+<body>
+<div style="font-family:'Noto Sans JP',sans-serif; min-height:100vh; overflow-x:hidden">
+
+  <!-- starfield -->
+  <div style="position:fixed; inset:0; pointer-events:none; z-index:0; mix-blend-mode:screen; opacity:0.85; animation:kfTwinkle 5s ease-in-out infinite; background-image:radial-gradient(1.5px 1.5px at 22px 34px, rgba(255,255,255,0.8), transparent 60%),radial-gradient(1px 1px at 120px 90px, rgba(255,210,122,0.8), transparent 60%),radial-gradient(1.5px 1.5px at 200px 160px, rgba(181,142,255,0.8), transparent 60%),radial-gradient(1px 1px at 280px 50px, rgba(90,233,255,0.7), transparent 60%),radial-gradient(1.5px 1.5px at 330px 210px, rgba(255,122,194,0.7), transparent 60%); background-size:380px 260px"></div>
+
+  <!-- TOPBAR -->
+  <div style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; height:52px; padding:0 22px; background:rgba(24,12,46,0.82); backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,210,122,0.18)">
+    <div style="display:flex; align-items:center; gap:10px">
+      <span style="color:#FFD27A; font-size:14px">✦</span>
+      <span style="display:inline-block; padding-right:0.35em; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic; font-size:19px; letter-spacing:0.04em; background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">BLENDER ROOM</span>
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:rgba(181,142,255,0.85)">部屋を、つくろう。</span>
+    </div>
+    <div style="display:flex; align-items:center; gap:14px">
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.25em; color:#FFD27A">LEC 01 / 15</span>
+      <a href="index.html" style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.2em; color:#5AE9FF; text-decoration:none; border:1px solid rgba(90,233,255,0.4); border-radius:7px; padding:6px 12px; background:rgba(90,233,255,0.06)" data-sh="background:rgba(90,233,255,0.16);box-shadow:0 0 10px rgba(90,233,255,0.4)">全15回マップ ▸</a>
+    </div>
+  </div>
+
+  <div style="position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 26px 80px">
+
+    <!-- HERO -->
+    <div style="padding:64px 0 22px">
+      <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.34em; color:#FFD27A">BLENDER_ROOM // LEC_01</span>
+        <span style="height:1px; width:60px; background:linear-gradient(90deg,#FFD27A,transparent)"></span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.2em; color:rgba(181,142,255,0.9)">はじめてのBlender</span>
+      </div>
+      <div style="display:flex; align-items:baseline; gap:18px; margin-top:18px; flex-wrap:wrap">
+        <span style="display:inline-block; padding-right:0.18em; padding-left:0.06em; font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700; font-size:92px; line-height:1; padding-bottom:0.14em; letter-spacing:-0.03em; background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; filter:drop-shadow(0 0 26px rgba(255,79,168,0.35))">01</span>
+        <h1 style="margin:0; font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:40px; line-height:1.25; letter-spacing:0.02em; background:linear-gradient(110deg,#FFFFFF,#FFD9EE 45%,#CDB4FF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">Blenderの第一歩と<br>「鉄の掟」</h1>
+      </div>
+      <p style="margin:16px 0 0; font-size:15px; line-height:2; color:rgba(248,239,255,0.78); letter-spacing:0.06em">3D酔いも迷子も、今日で卒業。最初の1回で「プロと同じ作法」を身につけて、<br>これから15回、事故ゼロで「アニメ背景になる部屋」を作っていきます。</p>
+
+      <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:18px; margin-top:34px; align-items:stretch">
+        <div style="border:1px solid rgba(255,210,122,0.25); border-radius:14px; padding:24px 26px; background:linear-gradient(180deg,rgba(255,122,194,0.07),rgba(181,142,255,0.04))">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.34em; color:#FFD27A">TODAY'S GOAL ── 今日のゴール</div>
+          <div style="display:flex; flex-direction:column; gap:14px; margin-top:18px">
+            <div style="display:flex; gap:12px; align-items:flex-start">
+              <span style="color:#FF7AC2; font-size:14px; line-height:1.9">▸</span>
+              <span style="font-size:15px; font-weight:700; line-height:1.9; color:#F8EFFF">3D空間を、迷子にならずに動き回れるようになる</span>
+            </div>
+            <div style="display:flex; gap:12px; align-items:flex-start">
+              <span style="color:#FF7AC2; font-size:14px; line-height:1.9">▸</span>
+              <span style="font-size:15px; font-weight:700; line-height:1.9; color:#F8EFFF">後々のエラーを100%防ぐ「プロのワークフロー」を覚える</span>
+            </div>
+          </div>
+          <div style="margin-top:20px; padding-top:16px; border-top:1px dashed rgba(181,142,255,0.3); font-size:13px; line-height:2; color:rgba(248,239,255,0.66); letter-spacing:0.04em">絵を描く前に筆と紙を整えるのと同じで、3Dも<strong style="color:#5AE9FF; font-weight:700">最初の段取りが9割</strong>。今日の内容は全15回ずっと使います。</div>
+        </div>
+        <!-- 成果物: dropping cube -->
+        <div style="border:1px solid rgba(181,142,255,0.3); border-radius:14px; padding:20px 22px 16px; background:rgba(13,6,32,0.45); display:flex; flex-direction:column">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.34em; color:#5AE9FF">本日の成果物</div>
+          <div style="position:relative; flex:1; min-height:190px; display:flex; align-items:flex-end; justify-content:center; overflow:hidden">
+            <div style="position:absolute; left:8%; right:8%; bottom:42px; height:2px; background:linear-gradient(90deg,transparent,rgba(255,210,122,0.7),transparent)"></div>
+            <div style="position:absolute; bottom:36px; left:50%; width:92px; height:12px; margin-left:-46px; border-radius:50%; background:rgba(10,4,24,0.65); animation:kfHeroShadow 6s ease-in-out infinite"></div>
+            <div style="position:absolute; bottom:108px; left:50%; margin-left:36px; color:#FFD27A; font-size:20px; animation:kfHeroSpark 6s ease-in-out infinite; text-shadow:0 0 12px rgba(255,210,122,0.8)">✦</div>
+            <div style="position:absolute; bottom:128px; left:50%; margin-left:-66px; color:#FF7AC2; font-size:13px; animation:kfHeroSpark 6s ease-in-out infinite; animation-delay:0.25s; text-shadow:0 0 10px rgba(255,122,194,0.8)">✦</div>
+            <div style="position:relative; margin-bottom:44px; animation:kfHeroCube 6s cubic-bezier(0.34,1.3,0.5,1) infinite; transform-origin:50% 100%">
+              <div style="width:120px; height:110px; perspective:700px">
+                <div style="position:absolute; left:50%; top:58%; transform-style:preserve-3d; transform:translateZ(-40px) rotateX(-24deg) rotateY(-38deg)">
+                  <div style="position:absolute; left:-34px; top:-34px; width:68px; height:68px; transform:translateZ(34px); background:rgba(255,122,194,0.22); border:2px solid #FF7AC2; border-radius:4px; display:flex; align-items:center; justify-content:center">
+                    <div style="display:flex; flex-direction:column; align-items:center; gap:3px">
+                      <div style="display:flex; gap:14px"><span style="width:6px; height:8px; border-radius:50%; background:#F8EFFF"></span><span style="width:6px; height:8px; border-radius:50%; background:#F8EFFF"></span></div>
+                      <span style="width:10px; height:5px; border:2px solid #F8EFFF; border-top:none; border-radius:0 0 10px 10px"></span>
+                    </div>
+                  </div>
+                  <div style="position:absolute; left:-34px; top:-34px; width:68px; height:68px; transform:rotateY(90deg) translateZ(34px); background:rgba(181,142,255,0.20); border:2px solid #B58EFF; border-radius:4px"></div>
+                  <div style="position:absolute; left:-34px; top:-34px; width:68px; height:68px; transform:rotateX(90deg) translateZ(34px); background:rgba(255,210,143,0.26); border:2px solid #FFD27A; border-radius:4px"></div>
+                </div>
+              </div>
+            </div>
+            <div style="position:absolute; bottom:8px; left:50%; transform:translateX(-50%); font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.22em; color:#FFD27A">⊢ 1.000 m ⊣ ぴったり接地</div>
+          </div>
+          <div style="font-size:13px; font-weight:700; color:rgba(248,239,255,0.85); text-align:center; letter-spacing:0.06em; line-height:1.8">正確な「1m四方」のサイコロ<br><span style="font-weight:400; font-size:11.5px; color:rgba(181,142,255,0.95)">底面が地面(Z=0)にピタッと接地した状態</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 01 基本設定 -->
+    <div data-reveal="1" style="margin-top:64px">
+      <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap">
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700; font-size:44px; color:#FFD27A; line-height:1">01</span>
+        <h2 style="margin:0; font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:26px; letter-spacing:0.04em; color:#F8EFFF">まず最初にやる、5つの基本設定</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.3em; color:rgba(181,142,255,0.9)">SETUP // 最初のおまじない</span>
+      </div>
+      <p style="margin:12px 0 0; font-size:14px; line-height:2; color:rgba(248,239,255,0.7); letter-spacing:0.04em">インストール直後に5つだけ設定します。あとで困らないための「おまじない」だと思ってOK。</p>
+
+      <div style="display:flex; flex-direction:column; gap:14px; margin-top:24px">
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr 240px; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">1</span></div>
+          <div>
+            <div style="font-size:16px; font-weight:900; color:#F8EFFF; letter-spacing:0.04em">英語表記を、いつでも見られるようにする</div>
+            <div style="margin-top:8px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#5AE9FF">編集 ▸ プリファレンス ▸ インターフェース ▸ 翻訳</span><br>
+              「新規データ」のチェックを<strong style="color:#FF7AC2">外す</strong>(ツールチップのみONがおすすめ)。<br>
+              <span style="color:rgba(181,142,255,0.95); font-size:12px">困った時に英語名で検索できると、世界中のチュートリアルが味方になります。</span>
+            </div>
+          </div>
+          <image-slot id="slot-pref-translate" shape="rounded" radius="10" placeholder="プリファレンス(翻訳)のスクショをここにドラッグ" style="width:240px;height:140px;display:block"></image-slot>
+        </div>
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">2</span></div>
+          <div>
+            <div style="font-size:16px; font-weight:900; color:#F8EFFF; letter-spacing:0.04em">視点グルグルの「中心」を直す</div>
+            <div style="margin-top:8px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#5AE9FF">プリファレンス ▸ ナビゲーション ▸ 軌道とパン</span> ▸ 「<strong style="color:#FF7AC2">選択物を中心に回転</strong>」にチェック。<br>
+              <span style="color:rgba(181,142,255,0.95); font-size:12px">いま見ているモノを中心にカメラが回ってくれるので、3D酔いがぐっと減ります。</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr 240px; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">3</span></div>
+          <div>
+            <div style="font-size:16px; font-weight:900; color:#F8EFFF; letter-spacing:0.04em">寸法(サイズ)を常に見えるようにする</div>
+            <div style="margin-top:8px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">
+              画面右上の◎が重なったアイコン <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#5AE9FF">ビューポートオーバーレイ</span> の▼を開き、「<strong style="color:#FF7AC2">辺の長さ</strong>」にチェック。<br>
+              <span style="color:rgba(181,142,255,0.95); font-size:12px">※編集モードのときだけ表示されます。背景美術は寸法が命!</span>
+            </div>
+          </div>
+          <image-slot id="slot-overlay-menu" shape="rounded" radius="10" placeholder="オーバーレイのメニューのスクショをここにドラッグ" style="width:240px;height:140px;display:block"></image-slot>
+        </div>
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr; gap:18px; border:1px solid rgba(255,79,168,0.45); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,79,168,0.10),rgba(181,142,255,0.04)); align-items:center; box-shadow:0 0 24px rgba(255,79,168,0.12)">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">4</span></div>
+          <div>
+            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
+              <span style="font-size:16px; font-weight:900; color:#F8EFFF; letter-spacing:0.04em">テンキーが無いノートPCの人へ</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.25em; color:#22103d; background:linear-gradient(135deg,#FFD27A,#FF7AC2); border-radius:5px; padding:3px 8px; font-weight:600">超重要</span>
+            </div>
+            <div style="margin-top:8px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#5AE9FF">プリファレンス ▸ 入力</span> ▸ 「<strong style="color:#FF7AC2">テンキーを模倣</strong>」にチェック。<br>
+              キーボード上段の数字 <span style="font-family:'IBM Plex Mono',monospace; color:#FFD27A">1・3・7</span> が、このあと習う「視点切り替えキー」として使えるようになります。
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">5</span></div>
+          <div>
+            <div style="font-size:16px; font-weight:900; color:#F8EFFF; letter-spacing:0.04em">こまめな保存を、習慣に</div>
+            <div style="margin-top:8px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:#5AE9FF">ファイル ▸ 名前を付けて保存</span> で .blend を保存。
+              <span style="display:inline-flex; gap:6px; margin:0 6px; vertical-align:middle">
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:#FFD27A; border:1px solid rgba(255,210,122,0.4); border-radius:5px; padding:2px 7px">02_壁.blend</span>
+                <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:#FFD27A; border:1px solid rgba(255,210,122,0.4); border-radius:5px; padding:2px 7px">03_家具.blend</span>
+              </span><br>
+              のように番号をつけて<strong style="color:#FF7AC2">別名保存</strong>していくと、データが壊れても前に戻れます。<span style="color:rgba(181,142,255,0.95); font-size:12px">プロも必ずやる保険です。</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 02 視点操作 -->
+    <div data-reveal="1" style="margin-top:72px">
+      <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap">
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700; font-size:44px; color:#FFD27A; line-height:1">02</span>
+        <h2 style="margin:0; font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:26px; letter-spacing:0.04em; color:#F8EFFF">迷子にならない視点操作</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.3em; color:rgba(181,142,255,0.9)">NAVIGATION // テンキーが命綱</span>
+      </div>
+      <p style="margin:12px 0 0; font-size:14px; line-height:2; color:rgba(248,239,255,0.7); letter-spacing:0.04em">「どこ見てるのか分からなくなった…」となったら、まずテンキー。<strong style="color:#5AE9FF">下のテンキーは実際に押せます</strong>。クリックして視点の変わり方を体感してみてください。</p>
+
+      <div style="display:grid; grid-template-columns:1fr 230px; gap:20px; margin-top:24px; border:1px solid rgba(181,142,255,0.3); border-radius:14px; padding:24px; background:rgba(13,6,32,0.45)">
+        <!-- 3D viewport -->
+        <div style="position:relative; min-height:300px; border:1px solid rgba(181,142,255,0.25); border-radius:10px; background:radial-gradient(ellipse 70% 60% at 50% 30%, rgba(181,142,255,0.08), transparent 70%), #160b30; overflow:hidden">
+          <div style="position:absolute; left:10px; top:10px; width:14px; height:14px; border-left:2px solid #FFD27A; border-top:2px solid #FFD27A; opacity:0.8"></div>
+          <div style="position:absolute; right:10px; top:10px; width:14px; height:14px; border-right:2px solid #FFD27A; border-top:2px solid #FFD27A; opacity:0.8"></div>
+          <div style="position:absolute; left:10px; bottom:10px; width:14px; height:14px; border-left:2px solid #FFD27A; border-bottom:2px solid #FFD27A; opacity:0.8"></div>
+          <div style="position:absolute; right:10px; bottom:10px; width:14px; height:14px; border-right:2px solid #FFD27A; border-bottom:2px solid #FFD27A; opacity:0.8"></div>
+          <div id="viewLabel" style="position:absolute; left:18px; top:14px; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.2em; color:#5AE9FF; text-shadow:0 0 8px rgba(90,233,255,0.5)">VIEW // USER VIEW · 自由視点</div>
+          <div id="projLabel" style="position:absolute; left:18px; top:32px; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.2em; color:rgba(255,210,122,0.9)">PERSP ── 透視投影(パースあり)</div>
+          <div id="perspContainer" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; perspective:620px; perspective-origin:50% 38%">
+            <div id="scene3d" style="position:relative; width:0; height:0; transform-style:preserve-3d; transform:rotateX(-26deg) rotateY(-38deg); transition:transform 0.8s cubic-bezier(0.25,1,0.35,1)">
+              <div style="position:absolute; left:-110px; top:-110px; width:220px; height:220px; transform:translateY(46px) rotateX(90deg); background-image:repeating-linear-gradient(0deg, rgba(181,142,255,0.22) 0 1px, transparent 1px 22px), repeating-linear-gradient(90deg, rgba(181,142,255,0.22) 0 1px, transparent 1px 22px); border:1px solid rgba(181,142,255,0.3)">
+                <div style="position:absolute; left:0; right:0; top:50%; height:2px; margin-top:-1px; background:rgba(255,90,122,0.75)"></div>
+                <div style="position:absolute; top:0; bottom:0; left:50%; width:2px; margin-left:-1px; background:rgba(110,228,150,0.75)"></div>
+              </div>
+              <div style="position:absolute; transform-style:preserve-3d; transform:translateY(0px)">
+                <div style="position:absolute; left:-42px; top:-42px; width:84px; height:84px; transform:translateZ(42px); background:rgba(255,122,194,0.20); border:2px solid #FF7AC2; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px">
+                  <div style="display:flex; flex-direction:column; align-items:center; gap:4px">
+                    <div style="display:flex; gap:18px"><span style="width:7px; height:10px; border-radius:50%; background:#F8EFFF"></span><span style="width:7px; height:10px; border-radius:50%; background:#F8EFFF"></span></div>
+                    <span style="width:12px; height:6px; border:2px solid #F8EFFF; border-top:none; border-radius:0 0 12px 12px"></span>
+                  </div>
+                  <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.25em; color:#FF7AC2">正面</span>
+                </div>
+                <div style="position:absolute; left:-42px; top:-42px; width:84px; height:84px; transform:rotateY(180deg) translateZ(42px); background:rgba(120,90,200,0.18); border:2px solid rgba(181,142,255,0.6); display:flex; align-items:center; justify-content:center"><span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.25em; color:rgba(181,142,255,0.9)">うしろ</span></div>
+                <div style="position:absolute; left:-42px; top:-42px; width:84px; height:84px; transform:rotateY(90deg) translateZ(42px); background:rgba(181,142,255,0.20); border:2px solid #B58EFF; display:flex; align-items:center; justify-content:center"><span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.25em; color:#CDB4FF">右側面</span></div>
+                <div style="position:absolute; left:-42px; top:-42px; width:84px; height:84px; transform:rotateY(-90deg) translateZ(42px); background:rgba(181,142,255,0.14); border:2px solid rgba(181,142,255,0.55); display:flex; align-items:center; justify-content:center"><span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.25em; color:rgba(181,142,255,0.85)">左側面</span></div>
+                <div style="position:absolute; left:-42px; top:-42px; width:84px; height:84px; transform:rotateX(90deg) translateZ(42px); background:rgba(255,210,143,0.24); border:2px solid #FFD27A; display:flex; align-items:center; justify-content:center"><span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.25em; color:#FFD27A">真上</span></div>
+                <div style="position:absolute; left:-42px; top:-42px; width:84px; height:84px; transform:rotateX(-90deg) translateZ(42px); background:rgba(90,60,140,0.3); border:2px solid rgba(181,142,255,0.4)"></div>
+              </div>
+            </div>
+          </div>
+          <div id="camFrame" style="position:absolute; inset:26px 40px; border:2px dashed rgba(255,210,122,0.8); border-radius:6px; pointer-events:none; opacity:0; transition:opacity 0.5s; box-shadow:0 0 0 200px rgba(10,4,24,0.45)">
+            <span style="position:absolute; left:8px; top:6px; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:#FFD27A">CAMERA 16:9</span>
+          </div>
+        </div>
+        <!-- numpad -->
+        <div style="display:flex; flex-direction:column; gap:14px; align-items:center; justify-content:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:#FFD27A">NUMPAD ── 押してみて!</div>
+          <div style="display:grid; grid-template-columns:repeat(3,52px); gap:8px">
+            <div id="npk7" onclick="numpadGo('top')" style="height:48px;display:flex;align-items:center;justify-content:center;border-radius:9px;cursor:pointer;user-select:none;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;border:1px solid rgba(181,142,255,0.45);border-bottom:3px solid rgba(181,142,255,0.6);background:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none;transform:none;transition:all 0.25s">7</div>
+            <div style="height:48px; display:flex; align-items:center; justify-content:center; border-radius:9px; border:1px solid rgba(181,142,255,0.2); background:rgba(248,239,255,0.03); color:rgba(248,239,255,0.3); font-family:'IBM Plex Mono',monospace; font-size:15px">8</div>
+            <div style="height:48px; display:flex; align-items:center; justify-content:center; border-radius:9px; border:1px solid rgba(181,142,255,0.2); background:rgba(248,239,255,0.03); color:rgba(248,239,255,0.3); font-family:'IBM Plex Mono',monospace; font-size:15px">9</div>
+            <div style="height:48px; display:flex; align-items:center; justify-content:center; border-radius:9px; border:1px solid rgba(181,142,255,0.2); background:rgba(248,239,255,0.03); color:rgba(248,239,255,0.3); font-family:'IBM Plex Mono',monospace; font-size:15px">4</div>
+            <div id="npk5" onclick="numpadTogglePersp()" style="height:48px;display:flex;align-items:center;justify-content:center;border-radius:9px;cursor:pointer;user-select:none;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;border:1px solid rgba(181,142,255,0.45);border-bottom:3px solid rgba(181,142,255,0.6);background:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none;transform:none;transition:all 0.25s">5</div>
+            <div style="height:48px; display:flex; align-items:center; justify-content:center; border-radius:9px; border:1px solid rgba(181,142,255,0.2); background:rgba(248,239,255,0.03); color:rgba(248,239,255,0.3); font-family:'IBM Plex Mono',monospace; font-size:15px">6</div>
+            <div id="npk1" onclick="numpadGo('front')" style="height:48px;display:flex;align-items:center;justify-content:center;border-radius:9px;cursor:pointer;user-select:none;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;border:1px solid rgba(181,142,255,0.45);border-bottom:3px solid rgba(181,142,255,0.6);background:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none;transform:none;transition:all 0.25s">1</div>
+            <div style="height:48px; display:flex; align-items:center; justify-content:center; border-radius:9px; border:1px solid rgba(181,142,255,0.2); background:rgba(248,239,255,0.03); color:rgba(248,239,255,0.3); font-family:'IBM Plex Mono',monospace; font-size:15px">2</div>
+            <div id="npk3" onclick="numpadGo('right')" style="height:48px;display:flex;align-items:center;justify-content:center;border-radius:9px;cursor:pointer;user-select:none;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;border:1px solid rgba(181,142,255,0.45);border-bottom:3px solid rgba(181,142,255,0.6);background:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none;transform:none;transition:all 0.25s">3</div>
+            <div id="npk0" onclick="numpadGo('camera')" style="height:48px;display:flex;align-items:center;justify-content:center;border-radius:9px;cursor:pointer;user-select:none;font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;border:1px solid rgba(181,142,255,0.45);border-bottom:3px solid rgba(181,142,255,0.6);background:rgba(248,239,255,0.07);color:#F8EFFF;box-shadow:none;transform:none;transition:all 0.25s">0</div>
+            <div style="height:48px; display:flex; align-items:center; justify-content:center; border-radius:9px; border:1px solid rgba(181,142,255,0.2); background:rgba(248,239,255,0.03); color:rgba(248,239,255,0.3); font-family:'IBM Plex Mono',monospace; font-size:15px">.</div>
+            <div onclick="numpadGo('home')" style="height:48px; display:flex; align-items:center; justify-content:center; border-radius:9px; border:1px solid rgba(90,233,255,0.35); background:rgba(90,233,255,0.06); color:#5AE9FF; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.1em; cursor:pointer" data-sh="background:rgba(90,233,255,0.15)">戻す</div>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:11.5px; color:rgba(248,239,255,0.75); line-height:1.7; letter-spacing:0.04em">
+            <div><span style="font-family:'IBM Plex Mono',monospace; color:#FF7AC2">1</span> 正面(フロント) <span style="font-family:'IBM Plex Mono',monospace; color:#FF7AC2">3</span> 右側面 <span style="font-family:'IBM Plex Mono',monospace; color:#FF7AC2">7</span> 真上</div>
+            <div><span style="font-family:'IBM Plex Mono',monospace; color:#FFD27A">5</span> パース ⇄ 平行投影</div>
+            <div><span style="font-family:'IBM Plex Mono',monospace; color:#5AE9FF">0</span> カメラから見る</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px; margin-top:14px; flex-wrap:wrap">
+        <div style="flex:1; min-width:280px; display:flex; align-items:center; gap:12px; border:1px solid rgba(181,142,255,0.28); border-radius:10px; padding:12px 16px; background:rgba(181,142,255,0.05)">
+          <span style="width:22px; height:34px; border:2px solid rgba(181,142,255,0.7); border-radius:11px; position:relative; flex-shrink:0"><span style="position:absolute; left:50%; top:5px; width:4px; height:9px; margin-left:-2px; border-radius:3px; background:#FF7AC2"></span></span>
+          <span style="font-size:12.5px; line-height:1.8; color:rgba(248,239,255,0.8)"><strong style="color:#F8EFFF">中ボタン(ホイール)ドラッグ</strong> = 視点をくるっと回転</span>
+        </div>
+        <div style="flex:1; min-width:280px; display:flex; align-items:center; gap:12px; border:1px solid rgba(181,142,255,0.28); border-radius:10px; padding:12px 16px; background:rgba(181,142,255,0.05)">
+          <span style="display:inline-flex; align-items:center; justify-content:center; height:26px; padding:0 8px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:6px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:11px; flex-shrink:0">Shift</span>
+          <span style="font-size:12.5px; line-height:1.8; color:rgba(248,239,255,0.8)"><strong style="color:#F8EFFF">+ 中ボタンドラッグ</strong> = 視点をスーッと平行移動</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 03 鉄の掟 -->
+    <div data-reveal="1" style="margin-top:72px">
+      <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap">
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700; font-size:44px; color:#FFD27A; line-height:1">03</span>
+        <h2 style="margin:0; font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:26px; letter-spacing:0.04em; color:#F8EFFF">絶対に守る「鉄の掟」</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.3em; color:#FF7AC2">IRON RULES // 超重要</span>
+      </div>
+      <p style="margin:12px 0 0; font-size:14px; line-height:2; color:rgba(248,239,255,0.7); letter-spacing:0.04em">初心者がいちばん詰まる「ベベルが歪む」「布が爆発する」事故。原因はほぼこれ。<strong style="color:#FF7AC2">モードによって、やっていい事が違います。</strong></p>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px">
+        <div style="border:1px solid rgba(255,210,122,0.3); border-radius:14px; padding:22px 24px; background:linear-gradient(180deg,rgba(255,210,122,0.07),rgba(181,142,255,0.03))">
+          <div style="display:flex; align-items:center; gap:10px">
+            <span style="width:34px; height:34px; border:2px solid #FFD27A; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:15px; color:#FFD27A">▣</span>
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:#FFD27A">OBJECT MODE</div>
+              <div style="font-size:16px; font-weight:900; color:#F8EFFF">オブジェクトモード</div>
+            </div>
+          </div>
+          <p style="margin:14px 0 0; font-size:13px; line-height:2; color:rgba(248,239,255,0.75)">「<strong style="color:#FFD27A">箱(コンテナ)</strong>」そのものを扱うモード。配置や移動はここで。</p>
+          <div style="margin-top:14px; border:1px solid rgba(255,79,168,0.5); border-radius:10px; padding:12px 14px; background:rgba(255,79,168,0.08); display:flex; align-items:center; gap:12px">
+            <span style="position:relative; display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border:1px solid rgba(255,79,168,0.6); border-bottom:3px solid rgba(255,79,168,0.7); border-radius:8px; background:rgba(248,239,255,0.06); font-family:'IBM Plex Mono',monospace; font-size:15px; font-weight:600; flex-shrink:0">S<span style="position:absolute; inset:-7px; display:flex; align-items:center; justify-content:center; color:#FF4FA8; font-size:38px; font-weight:400; line-height:1">⃠</span></span>
+            <span style="font-size:13px; font-weight:700; line-height:1.8; color:#FF9DD0">ここでは絶対に拡大縮小(S)をしない!<br><span style="font-weight:400; font-size:11.5px; color:rgba(248,239,255,0.65)">スケール値が「1」からズレてしまうため</span></span>
+          </div>
+        </div>
+        <div style="border:1px solid rgba(90,233,255,0.35); border-radius:14px; padding:22px 24px; background:linear-gradient(180deg,rgba(90,233,255,0.06),rgba(181,142,255,0.03))">
+          <div style="display:flex; align-items:center; gap:10px">
+            <span style="width:34px; height:34px; border:2px solid #5AE9FF; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:13px; color:#5AE9FF">∴</span>
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:#5AE9FF">EDIT MODE ── <span style="border:1px solid rgba(90,233,255,0.5); border-radius:4px; padding:1px 6px">Tab</span>で切替</div>
+              <div style="font-size:16px; font-weight:900; color:#F8EFFF">編集モード</div>
+            </div>
+          </div>
+          <p style="margin:14px 0 0; font-size:13px; line-height:2; color:rgba(248,239,255,0.75)">「<strong style="color:#5AE9FF">中身(頂点・辺・面)</strong>」を直接いじるモード。</p>
+          <div style="margin-top:14px; border:1px solid rgba(90,233,255,0.45); border-radius:10px; padding:12px 14px; background:rgba(90,233,255,0.07); display:flex; align-items:center; gap:12px">
+            <span style="color:#5AE9FF; font-size:20px; flex-shrink:0">✓</span>
+            <span style="font-size:13px; font-weight:700; line-height:1.8; color:#A8F2FF">サイズ変更・形を変えるのは必ずこっちで!<br><span style="font-weight:400; font-size:11.5px; color:rgba(248,239,255,0.65)">スケール値は「1」のまま安全に形が変わる</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ctrl+A demo -->
+      <div data-reveal="1" style="display:grid; grid-template-columns:1fr 300px; gap:20px; margin-top:18px; border:1px solid rgba(255,210,122,0.35); border-radius:14px; padding:24px; background:linear-gradient(180deg,rgba(255,210,122,0.06),rgba(255,122,194,0.04)); align-items:center">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">
+            <span style="color:#FFD27A; font-size:16px">✦</span>
+            <span style="font-size:17px; font-weight:900; color:#F8EFFF; letter-spacing:0.04em">お守り:「Sしちゃったら Ctrl+A」</span>
+          </div>
+          <p style="margin:12px 0 0; font-size:13px; line-height:2.1; color:rgba(248,239,255,0.75)">もしオブジェクトモードでうっかり <span style="font-family:'IBM Plex Mono',monospace; color:#FF7AC2">S</span> を押してしまったら、慌てず<br>
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:#5AE9FF">Ctrl + A ▸ 「スケール」</span> でリセット(スケール値が1.0に戻ります)。<br>
+          <span style="font-size:12px; color:rgba(181,142,255,0.95)">これを忘れると、第5回のベベルが歪んだり、第8回の布が爆発する原因に…。セットで唱えて覚えましょう。</span></p>
+        </div>
+        <div style="position:relative; height:170px; border:1px solid rgba(181,142,255,0.3); border-radius:10px; background:#160b30; overflow:hidden">
+          <div style="position:absolute; left:0; right:0; top:24px; display:flex; align-items:center; justify-content:center; height:64px">
+            <div style="width:46px; height:46px; border:2px solid #FF7AC2; border-radius:6px; background:rgba(255,122,194,0.2); animation:kfOopsCube 8s ease-in-out infinite"></div>
+          </div>
+          <div style="position:absolute; left:0; right:0; top:8px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.15em; color:#FF7AC2; opacity:0; animation:kfOopsBad 8s linear infinite">スケール X:1.50 …!?</div>
+          <div style="position:absolute; left:0; right:0; top:8px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:0.15em; color:#5AE9FF; opacity:0; animation:kfOopsGood 8s linear infinite">✓ スケール 1.0 に戻った!</div>
+          <div style="position:absolute; left:0; right:0; bottom:16px; display:flex; align-items:center; justify-content:center; gap:8px">
+            <span style="display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 9px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:7px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; animation:kfOopsS 8s linear infinite">S</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,239,255,0.5)">→</span>
+            <span style="display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 9px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:7px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; animation:kfOopsCtrl 8s linear infinite">Ctrl</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,239,255,0.5)">+</span>
+            <span style="display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 9px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:7px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; animation:kfOopsA 8s linear infinite">A</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 04 実践 -->
+    <div data-reveal="1" style="margin-top:72px">
+      <div style="display:flex; align-items:baseline; gap:14px; flex-wrap:wrap">
+        <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:700; font-size:44px; color:#FFD27A; line-height:1">04</span>
+        <h2 style="margin:0; font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:26px; letter-spacing:0.04em; color:#F8EFFF">実践:正確な「1mキューブ」を作る</h2>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.3em; color:rgba(181,142,255,0.9)">PRACTICE // 今日の成果物</span>
+      </div>
+      <p style="margin:12px 0 0; font-size:14px; line-height:2; color:rgba(248,239,255,0.7); letter-spacing:0.04em">今日の総仕上げ。手順はたった4つです。キーの動きはアニメで確認してね。</p>
+
+      <div style="display:flex; flex-direction:column; gap:14px; margin-top:24px">
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr auto; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">1</span></div>
+          <div>
+            <div style="font-size:15.5px; font-weight:900; color:#F8EFFF">初期キューブを消して、新しく作り直す</div>
+            <div style="margin-top:6px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">最初からある立方体を選択して削除 → 自分で新規作成。<span style="color:rgba(181,142,255,0.95); font-size:12px">「自分で出したものを自分で管理する」が第一歩。</span></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:7px; flex-wrap:wrap; justify-content:flex-end">
+            <span style="display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 9px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:7px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; animation:kfKeyPress 7s linear infinite">X</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:rgba(248,239,255,0.55)">削除 →</span>
+            <span style="display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 9px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:7px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; animation:kfKeyPress 7s linear infinite; animation-delay:0.9s">Shift</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,239,255,0.5)">+</span>
+            <span style="display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 9px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:7px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; animation:kfKeyPress 7s linear infinite; animation-delay:1.1s">A</span>
+            <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; color:rgba(248,239,255,0.55)">▸ メッシュ ▸ 立方体</span>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr auto; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">2</span></div>
+          <div>
+            <div style="font-size:15.5px; font-weight:900; color:#F8EFFF">編集モードに入る</div>
+            <div style="margin-top:6px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">頂点が見える状態になればOK。<span style="color:rgba(181,142,255,0.95); font-size:12px">鉄の掟どおり、サイズをいじるのは編集モードで!</span></div>
+          </div>
+          <div style="display:flex; align-items:center; gap:7px; justify-content:flex-end">
+            <span style="display:inline-flex; align-items:center; justify-content:center; min-width:34px; height:34px; padding:0 11px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:7px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600; animation:kfKeyPressIce 4s linear infinite">Tab</span>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr 240px; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">3</span></div>
+          <div>
+            <div style="font-size:15.5px; font-weight:900; color:#F8EFFF">サイズを正確に「1.000m」にする</div>
+            <div style="margin-top:6px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">
+              <span style="display:inline-flex; align-items:center; justify-content:center; min-width:26px; height:26px; padding:0 7px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:6px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; animation:kfKeyPress 7s linear infinite; vertical-align:middle">A</span> で全選択 →
+              <span style="display:inline-flex; align-items:center; justify-content:center; min-width:26px; height:26px; padding:0 7px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:6px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; animation:kfKeyPress 7s linear infinite; animation-delay:0.9s; vertical-align:middle">N</span> でサイドバーを開き、<strong style="color:#5AE9FF">アイテム ▸ 寸法</strong> を見ながら各辺を <span style="font-family:'IBM Plex Mono',monospace; color:#FFD27A">1.000m</span> に。
+            </div>
+          </div>
+          <image-slot id="slot-n-panel" shape="rounded" radius="10" placeholder="Nパネル(寸法)のスクショをここにドラッグ" style="width:240px;height:140px;display:block"></image-slot>
+        </div>
+
+        <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr 300px; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">4</span></div>
+          <div>
+            <div style="font-size:15.5px; font-weight:900; color:#F8EFFF">底面を地面(Z=0)にピタッと接地させる</div>
+            <div style="margin-top:6px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">
+              テンキー <span style="font-family:'IBM Plex Mono',monospace; color:#FFD27A">1</span> で正面を向いてから、
+              <span style="font-family:'IBM Plex Mono',monospace; color:#FF7AC2">G</span> ▸ <span style="font-family:'IBM Plex Mono',monospace; color:#FF7AC2">Z</span> で上下移動だけに固定。底面を中央の太い線(地面)に重ねます。<br>
+              <span style="color:rgba(181,142,255,0.95); font-size:12px">「家具が床に埋まってる/浮いてる」事故を防ぐ、背景屋さんの基本姿勢!</span>
+            </div>
+          </div>
+          <div style="position:relative; height:160px; border:1px solid rgba(181,142,255,0.3); border-radius:10px; background:#160b30; overflow:hidden">
+            <div style="position:absolute; left:12px; top:10px; font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.2em; color:rgba(90,233,255,0.8)">FRONT VIEW</div>
+            <div style="position:absolute; left:10%; right:10%; bottom:42px; height:2px; background:rgba(255,210,122,0.75); box-shadow:0 0 8px rgba(255,210,122,0.4)"></div>
+            <div style="position:absolute; left:50%; top:14px; bottom:42px; width:1px; margin-left:-1px; background:repeating-linear-gradient(180deg, rgba(90,233,255,0.5) 0 5px, transparent 5px 10px)"></div>
+            <div style="position:absolute; bottom:42px; left:50%; width:44px; height:44px; margin-left:-22px; border:2px solid #FF7AC2; background:rgba(255,122,194,0.2); border-radius:4px; animation:kfGzCube 7s ease-in-out infinite"></div>
+            <div style="position:absolute; bottom:48px; left:50%; margin-left:30px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:#FFD27A; opacity:0; animation:kfGzFlash 7s linear infinite; text-shadow:0 0 8px rgba(255,210,122,0.7)">✦ ピタッ</div>
+            <div style="position:absolute; left:0; right:0; bottom:8px; display:flex; justify-content:center; gap:8px">
+              <span style="display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:28px; padding:0 8px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:6px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; animation:kfGzG 7s linear infinite">G</span>
+              <span style="font-family:'IBM Plex Mono',monospace; font-size:11px; color:rgba(248,239,255,0.5); line-height:28px">→</span>
+              <span style="display:inline-flex; align-items:center; justify-content:center; min-width:28px; height:28px; padding:0 8px; border:1px solid rgba(181,142,255,0.45); border-bottom:3px solid rgba(181,142,255,0.55); border-radius:6px; background:rgba(248,239,255,0.07); font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; animation:kfGzZ 7s linear infinite">Z</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div data-reveal="1" style="margin-top:72px; border:1px solid rgba(255,210,122,0.3); border-radius:16px; padding:28px 30px; background:linear-gradient(180deg,rgba(255,122,194,0.08),rgba(90,233,255,0.04)); position:relative; overflow:hidden">
+      <span style="position:absolute; right:18px; top:12px; color:#FFD27A; font-size:18px; animation:kfFloat 4s ease-in-out infinite">✦</span>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.34em; color:#FFD27A">RECAP ── 今日のキー、ぜんぶ</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:16px">
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FFD27A">1·3·7</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">視点切替</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FFD27A">5</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">パース⇄平行</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FFD27A">0</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">カメラ視点</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#5AE9FF">Tab</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">編集モード⇄オブジェクトモード</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FF7AC2">Shift+A</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">新規追加</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FF7AC2">X</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">削除</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FF7AC2">A</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">全選択</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FF7AC2">N</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">寸法サイドバー</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(181,142,255,0.35); border-radius:8px; padding:7px 12px; background:rgba(248,239,255,0.05); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FF7AC2">G▸Z</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">上下移動</span></span>
+        <span style="display:inline-flex; align-items:center; gap:8px; border:1px solid rgba(255,210,122,0.5); border-radius:8px; padding:7px 12px; background:rgba(255,210,122,0.08); font-family:'IBM Plex Mono',monospace; font-size:12px"><span style="color:#FFD27A">Ctrl+A</span><span style="font-family:'Noto Sans JP',sans-serif; font-size:11px; color:rgba(248,239,255,0.7)">お守り(スケール初期化)</span></span>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-top:24px; padding-top:18px; border-top:1px dashed rgba(181,142,255,0.3); flex-wrap:wrap">
+        <div style="font-size:13px; line-height:1.9; color:rgba(248,239,255,0.75)">
+          <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:#5AE9FF">NEXT ▸ LEC_02</span><br>
+          <strong style="color:#F8EFFF">部屋モデリング① ── 間取り図を「なぞって」壁の線画を作る。</strong> 2Dの感覚そのままでOK!
+        </div>
+        <div style="display:flex; gap:10px">
+          <a href="index.html" style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#5AE9FF; text-decoration:none; border:1px solid rgba(90,233,255,0.4); border-radius:9px; padding:12px 18px; background:rgba(90,233,255,0.06)" data-sh="background:rgba(90,233,255,0.15)">全15回マップ</a>
+          <a href="02.html" style="font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#22103d; text-decoration:none; border-radius:9px; padding:12px 20px; background:linear-gradient(135deg,#FF4FA8,#B850FF); font-weight:600; box-shadow:0 0 18px rgba(255,79,168,0.4)" data-sh="box-shadow:0 0 28px rgba(255,79,168,0.65)">第2回へ ▸</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:48px; display:flex; align-items:center; justify-content:center; gap:12px; opacity:0.65">
+      <img src="assets/blender_logo.png" alt="Blender" style="height:22px; filter:drop-shadow(0 0 6px rgba(255,255,255,0.2))">
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:rgba(181,142,255,0.8)">BLENDER ROOM // アニメ美術のためのBlender入門 · 全15回</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Numpad interactive state ──────────────────────
+var npState = { view: 'home', persp: true };
+var npBaseT = {
+  home:   'rotateX(-26deg) rotateY(-38deg)',
+  front:  'rotateX(0deg) rotateY(0deg)',
+  right:  'rotateY(-90deg)',
+  top:    'rotateX(-90deg)',
+  camera: 'rotateX(-16deg) rotateY(-26deg)'
+};
+var npLabels = {
+  home:   'USER VIEW · 自由視点',
+  front:  'FRONT · 正面〔1〕',
+  right:  'RIGHT · 右側面〔3〕',
+  top:    'TOP · 真上〔7〕',
+  camera: 'CAMERA · カメラ視点〔0〕'
+};
+
+function capStyle(on, color, glow, ink) {
+  return 'height:48px;display:flex;align-items:center;justify-content:center;border-radius:9px;cursor:pointer;user-select:none;' +
+    "font-family:'IBM Plex Mono',monospace;font-size:16px;font-weight:600;" +
+    'border:1px solid ' + (on ? color : 'rgba(181,142,255,0.45)') + ';' +
+    'border-bottom:3px solid ' + (on ? color : 'rgba(181,142,255,0.6)') + ';' +
+    'background:' + (on ? 'linear-gradient(135deg,' + color + ',' + color + ')' : 'rgba(248,239,255,0.07)') + ';' +
+    'color:' + (on ? ink : '#F8EFFF') + ';' +
+    'box-shadow:' + (on ? '0 0 18px ' + glow : 'none') + ';' +
+    'transform:' + (on ? 'translateY(2px)' : 'none') + ';' +
+    'transition:all 0.25s';
+}
+
+function numpadRender() {
+  var v = npState.view, p = npState.persp;
+  var pink = '#FF4FA8', pg = 'rgba(255,79,168,0.6)';
+  var el;
+  el = document.getElementById('npk7'); if(el) el.style.cssText = capStyle(v==='top',   pink, pg, '#22103d');
+  el = document.getElementById('npk5'); if(el) el.style.cssText = capStyle(!p, '#FFD27A', 'rgba(255,210,122,0.55)', '#3a2a08');
+  el = document.getElementById('npk1'); if(el) el.style.cssText = capStyle(v==='front', pink, pg, '#22103d');
+  el = document.getElementById('npk3'); if(el) el.style.cssText = capStyle(v==='right', pink, pg, '#22103d');
+  el = document.getElementById('npk0'); if(el) el.style.cssText = capStyle(v==='camera','#5AE9FF','rgba(90,233,255,0.55)','#0e3340');
+  var tilt = (p && (v==='front'||v==='right'||v==='top')) ? ' rotateX(-7deg) rotateY(9deg)' : '';
+  var scene = document.getElementById('scene3d');
+  var persp = document.getElementById('perspContainer');
+  var vl    = document.getElementById('viewLabel');
+  var pl    = document.getElementById('projLabel');
+  var cf    = document.getElementById('camFrame');
+  if(scene) scene.style.transform = npBaseT[v] + tilt;
+  if(persp) persp.style.perspective = p ? '620px' : '2800px';
+  if(vl)    vl.textContent = 'VIEW // ' + npLabels[v];
+  if(pl)    pl.textContent = p ? 'PERSP ── 透視投影(パースあり)' : 'ORTHO ── 平行投影(パースなし)';
+  if(cf)    cf.style.opacity = v==='camera' ? '1' : '0';
+}
+function numpadGo(view)       { npState.view = view; numpadRender(); }
+function numpadTogglePersp()  { npState.persp = !npState.persp; numpadRender(); }
+
+// ── style-hover & scroll reveal ──────────────────
+(function(){
+  document.querySelectorAll('[data-sh]').forEach(function(el){
+    var b=el.getAttribute('style')||'';
+    el.addEventListener('mouseenter',function(){el.style.cssText=b+';'+el.getAttribute('data-sh');});
+    el.addEventListener('mouseleave',function(){el.style.cssText=b;});
+  });
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';io.unobserve(en.target);}
+    });
+  },{threshold:0.06});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight*0.92)return;
+    el.style.opacity='0';el.style.transform='translateY(18px)';
+    el.style.transition='opacity 0.7s ease,transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
