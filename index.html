@@ -34,6 +34,8 @@
     <input type="range" min="0" max="30" step="0.01" value="{{ t }}" onInput="{{ onSeek }}" style="width:340px">
     <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#FFD27A;min-width:92px;text-align:right">{{ timeLabel }}</span>
   </div>
+
+  <a href="start.html" onClick="{{ onGoStart }}" style="position:fixed;right:22px;bottom:64px;z-index:100;display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-family:'Noto Sans JP',sans-serif;font-weight:700;font-size:15px;letter-spacing:0.08em;color:#150927;padding:12px 22px;border-radius:8px;background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%);box-shadow:0 6px 22px rgba(255,79,168,0.4)">スタートへ →</a>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
@@ -59,6 +61,11 @@ class Component extends DCLogic {
 
   // ── lifecycle ──
   componentDidMount(){
+    // 一度見たら次回からスタートページへ自動スキップ（?replay でやり直し可）
+    try{
+      const sp=new URLSearchParams(location.search);
+      if(!sp.has('replay') && localStorage.getItem('blroom_seen_opening')==='1'){ location.replace('start.html'); return; }
+    }catch(e){}
     try{ const s=localStorage.getItem('blroom_open_t'); if(s!=null) this.setState({ t:parseFloat(s)||0 }); }catch(e){}
     this.fit();
     this._onR = ()=>this.fit();
@@ -78,12 +85,14 @@ class Component extends DCLogic {
   loop = (now)=>{
     const dt=Math.min(0.05,(now-this._last)/1000); this._last=now;
     if(this.state.playing){
-      let t=this.state.t+dt; if(t>=this.DUR) t-=this.DUR;
+      let t=this.state.t+dt; if(t>=this.DUR){ t-=this.DUR; this._markSeen(); }
       this.setState({ t }); this._save(t);
     }
     this._raf=requestAnimationFrame(this.loop);
   };
   _save(t){ if(!this._lw||Math.abs(t-this._lw)>0.2){ try{ localStorage.setItem('blroom_open_t', t); }catch(e){} this._lw=t; } }
+  _markSeen(){ try{ localStorage.setItem('blroom_seen_opening','1'); }catch(e){} }
+  goStart = ()=>{ this._markSeen(); };
   toggle = ()=> this.setState(s=>({ playing:!s.playing }));
   seek = (e)=>{ const v=parseFloat(e.target.value); this.setState({ playing:false, t:v }); this._save(v); };
 
@@ -224,7 +233,7 @@ class Component extends DCLogic {
       h('div',{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontStyle:'italic', fontSize:'100px', lineHeight:0.95, opacity:a, transform:`scale(${this.mix(a,0.94,1)})`, filter:'drop-shadow(0 0 28px rgba(255,79,168,0.35))', ...this.grad() },'BLENDER ROOM'),
       h('div',{ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:500, fontSize:'24px', letterSpacing:'0.16em', color:'rgba(248,239,255,0.82)', marginTop:'20px', opacity:b },'サイコロ1個から、カメラが動くアニメ背景まで。'),
       h('div',{ marginTop:'46px', opacity:cOp, transform:`scale(${this.mix(c,0.9,1)})` },
-        h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontWeight:600, fontSize:'20px', letterSpacing:'0.2em', color:'#150927', padding:'18px 40px', borderRadius:'9px', background:GRAD, boxShadow:`0 0 ${this.mix(pulse,18,40)}px rgba(255,79,168,${this.mix(pulse,0.4,0.75)})`, cursor:'pointer' },'スタートページへGO! ▸', { onClick:()=>{ window.location.href='start.html'; } }))
+        h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontWeight:600, fontSize:'20px', letterSpacing:'0.2em', color:'#150927', padding:'18px 40px', borderRadius:'9px', background:GRAD, boxShadow:`0 0 ${this.mix(pulse,18,40)}px rgba(255,79,168,${this.mix(pulse,0.4,0.75)})`, cursor:'pointer' },'スタートページへGO! ▸', { onClick:()=>{ this._markSeen(); window.location.href='start.html'; } }))
     ]);
   }
 
@@ -274,6 +283,7 @@ class Component extends DCLogic {
       t: this.state.t,
       onSeek: this.seek,
       onToggle: this.toggle,
+      onGoStart: this.goStart,
       playLabel: this.state.playing ? '❚❚' : '▶',
       timeLabel: this.state.t.toFixed(1) + ' / 30.0'
     };
