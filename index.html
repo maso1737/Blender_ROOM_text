@@ -1,257 +1,284 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BLENDER ROOM // INDEX – 全15回シラバスマップ</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,900;1,700;1,900&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
-<style>
-  html{scrollbar-color:rgba(255,79,168,0.6) rgba(20,10,40,0.6)}
-  body{margin:0;color:#F8EFFF;
-    background:
-      radial-gradient(ellipse 80% 55% at 88% -10%, rgba(184,80,255,0.32), transparent 60%),
-      radial-gradient(ellipse 65% 50% at -10% 18%, rgba(255,122,194,0.17), transparent 60%),
-      radial-gradient(ellipse 70% 55% at 50% 115%, rgba(90,233,255,0.14), transparent 65%),
-      linear-gradient(180deg,#2b1852 0%,#190d34 100%);
-    background-attachment:fixed;}
-  ::selection{background:rgba(255,79,168,0.5)}
-  @keyframes kfTwinkle{0%,100%{opacity:0.5}50%{opacity:0.95}}
-  @keyframes kfFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001s !important;animation-iteration-count:1 !important}}
-</style>
+<script src="./support.js"></script>
 </head>
 <body>
-<div style="font-family:'Noto Sans JP',sans-serif; min-height:100vh; overflow-x:hidden">
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,900;1,900&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;800&family=Cormorant+Garamond:ital,wght@1,500;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="_ds/kinetic-stage-design-system-bfe4c6e7-5846-4ac3-abfb-b4c3c57ee77d/colors_and_type.css">
+<link rel="stylesheet" href="_ds/kinetic-stage-design-system-bfe4c6e7-5846-4ac3-abfb-b4c3c57ee77d/stage-system.css">
+<script src="_ds/kinetic-stage-design-system-bfe4c6e7-5846-4ac3-abfb-b4c3c57ee77d/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:#07030f;overflow:hidden}
+  @keyframes kfTw{0%,100%{opacity:.5}50%{opacity:.95}}
+  input[type=range]{accent-color:#FF4FA8;cursor:pointer}
+</style>
+</helmet>
+<div style="position:fixed;inset:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-family:'Noto Sans JP',sans-serif;background:radial-gradient(ellipse 85% 60% at 88% -12%,rgba(184,80,255,0.30),transparent 60%),radial-gradient(ellipse 65% 55% at -8% 16%,rgba(255,122,194,0.16),transparent 60%),radial-gradient(ellipse 70% 55% at 50% 114%,rgba(90,233,255,0.13),transparent 65%),linear-gradient(180deg,#2b1852 0%,#120a2a 55%,#07030f 100%)">
 
-  <!-- starfield -->
-  <div style="position:fixed; inset:0; pointer-events:none; z-index:0; mix-blend-mode:screen; opacity:0.85; animation:kfTwinkle 5s ease-in-out infinite; background-image:radial-gradient(1.5px 1.5px at 22px 34px, rgba(255,255,255,0.8), transparent 60%),radial-gradient(1px 1px at 120px 90px, rgba(255,210,122,0.8), transparent 60%),radial-gradient(1.5px 1.5px at 200px 160px, rgba(181,142,255,0.8), transparent 60%),radial-gradient(1px 1px at 280px 50px, rgba(90,233,255,0.7), transparent 60%),radial-gradient(1.5px 1.5px at 330px 210px, rgba(255,122,194,0.7), transparent 60%); background-size:380px 260px"></div>
+  <div style="position:fixed;inset:0;pointer-events:none;z-index:0;mix-blend-mode:screen;opacity:0.85;animation:kfTw 5s ease-in-out infinite;background-image:radial-gradient(1.5px 1.5px at 22px 34px,rgba(255,255,255,0.8),transparent 60%),radial-gradient(1px 1px at 120px 90px,rgba(255,210,122,0.8),transparent 60%),radial-gradient(1.5px 1.5px at 200px 160px,rgba(181,142,255,0.8),transparent 60%),radial-gradient(1px 1px at 280px 50px,rgba(90,233,255,0.7),transparent 60%),radial-gradient(1.5px 1.5px at 330px 210px,rgba(255,122,194,0.7),transparent 60%);background-size:380px 260px"></div>
 
-  <!-- TOPBAR -->
-  <div style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; height:52px; padding:0 22px; background:rgba(24,12,46,0.82); backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,210,122,0.18)">
-    <div style="display:flex; align-items:center; gap:10px">
-      <span style="color:#FFD27A; font-size:14px">✦</span>
-      <span style="display:inline-block; padding-right:0.35em; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic; font-size:19px; letter-spacing:0.04em; background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">BLENDER ROOM</span>
-      <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:rgba(181,142,255,0.85)">部屋を、つくろう。</span>
-    </div>
-    <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.25em; color:#FFD27A">INDEX // 全15回マップ</span>
+  <div ref="{{ stageRef }}" style="width:1920px;height:1080px;position:relative;flex:none;transform-origin:center center;z-index:1">
+    {{ scene }}
   </div>
 
-  <div style="position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 26px 80px">
-
-    <!-- HERO -->
-    <div style="padding:64px 0 10px; text-align:center">
-      <div style="display:flex; align-items:center; justify-content:center; gap:12px">
-        <span style="height:1px; width:70px; background:linear-gradient(90deg,transparent,#FFD27A)"></span>
-        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.34em; color:#FFD27A">SYLLABUS MAP // 15 LECTURES</span>
-        <span style="height:1px; width:70px; background:linear-gradient(90deg,#FFD27A,transparent)"></span>
-      </div>
-      <h1 style="margin:20px 0 0; font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:42px; line-height:1.3; letter-spacing:0.03em; background:linear-gradient(110deg,#FFFFFF,#FFD9EE 45%,#CDB4FF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">15回で、アニメに出てくる<br>「あの部屋」を自分の手で。</h1>
-      <p style="margin:18px auto 0; max-width:620px; font-size:14.5px; line-height:2.1; color:rgba(248,239,255,0.75); letter-spacing:0.05em">サイコロ1個から始めて、最終回にはカメラが動くアニメ背景動画が完成します。<strong style="color:#5AE9FF">背景美術・撮影処理の「2Dの目」</strong>を、そのまま武器にして進む構成です。</p>
-      <div style="margin-top:22px; display:flex; justify-content:center">
-        <img src="assets/blender_logo.png" alt="Blender" style="height:30px; filter:drop-shadow(0 0 10px rgba(255,255,255,0.25)); animation:kfFloat 4.5s ease-in-out infinite">
-      </div>
-    </div>
-
-    <!-- chapters (JS-rendered) -->
-    <div id="chapters-root"></div>
-
-    <!-- goal banner -->
-    <div style="margin-top:56px; border:1px solid rgba(255,210,122,0.35); border-radius:16px; padding:30px 32px; background:linear-gradient(180deg,rgba(255,122,194,0.09),rgba(90,233,255,0.05)); text-align:center; position:relative; overflow:hidden">
-      <span style="position:absolute; left:20px; top:14px; color:#FF7AC2; font-size:14px; animation:kfFloat 4s ease-in-out infinite">✦</span>
-      <span style="position:absolute; right:24px; top:20px; color:#FFD27A; font-size:18px; animation:kfFloat 5s ease-in-out infinite">✦</span>
-      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.34em; color:#FFD27A">FINAL GOAL ── 最終回のあなた</div>
-      <div style="margin-top:14px; font-size:19px; font-weight:900; line-height:1.9; letter-spacing:0.04em; color:#F8EFFF">朝日が差し込む自分の部屋を、カメラがゆっくり動く。<br><span style="background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">それはもう、アニメのワンカットです。</span></div>
-      <div style="margin-top:16px; font-size:12.5px; line-height:2; color:rgba(248,239,255,0.7)">モデリング → 布 → 色 → 光 → 撮影(AE)。アニメの背景美術と同じ工程を、ぜんぶ自分の手で通します。</div>
-      <a href="01.html" id="start-btn" style="display:inline-block; margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#22103d; text-decoration:none; border-radius:9px; padding:13px 26px; background:linear-gradient(135deg,#FF4FA8,#B850FF); font-weight:600; box-shadow:0 0 18px rgba(255,79,168,0.4)">第1回からはじめる ▸</a>
-    </div>
-
-    <div style="margin-top:48px; display:flex; align-items:center; justify-content:center; gap:12px; opacity:0.65">
-      <img src="assets/blender_logo.png" alt="Blender" style="height:22px">
-      <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:rgba(181,142,255,0.8)">BLENDER ROOM // アニメ美術のためのBlender入門 · 全15回</span>
-    </div>
+  <div style="position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:99;display:flex;align-items:center;gap:14px;padding:9px 16px;border-radius:8px;background:rgba(16,7,40,0.72);backdrop-filter:blur(8px);border:1px solid rgba(255,210,122,0.22)">
+    <button onClick="{{ onToggle }}" style="width:34px;height:30px;border:1px solid rgba(255,79,168,0.5);border-radius:5px;background:rgba(255,79,168,0.12);color:#F8EFFF;font-size:13px;cursor:pointer;line-height:1">{{ playLabel }}</button>
+    <input type="range" min="0" max="30" step="0.01" value="{{ t }}" onInput="{{ onSeek }}" style="width:340px">
+    <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:0.18em;color:#FFD27A;min-width:92px;text-align:right">{{ timeLabel }}</span>
   </div>
 </div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { t: 0, playing: true };
+  DUR = 30;
+  GRAD = 'linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%)';
+  scaleRef = React.createRef();
 
-<script>
-// ── chapter / lecture data ────────────────────────
-var CHAPTERS = [
-  { num:'I',   title:'はじめの一歩',         en:'SETUP // 事故ゼロの土台', lectures:[
-    { no:1,  title:'Blenderの第一歩と「鉄の掟」',
-      desc:'3D酔いしない視点操作と、後のエラーを100%防ぐプロの作法。最初の1回がいちばん大事。',
-      deliver:'正確な「1m四方」のサイコロ(地面にピタッと接地)',
-      keys:['1·3·7','Tab','Ctrl+A'] }
-  ]},
-  { num:'II',  title:'部屋の箱を建てる',       en:'ROOM SHELL // 2Dの感覚でOK', lectures:[
-    { no:2,  title:'部屋モデリング①:2Dトレースで間取り作成',
-      desc:'使い慣れた「平面」の感覚で間取り図をなぞるだけ。3Dはまだ考えなくて大丈夫。',
-      deliver:'歪みのない、完全に閉じた壁の線画(平面)',
-      keys:['E','F','M'] },
-    { no:3,  title:'部屋モデリング②:壁の立体化と開口部',
-      desc:'線画を一気に立ち上げて部屋に。窓やドアの穴をあけ、スナップでパーツを吸い付かせる。',
-      deliver:'窓とドアがぴったりハマった部屋の箱',
-      keys:['E','Ctrl+R','スナップ'] }
-  ]},
-  { num:'III', title:'家具をつくる',           en:'FURNITURE // 図面から立体へ', lectures:[
-    { no:4,  title:'家具モデリング①:テレビとテレビ台',
-      desc:'「正面」と「横」の2D図面から立体を起こす反復ステップ。分離と結合も覚える。',
-      deliver:'液晶テレビとテレビ台のアセット',
-      keys:['P','Ctrl+J'] },
-    { no:5,  title:'家具モデリング②:タンスとモディファイア',
-      desc:'引き出しのような規則的な形は、手作業せず自動で綺麗に増やす。角を丸めてアニメに馴染むハイライトを。',
-      deliver:'引き出しが等間隔で並んだベベル付きタンス',
-      keys:['I','配列','ベベル'] },
-    { no:6,  title:'家具モデリング③:【実習】机と椅子',
-      desc:'ここまでの技を組み合わせて自力で制作。重なった頂点の「データ大掃除」も覚える。',
-      deliver:'正確な寸法で作られた机と椅子の3Dアセット',
-      keys:['M','実習'] },
-    { no:7,  title:'有機的モデリング:ソファと細分割',
-      desc:'カクカクのローポリから、ふっくら柔らかいソファへ。ミラー×細分割の強力コンビ。',
-      deliver:'丸みのある、ふっくらとした1〜2人掛けソファ',
-      keys:['ミラー','Ctrl+1·2'] }
-  ]},
-  { num:'IV',  title:'布に命を吹き込む',       en:'CLOTH SIM // 物理の魔法', lectures:[
-    { no:8,  title:'布シミュレーション①:クッション',
-      desc:'手では作れないリアルなシワや膨らみを、物理シミュレーションにおまかせ。',
-      deliver:'空気の詰まったリアルなクッション',
-      keys:['クロス','Space'] },
-    { no:9,  title:'布シミュレーション②:【実習】ベッド・カーテン',
-      desc:'「ぶつかる判定(コリジョン)」とピン留めで、布団が掛かるベッドと垂れるカーテンを。',
-      deliver:'布団がかかったベッド、または窓辺のカーテン',
-      keys:['コリジョン','ピン留め'] }
-  ]},
-  { num:'V',   title:'色と質感をのせる',       en:'TEXTURE // 2Dスキルの見せ場', lectures:[
-    { no:10, title:'UV展開とアセット管理',
-      desc:'3Dモデルに絵を塗るための「展開図(画用紙)」を開く。納品できるプロのデータ整理も。',
-      deliver:'ターンテーブル動画と、整理された納品データ',
-      keys:['UV','シーム'], isWhite:true },
-    { no:11, title:'テクスチャ・外部ツール連携',
-      desc:'アニメ背景らしいフラットな固有色の塗り方と、Photoshopなど2Dソフトとの連携技。',
-      deliver:'色と木目がきれいにのった家具アセット',
-      keys:['ペイント','PS連携'], isWhite:true }
-  ]},
-  { num:'VI',  title:'シーンとして組む',       en:'SCENE // 光とカメラで演出', lectures:[
-    { no:12, title:'部屋のレイアウト(アペンドとカメラワーク)',
-      desc:'作ってきた家具を部屋に大集合。絵コンテに合わせたベストなアングルとレンズを決める。',
-      deliver:'アニメのワンシーンのようになった部屋の画面',
-      keys:['アペンド','レンズ'] },
-    { no:13, title:'ライティングとアニメ絵作り',
-      desc:'光と影で「時間帯」と「空気感」を演出。窓から差し込む朝日と、フワッとボケる影。',
-      deliver:'窓枠の影が床に落ちるドラマチックな部屋の絵',
-      keys:['EEVEE','サン'], isWhite:true }
-  ]},
-  { num:'VII', title:'アニメにして納品する',   en:"OUTPUT // 撮影(AE)へバトンタッチ", lectures:[
-    { no:14, title:'レンダリングとAOV(マルチパス出力)',
-      desc:'カメラを少しだけ動かして「動画としての命」を吹き込み、プロ仕様のマルチパスで書き出す。',
-      deliver:'プレイブラスト動画(mp4)+連番EXR',
-      keys:['EXR','AOV'] },
-    { no:15, title:'AE撮影(コンポジット)連携と最終講評',
-      desc:'After Effectsで仕上げの撮影処理。3Dの生データを「二次元のアニメ背景美術」へ昇華。',
-      deliver:'15回の集大成:カメラが動くアニメ背景動画(mp4)',
-      keys:['AE','講評'], isWhite:true }
-  ]}
-];
+  h = (tag, style, kids, extra) =>
+    React.createElement(tag, Object.assign({ style }, extra || {}),
+      ...(kids == null ? [] : Array.isArray(kids) ? kids : [kids]));
 
-// ── key badge HTML ────────────────────────────────
-function keyBadge(k) {
-  return '<span style="display:inline-flex;align-items:center;justify-content:center;height:24px;padding:0 8px;border:1px solid rgba(181,142,255,0.4);border-bottom:2px solid rgba(181,142,255,0.5);border-radius:6px;background:rgba(248,239,255,0.06);font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#F8EFFF">' + k + '</span>';
-}
+  // ── math helpers ──
+  clamp01(x){ return Math.max(0, Math.min(1, x)); }
+  seg(t,a,b){ return this.clamp01((b-a) ? (t-a)/(b-a) : 1); }
+  mix(p,a,b){ return a+(b-a)*p; }
+  eOut(p){ return 1-Math.pow(1-p,3); }
+  eInOut(p){ return p<.5 ? 4*p*p*p : 1-Math.pow(-2*p+2,3)/2; }
+  eBack(p){ const c1=1.70158, c3=c1+1; return 1+c3*Math.pow(p-1,3)+c1*Math.pow(p-1,2); }
+  pad(n){ return String(Math.min(900,Math.max(0,Math.floor(n)))).padStart(4,'0'); }
+  grad(extra){ return Object.assign({ background:this.GRAD, WebkitBackgroundClip:'text', backgroundClip:'text', WebkitTextFillColor:'transparent', color:'transparent' }, extra||{}); }
 
-// ── card HTML ─────────────────────────────────────
-function lectureCard(lec) {
-  var ready = lec.no <= 4;
-  var noStr = String(lec.no).padStart(2,'0');
-  var href  = ready ? noStr + '.html' : '#';
-  var onclick = ready ? '' : ' onclick="return false"';
+  // ── lifecycle ──
+  componentDidMount(){
+    try{ const s=localStorage.getItem('blroom_open_t'); if(s!=null) this.setState({ t:parseFloat(s)||0 }); }catch(e){}
+    this.fit();
+    this._onR = ()=>this.fit();
+    window.addEventListener('resize', this._onR);
+    this._last = performance.now();
+    this._raf = requestAnimationFrame(this.loop);
+  }
+  componentWillUnmount(){
+    cancelAnimationFrame(this._raf);
+    window.removeEventListener('resize', this._onR);
+  }
+  fit = ()=>{
+    const el=this.scaleRef.current; if(!el) return;
+    const s=Math.min(window.innerWidth/1920, window.innerHeight/1080);
+    el.style.transform='scale('+s+')';
+  };
+  loop = (now)=>{
+    const dt=Math.min(0.05,(now-this._last)/1000); this._last=now;
+    if(this.state.playing){
+      let t=this.state.t+dt; if(t>=this.DUR) t-=this.DUR;
+      this.setState({ t }); this._save(t);
+    }
+    this._raf=requestAnimationFrame(this.loop);
+  };
+  _save(t){ if(!this._lw||Math.abs(t-this._lw)>0.2){ try{ localStorage.setItem('blroom_open_t', t); }catch(e){} this._lw=t; } }
+  toggle = ()=> this.setState(s=>({ playing:!s.playing }));
+  seek = (e)=>{ const v=parseFloat(e.target.value); this.setState({ playing:false, t:v }); this._save(v); };
 
-  var cardStyle = ready
-    ? 'display:flex;align-items:center;gap:18px;flex-wrap:wrap;text-decoration:none;color:inherit;border:1px solid rgba(255,79,168,0.5);border-radius:14px;padding:18px 22px;background:linear-gradient(180deg,rgba(255,79,168,0.10),rgba(181,142,255,0.05));box-shadow:0 0 22px rgba(255,79,168,0.14);cursor:pointer;opacity:1;transition:all 0.3s'
-    : 'display:flex;align-items:center;gap:18px;flex-wrap:wrap;text-decoration:none;color:inherit;border:1px solid rgba(255,210,122,0.18);border-radius:14px;padding:18px 22px;background:linear-gradient(180deg,rgba(255,122,194,0.05),rgba(181,142,255,0.025));box-shadow:none;cursor:default;opacity:0.78;transition:all 0.3s';
-  var hoverStyle = ready
-    ? 'box-shadow:0 0 32px rgba(255,79,168,0.3);border-color:rgba(255,79,168,0.8);transform:translateY(-2px)'
-    : 'border-color:rgba(255,210,122,0.3)';
+  // ════════ SCENE 1 — cube hook (0–5) ════════
+  scene1(t){
+    const h=this.h;
+    const op=this.seg(t,0.1,0.7)*(1-this.seg(t,3.9,4.6));
+    const intro=this.eBack(this.seg(t,0,1.05));
+    const recede=this.mix(this.seg(t,3.5,4.6),1,0.45);
+    const rot=t*36-30, k=intro*recede;
+    const fB={ position:'absolute', left:0, top:0, width:'240px', height:'240px', border:'1.6px solid rgba(255,79,168,0.55)', background:'linear-gradient(135deg,rgba(255,79,168,0.07),rgba(90,233,255,0.045))', boxShadow:'inset 0 0 34px rgba(184,80,255,0.18)' };
+    const f=(tf)=>h('div', Object.assign({}, fB, { transform:tf }));
+    const faces=[f('translateZ(120px)'),f('rotateY(180deg) translateZ(120px)'),f('rotateY(90deg) translateZ(120px)'),f('rotateY(-90deg) translateZ(120px)'),f('rotateX(90deg) translateZ(120px)'),f('rotateX(-90deg) translateZ(120px)')];
+    const glow=h('div',{ position:'absolute', left:'960px', top:'430px', width:'540px', height:'540px', transform:'translate(-50%,-50%)', background:'radial-gradient(circle,rgba(255,79,168,0.20),transparent 62%)', filter:'blur(8px)', opacity:k });
+    const cube=h('div',{ position:'absolute', left:'960px', top:'430px', width:0, height:0, perspective:'1000px' },
+      h('div',{ transformStyle:'preserve-3d', position:'absolute', left:0, top:0, width:'240px', height:'240px', marginLeft:'-120px', marginTop:'-120px', transform:`rotateX(-24deg) rotateY(${rot}deg) scale(${k})` }, faces));
+    const c=this.seg(t,1.15,1.85);
+    const cap=h('div',{ position:'absolute', left:0, right:0, top:'644px', textAlign:'center', opacity:c, transform:`translateY(${this.mix(c,18,0)}px)` },[
+      h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontSize:'15px', letterSpacing:'0.42em', color:'#FFD27A', marginBottom:'22px' },'✦  START FROM ONE CUBE'),
+      h('div',{ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:900, fontSize:'74px', letterSpacing:'0.05em', color:'#F8EFFF' },'サイコロ1個から。'),
+      h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontSize:'16px', letterSpacing:'0.3em', color:'rgba(181,142,255,0.92)', marginTop:'22px' },'ここから、部屋をつくる。')
+    ]);
+    return h('div',{ position:'absolute', inset:0, opacity:op },[glow,cube,cap]);
+  }
 
-  var badgeStyle = ready
-    ? 'font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:0.22em;color:#22103d;background:linear-gradient(135deg,#FFD27A,#FF7AC2);border-radius:5px;padding:3px 9px;font-weight:600'
-    : 'font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:0.22em;color:rgba(181,142,255,0.9);border:1px solid rgba(181,142,255,0.4);border-radius:5px;padding:2px 8px';
-  var badgeText = ready ? '公開中 ▸ ひらく' : '準備中';
+  // ════════ SCENE 2 — masthead (4–9) ════════
+  scene2(t){
+    const h=this.h, GRAD=this.GRAD;
+    const op=this.seg(t,4.3,4.9)*(1-this.seg(t,8.2,8.8));
+    const rev=this.eOut(this.seg(t,4.4,5.7));
+    const z=this.mix(this.eInOut(this.seg(t,4.3,8.8)),1.07,1.0);
+    const sub=this.seg(t,5.7,6.5);
+    const sweep=this.mix(this.seg(t,4.9,6.7),-45,145);
+    const title=h('div',{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontStyle:'italic', fontSize:'152px', lineHeight:0.9, letterSpacing:'0.005em', whiteSpace:'nowrap', clipPath:`inset(0 ${100-100*rev}% -30% 0)`, filter:'drop-shadow(0 0 30px rgba(255,79,168,0.35))', ...this.grad() },'BLENDER ROOM');
+    const band=h('div',{ position:'absolute', top:'-6%', bottom:'-6%', left:`${sweep}%`, width:'130px', transform:'skewX(-18deg)', background:'linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent)', mixBlendMode:'screen', pointerEvents:'none' });
+    return h('div',{ position:'absolute', inset:0, opacity:op, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' },
+      h('div',{ transform:`scale(${z})`, textAlign:'center', position:'relative' },[
+        h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontSize:'16px', letterSpacing:'0.42em', color:'#FFD27A', marginBottom:'30px', opacity:this.seg(t,4.6,5.4) },'背景美術のための Blender 入門'),
+        h('div',{ position:'relative', display:'inline-block' },[ title, band ]),
+        h('div',{ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:700, fontSize:'42px', letterSpacing:'0.18em', color:'#F8EFFF', marginTop:'14px', opacity:sub, transform:`translateY(${this.mix(sub,16,0)}px)` },'部屋を、つくろう。')
+      ])
+    );
+  }
 
-  var whiteBadge = lec.isWhite
-    ? '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:0.18em;color:#4a3a6e;background:linear-gradient(180deg,#FFFFFF,#F3EDFF);border-radius:5px;padding:3px 9px;font-weight:600;box-shadow:0 0 10px rgba(255,255,255,0.25)">✦ 画用紙トーン回</span>'
-    : '';
+  // ════════ SCENE 3 — the promise (8–14) ════════
+  scene3(t){
+    const h=this.h, GRAD=this.GRAD;
+    const op=this.seg(t,8.4,9.0)*(1-this.seg(t,13.0,13.6));
+    const eye=this.seg(t,8.5,9.1);
+    const L=(s)=>{ const p=this.seg(t,s,s+0.45); const b=this.eBack(this.seg(t,s,s+0.78)); return { o:p, y:this.mix(p,48,0), s:this.mix(b,0.9,1) }; };
+    const l1=L(8.9), l2=L(9.5), l3=L(10.2);
+    const lineWrap=(L,kids)=>h('div',{ opacity:L.o, transform:`translateY(${L.y}px) scale(${L.s})`, transformOrigin:'left center' }, kids);
+    return h('div',{ position:'absolute', inset:0, opacity:op, display:'flex', flexDirection:'column', justifyContent:'center', paddingLeft:'220px' },[
+      h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontSize:'15px', letterSpacing:'0.42em', color:'#FFD27A', marginBottom:'40px', opacity:eye },'THE PROMISE // 15回の約束'),
+      lineWrap(l1, h('div',{ display:'flex', alignItems:'baseline', gap:'4px' },[
+        h('span', this.grad({ fontFamily:"'Cormorant Garamond',serif", fontStyle:'italic', fontWeight:700, fontSize:'118px', lineHeight:1 }),'15'),
+        h('span',{ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:900, fontSize:'62px', color:'#F8EFFF', letterSpacing:'0.03em', marginLeft:'10px' },'回で、')
+      ])),
+      lineWrap(l2, h('div',{ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:900, fontSize:'62px', letterSpacing:'0.03em', color:'#F8EFFF', marginTop:'10px' },[
+        'アニメの',
+        h('span', this.grad({}),'「あの部屋」'),
+        'を'
+      ])),
+      lineWrap(l3, h('div', this.grad({ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:900, fontSize:'96px', letterSpacing:'0.03em', marginTop:'12px', filter:'drop-shadow(0 0 26px rgba(255,79,168,0.3))' }),'自分の手で。'))
+    ]);
+  }
 
-  var keys = lec.keys.map(keyBadge).join('');
-
-  return '<a href="' + href + '"' + onclick + ' style="' + cardStyle + '" data-sh="' + hoverStyle + '">' +
-    '<div style="display:flex;flex-direction:column;align-items:center;gap:2px;width:56px;flex-shrink:0">' +
-      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:8.5px;letter-spacing:0.22em;color:#FFD27A">LEC</span>' +
-      '<span style="display:inline-block;padding-right:0.18em;padding-left:0.06em;font-family:\'Cormorant Garamond\',serif;font-style:italic;font-weight:700;font-size:34px;line-height:1;background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">' + noStr + '</span>' +
-    '</div>' +
-    '<div style="flex:1;min-width:240px">' +
-      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">' +
-        '<span style="font-size:16px;font-weight:900;letter-spacing:0.03em;color:#F8EFFF">' + lec.title + '</span>' +
-        '<span style="' + badgeStyle + '">' + badgeText + '</span>' +
-        whiteBadge +
-      '</div>' +
-      '<div style="margin-top:6px;font-size:12.5px;line-height:1.9;color:rgba(248,239,255,0.68);letter-spacing:0.03em">' + lec.desc + '</div>' +
-      '<div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
-        '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:8.5px;letter-spacing:0.24em;color:#5AE9FF;flex-shrink:0">成果物 ▸</span>' +
-        '<span style="font-size:11.5px;color:rgba(181,142,255,0.95);letter-spacing:0.03em">' + lec.deliver + '</span>' +
-      '</div>' +
-    '</div>' +
-    '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:190px">' + keys + '</div>' +
-  '</a>';
-}
-
-// ── chapter HTML ──────────────────────────────────
-function chapterBlock(ch) {
-  var cards = ch.lectures.map(lectureCard).join('');
-  return '<div data-reveal="1" style="margin-top:52px">' +
-    '<div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">' +
-      '<span style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-weight:700;font-size:40px;color:#FFD27A;line-height:1">' + ch.num + '</span>' +
-      '<h2 style="margin:0;font-weight:900;font-size:22px;letter-spacing:0.05em;color:#F8EFFF">' + ch.title + '</h2>' +
-      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9.5px;letter-spacing:0.28em;color:rgba(181,142,255,0.9)">' + ch.en + '</span>' +
-    '</div>' +
-    '<div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">' + cards + '</div>' +
-  '</div>';
-}
-
-// ── render ────────────────────────────────────────
-var root = document.getElementById('chapters-root');
-root.innerHTML = CHAPTERS.map(chapterBlock).join('');
-
-// ── hover handler ─────────────────────────────────
-root.querySelectorAll('[data-sh]').forEach(function(el){
-  var b = el.getAttribute('style')||'';
-  el.addEventListener('mouseenter', function(){ el.style.cssText = b + ';' + el.getAttribute('data-sh'); });
-  el.addEventListener('mouseleave', function(){ el.style.cssText = b; });
-});
-
-// start button hover
-var sb = document.getElementById('start-btn');
-if(sb){
-  var sbBase = sb.getAttribute('style')||'';
-  sb.addEventListener('mouseenter', function(){ sb.style.cssText = sbBase + ';box-shadow:0 0 30px rgba(255,79,168,0.7)'; });
-  sb.addEventListener('mouseleave', function(){ sb.style.cssText = sbBase; });
-}
-
-// ── scroll reveal ─────────────────────────────────
-(function(){
-  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';io.unobserve(en.target);}
+  // ════════ SCENE 4 — pipeline montage (13–21) ════════
+  scene4(t){
+    const h=this.h, GRAD=this.GRAD;
+    const steps=[
+      { jp:'モデリング', en:'MODELING', c:'#B58EFF' },
+      { jp:'布シミュ',   en:'CLOTH SIM', c:'#5AE9FF' },
+      { jp:'色',         en:'TEXTURE', c:'#FFD27A' },
+      { jp:'光',         en:'LIGHTING', c:'#FF4FA8' },
+      { jp:'撮影',       en:'COMPOSITE', c:'#5AE9FF' }
+    ];
+    const op=this.seg(t,13.4,13.9)*(1-this.seg(t,20.1,20.6));
+    const t0=13.75, dur=1.18;
+    let idx=Math.floor((t-t0)/dur); idx=Math.max(0,Math.min(4,idx));
+    const lp=(t-t0-idx*dur)/dur;
+    const wi=this.eBack(this.clamp01(lp/0.42));
+    const wo=idx<4 ? this.seg(lp,0.84,1) : 0;
+    const wordY=this.mix(wi,64,0)-wo*64;
+    const wordOp=this.clamp01(lp/0.28)*(1-wo);
+    const cur=steps[idx];
+    const prog=this.clamp01((idx+this.clamp01(lp))/5);
+    const crumbs=steps.map((s,i)=>{
+      const on=i===idx, done=i<idx;
+      return h('div',{ display:'flex', flexDirection:'column', alignItems:'center', gap:'10px' },[
+        h('div', on ? { fontFamily:"'Noto Sans JP',sans-serif", fontWeight:700, fontSize:'22px', letterSpacing:'0.1em', whiteSpace:'nowrap', padding:'7px 16px', borderRadius:'3px', color:'#150927', background:GRAD, boxShadow:'0 0 16px rgba(255,79,168,0.4)' } : { fontFamily:"'Noto Sans JP',sans-serif", fontWeight:500, fontSize:'20px', letterSpacing:'0.1em', whiteSpace:'nowrap', padding:'7px 16px', borderRadius:'3px', color:done?'rgba(248,239,255,0.55)':'rgba(181,142,255,0.5)', border:'1px solid '+(done?'rgba(255,210,122,0.3)':'rgba(181,142,255,0.22)') }, s.jp),
+        h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontSize:'9px', letterSpacing:'0.26em', color:on?'#FFD27A':'rgba(181,142,255,0.45)' }, s.en)
+      ]);
     });
-  },{threshold:0.04});
-  document.querySelectorAll('[data-reveal]').forEach(function(el){
-    var r=el.getBoundingClientRect();
-    if(r.top<window.innerHeight*0.95)return;
-    el.style.opacity='0';el.style.transform='translateY(18px)';
-    el.style.transition='opacity 0.7s ease,transform 0.7s cubic-bezier(0.22,1,0.36,1)';
-    io.observe(el);
-  });
-})();
+    return h('div',{ position:'absolute', inset:0, opacity:op },[
+      h('div',{ position:'absolute', left:0, right:0, top:'150px', textAlign:'center', fontFamily:"'IBM Plex Mono',monospace", fontSize:'15px', letterSpacing:'0.42em', color:'#FFD27A' },'PIPELINE // 制作工程は、ぜんぶ自分の手で'),
+      h('div',{ position:'absolute', left:0, right:0, top:'400px', textAlign:'center', opacity:wordOp, transform:`translateY(${wordY}px)` },[
+        h('div',{ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:900, fontSize:'140px', letterSpacing:'0.04em', lineHeight:1, color:cur.c, filter:`drop-shadow(0 0 34px ${cur.c}66)` }, cur.jp),
+        h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontSize:'22px', letterSpacing:'0.5em', color:'rgba(248,239,255,0.8)', marginTop:'24px', paddingLeft:'0.5em' }, cur.en)
+      ]),
+      h('div',{ position:'absolute', left:'160px', right:'160px', bottom:'200px' },[
+        h('div',{ display:'flex', justifyContent:'space-between', alignItems:'flex-start' }, crumbs),
+        h('div',{ position:'relative', height:'2px', marginTop:'26px', background:'rgba(181,142,255,0.18)' },
+          h('div',{ position:'absolute', left:0, top:0, height:'2px', width:`${prog*100}%`, background:GRAD, boxShadow:'0 0 10px rgba(255,79,168,0.6)' }))
+      ])
+    ]);
+  }
+
+  // ════════ SCENE 5 — payoff (20–27) ════════
+  scene5(t){
+    const h=this.h, GRAD=this.GRAD;
+    const op=this.seg(t,20.5,21.1)*(1-this.seg(t,26.7,27.2));
+    const z=this.mix(this.eInOut(this.seg(t,20.5,27)),1.0,1.07);
+    const lx=this.mix(this.eInOut(this.seg(t,20.7,26)),-18,86);
+    const a=this.seg(t,21.0,22.2), b=this.seg(t,22.7,23.7);
+    const punch=this.eBack(this.seg(t,24.2,25.1)), pOp=this.seg(t,24.2,24.8);
+    const ghost=h('div',{ position:'absolute', left:'-40px', bottom:'-220px', fontFamily:"'Cormorant Garamond',serif", fontStyle:'italic', fontWeight:700, fontSize:'760px', lineHeight:1, color:'transparent', WebkitTextStroke:'2px rgba(181,142,255,0.16)', transform:`translateX(${this.mix(this.seg(t,20.5,27),0,40)}px)`, pointerEvents:'none' },'15');
+    const light=h('div',{ position:'absolute', top:'-10%', bottom:'-10%', left:`${lx}%`, width:'420px', transform:'skewX(-15deg)', background:'linear-gradient(90deg,transparent,rgba(255,233,176,0.16),rgba(255,210,122,0.05),transparent)', filter:'blur(6px)', mixBlendMode:'screen', pointerEvents:'none' });
+    const text=h('div',{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', transform:`scale(${z})` },[
+      h('div',{ fontFamily:"'Noto Serif JP',serif", fontWeight:600, fontSize:'46px', letterSpacing:'0.14em', color:'rgba(248,239,255,0.9)', opacity:a, transform:`translateY(${this.mix(a,18,0)}px)` },'朝日が差し込む、自分の部屋。'),
+      h('div',{ fontFamily:"'Noto Serif JP',serif", fontWeight:600, fontSize:'46px', letterSpacing:'0.14em', color:'rgba(248,239,255,0.9)', marginTop:'18px', opacity:b, transform:`translateY(${this.mix(b,18,0)}px)` },'カメラが、ゆっくりと動く。'),
+      h('div',{ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:900, fontSize:'88px', letterSpacing:'0.03em', marginTop:'48px', opacity:pOp, transform:`scale(${this.mix(punch,0.86,1)})`, filter:'drop-shadow(0 0 30px rgba(255,79,168,0.35))', ...this.grad() },'それはもう、アニメのワンカット。')
+    ]);
+    return h('div',{ position:'absolute', inset:0, opacity:op, overflow:'hidden' },[ ghost, light, text ]);
+  }
+
+  // ════════ SCENE 6 — lockup (26.5–30) ════════
+  scene6(t){
+    const h=this.h, GRAD=this.GRAD;
+    const op=this.seg(t,26.8,27.4);
+    const a=this.seg(t,26.9,27.6), b=this.seg(t,27.3,28.0), c=this.eBack(this.seg(t,27.7,28.5)), cOp=this.seg(t,27.7,28.2);
+    const pulse=0.5+0.5*Math.sin(t*3.2);
+    const fl=(ph)=>Math.sin(t*1.6+ph)*8;
+    return h('div',{ position:'absolute', inset:0, opacity:op, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center' },[
+      h('div',{ position:'absolute', left:'30%', top:'24%', color:'#FF7AC2', fontSize:'26px', opacity:a, transform:`translateY(${fl(0)}px)` },'✦'),
+      h('div',{ position:'absolute', right:'28%', top:'30%', color:'#FFD27A', fontSize:'34px', opacity:a, transform:`translateY(${fl(2)}px)` },'✦'),
+      h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontSize:'15px', letterSpacing:'0.42em', color:'#FFD27A', marginBottom:'24px', opacity:a },'BLENDER ROOM // 全15回'),
+      h('div',{ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontStyle:'italic', fontSize:'100px', lineHeight:0.95, opacity:a, transform:`scale(${this.mix(a,0.94,1)})`, filter:'drop-shadow(0 0 28px rgba(255,79,168,0.35))', ...this.grad() },'BLENDER ROOM'),
+      h('div',{ fontFamily:"'Noto Sans JP',sans-serif", fontWeight:500, fontSize:'24px', letterSpacing:'0.16em', color:'rgba(248,239,255,0.82)', marginTop:'20px', opacity:b },'サイコロ1個から、カメラが動くアニメ背景まで。'),
+      h('div',{ marginTop:'46px', opacity:cOp, transform:`scale(${this.mix(c,0.9,1)})` },
+        h('div',{ fontFamily:"'IBM Plex Mono',monospace", fontWeight:600, fontSize:'20px', letterSpacing:'0.2em', color:'#150927', padding:'18px 40px', borderRadius:'9px', background:GRAD, boxShadow:`0 0 ${this.mix(pulse,18,40)}px rgba(255,79,168,${this.mix(pulse,0.4,0.75)})`, cursor:'pointer' },'スタートページへGO! ▸', { onClick:()=>{ window.location.href='start.html'; } }))
+    ]);
+  }
+
+  // ════════ stage chrome ════════
+  corner(pos){
+    const h=this.h;
+    const base={ position:'absolute', width:'30px', height:'30px', borderColor:'#FFD27A', opacity:0.7 };
+    const m={ tl:{ left:'34px', top:'34px', borderLeft:'2px solid #FFD27A', borderTop:'2px solid #FF4FA8' },
+              tr:{ right:'34px', top:'34px', borderRight:'2px solid #FFD27A', borderTop:'2px solid #FF4FA8' },
+              bl:{ left:'34px', bottom:'34px', borderLeft:'2px solid #FFD27A', borderBottom:'2px solid #FF4FA8' },
+              br:{ right:'34px', bottom:'34px', borderRight:'2px solid #FFD27A', borderBottom:'2px solid #FF4FA8' } };
+    return h('div', Object.assign({}, base, m[pos]));
+  }
+  chrome(t){
+    const h=this.h, GRAD=this.GRAD;
+    const ml={ fontFamily:"'IBM Plex Mono',monospace", fontSize:'13px', letterSpacing:'0.28em' };
+    return h('div',{ position:'absolute', inset:0, pointerEvents:'none', zIndex:20 },[
+      this.corner('tl'), this.corner('tr'), this.corner('bl'), this.corner('br'),
+      h('div',{ position:'absolute', left:0, top:0, height:'3px', width:`${(t/this.DUR)*100}%`, background:GRAD, boxShadow:'0 0 10px rgba(255,79,168,0.6)' }),
+      h('div',{ position:'absolute', left:'90px', top:'52px', display:'flex', alignItems:'center', gap:'10px' },[
+        h('span', Object.assign({ color:'#FFD27A' }, { fontSize:'14px' }),'✦'),
+        h('span', this.grad({ fontFamily:"'Barlow Condensed',sans-serif", fontWeight:900, fontStyle:'italic', fontSize:'17px', letterSpacing:'0.04em' }),'BLENDER ROOM'),
+        h('span', Object.assign({}, ml, { color:'rgba(181,142,255,0.85)', fontSize:'10px' }),'// OPENING')
+      ]),
+      h('div', Object.assign({ position:'absolute', right:'90px', top:'54px', color:'rgba(181,142,255,0.85)', fontSize:'10px' }, ml),'ANIME BG STUDIO · 背景美術 × Blender'),
+      h('div', Object.assign({ position:'absolute', left:'90px', bottom:'52px', color:'#FFD27A', fontSize:'10px' }, ml),'FRAME '+this.pad(t*30)+' / 0900'),
+      h('div', Object.assign({ position:'absolute', right:'90px', bottom:'52px', color:'#5AE9FF', fontSize:'10px' }, ml),'LEC 00 ▸ 15')
+    ]);
+  }
+
+  renderStage(t){
+    const k=[];
+    if(t<5.0) k.push(this.scene1(t));
+    if(t>4.0 && t<9.2) k.push(this.scene2(t));
+    if(t>8.0 && t<14.0) k.push(this.scene3(t));
+    if(t>13.0 && t<21.0) k.push(this.scene4(t));
+    if(t>20.0 && t<27.4) k.push(this.scene5(t));
+    if(t>26.4) k.push(this.scene6(t));
+    k.push(this.chrome(t));
+    return this.h('div',{ position:'absolute', inset:0 }, k);
+  }
+
+  renderVals(){
+    return {
+      scene: this.renderStage(this.state.t),
+      stageRef: this.scaleRef,
+      t: this.state.t,
+      onSeek: this.seek,
+      onToggle: this.toggle,
+      playLabel: this.state.playing ? '❚❚' : '▶',
+      timeLabel: this.state.t.toFixed(1) + ' / 30.0'
+    };
+  }
+}
 </script>
 </body>
 </html>

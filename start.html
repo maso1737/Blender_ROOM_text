@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BLENDER ROOM // INDEX – 全15回シラバスマップ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,500;0,700;0,900;1,700;1,900&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@400;500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
+<style>
+  html{scrollbar-color:rgba(255,79,168,0.6) rgba(20,10,40,0.6)}
+  body{margin:0;color:#F8EFFF;
+    background:
+      radial-gradient(ellipse 80% 55% at 88% -10%, rgba(184,80,255,0.32), transparent 60%),
+      radial-gradient(ellipse 65% 50% at -10% 18%, rgba(255,122,194,0.17), transparent 60%),
+      radial-gradient(ellipse 70% 55% at 50% 115%, rgba(90,233,255,0.14), transparent 65%),
+      linear-gradient(180deg,#2b1852 0%,#190d34 100%);
+    background-attachment:fixed;}
+  ::selection{background:rgba(255,79,168,0.5)}
+  @keyframes kfTwinkle{0%,100%{opacity:0.5}50%{opacity:0.95}}
+  @keyframes kfFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+  @media (prefers-reduced-motion: reduce){*{animation-duration:0.001s !important;animation-iteration-count:1 !important}}
+</style>
+</head>
+<body>
+<div style="font-family:'Noto Sans JP',sans-serif; min-height:100vh; overflow-x:hidden">
+
+  <!-- starfield -->
+  <div style="position:fixed; inset:0; pointer-events:none; z-index:0; mix-blend-mode:screen; opacity:0.85; animation:kfTwinkle 5s ease-in-out infinite; background-image:radial-gradient(1.5px 1.5px at 22px 34px, rgba(255,255,255,0.8), transparent 60%),radial-gradient(1px 1px at 120px 90px, rgba(255,210,122,0.8), transparent 60%),radial-gradient(1.5px 1.5px at 200px 160px, rgba(181,142,255,0.8), transparent 60%),radial-gradient(1px 1px at 280px 50px, rgba(90,233,255,0.7), transparent 60%),radial-gradient(1.5px 1.5px at 330px 210px, rgba(255,122,194,0.7), transparent 60%); background-size:380px 260px"></div>
+
+  <!-- TOPBAR -->
+  <div style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:16px; height:52px; padding:0 22px; background:rgba(24,12,46,0.82); backdrop-filter:blur(8px); border-bottom:1px solid rgba(255,210,122,0.18)">
+    <div style="display:flex; align-items:center; gap:10px">
+      <span style="color:#FFD27A; font-size:14px">✦</span>
+      <span style="display:inline-block; padding-right:0.35em; font-family:'Barlow Condensed',sans-serif; font-weight:900; font-style:italic; font-size:19px; letter-spacing:0.04em; background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">BLENDER ROOM</span>
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:rgba(181,142,255,0.85)">部屋を、つくろう。</span>
+    </div>
+    <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.25em; color:#FFD27A">INDEX // 全15回マップ</span>
+  </div>
+
+  <div style="position:relative; z-index:1; max-width:960px; margin:0 auto; padding:0 26px 80px">
+
+    <!-- HERO -->
+    <div style="padding:64px 0 10px; text-align:center">
+      <div style="display:flex; align-items:center; justify-content:center; gap:12px">
+        <span style="height:1px; width:70px; background:linear-gradient(90deg,transparent,#FFD27A)"></span>
+        <span style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.34em; color:#FFD27A">SYLLABUS MAP // 15 LECTURES</span>
+        <span style="height:1px; width:70px; background:linear-gradient(90deg,#FFD27A,transparent)"></span>
+      </div>
+      <h1 style="margin:20px 0 0; font-family:'Noto Sans JP',sans-serif; font-weight:900; font-size:42px; line-height:1.3; letter-spacing:0.03em; background:linear-gradient(110deg,#FFFFFF,#FFD9EE 45%,#CDB4FF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">15回で、アニメに出てくる<br>「あの部屋」を自分の手で。</h1>
+      <p style="margin:18px auto 0; max-width:620px; font-size:14.5px; line-height:2.1; color:rgba(248,239,255,0.75); letter-spacing:0.05em">サイコロ1個から始めて、最終回にはカメラが動くアニメ背景動画が完成します。<strong style="color:#5AE9FF">背景美術・撮影処理の「2Dの目」</strong>を、そのまま武器にして進む構成です。</p>
+      <div style="margin-top:22px; display:flex; justify-content:center">
+        <img src="assets/blender_logo.png" alt="Blender" style="height:30px; filter:drop-shadow(0 0 10px rgba(255,255,255,0.25)); animation:kfFloat 4.5s ease-in-out infinite">
+      </div>
+    </div>
+
+    <!-- chapters (JS-rendered) -->
+    <div id="chapters-root"></div>
+
+    <!-- goal banner -->
+    <div style="margin-top:56px; border:1px solid rgba(255,210,122,0.35); border-radius:16px; padding:30px 32px; background:linear-gradient(180deg,rgba(255,122,194,0.09),rgba(90,233,255,0.05)); text-align:center; position:relative; overflow:hidden">
+      <span style="position:absolute; left:20px; top:14px; color:#FF7AC2; font-size:14px; animation:kfFloat 4s ease-in-out infinite">✦</span>
+      <span style="position:absolute; right:24px; top:20px; color:#FFD27A; font-size:18px; animation:kfFloat 5s ease-in-out infinite">✦</span>
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.34em; color:#FFD27A">FINAL GOAL ── 最終回のあなた</div>
+      <div style="margin-top:14px; font-size:19px; font-weight:900; line-height:1.9; letter-spacing:0.04em; color:#F8EFFF">朝日が差し込む自分の部屋を、カメラがゆっくり動く。<br><span style="background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent">それはもう、アニメのワンカットです。</span></div>
+      <div style="margin-top:16px; font-size:12.5px; line-height:2; color:rgba(248,239,255,0.7)">モデリング → 布 → 色 → 光 → 撮影(AE)。アニメの背景美術と同じ工程を、ぜんぶ自分の手で通します。</div>
+      <a href="01.html" id="start-btn" style="display:inline-block; margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.2em; color:#22103d; text-decoration:none; border-radius:9px; padding:13px 26px; background:linear-gradient(135deg,#FF4FA8,#B850FF); font-weight:600; box-shadow:0 0 18px rgba(255,79,168,0.4)">第1回からはじめる ▸</a>
+    </div>
+
+    <div style="margin-top:48px; display:flex; align-items:center; justify-content:center; gap:12px; opacity:0.65">
+      <img src="assets/blender_logo.png" alt="Blender" style="height:22px">
+      <span style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:rgba(181,142,255,0.8)">BLENDER ROOM // アニメ美術のためのBlender入門 · 全15回</span>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── chapter / lecture data ────────────────────────
+var CHAPTERS = [
+  { num:'I',   title:'はじめの一歩',         en:'SETUP // 事故ゼロの土台', lectures:[
+    { no:1,  title:'Blenderの第一歩と「鉄の掟」',
+      desc:'3D酔いしない視点操作と、後のエラーを100%防ぐプロの作法。最初の1回がいちばん大事。',
+      deliver:'正確な「1m四方」のサイコロ(地面にピタッと接地)',
+      keys:['1·3·7','Tab','Ctrl+A'] }
+  ]},
+  { num:'II',  title:'部屋の箱を建てる',       en:'ROOM SHELL // 2Dの感覚でOK', lectures:[
+    { no:2,  title:'部屋モデリング①:2Dトレースで間取り作成',
+      desc:'使い慣れた「平面」の感覚で間取り図をなぞるだけ。3Dはまだ考えなくて大丈夫。',
+      deliver:'歪みのない、完全に閉じた壁の線画(平面)',
+      keys:['E','F','M'] },
+    { no:3,  title:'部屋モデリング②:壁の立体化と開口部',
+      desc:'線画を一気に立ち上げて部屋に。窓やドアの穴をあけ、スナップでパーツを吸い付かせる。',
+      deliver:'窓とドアがぴったりハマった部屋の箱',
+      keys:['E','Ctrl+R','スナップ'] }
+  ]},
+  { num:'III', title:'家具をつくる',           en:'FURNITURE // 図面から立体へ', lectures:[
+    { no:4,  title:'家具モデリング①:テレビとテレビ台',
+      desc:'「正面」と「横」の2D図面から立体を起こす反復ステップ。分離と結合も覚える。',
+      deliver:'液晶テレビとテレビ台のアセット',
+      keys:['P','Ctrl+J'] },
+    { no:5,  title:'家具モデリング②:タンスとモディファイア',
+      desc:'引き出しのような規則的な形は、手作業せず自動で綺麗に増やす。角を丸めてアニメに馴染むハイライトを。',
+      deliver:'引き出しが等間隔で並んだベベル付きタンス',
+      keys:['I','配列','ベベル'] },
+    { no:6,  title:'家具モデリング③:【実習】机と椅子',
+      desc:'ここまでの技を組み合わせて自力で制作。重なった頂点の「データ大掃除」も覚える。',
+      deliver:'正確な寸法で作られた机と椅子の3Dアセット',
+      keys:['M','実習'] },
+    { no:7,  title:'有機的モデリング:ソファと細分割',
+      desc:'カクカクのローポリから、ふっくら柔らかいソファへ。ミラー×細分割の強力コンビ。',
+      deliver:'丸みのある、ふっくらとした1〜2人掛けソファ',
+      keys:['ミラー','Ctrl+1·2'] }
+  ]},
+  { num:'IV',  title:'布に命を吹き込む',       en:'CLOTH SIM // 物理の魔法', lectures:[
+    { no:8,  title:'布シミュレーション①:クッション',
+      desc:'手では作れないリアルなシワや膨らみを、物理シミュレーションにおまかせ。',
+      deliver:'空気の詰まったリアルなクッション',
+      keys:['クロス','Space'] },
+    { no:9,  title:'布シミュレーション②:【実習】ベッド・カーテン',
+      desc:'「ぶつかる判定(コリジョン)」とピン留めで、布団が掛かるベッドと垂れるカーテンを。',
+      deliver:'布団がかかったベッド、または窓辺のカーテン',
+      keys:['コリジョン','ピン留め'] }
+  ]},
+  { num:'V',   title:'色と質感をのせる',       en:'TEXTURE // 2Dスキルの見せ場', lectures:[
+    { no:10, title:'UV展開とアセット管理',
+      desc:'3Dモデルに絵を塗るための「展開図(画用紙)」を開く。納品できるプロのデータ整理も。',
+      deliver:'ターンテーブル動画と、整理された納品データ',
+      keys:['UV','シーム'], isWhite:true },
+    { no:11, title:'テクスチャ・外部ツール連携',
+      desc:'アニメ背景らしいフラットな固有色の塗り方と、Photoshopなど2Dソフトとの連携技。',
+      deliver:'色と木目がきれいにのった家具アセット',
+      keys:['ペイント','PS連携'], isWhite:true }
+  ]},
+  { num:'VI',  title:'シーンとして組む',       en:'SCENE // 光とカメラで演出', lectures:[
+    { no:12, title:'部屋のレイアウト(アペンドとカメラワーク)',
+      desc:'作ってきた家具を部屋に大集合。絵コンテに合わせたベストなアングルとレンズを決める。',
+      deliver:'アニメのワンシーンのようになった部屋の画面',
+      keys:['アペンド','レンズ'] },
+    { no:13, title:'ライティングとアニメ絵作り',
+      desc:'光と影で「時間帯」と「空気感」を演出。窓から差し込む朝日と、フワッとボケる影。',
+      deliver:'窓枠の影が床に落ちるドラマチックな部屋の絵',
+      keys:['EEVEE','サン'], isWhite:true }
+  ]},
+  { num:'VII', title:'アニメにして納品する',   en:"OUTPUT // 撮影(AE)へバトンタッチ", lectures:[
+    { no:14, title:'レンダリングとAOV(マルチパス出力)',
+      desc:'カメラを少しだけ動かして「動画としての命」を吹き込み、プロ仕様のマルチパスで書き出す。',
+      deliver:'プレイブラスト動画(mp4)+連番EXR',
+      keys:['EXR','AOV'] },
+    { no:15, title:'AE撮影(コンポジット)連携と最終講評',
+      desc:'After Effectsで仕上げの撮影処理。3Dの生データを「二次元のアニメ背景美術」へ昇華。',
+      deliver:'15回の集大成:カメラが動くアニメ背景動画(mp4)',
+      keys:['AE','講評'], isWhite:true }
+  ]}
+];
+
+// ── key badge HTML ────────────────────────────────
+function keyBadge(k) {
+  return '<span style="display:inline-flex;align-items:center;justify-content:center;height:24px;padding:0 8px;border:1px solid rgba(181,142,255,0.4);border-bottom:2px solid rgba(181,142,255,0.5);border-radius:6px;background:rgba(248,239,255,0.06);font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#F8EFFF">' + k + '</span>';
+}
+
+// ── card HTML ─────────────────────────────────────
+function lectureCard(lec) {
+  var ready = lec.no <= 4;
+  var noStr = String(lec.no).padStart(2,'0');
+  var href  = ready ? noStr + '.html' : '#';
+  var onclick = ready ? '' : ' onclick="return false"';
+
+  var cardStyle = ready
+    ? 'display:flex;align-items:center;gap:18px;flex-wrap:wrap;text-decoration:none;color:inherit;border:1px solid rgba(255,79,168,0.5);border-radius:14px;padding:18px 22px;background:linear-gradient(180deg,rgba(255,79,168,0.10),rgba(181,142,255,0.05));box-shadow:0 0 22px rgba(255,79,168,0.14);cursor:pointer;opacity:1;transition:all 0.3s'
+    : 'display:flex;align-items:center;gap:18px;flex-wrap:wrap;text-decoration:none;color:inherit;border:1px solid rgba(255,210,122,0.18);border-radius:14px;padding:18px 22px;background:linear-gradient(180deg,rgba(255,122,194,0.05),rgba(181,142,255,0.025));box-shadow:none;cursor:default;opacity:0.78;transition:all 0.3s';
+  var hoverStyle = ready
+    ? 'box-shadow:0 0 32px rgba(255,79,168,0.3);border-color:rgba(255,79,168,0.8);transform:translateY(-2px)'
+    : 'border-color:rgba(255,210,122,0.3)';
+
+  var badgeStyle = ready
+    ? 'font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:0.22em;color:#22103d;background:linear-gradient(135deg,#FFD27A,#FF7AC2);border-radius:5px;padding:3px 9px;font-weight:600'
+    : 'font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:0.22em;color:rgba(181,142,255,0.9);border:1px solid rgba(181,142,255,0.4);border-radius:5px;padding:2px 8px';
+  var badgeText = ready ? '公開中 ▸ ひらく' : '準備中';
+
+  var whiteBadge = lec.isWhite
+    ? '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9px;letter-spacing:0.18em;color:#4a3a6e;background:linear-gradient(180deg,#FFFFFF,#F3EDFF);border-radius:5px;padding:3px 9px;font-weight:600;box-shadow:0 0 10px rgba(255,255,255,0.25)">✦ 画用紙トーン回</span>'
+    : '';
+
+  var keys = lec.keys.map(keyBadge).join('');
+
+  return '<a href="' + href + '"' + onclick + ' style="' + cardStyle + '" data-sh="' + hoverStyle + '">' +
+    '<div style="display:flex;flex-direction:column;align-items:center;gap:2px;width:56px;flex-shrink:0">' +
+      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:8.5px;letter-spacing:0.22em;color:#FFD27A">LEC</span>' +
+      '<span style="display:inline-block;padding-right:0.18em;padding-left:0.06em;font-family:\'Cormorant Garamond\',serif;font-style:italic;font-weight:700;font-size:34px;line-height:1;background:linear-gradient(120deg,#FFE9B0,#FFD27A 26%,#FF4FA8 62%,#B58EFF 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">' + noStr + '</span>' +
+    '</div>' +
+    '<div style="flex:1;min-width:240px">' +
+      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">' +
+        '<span style="font-size:16px;font-weight:900;letter-spacing:0.03em;color:#F8EFFF">' + lec.title + '</span>' +
+        '<span style="' + badgeStyle + '">' + badgeText + '</span>' +
+        whiteBadge +
+      '</div>' +
+      '<div style="margin-top:6px;font-size:12.5px;line-height:1.9;color:rgba(248,239,255,0.68);letter-spacing:0.03em">' + lec.desc + '</div>' +
+      '<div style="margin-top:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap">' +
+        '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:8.5px;letter-spacing:0.24em;color:#5AE9FF;flex-shrink:0">成果物 ▸</span>' +
+        '<span style="font-size:11.5px;color:rgba(181,142,255,0.95);letter-spacing:0.03em">' + lec.deliver + '</span>' +
+      '</div>' +
+    '</div>' +
+    '<div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:190px">' + keys + '</div>' +
+  '</a>';
+}
+
+// ── chapter HTML ──────────────────────────────────
+function chapterBlock(ch) {
+  var cards = ch.lectures.map(lectureCard).join('');
+  return '<div data-reveal="1" style="margin-top:52px">' +
+    '<div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">' +
+      '<span style="font-family:\'Cormorant Garamond\',serif;font-style:italic;font-weight:700;font-size:40px;color:#FFD27A;line-height:1">' + ch.num + '</span>' +
+      '<h2 style="margin:0;font-weight:900;font-size:22px;letter-spacing:0.05em;color:#F8EFFF">' + ch.title + '</h2>' +
+      '<span style="font-family:\'IBM Plex Mono\',monospace;font-size:9.5px;letter-spacing:0.28em;color:rgba(181,142,255,0.9)">' + ch.en + '</span>' +
+    '</div>' +
+    '<div style="display:flex;flex-direction:column;gap:12px;margin-top:16px">' + cards + '</div>' +
+  '</div>';
+}
+
+// ── render ────────────────────────────────────────
+var root = document.getElementById('chapters-root');
+root.innerHTML = CHAPTERS.map(chapterBlock).join('');
+
+// ── hover handler ─────────────────────────────────
+root.querySelectorAll('[data-sh]').forEach(function(el){
+  var b = el.getAttribute('style')||'';
+  el.addEventListener('mouseenter', function(){ el.style.cssText = b + ';' + el.getAttribute('data-sh'); });
+  el.addEventListener('mouseleave', function(){ el.style.cssText = b; });
+});
+
+// start button hover
+var sb = document.getElementById('start-btn');
+if(sb){
+  var sbBase = sb.getAttribute('style')||'';
+  sb.addEventListener('mouseenter', function(){ sb.style.cssText = sbBase + ';box-shadow:0 0 30px rgba(255,79,168,0.7)'; });
+  sb.addEventListener('mouseleave', function(){ sb.style.cssText = sbBase; });
+}
+
+// ── scroll reveal ─────────────────────────────────
+(function(){
+  if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.style.opacity='1';en.target.style.transform='translateY(0)';io.unobserve(en.target);}
+    });
+  },{threshold:0.04});
+  document.querySelectorAll('[data-reveal]').forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight*0.95)return;
+    el.style.opacity='0';el.style.transform='translateY(18px)';
+    el.style.transition='opacity 0.7s ease,transform 0.7s cubic-bezier(0.22,1,0.36,1)';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
