@@ -61,12 +61,15 @@ class Component extends DCLogic {
 
   // ── lifecycle ──
   componentDidMount(){
+    // パスごとに独立したキーを使う（リポジトリ名が変わっても影響しない）
+    this._seenKey = 'blroom_seen_opening:' + (location.pathname.split('/').slice(0,-1).join('/') || '/');
+    this._tKey    = 'blroom_open_t:'       + this._seenKey;
     // 一度見たら次回からスタートページへ自動スキップ（?replay でやり直し可）
     try{
       const sp=new URLSearchParams(location.search);
-      if(!sp.has('replay') && localStorage.getItem('blroom_seen_opening')==='1'){ location.replace('start.html'); return; }
+      if(!sp.has('replay') && localStorage.getItem(this._seenKey)==='1'){ location.replace('start.html'); return; }
     }catch(e){}
-    try{ const s=localStorage.getItem('blroom_open_t'); if(s!=null) this.setState({ t:parseFloat(s)||0 }); }catch(e){}
+    try{ const s=localStorage.getItem(this._tKey); if(s!=null) this.setState({ t:parseFloat(s)||0 }); }catch(e){}
     this.fit();
     this._onR = ()=>this.fit();
     window.addEventListener('resize', this._onR);
@@ -90,8 +93,8 @@ class Component extends DCLogic {
     }
     this._raf=requestAnimationFrame(this.loop);
   };
-  _save(t){ if(!this._lw||Math.abs(t-this._lw)>0.2){ try{ localStorage.setItem('blroom_open_t', t); }catch(e){} this._lw=t; } }
-  _markSeen(){ try{ localStorage.setItem('blroom_seen_opening','1'); }catch(e){} }
+  _save(t){ if(!this._lw||Math.abs(t-this._lw)>0.2){ try{ localStorage.setItem(this._tKey||'blroom_open_t', t); }catch(e){} this._lw=t; } }
+  _markSeen(){ try{ localStorage.setItem(this._seenKey||'blroom_seen_opening','1'); }catch(e){} }
   goStart = ()=>{ this._markSeen(); };
   toggle = ()=> this.setState(s=>({ playing:!s.playing }));
   seek = (e)=>{ const v=parseFloat(e.target.value); this.setState({ playing:false, t:v }); this._save(v); };
