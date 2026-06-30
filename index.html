@@ -452,7 +452,7 @@ class Component extends DCLogic {
     const cShow = t>16.8 && t<22.4;
     curtain.group.visible = cShow;
     if(cShow){
-      const o = seg(t,16.8,17.3) * (1-seg(t,21.6,22.3));
+      const o = seg(t,16.8,17.3);   // フェードインのみ。終端のフェードアウトは廃止（半透明で布の貫通が見えるため）
       curtain.mat.opacity = o;
       // reveal: rod travels from bundle → full width, ease-out so it flings open then decelerates
       const rev = this.eOut(this.clamp01((t-17.1)/2.3));
