@@ -257,7 +257,7 @@ class Component extends DCLogic {
     const planeBase = Math.max(bboxW,bboxD)*1.3;
     const imgMesh = new THREE.Mesh(new THREE.PlaneGeometry(planeBase, planeBase*(922/1064)), imgMat);
     imgMesh.rotation.x=-Math.PI/2; imgMesh.position.y=-0.04; imgMesh.renderOrder=-1; scene.add(imgMesh);
-    new THREE.TextureLoader().load('OP/media/s1_room_setting.png', (tx)=>{ tx.encoding=THREE.sRGBEncoding; tx.center.set(0.5,0.5); tx.rotation=Math.PI/2; imgMat.map=tx; imgMat.needsUpdate=true; });
+    new THREE.TextureLoader().load('assets/op/s1_room_setting.png', (tx)=>{ tx.encoding=THREE.sRGBEncoding; tx.center.set(0.5,0.5); tx.rotation=Math.PI/2; imgMat.map=tx; imgMat.needsUpdate=true; });
 
     // ---------- CURTAIN (Verlet cloth) ----------
     const curtain = this.buildCurtain(scene);
@@ -556,9 +556,9 @@ class Component extends DCLogic {
     const h=this.h;
     const op=this.seg(t,22.0,22.5)*(1-this.seg(t,28.4,29.0));
     const cuts=[
-      { src:'OP/uploads/3.png', s:22.2, e:24.4, jp:'色',   en:'TEXTURE',   c:'#FFD27A' },
-      { src:'OP/uploads/2.png', s:24.4, e:26.6, jp:'光',   en:'LIGHTING',  c:'#FF4FA8' },
-      { src:'OP/uploads/1.png', s:26.6, e:29.0, jp:'撮影', en:'COMPOSITE', c:'#5AE9FF' }
+      { src:'assets/op/3.png', s:22.2, e:24.4, jp:'色',   en:'TEXTURE',   c:'#FFD27A' },
+      { src:'assets/op/2.png', s:24.4, e:26.6, jp:'光',   en:'LIGHTING',  c:'#FF4FA8' },
+      { src:'assets/op/1.png', s:26.6, e:29.0, jp:'撮影', en:'COMPOSITE', c:'#5AE9FF' }
     ];
     const drift = Math.sin(t*0.8)*1.4;
     const layers = cuts.map((cut,i)=>{
