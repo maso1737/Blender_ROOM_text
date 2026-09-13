@@ -49,3 +49,10 @@
 
 - コミット末尾に `Co-Authored-By: Claude <noreply@anthropic.com>` を付ける。
 - push 先は `origin`（= Blender_ROOM_text リポジトリ）。
+
+## 関連
+
+- 第13回「ライティングとアニメ絵作り」の補助資料 →
+  [bulb-node-steps.html](../Blender/TSR_EL_stage_light/bulb-node-steps.html)
+  （電球グリッドを Geometry Nodes で組む手順書。このリポジトリ外のローカルファイルなので
+  GitHub Pages 上のリンクとしては機能しない。ローカルで参照するとき用）
