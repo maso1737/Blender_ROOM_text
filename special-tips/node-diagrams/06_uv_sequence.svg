@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="1240" viewBox="0 0 2100 1240">
+<rect width="2100" height="1240" fill="#181513"/>
+<text x="56" y="74" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="44" fill="#FF9A3C">06</tspan><tspan font-size="30" fill="#FFFFFF">  bulb_uv / Image Sequence</tspan></text>
+<text x="56" y="116" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#8A8076">AE の白黒連番で自由に振り付ける（本命）</text>
+<line x1="56" y1="146" x2="2044" y2="146" stroke="#4A423B" stroke-width="2"/>
+<text x="56" y="215" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#00D6A3" letter-spacing="3">GEOMETRY NODES</text>
+<rect x="120" y="250" width="300" height="150" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 308 L120 262 Q120 250 132 250 L408 250 Q420 250 420 262 L420 308 Z" fill="#4F4F94"/>
+<text x="144" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Position</text>
+<circle cx="420" cy="334" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="394" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Position</text>
+<rect x="500" y="250" width="400" height="226" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M500 308 L500 262 Q500 250 512 250 L888 250 Q900 250 900 262 L900 308 Z" fill="#4F4F94"/>
+<text x="524" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Vector Math</text>
+<circle cx="500" cy="334" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="526" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Vector</text>
+<circle cx="900" cy="334" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="874" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Vector</text>
+<rect x="520" y="368" width="104" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="534" y="392" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Divide</text>
+<text x="524" y="430" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">10, 10, 1</text>
+<rect x="980" y="250" width="400" height="226" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M980 308 L980 262 Q980 250 992 250 L1368 250 Q1380 250 1380 262 L1380 308 Z" fill="#4F4F94"/>
+<text x="1004" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Vector Math</text>
+<circle cx="980" cy="334" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="1006" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Vector</text>
+<circle cx="1380" cy="334" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="1354" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Vector</text>
+<rect x="1000" y="368" width="65" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="1014" y="392" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Add</text>
+<text x="1004" y="430" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">0.5, 0.5, 0</text>
+<rect x="1460" y="250" width="470" height="308" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1460 308 L1460 262 Q1460 250 1472 250 L1918 250 Q1930 250 1930 262 L1930 308 Z" fill="#2F6B55"/>
+<text x="1484" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Store Named Attribute</text>
+<circle cx="1460" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1486" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Geometry</text>
+<circle cx="1460" cy="378" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="1486" y="386" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Value</text>
+<circle cx="1930" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1904" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Geometry</text>
+<text x="1484" y="436" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Vector</text>
+<text x="1484" y="474" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Domain:  Point</text>
+<rect x="1480" y="488" width="208" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="1494" y="512" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Name:  bulb_uv</text>
+<path d="M420 334 C490 334 430 334 500 334" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M900 334 C970 334 910 334 980 334" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M1380 334 C1450 334 1390 378 1460 378" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<line x1="56" y1="700" x2="2044" y2="700" stroke="#4A423B" stroke-width="2" stroke-dasharray="10 10"/>
+<text x="56" y="760" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#D6C23A" letter-spacing="3">MATERIAL</text>
+<rect x="120" y="790" width="430" height="226" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 848 L120 802 Q120 790 132 790 L538 790 Q550 790 550 802 L550 848 Z" fill="#8A7A28"/>
+<text x="144" y="828" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Attribute</text>
+<circle cx="550" cy="874" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="524" y="882" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Vector</text>
+<text x="144" y="932" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Type:  Instancer</text>
+<rect x="140" y="946" width="208" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="154" y="970" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Name:  bulb_uv</text>
+<rect x="650" y="790" width="520" height="226" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M650 848 L650 802 Q650 790 662 790 L1158 790 Q1170 790 1170 802 L1170 848 Z" fill="#8A7A28"/>
+<text x="674" y="828" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Image Texture</text>
+<circle cx="650" cy="874" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="676" y="882" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Vector</text>
+<circle cx="1170" cy="874" r="11" fill="#D6C23A" stroke="#181513" stroke-width="2.5"/>
+<text x="1144" y="882" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Color</text>
+<rect x="670" y="908" width="325" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="684" y="932" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Source:  Image Sequence</text>
+<text x="674" y="970" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Interpolation:  Closest</text>
+<rect x="1270" y="790" width="400" height="194" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1270 848 L1270 802 Q1270 790 1282 790 L1658 790 Q1670 790 1670 802 L1670 848 Z" fill="#356B38"/>
+<text x="1294" y="828" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Emission</text>
+<circle cx="1270" cy="874" r="11" fill="#D6C23A" stroke="#181513" stroke-width="2.5"/>
+<text x="1296" y="882" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Color</text>
+<circle cx="1270" cy="918" r="11" fill="#B0A79B" stroke="#181513" stroke-width="2.5"/>
+<text x="1296" y="926" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Strength</text>
+<path d="M550 874 C620 874 580 874 650 874" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M1170 874 C1240 874 1200 918 1270 918" fill="none" stroke="#FF9A3C" stroke-width="8" stroke-linecap="round"/>
+<path d="M1695 558 C2375.0 558 -345.0 790 335 790" fill="none" stroke="#FF9A3C" stroke-width="6" stroke-linecap="round" stroke-dasharray="14 12"/>
+<text x="1720" y="648" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="26" font-weight="700" fill="#FF9A3C">bulb_uv</text>
+<rect x="120" y="1120" width="1560" height="62" rx="8" fill="#FF9A3C" opacity="0.12"/>
+<rect x="120" y="1120" width="6" height="62" rx="3" fill="#FF9A3C"/>
+<text x="144" y="1160" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" font-weight="700" fill="#FF9A3C">Divide の数字は Grid の Size と同じ。これで格子が 0〜1 に収まる</text>
+</svg>

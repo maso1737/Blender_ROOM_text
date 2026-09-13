@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2100" height="980" viewBox="0 0 2100 980">
+<rect width="2100" height="980" fill="#181513"/>
+<text x="56" y="74" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="44" fill="#FF9A3C">MAP</tspan><tspan font-size="30" fill="#FFFFFF">  電飾グリッド 全体構成</tspan></text>
+<text x="56" y="116" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#8A8076">4つのラインに分かれている。上から順に組めばよい</text>
+<line x1="56" y1="146" x2="2044" y2="146" stroke="#4A423B" stroke-width="2"/>
+<text x="56" y="272" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="52" font-weight="700" fill="#2F6B55">A</text>
+<text x="56" y="306" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="20" fill="#8A8076">電球を並べる</text>
+<rect x="200" y="210" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M200 268 L200 222 Q200 210 212 210 L608 210 Q620 210 620 222 L620 268 Z" fill="#2F6B55"/>
+<text x="224" y="248" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Grid</text>
+<rect x="680" y="210" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M680 268 L680 222 Q680 210 692 210 L1088 210 Q1100 210 1100 222 L1100 268 Z" fill="#2F6B55"/>
+<text x="704" y="248" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Store Named Attribute</text>
+<path d="M620 240 C690 240 610 240 680 240" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<rect x="1160" y="210" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1160 268 L1160 222 Q1160 210 1172 210 L1568 210 Q1580 210 1580 222 L1580 268 Z" fill="#2F6B55"/>
+<text x="1184" y="248" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Instance on Points</text>
+<path d="M1100 240 C1170 240 1090 240 1160 240" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<text x="56" y="462" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="52" font-weight="700" fill="#4F4F94">B</text>
+<text x="56" y="496" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="20" fill="#8A8076">模様を計算する</text>
+<rect x="200" y="400" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M200 458 L200 412 Q200 400 212 400 L608 400 Q620 400 620 412 L620 458 Z" fill="#4F4F94"/>
+<text x="224" y="438" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Position</text>
+<rect x="680" y="400" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M680 458 L680 412 Q680 400 692 400 L1088 400 Q1100 400 1100 412 L1100 458 Z" fill="#4F4F94"/>
+<text x="704" y="438" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Math</text>
+<path d="M620 430 C690 430 610 430 680 430" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<rect x="1160" y="400" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1160 458 L1160 412 Q1160 400 1172 400 L1568 400 Q1580 400 1580 412 L1580 458 Z" fill="#4F4F94"/>
+<text x="1184" y="438" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Store Named Attribute</text>
+<path d="M1100 430 C1170 430 1090 430 1160 430" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<text x="56" y="652" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="52" font-weight="700" fill="#8A7A28">C</text>
+<text x="56" y="686" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="20" fill="#8A8076">光らせる（マテリアル）</text>
+<rect x="200" y="590" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M200 648 L200 602 Q200 590 212 590 L608 590 Q620 590 620 602 L620 648 Z" fill="#8A7A28"/>
+<text x="224" y="628" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Attribute</text>
+<rect x="680" y="590" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M680 648 L680 602 Q680 590 692 590 L1088 590 Q1100 590 1100 602 L1100 648 Z" fill="#8A7A28"/>
+<text x="704" y="628" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Image Texture</text>
+<path d="M620 620 C690 620 610 620 680 620" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<rect x="1160" y="590" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1160 648 L1160 602 Q1160 590 1172 590 L1568 590 Q1580 590 1580 602 L1580 648 Z" fill="#8A7A28"/>
+<text x="1184" y="628" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Emission</text>
+<path d="M1100 620 C1170 620 1090 620 1160 620" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<text x="56" y="842" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="52" font-weight="700" fill="#2F6B55">D</text>
+<text x="56" y="876" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="20" fill="#8A8076">ワイプで散らす</text>
+<rect x="200" y="780" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M200 838 L200 792 Q200 780 212 780 L608 780 Q620 780 620 792 L620 838 Z" fill="#2F6B55"/>
+<text x="224" y="818" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Set Position</text>
+<rect x="680" y="780" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M680 838 L680 792 Q680 780 692 780 L1088 780 Q1100 780 1100 792 L1100 838 Z" fill="#2F6B55"/>
+<text x="704" y="818" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Rotate Instances</text>
+<path d="M620 810 C690 810 610 810 680 810" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<rect x="1160" y="780" width="420" height="88" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1160 838 L1160 792 Q1160 780 1172 780 L1568 780 Q1580 780 1580 792 L1580 838 Z" fill="#2F6B55"/>
+<text x="1184" y="818" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Group Output</text>
+<path d="M1100 810 C1170 810 1090 810 1160 810" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+</svg>

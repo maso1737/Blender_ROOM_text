@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1000" viewBox="0 0 1900 1000">
+<rect width="1900" height="1000" fill="#181513"/>
+<text x="56" y="74" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="44" fill="#FF9A3C">02</tspan><tspan font-size="30" fill="#FFFFFF">  Attribute / Emission</tspan></text>
+<text x="56" y="116" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#8A8076">光る器をつくる。Type を Instancer にするのが要</text>
+<line x1="56" y1="146" x2="1844" y2="146" stroke="#4A423B" stroke-width="2"/>
+<rect x="120" y="250" width="520" height="226" rx="12" fill="#2C2724" stroke="#FF9A3C" stroke-width="3"/>
+<path d="M120 308 L120 262 Q120 250 132 250 L628 250 Q640 250 640 262 L640 308 Z" fill="#8A7A28"/>
+<text x="144" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Attribute</text>
+<circle cx="640" cy="334" r="11" fill="#B0A79B" stroke="#181513" stroke-width="2.5"/>
+<text x="614" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Fac</text>
+<rect x="140" y="368" width="234" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="154" y="392" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Type:  Instancer</text>
+<text x="144" y="430" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Name:  light_val</text>
+<rect x="820" y="250" width="440" height="194" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M820 308 L820 262 Q820 250 832 250 L1248 250 Q1260 250 1260 262 L1260 308 Z" fill="#356B38"/>
+<text x="844" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Emission</text>
+<circle cx="820" cy="334" r="11" fill="#D6C23A" stroke="#181513" stroke-width="2.5"/>
+<text x="846" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Color</text>
+<circle cx="820" cy="378" r="11" fill="#B0A79B" stroke="#181513" stroke-width="2.5"/>
+<text x="846" y="386" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Strength</text>
+<circle cx="1260" cy="334" r="11" fill="#63C763" stroke="#181513" stroke-width="2.5"/>
+<text x="1234" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Emission</text>
+<rect x="1420" y="250" width="400" height="150" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1420 308 L1420 262 Q1420 250 1432 250 L1808 250 Q1820 250 1820 262 L1820 308 Z" fill="#3E3A36"/>
+<text x="1444" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Material Output</text>
+<circle cx="1420" cy="334" r="11" fill="#63C763" stroke="#181513" stroke-width="2.5"/>
+<text x="1446" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Surface</text>
+<path d="M640 334 C730.0 334 730.0 378 820 378" fill="none" stroke="#FF9A3C" stroke-width="8" stroke-linecap="round"/>
+<path d="M1260 334 C1340.0 334 1340.0 334 1420 334" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<rect x="120" y="640" width="1400" height="62" rx="8" fill="#FF9A3C" opacity="0.12"/>
+<rect x="120" y="640" width="6" height="62" rx="3" fill="#FF9A3C"/>
+<text x="144" y="680" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" font-weight="700" fill="#FF9A3C">Type を Instancer にしないと真っ黒。球ではなく「球を配る格子」から値をもらう</text>
+<rect x="120" y="790" width="520" height="188" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 848 L120 802 Q120 790 132 790 L628 790 Q640 790 640 802 L640 848 Z" fill="#2F6B55"/>
+<text x="144" y="828" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Set Material</text>
+<circle cx="120" cy="874" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="146" y="882" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Geometry</text>
+<circle cx="640" cy="874" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="614" y="882" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Geometry</text>
+<text x="144" y="932" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">ジオメトリノード側に追加</text>
+<text x="700" y="882" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#BCB2A4">Instance on Points → Set Material → Group Output につなぎ直す</text>
+</svg>

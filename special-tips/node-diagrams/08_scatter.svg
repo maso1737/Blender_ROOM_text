@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2340" height="1340" viewBox="0 0 2340 1340">
+<rect width="2340" height="1340" fill="#181513"/>
+<text x="56" y="74" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="44" fill="#FF9A3C">08</tspan><tspan font-size="30" fill="#FFFFFF">  Set Position / Group Input</tspan></text>
+<text x="56" y="116" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#8A8076">ワイプで上下に散らす</text>
+<line x1="56" y1="146" x2="2284" y2="146" stroke="#4A423B" stroke-width="2"/>
+<rect x="120" y="250" width="500" height="150" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 308 L120 262 Q120 250 132 250 L608 250 Q620 250 620 262 L620 308 Z" fill="#2F6B55"/>
+<text x="144" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Instance on Points</text>
+<circle cx="620" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="594" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instances</text>
+<rect x="760" y="250" width="420" height="194" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M760 308 L760 262 Q760 250 772 250 L1168 250 Q1180 250 1180 262 L1180 308 Z" fill="#2F6B55"/>
+<text x="784" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Set Position</text>
+<circle cx="760" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="786" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Geometry</text>
+<circle cx="760" cy="378" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="786" y="386" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Offset</text>
+<circle cx="1180" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1154" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Geometry</text>
+<rect x="1320" y="250" width="440" height="194" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1320 308 L1320 262 Q1320 250 1332 250 L1748 250 Q1760 250 1760 262 L1760 308 Z" fill="#2F6B55"/>
+<text x="1344" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Rotate Instances</text>
+<circle cx="1320" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1346" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instances</text>
+<circle cx="1320" cy="378" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="1346" y="386" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Rotation</text>
+<circle cx="1760" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1734" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instances</text>
+<rect x="1900" y="250" width="360" height="150" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1900 308 L1900 262 Q1900 250 1912 250 L2248 250 Q2260 250 2260 262 L2260 308 Z" fill="#3E3A36"/>
+<text x="1924" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Group Output</text>
+<circle cx="1900" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1926" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Geometry</text>
+<rect x="120" y="620" width="460" height="264" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 678 L120 632 Q120 620 132 620 L568 620 Q580 620 580 632 L580 678 Z" fill="#4F4F94"/>
+<text x="144" y="658" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Random Value</text>
+<circle cx="580" cy="704" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="554" y="712" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Value</text>
+<text x="144" y="762" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Vector</text>
+<text x="144" y="800" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Min  -0.4, -0.4, -6</text>
+<text x="144" y="838" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Max   0.4,  0.4,  6</text>
+<rect x="700" y="620" width="380" height="232" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M700 678 L700 632 Q700 620 712 620 L1068 620 Q1080 620 1080 632 L1080 678 Z" fill="#4F4F94"/>
+<text x="724" y="658" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Vector Math</text>
+<circle cx="700" cy="704" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="726" y="712" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Vector</text>
+<circle cx="700" cy="748" r="11" fill="#B0A79B" stroke="#181513" stroke-width="2.5"/>
+<text x="726" y="756" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Scale</text>
+<circle cx="1080" cy="704" r="11" fill="#6363C7" stroke="#181513" stroke-width="2.5"/>
+<text x="1054" y="712" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Vector</text>
+<rect x="720" y="782" width="91" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="734" y="806" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Scale</text>
+<rect x="120" y="1010" width="460" height="150" rx="12" fill="#2C2724" stroke="#FF9A3C" stroke-width="3"/>
+<path d="M120 1068 L120 1022 Q120 1010 132 1010 L568 1010 Q580 1010 580 1022 L580 1068 Z" fill="#3E3A36"/>
+<text x="144" y="1048" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Group Input</text>
+<circle cx="580" cy="1094" r="11" fill="#B0A79B" stroke="#181513" stroke-width="2.5"/>
+<text x="554" y="1102" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">SCATTER</text>
+<path d="M620 334 C690 334 690 334 760 334" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M1180 334 C1250 334 1250 334 1320 334" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M1760 334 C1830 334 1830 334 1900 334" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M580 704 C650 704 630 704 700 704" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M580 1094 C650 1094 630 748 700 748" fill="none" stroke="#FF9A3C" stroke-width="8" stroke-linecap="round"/>
+<path d="M1080 704 C1240.0 704 600.0 378 760 378" fill="none" stroke="#FF9A3C" stroke-width="8" stroke-linecap="round"/>
+<g transform="translate(640,1094) rotate(45)"><rect x="-14" y="-14" width="28" height="28" fill="#FF9A3C"/></g>
+<text x="680" y="1103" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#FF9A3C">モディファイア上で I キー＝キーフレーム</text>
+<rect x="120" y="1220" width="1560" height="62" rx="8" fill="#FF9A3C" opacity="0.12"/>
+<rect x="120" y="1220" width="6" height="62" rx="3" fill="#FF9A3C"/>
+<text x="144" y="1260" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" font-weight="700" fill="#FF9A3C">Group Input に出すと、ノードを触らずタイミングだけ詰められる</text>
+</svg>

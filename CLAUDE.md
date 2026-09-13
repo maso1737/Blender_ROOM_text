@@ -52,7 +52,8 @@
 
 ## 関連
 
-- 第13回「ライティングとアニメ絵作り」の補助資料 →
-  [bulb-node-steps.html](../Blender/TSR_EL_stage_light/bulb-node-steps.html)
-  （電球グリッドを Geometry Nodes で組む手順書。このリポジトリ外のローカルファイルなので
-  GitHub Pages 上のリンクとしては機能しない。ローカルで参照するとき用）
+- `special-tips/` … 元は `Integrations/Blender/TSR_EL_stage_light/bulb-node-steps.html`
+  （電球グリッドを Geometry Nodes で組む手順書。`node-diagrams/` の SVG込み）。
+  このリポジトリに**コピーして同梱**し、GitHub Pages 上でも開けるようにしてある。
+  `start.html` の「第1回からはじめる」ボタン下の「【期間限定‼】スペシャルTIPS公開中！」から誘導。
+  元ファイルを更新したら手動でコピーし直す（自動同期はしていない）。

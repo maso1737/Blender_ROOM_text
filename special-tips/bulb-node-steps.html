@@ -1,0 +1,1140 @@
+<meta charset="utf-8">
+<title>電飾グリッド ノード手順</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --ground:#EDEAE3; --panel:#FFFFFF; --panel-2:#F6F3ED;
+  --ink:#221E19; --ink-2:#5C544A; --ink-3:#8C8377;
+  --rule:#DCD6CB; --rule-2:#C8C0B2;
+  --amber:#C77400; --amber-ink:#8A5100; --amber-wash:#FBEFDC;
+  --stage:#171310;
+  --warn:#B03A1E; --warn-wash:#FBE7E1;
+  --sk-geo:#00A884; --sk-vec:#6363C7; --sk-val:#9A9186; --sk-col:#B8A400; --sk-int:#4E8C52;
+  --maxw:960px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+    --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+    --rule:#332C24; --rule-2:#473D31;
+    --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+    --warn:#FF8C6B; --warn-wash:#2E1A14;
+    --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+  --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+  --rule:#332C24; --rule-2:#473D31;
+  --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+  --warn:#FF8C6B; --warn-wash:#2E1A14;
+  --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.85; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 96px}
+
+header{padding:52px 0 28px}
+.eyebrow{
+  font-family:"JetBrains Mono",ui-monospace,monospace; font-size:11px; letter-spacing:.22em;
+  color:var(--ink-3); text-transform:uppercase; margin:0 0 16px;
+}
+h1{
+  font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400;
+  font-size:clamp(30px,6.2vw,54px); line-height:1.12; margin:0; text-wrap:balance;
+  color:var(--ink);
+}
+h1 .amb{color:var(--amber)}
+.lead{max-width:62ch; color:var(--ink-2); margin:20px 0 0; font-size:16px}
+.lead b{color:var(--ink); font-weight:700}
+
+.toolbar{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+  margin-top:26px; padding:14px 16px; border:1px solid var(--rule); border-radius:2px;
+  background:var(--panel);
+}
+.legend{display:flex; flex-wrap:wrap; gap:6px 16px; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-2)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.legend i{width:8px; height:8px; border-radius:50%; display:block}
+.spacer{flex:1 1 auto; min-width:8px}
+
+button{
+  font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.08em;
+  background:var(--panel-2); color:var(--ink); border:1px solid var(--rule-2);
+  border-radius:2px; padding:7px 13px; cursor:pointer;
+}
+button:hover{border-color:var(--amber); color:var(--amber-ink)}
+button:focus-visible,input:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+
+.steps{display:flex; flex-direction:column; gap:0; margin-top:44px}
+.step{
+  display:grid; grid-template-columns:56px 1fr; gap:0 22px;
+  padding:34px 0 38px; border-top:1px solid var(--rule);
+}
+.step:first-child{border-top:2px solid var(--rule-2)}
+.num{
+  font-family:"Bungee",monospace; font-size:26px; line-height:1;
+  color:var(--amber); padding-top:4px;
+}
+.num small{display:block; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.2em; color:var(--ink-3); margin-top:7px}
+.body h2{font-size:21px; line-height:1.45; margin:0 0 6px; font-weight:900; text-wrap:balance}
+.goal{color:var(--ink-2); margin:0 0 18px; max-width:60ch}
+
+.grid2{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,300px); gap:24px; align-items:start}
+@media (max-width:760px){
+  .step{grid-template-columns:40px 1fr; gap:0 14px}
+  .grid2{grid-template-columns:1fr}
+  .num{font-size:20px}
+}
+
+.recipe{display:flex; flex-direction:column; gap:12px; min-width:0}
+.flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.nd{
+  font-family:"JetBrains Mono",monospace; font-size:12.5px; font-weight:700;
+  background:var(--panel); border:1px solid var(--rule-2); border-radius:2px;
+  padding:5px 10px 5px 8px; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+}
+.nd::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--sk-val); flex:none}
+.nd[data-sk="geo"]::before{background:var(--sk-geo)}
+.nd[data-sk="vec"]::before{background:var(--sk-vec)}
+.nd[data-sk="col"]::before{background:var(--sk-col)}
+.nd[data-sk="int"]::before{background:var(--sk-int)}
+.nd.mat{border-style:dashed}
+.ar{color:var(--ink-3); font-style:normal; font-size:13px; padding:0 1px}
+.to{font-family:"Zen Kaku Gothic New",sans-serif; font-size:12.5px; color:var(--ink-2)}
+.to b{color:var(--ink)}
+.where{
+  font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  color:var(--ink-3); text-transform:uppercase; margin:0 0 -4px;
+}
+.where b{color:var(--amber-ink)}
+
+.set{margin:2px 0 0; border-top:1px solid var(--rule); font-size:13.5px}
+.set > div{display:flex; gap:12px; padding:7px 2px; border-bottom:1px solid var(--rule)}
+.set dt{flex:1 1 auto; color:var(--ink-2); font-family:"JetBrains Mono",monospace; font-size:12px; line-height:1.6}
+.set dd{margin:0; flex:none; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); line-height:1.6}
+
+.note{
+  border-left:3px solid var(--amber); background:var(--amber-wash);
+  padding:12px 14px; font-size:14px; color:var(--ink); margin:4px 0 0; line-height:1.8;
+}
+.note.bad{border-left-color:var(--warn); background:var(--warn-wash)}
+.note b{font-weight:900}
+code{
+  font-family:"JetBrains Mono",monospace; font-size:.88em; font-weight:700;
+  background:color-mix(in srgb, var(--ink) 9%, transparent); padding:1px 5px; border-radius:2px;
+}
+
+.stagebox{position:sticky; top:18px; min-width:0}
+.stage{
+  width:100%; aspect-ratio:4/3; display:block; background:var(--stage);
+  border:1px solid var(--rule-2); border-radius:2px;
+}
+.cap{
+  font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  color:var(--ink-3); margin:8px 0 0; text-transform:uppercase;
+}
+.cap b{color:var(--amber-ink); font-weight:700}
+.cap.plain{text-transform:none; letter-spacing:0; line-height:1.7; font-family:"Zen Kaku Gothic New",sans-serif; font-size:12.5px}
+.ctrls{display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:10px}
+.ctrls label{font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-2); display:flex; align-items:center; gap:8px}
+input[type=range]{width:118px; accent-color:var(--amber)}
+input[type=checkbox]{accent-color:var(--amber); width:15px; height:15px}
+.val{font-variant-numeric:tabular-nums; color:var(--ink); font-weight:700; min-width:2.6em; display:inline-block}
+
+/* 拡張編の見出し */
+.exhead{margin-top:64px; padding-top:30px; border-top:3px double var(--rule-2)}
+.exhead h2{
+  font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400;
+  font-size:clamp(24px,4vw,36px); margin:0; color:var(--ink);
+}
+.exhead p{color:var(--ink-2); margin:12px 0 0; max-width:62ch; font-size:15px}
+.exhead + .steps{margin-top:22px}
+
+/* 個数から数値を出す計算機 */
+.calc{border:1px solid var(--rule-2); background:var(--panel); padding:16px 18px 6px; margin-top:14px}
+.calc-in{display:flex; flex-wrap:wrap; gap:12px 18px; margin-bottom:14px}
+.calc-in label{
+  font-family:"JetBrains Mono",monospace; font-size:11.5px; color:var(--ink-2);
+  display:flex; align-items:center; gap:8px;
+}
+.calc-in input{
+  width:76px; padding:6px 8px; font-family:"JetBrains Mono",monospace; font-size:14px;
+  font-weight:700; font-variant-numeric:tabular-nums;
+  background:var(--panel-2); color:var(--ink); border:1px solid var(--rule-2); border-radius:2px;
+}
+.calc .set dd{color:var(--amber-ink); user-select:all}
+
+/* ノード構成図（本文幅を超えて広げる） */
+/* ページ中央を基準に広げる。--rail は本文列が中央からずれている量。 */
+.dgm{
+  --rail:0px;
+  position:relative; left:50%;
+  width:min(1480px, 94vw);
+  margin:24px 0 0 calc(-1 * min(740px, 47vw) - var(--rail));
+  padding:0;
+}
+.step .dgm{--rail:39px}
+@media (max-width:760px){ .step .dgm{--rail:27px} }
+.dgm img{
+  display:block; width:100%; height:auto;
+  border:1px solid var(--rule-2); border-radius:3px;
+  background:#181513; cursor:zoom-in;
+}
+.dgm figcaption{
+  font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.1em;
+  color:var(--ink-3); margin-top:8px; text-transform:uppercase;
+}
+.dgm figcaption b{color:var(--amber-ink); font-weight:700}
+header .dgm{margin-top:28px}
+
+/* 原寸表示 */
+.lb[hidden]{display:none}
+.lb{
+  position:fixed; inset:0; z-index:60; background:rgba(12,10,8,.97);
+  overflow:auto; padding:70px 24px 40px;
+}
+.lb img{display:block; margin:0 auto; max-width:none; background:#181513}
+.lb.fit img{width:100%; max-width:1600px; height:auto}
+.lbbar{
+  position:fixed; top:0; left:0; right:0; height:56px; z-index:61;
+  background:var(--panel); border-bottom:1px solid var(--rule-2);
+  display:flex; align-items:center; gap:10px; padding:0 20px;
+}
+.lbbar .name{
+  font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-2);
+  flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+.trouble{margin-top:56px; border:1px solid var(--rule-2); background:var(--panel); padding:26px 26px 10px}
+.trouble h2{font-family:"Bungee",sans-serif; font-weight:400; font-size:19px; margin:0 0 4px; color:var(--ink)}
+.trouble > p{color:var(--ink-2); margin:0 0 18px; font-size:14px}
+.tr{border-top:1px solid var(--rule); padding:16px 0}
+.tr h3{margin:0 0 6px; font-size:15px; font-weight:900; line-height:1.6}
+.tr p{margin:0; color:var(--ink-2); font-size:14px}
+
+.tail{margin-top:48px; color:var(--ink-2); font-size:14.5px; max-width:62ch}
+.tail h2{font-size:17px; color:var(--ink); margin:0 0 8px; font-weight:900}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Blender 5.x / Geometry Nodes / EEVEE</p>
+  <h1>電球を<span class="amb">並べて</span><br>模様を<span class="amb">送る</span>。</h1>
+  <p class="lead">上から順に組むだけ。<b>1ステップ＝1つの結果</b>で、右のプレビューが「そこまで組めたら、こう見えるはず」です。見た目が違ったら、そのステップだけ見直せば大丈夫。<br>ノード名は英語のままなので、Blender の <code>Shift + A</code> → <code>Search</code> にそのまま貼れます。丸い点の色は、Blender のソケットの色に合わせてあります。</p>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span><i style="background:var(--sk-geo)"></i>Geometry</span>
+      <span><i style="background:var(--sk-vec)"></i>Vector</span>
+      <span><i style="background:var(--sk-val)"></i>Float</span>
+      <span><i style="background:var(--sk-col)"></i>Color</span>
+      <span><i style="background:var(--sk-int)"></i>Integer</span>
+    </div>
+    <span class="spacer"></span>
+    <button id="playAll" aria-pressed="true">❙❙ 全部止める</button>
+  </div>
+
+  <figure class="dgm">
+    <img src="node-diagrams/00_overview.svg" alt="電飾グリッド全体のノード構成マップ。A〜Dの4ライン。">
+    <figcaption>全体マップ ／ 4つのラインに分かれている — <b>クリックで原寸</b></figcaption>
+  </figure>
+</header>
+
+<div class="steps">
+
+  <section class="step">
+    <div class="num">01<small>GEO</small></div>
+    <div class="body">
+      <h2>電球を格子に並べる</h2>
+      <p class="goal">まだ光りません。ここでは「球がきれいに整列した」だけで正解です。空のメッシュを1つ置いて、ジオメトリノードのモディファイアを付けて始めます。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Geometry Nodes</p>
+          <div class="flow">
+            <span class="nd" data-sk="geo">Grid</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Instance on Points</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Group Output</span>
+          </div>
+          <div class="flow">
+            <span class="nd" data-sk="geo">UV Sphere</span><i class="ar">→</i>
+            <span class="to">Instance on Points の <b>Instance</b> へ</span>
+          </div>
+          <dl class="set">
+            <div><dt>Grid / Size X, Y</dt><dd>10 m</dd></div>
+            <div><dt>Grid / Vertices X, Y</dt><dd>13 / 9</dd></div>
+            <div><dt>UV Sphere / Radius</dt><dd>0.2 m</dd></div>
+          </dl>
+          <div class="note"><b>ここだけ注意：</b>UV Sphere は「オブジェクトとして追加」ではなく <b>ノードとして</b> 追加します。<code>Shift + A</code> → <code>Mesh</code> → <code>UV Sphere</code>。</div>
+          <div class="note"><b>電球の数は自由に変えられます。</b>13 / 9 はただの例です。ただし <b>06 の数値だけは個数から計算した値</b>なので、数を変えたら差し替えが要ります。06 に計算機を置いてあるので、そこに数を入れるだけで済みます。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="1" aria-label="消灯した電球が格子状に並んだプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>整列・全消灯</b></p>
+        </div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/01_grid_instance.svg" alt="STEP 01 のノード構成図" loading="lazy">
+        <figcaption>STEP 01 のノード構成 — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">02<small>MAT</small></div>
+    <div class="body">
+      <h2>光る器をつくる</h2>
+      <p class="goal">マテリアル側の配線です。この時点では全球が同じ明るさで光ります。やっているのは「明るさを外から受け取る穴を開ける」作業。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Shading（マテリアル）</p>
+          <div class="flow">
+            <span class="nd mat" data-sk="col">Attribute</span><i class="ar">→</i>
+            <span class="nd mat">Emission</span><i class="ar">→</i>
+            <span class="nd mat" data-sk="geo">Material Output</span>
+          </div>
+          <p class="where">Geometry Nodes（つなぎ直す）</p>
+          <div class="flow">
+            <span class="nd" data-sk="geo">Instance on Points</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Set Material</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Group Output</span>
+          </div>
+          <dl class="set">
+            <div><dt>Attribute / Type</dt><dd>Instancer</dd></div>
+            <div><dt>Attribute / Name</dt><dd>light_val</dd></div>
+            <div><dt>Attribute の Fac → Emission の</dt><dd>Strength</dd></div>
+            <div><dt>Emission / Color</dt><dd>#FFC87A</dd></div>
+          </dl>
+          <div class="note bad"><b>9割の人がここで真っ黒になります。</b><code>Attribute</code> の Type は初期値が <code>Geometry</code>。必ず <b><code>Instancer</code></b> に変えてください。球そのものではなく「球を配っている格子」から値をもらうからです。<br><br>不安なら、いったん <code>Value</code> ノード（1.0）を Emission の Strength に直結して、全部光ることだけ先に確認しておくと安心です。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="2" aria-label="全ての電球が同じ明るさで点灯したプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>全点灯・ムラなし</b></p>
+        </div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/02_material_emission.svg" alt="STEP 02 のノード構成図" loading="lazy">
+        <figcaption>STEP 02 のノード構成 ／ オレンジの箇所が要 — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">03<small>GEO</small></div>
+    <div class="body">
+      <h2>角からの距離を測る</h2>
+      <p class="goal">模様の「種」をつくります。角から遠いほど大きい数値。まだ止まったグラデーションですが、これが波の元になります。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Geometry Nodes ／ <b>Instance on Points より前</b> に入れる</p>
+          <div class="flow">
+            <span class="nd" data-sk="vec">Position</span><i class="ar">→</i>
+            <span class="nd">Vector Math</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Store Named Attribute</span>
+          </div>
+          <dl class="set">
+            <div><dt>Vector Math / モード</dt><dd>Distance</dd></div>
+            <div><dt>Vector Math / 下の Vector</dt><dd>-5, -5, 0</dd></div>
+            <div><dt>Store / Data Type</dt><dd>Float</dd></div>
+            <div><dt>Store / Domain</dt><dd>Point</dd></div>
+            <div><dt>Store / Name</dt><dd>light_val</dd></div>
+          </dl>
+          <div class="note"><b>順番が命です。</b><code>Grid</code> → <code>Store Named Attribute</code> → <code>Instance on Points</code>。点に入れた値は、インスタンス化のときに自動で球へ引き継がれます。逆だと引き継がれません。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="3" aria-label="左下の角から明るさが変化する静止グラデーションのプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>角からのグラデ・静止</b></p>
+        </div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/03_distance.svg" alt="STEP 03 のノード構成図。まだ繋がないノードは薄く表示。" loading="lazy">
+        <figcaption>STEP 03 のノード構成 ／ 薄いノードは 04・05 で足す — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">04<small>GEO</small></div>
+    <div class="body">
+      <h2>波にして送り出す</h2>
+      <p class="goal">距離に時間を混ぜると、模様が「送られて」見えます。ここで初めて動きます。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Vector Math と Store Named Attribute の <b>あいだ</b> に割り込ませる</p>
+          <div class="flow">
+            <span class="nd">Vector Math</span><i class="ar">→</i>
+            <span class="nd">Math</span><i class="ar">→</i>
+            <span class="nd">Math</span><i class="ar">→</i>
+            <span class="nd">Math</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Store</span>
+          </div>
+          <div class="flow">
+            <span class="nd">Scene Time</span><i class="ar">→</i>
+            <span class="to">2つ目の Math（Subtract）の <b>下側</b> へ</span>
+          </div>
+          <dl class="set">
+            <div><dt>Math ① Multiply</dt><dd>2.5</dd></div>
+            <div><dt>Math ② Subtract</dt><dd>Scene Time の Seconds</dd></div>
+            <div><dt>Math ③</dt><dd>Sine</dd></div>
+          </dl>
+          <div class="note"><b>Frame ではなく Seconds を使います。</b>あとから 24fps → 30fps に変えても波の速度が変わりません。<br>波を逆走させたいときは、Subtract を <code>Add</code> に変えるだけです。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="4" aria-label="角から波が広がるアニメーションのプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>波が外へ送られる</b></p>
+        </div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/04_wave.svg" alt="STEP 04 のノード構成図。Greater Than はまだ薄く表示。" loading="lazy">
+        <figcaption>STEP 04 のノード構成 ／ 薄い Greater Than は 05 で足す — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">05<small>GEO</small></div>
+    <div class="body">
+      <h2>電球らしくパキッとさせる</h2>
+      <p class="goal">04 のままだとフワフワして「電球」に見えません。中間の明るさを切り落として、点いてる／消えてるをハッキリ分けます。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Sine の直後に足す</p>
+          <div class="flow">
+            <span class="nd">Math (Sine)</span><i class="ar">→</i>
+            <span class="nd">Math</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Store Named Attribute</span>
+          </div>
+          <dl class="set">
+            <div><dt>Math / モード</dt><dd>Greater Than</dd></div>
+            <div><dt>Math / しきい値</dt><dd>0.3</dd></div>
+          </dl>
+          <div class="note">しきい値を<b>上げる</b>と点く球が減って「点が走る」。<b>下げる</b>と点く球が増えて「帯が流れる」。この数字ひとつで表情がかなり変わるので、まずここを振ってみてください。<br><br>じわっと消える余韻が欲しければ、<code>Greater Than</code> の代わりに <code>Float Curve</code> を使い、立ち上がりを急・落ちを緩やかに描きます。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="5" aria-label="点灯と消灯がはっきり分かれた波のプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>点／消がパキッと</b></p>
+        </div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/05_crisp.svg" alt="STEP 05 のノード構成図。03〜05 が全てつながった完成状態。" loading="lazy">
+        <figcaption>STEP 05 のノード構成 ／ 03〜05 がつながった完成形 — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">06<small>KEY</small></div>
+    <div class="body">
+      <h2>AE の白黒連番で自由に振り付ける</h2>
+      <p class="goal">ここが本命です。電球の格子を 0〜1 の平面とみなして、AE で作った白黒連番をそのまま貼ります。ストライプ・点々・ダイヤ・文字送り──全部この1本の仕掛けで出せて、タイミングは AE 側で秒単位に詰められます。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Geometry Nodes（04〜05 とは別ライン。並列に足す）</p>
+          <div class="flow">
+            <span class="nd" data-sk="vec">Position</span><i class="ar">→</i>
+            <span class="nd" data-sk="vec">Vector Math</span><i class="ar">→</i>
+            <span class="nd" data-sk="vec">Vector Math</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Store</span>
+          </div>
+          <dl class="set">
+            <div><dt>Vector Math ① Divide</dt><dd>10, 10, 1</dd></div>
+            <div><dt>Vector Math ② Add</dt><dd>0.5, 0.5, 0</dd></div>
+            <div><dt>Store / Data Type</dt><dd>Vector</dd></div>
+            <div><dt>Store / Domain</dt><dd>Point</dd></div>
+            <div><dt>Store / Name</dt><dd>bulb_uv</dd></div>
+          </dl>
+          <p class="where" style="margin-top:14px">Shading（マテリアル）</p>
+          <div class="flow">
+            <span class="nd mat" data-sk="col">Attribute</span><i class="ar">→</i>
+            <span class="nd mat" data-sk="col">Image Texture</span><i class="ar">→</i>
+            <span class="nd mat">Emission</span>
+          </div>
+          <dl class="set">
+            <div><dt>Attribute / Type</dt><dd>Instancer</dd></div>
+            <div><dt>Attribute / Name</dt><dd>bulb_uv</dd></div>
+            <div><dt>Attribute の Vector → Image Texture の</dt><dd>Vector</dd></div>
+            <div><dt>Image Texture / Source</dt><dd>Image Sequence</dd></div>
+            <div><dt>Image Texture / Interpolation</dt><dd>Closest</dd></div>
+            <div><dt>Image Texture / <b>Extension</b></dt><dd>Extend</dd></div>
+            <div><dt>Image Texture / Cyclic</dt><dd>ループするなら ON</dd></div>
+            <div><dt>Image Texture の Color → Emission の</dt><dd>Strength</dd></div>
+          </dl>
+          <div class="note bad"><b>Extension は必ず <code>Extend</code> に。</b>初期値の <code>Repeat</code> のままだと、<b>いちばん右の列に画像のいちばん左の列が出ます</b>。ストライプだとハッキリ破綻します。</div>
+          <div class="note"><b>Source を <code>Image Sequence</code> にすると</b> <code>Frames</code>（枚数）／<code>Start Frame</code>（再生開始）／<code>Offset</code>（何枚目を頭にするか）／<code>Cyclic</code>（ループ）が出ます。<br><br><code>Offset</code> があるので、<b>同じ連番を使い回して、カットごとに頭出しをずらす</b>ことができます。素材1本で何カットも持たせられます。</div>
+
+          <p class="where" style="margin-top:20px">連番の解像度と、Vector Math の数値</p>
+          <p class="goal" style="margin:8px 0 0">連番は正方形ではなく、<b>電球の数そのもの</b>で作るのが一番きれいです（1ピクセル＝1電球）。AE では大きいコンプでデザインし、それを電球の数のコンプにネストして書き出します。<br>電球の数を変えたら下の計算機に入れてください。そのまま Vector Math に打てる数字が出ます。</p>
+
+          <div class="calc">
+            <div class="calc-in">
+              <label>Vertices X <input type="number" id="cx" value="13" min="2" max="400" step="1"></label>
+              <label>Vertices Y <input type="number" id="cy" value="9" min="2" max="400" step="1"></label>
+              <label>Grid Size <input type="number" id="cs" value="10" min="0.1" max="1000" step="0.1"> m</label>
+            </div>
+            <dl class="set">
+              <div><dt>AE のコンプ解像度</dt><dd id="o0">13 × 9 px</dd></div>
+              <div><dt>デザイン用コンプ（100倍）</dt><dd id="o5">1300 × 900 px</dd></div>
+              <div><dt>Vector Math ① Add</dt><dd id="o1">5, 5, 0</dd></div>
+              <div><dt>Vector Math ② Multiply</dt><dd id="o2">0.092308, 0.088889, 0</dd></div>
+              <div><dt>Vector Math ③ Add</dt><dd id="o3">0.038462, 0.055556, 0</dd></div>
+              <div><dt>上下が逆に出たら ②③ の Y を</dt><dd id="o4">-0.088889 ／ 0.944444</dd></div>
+            </dl>
+          </div>
+          <div class="note">左の手順に書いた簡易版（<code>Divide 10</code> → <code>Add 0.5</code>）は、電球の中心ではなく<b>ピクセルの境目</b>を拾うので、端の1列が半個ぶんずれます。ぼやけた大きい模様なら気づきませんが、<b>1px＝1電球でやるならこの3行に差し替えてください。</b></div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="6" aria-label="ストライプ・点々・ダイヤの模様が順番に流れるプレビュー"></canvas>
+          <p class="cap">再生中：<b><span data-pat>ストライプ送り</span></b></p>
+          <p class="cap plain">AE で描いた模様が、そのまま電球になります。プレビューは3種類を自動で切り替えています。</p>
+        </div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/06_uv_sequence.svg" alt="STEP 06 のノード構成図。上段がジオメトリノード、下段がマテリアル。" loading="lazy">
+        <figcaption>STEP 06 のノード構成 ／ 上段＝ジオメトリノード、下段＝マテリアル — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">07<small>GEO</small></div>
+    <div class="body">
+      <h2>★ や ◆ に差し替える</h2>
+      <p class="goal">球を別の形に入れ替えます。全部★にするのも、点ごとにランダムに混ぜるのも同じ仕掛けです。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">先に ★ と ◆ を1つのコレクション（例 BULB_SHAPES）に入れておく</p>
+          <div class="flow">
+            <span class="nd" data-sk="geo">Collection Info</span><i class="ar">→</i>
+            <span class="to">Instance on Points の <b>Instance</b> へ</span>
+          </div>
+          <div class="flow">
+            <span class="nd" data-sk="int">Random Value</span><i class="ar">→</i>
+            <span class="to">Instance on Points の <b>Instance Index</b> へ</span>
+          </div>
+          <dl class="set">
+            <div><dt>Collection Info / Separate Children</dt><dd>ON</dd></div>
+            <div><dt>Collection Info / Reset Children</dt><dd>ON</dd></div>
+            <div><dt>Instance on Points / Pick Instance</dt><dd>ON</dd></div>
+            <div><dt>Random Value / Data Type</dt><dd>Integer</dd></div>
+            <div><dt>Random Value / Min, Max</dt><dd>0, 形の数−1</dd></div>
+          </dl>
+          <div class="note"><b>Pick Instance を ON にし忘れると</b>、すべての点に「コレクションまるごと」が乗って画面が大変なことになります。ON にすれば「どれか1つを選ぶ」に変わります。<br><br>全部★でいいなら Collection Info は不要です。UV Sphere の代わりに ★ の <code>Object Info</code> をつなぐだけ。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="7" aria-label="星・菱形・円が混ざった電球で模様が流れるプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>★ ◆ ● が混在</b></p>
+        </div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/07_pick_instance.svg" alt="STEP 07 のノード構成図" loading="lazy">
+        <figcaption>STEP 07 のノード構成 ／ Pick Instance の ON を忘れずに — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">08<small>GEO</small></div>
+    <div class="body">
+      <h2>ワイプで上下に散らす</h2>
+      <p class="goal">カットの切り替わりで、固定されていたはずの電球が実際に飛び散る。スライダー1本で動くようにしておくのがコツです。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Instance on Points の <b>あと</b> に入れる</p>
+          <div class="flow">
+            <span class="nd" data-sk="geo">Instance on Points</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Set Position</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Rotate Instances</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Group Output</span>
+          </div>
+          <div class="flow">
+            <span class="nd" data-sk="vec">Random Value</span><i class="ar">→</i>
+            <span class="nd" data-sk="vec">Vector Math</span><i class="ar">→</i>
+            <span class="to">Set Position の <b>Offset</b> へ</span>
+          </div>
+          <div class="flow">
+            <span class="nd" data-sk="geo">Group Input</span><i class="ar">→</i>
+            <span class="to">Vector Math (Scale) の <b>Scale</b> へ</span>
+          </div>
+          <dl class="set">
+            <div><dt>Random Value / Data Type</dt><dd>Vector</dd></div>
+            <div><dt>Random Value / Min</dt><dd>-0.4, -0.4, -6</dd></div>
+            <div><dt>Random Value / Max</dt><dd>0.4, 0.4, 6</dd></div>
+            <div><dt>Vector Math / モード</dt><dd>Scale</dd></div>
+            <div><dt>Group Input に足す項目</dt><dd>Float「SCATTER」</dd></div>
+          </dl>
+          <div class="note"><b>Group Input に出すのが肝です。</b>こうするとモディファイアのパネルに「SCATTER」というスライダーが出て、普通のプロパティと同じように <b><code>I</code> キーでキーフレームが打てます</b>。以降はノードを触らずに、タイミングだけ詰められます。<br><br>散らすのと同時に <b>Render Properties → Motion Blur を ON</b>。尾が引いた瞬間に「本当に動いた」ように見えます。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="8" aria-label="電球が上下に散るプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>SCATTER で飛散</b></p>
+          <div class="ctrls">
+            <label>SCATTER <input type="range" id="scat" min="0" max="1" step="0.01" value="0"> <span class="val" id="scatv">0.00</span></label>
+            <button id="wipe">ワイプを再生</button>
+          </div>
+        </div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/08_scatter.svg" alt="STEP 08 のノード構成図" loading="lazy">
+        <figcaption>STEP 08 のノード構成 ／ オレンジが SCATTER の経路 — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">09<small>OUT</small></div>
+    <div class="body">
+      <h2>滲みを足して、AE に渡す</h2>
+      <p class="goal">最後の仕上げ。ノードではなくレンダー設定側です。ここまでの素材が一気に「電飾」になります。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <dl class="set">
+            <div><dt>Compositing → Glare</dt><dd>Bloom / Fog Glow</dd></div>
+            <div><dt>Render Properties → Motion Blur</dt><dd>ON</dd></div>
+            <div><dt>View Layer → Passes → Light</dt><dd>Emission</dd></div>
+            <div><dt>出力フォーマット</dt><dd>OpenEXR MultiLayer</dd></div>
+          </dl>
+          <div class="note bad"><b>EEVEE の Bloom は無くなりました。</b>昔のチュートリアルに出てくる Render Properties の「Bloom」チェックは、現行版には存在しません。光の滲みは <b>Compositing タブの <code>Glare</code> ノード</b>で作ります。3Dビューのヘッダから Viewport Compositing を有効にすると、ビューポート上でも滲んで見えます。</div>
+          <div class="note"><b>電球の位置にライトを置かないこと。</b>数百個のライトは EEVEE でも破綻します。Emission マテリアル＋Glare だけで絵は成立します。<br><br><b>Emission パスを分けて出す。</b>マルチレイヤー EXR にしておけば、グローの強さや色を AE 側で後から自由に変えられます。カット間ワイプの調整が効くようになるので、これは必ずやっておく価値があります。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="9" aria-label="グローが乗った完成状態のプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>完成形</b></p>
+          <div class="ctrls">
+            <label><input type="checkbox" id="glow" checked> GLARE（滲み）</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<section class="exhead">
+  <p class="eyebrow">Extra / 拡張編</p>
+  <h2>色をつける</h2>
+  <p>ここから先は、基本の9ステップが動いてからで構いません。<b>電球ごと・列ごとに色を変える</b>方法を3つ。どれも既存のノードを壊さずに足せます。</p>
+</section>
+
+<div class="steps">
+
+  <section class="step">
+    <div class="num">A<small>MAT</small></div>
+    <div class="body">
+      <h2>AE をカラーで作る</h2>
+      <p class="goal">いちばん自由で、ジオメトリノードは一切さわりません。連番を白黒ではなくカラーで書き出すだけ。色も明滅も、全部 AE 側で完結します。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Shading（マテリアル）／ 06 の Image Texture から2本に分ける</p>
+          <div class="flow">
+            <span class="nd mat" data-sk="col">Image Texture</span><i class="ar">→</i>
+            <span class="to">Emission の <b>Color</b> へ（そのまま）</span>
+          </div>
+          <div class="flow">
+            <span class="nd mat" data-sk="col">Image Texture</span><i class="ar">→</i>
+            <span class="nd mat" data-sk="col">Separate Color</span><i class="ar">→</i>
+            <span class="to">Emission の <b>Strength</b> へ</span>
+          </div>
+          <dl class="set">
+            <div><dt>Separate Color / モード</dt><dd>HSV</dd></div>
+            <div><dt>Separate Color の V → Emission の</dt><dd>Strength</dd></div>
+          </dl>
+          <div class="note"><b>色は AE の色そのまま、明るさは AE の明度そのまま</b>になります。レインボーを流すのも、特定の電球だけ赤にするのも、AE で描けば全部そのまま出ます。<br><br>拡張としてはこれが一番強い方法です。迷ったらこれを選んでください。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="10" aria-label="AEのカラー連番で虹色の帯が流れるプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>色も明滅も AE 任せ</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">B<small>GEO</small></div>
+    <div class="body">
+      <h2>列ごとに色を変える</h2>
+      <p class="goal">色はジオメトリノードで固定して、明滅だけ AE で制御する分け方。色を一度決めたら触らずに済むので、振り付けのやり直しが速くなります。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Geometry Nodes ／ また別ラインを並列に足す</p>
+          <div class="flow">
+            <span class="nd" data-sk="vec">Position</span><i class="ar">→</i>
+            <span class="nd" data-sk="vec">Separate XYZ</span><i class="ar">→</i>
+            <span class="nd">Map Range</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Store Named Attribute</span>
+          </div>
+          <dl class="set">
+            <div><dt>Separate XYZ から取る成分</dt><dd>X（列ごと）</dd></div>
+            <div><dt>Map Range / From Min, Max</dt><dd>-5, 5</dd></div>
+            <div><dt>Map Range / To Min, Max</dt><dd>0, 1</dd></div>
+            <div><dt>Store / Data Type</dt><dd>Float</dd></div>
+            <div><dt>Store / Domain</dt><dd>Point</dd></div>
+            <div><dt>Store / Name</dt><dd>hue</dd></div>
+          </dl>
+          <p class="where" style="margin-top:14px">Shading（マテリアル）</p>
+          <div class="flow">
+            <span class="nd mat" data-sk="col">Attribute</span><i class="ar">→</i>
+            <span class="nd mat" data-sk="col">Color Ramp</span><i class="ar">→</i>
+            <span class="to">Emission の <b>Color</b> へ</span>
+          </div>
+          <dl class="set">
+            <div><dt>Attribute / Type</dt><dd>Instancer</dd></div>
+            <div><dt>Attribute / Name</dt><dd>hue</dd></div>
+            <div><dt>Color Ramp / Interpolation</dt><dd>Constant</dd></div>
+          </dl>
+          <div class="note"><code>Color Ramp</code> に虹の色を並べれば<b>列ごとのレインボー</b>です。Interpolation を <b><code>Constant</code></b> にすると色が混ざらず、<b>帯がくっきり分かれます</b>。電飾らしくするならこちらです。<br><br>X の代わりに <b>Y を使えば行ごと</b>、<code>Vector Math (Distance)</code> を使えば<b>中心から外へ虹が広がります</b>。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="11" aria-label="列ごとに色が変わる電球のプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>列ごとに色が変わる</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step">
+    <div class="num">C<small>GEO</small></div>
+    <div class="body">
+      <h2>電球ごとにランダムな色</h2>
+      <p class="goal">B とほぼ同じ。入口を Position から Random Value に差し替えるだけです。</p>
+      <div class="grid2">
+        <div class="recipe">
+          <p class="where">Geometry Nodes</p>
+          <div class="flow">
+            <span class="nd" data-sk="val">Random Value</span><i class="ar">→</i>
+            <span class="nd" data-sk="geo">Store Named Attribute</span>
+          </div>
+          <dl class="set">
+            <div><dt>Random Value / Data Type</dt><dd>Float</dd></div>
+            <div><dt>Random Value / Min, Max</dt><dd>0, 1</dd></div>
+            <div><dt>Store / Name</dt><dd>hue</dd></div>
+          </dl>
+          <div class="note">マテリアル側は <b>B とまったく同じ</b>です。<br><br><code>Color Ramp</code> に<b>好きな色を3〜4色だけ</b>置くのがコツ。完全な虹より、少ない色がバラけて混ざるほうが看板らしく見えます。</div>
+        </div>
+        <div class="stagebox">
+          <canvas class="stage" data-step="12" aria-label="電球ごとにランダムな色がついたプレビュー"></canvas>
+          <p class="cap">見えるはず：<b>4色がバラけて混ざる</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<section class="trouble" style="margin-top:44px">
+  <h2>おすすめの分担</h2>
+  <p>色と明滅を別々のノードで受け持たせると、あとの調整が一番ラクになります。</p>
+  <div class="tr">
+    <h3>色は B か C で固定、明滅は 06 の AE 連番（白黒）で制御</h3>
+    <p>
+      <code>Attribute (hue)</code> → <code>Color Ramp</code> → Emission の <b>Color</b><br>
+      <code>Attribute (bulb_uv)</code> → <code>Image Texture</code> → Emission の <b>Strength</b>
+    </p>
+    <p style="margin-top:10px">色は一度決めたら触らず、振り付けだけ AE で何度でもやり直せます。06 にノードを2つ足すだけで組めます。</p>
+  </div>
+</section>
+
+<section class="trouble">
+  <h2>真っ黒になったら</h2>
+  <p>この4つで、ほぼ全部の「光らない」が直ります。上から順に確認してください。</p>
+  <div class="tr">
+    <h3>1 ／ <code>Attribute</code> の Type が <code>Geometry</code> のままになっていませんか</h3>
+    <p>いちばん多い原因です。<code>Instancer</code> に変えてください。球そのものではなく、球を配っている格子が値を持っています。</p>
+  </div>
+  <div class="tr">
+    <h3>2 ／ <code>Realize Instances</code> が入っていませんか</h3>
+    <p>これが入った瞬間、Instancer からの受け渡しが切れて真っ黒になります。しかも数千個で極端に重くなります。<b>入れないのが正解です。</b></p>
+  </div>
+  <div class="tr">
+    <h3>3 ／ <code>Store Named Attribute</code> の位置と名前</h3>
+    <p><code>Instance on Points</code> より <b>前</b> にあるか。Domain が <code>Point</code> か。名前がマテリアル側と <b>1文字違わず</b> 同じか（<code>light_val</code>）。大文字・小文字も区別されます。</p>
+  </div>
+  <div class="tr">
+    <h3>4 ／ <code>Set Material</code> をつなぎましたか</h3>
+    <p>ジオメトリノードで作った形には、オブジェクトのマテリアルが自動では乗りません。<code>Set Material</code> ノードで明示的に指定します。</p>
+  </div>
+</section>
+
+<div class="tail">
+  <h2>結局どれが速いか</h2>
+  <p>01〜05 は「仕組みの理解」で、模様を1つ作るたびにノードを組み替える必要があります。映像の尺合わせには向きません。<br><br><b>実制作では 06 を主役にしてください。</b>仕掛けを1本に固定して、模様の設計とタイミングは全部 AE 側でやる。これが一番速く、一番やり直しが効きます。01〜05 は 06 の上に重ねる「揺らぎの足し算」として残しておくと、機械的になりすぎません。</p>
+</div>
+</div>
+
+<div class="lb" id="lb" hidden>
+  <div class="lbbar">
+    <span class="name" id="lbname"></span>
+    <button id="lbfit">画面に合わせる</button>
+    <button id="lbclose">閉じる ✕</button>
+  </div>
+  <img id="lbimg" alt="ノード構成図の原寸表示">
+</div>
+
+<script>
+(function(){
+"use strict";
+var PR = Math.min(window.devicePixelRatio || 1, 2);
+var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var stages = [];
+var running = !reduce;
+var clock = reduce ? 1.6 : 0;
+var last = 0;
+var scatterManual = 0, wipeStart = -99;
+var glowOn = true;
+var patNames = ["ストライプ送り", "点々の市松", "ダイヤの拡大"];
+var curPat = 0;
+
+function hash(i){ var x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); }
+function clamp(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+function pattern(u, v, t){
+  var idx = Math.floor(t / 3.6) % 3;
+  curPat = idx;
+  if (idx === 0){
+    return ((((u + v) * 3.2 - t * 0.85) % 1) + 1) % 1 < 0.42 ? 1 : 0;
+  }
+  if (idx === 1){
+    return (Math.sin(u * 12.6 - t * 2.4) * Math.sin(v * 12.6 - t * 1.7)) > 0.35 ? 1 : 0;
+  }
+  var d = Math.abs(u - 0.5) + Math.abs(v - 0.5);
+  return ((((d * 3.4 - t * 0.8) % 1) + 1) % 1) < 0.34 ? 1 : 0;
+}
+
+var VAL = {
+  1: function(){ return 0; },
+  2: function(){ return 1; },
+  3: function(u, v){ return clamp(Math.sqrt(u * u + (v - 1) * (v - 1)) / 1.414); },
+  4: function(u, v, t){
+    var d = Math.sqrt(u * u + (v - 1) * (v - 1));
+    return clamp(0.5 + 0.5 * Math.sin(d * 11 - t * 3));
+  },
+  5: function(u, v, t){
+    var d = Math.sqrt(u * u + (v - 1) * (v - 1));
+    return Math.sin(d * 11 - t * 3) > 0.3 ? 1 : 0;
+  },
+  6: pattern,
+  7: pattern,
+  8: function(u, v, t){ return Math.sin((u + v) * 9 - t * 3.4) > 0.15 ? 1 : 0; },
+  9: pattern,
+  /* 拡張編 */
+  10: function(u, v, t){ return clamp(0.42 + 0.58 * Math.sin((u + v) * 6.5 - t * 2.1)); },
+  11: function(u, v, t){ return Math.sin((u + v) * 9 - t * 3.4) > 0.15 ? 1 : 0; },
+  12: pattern
+};
+
+/* 色（拡張編のみ）。無いステップは従来どおりの電球色。 */
+function hsv(h, s, v){
+  h = ((h % 1) + 1) % 1;
+  var i = Math.floor(h * 6), f = h * 6 - i;
+  var p = v * (1 - s), q = v * (1 - f * s), w = v * (1 - (1 - f) * s);
+  var r, g, b;
+  if (i % 6 === 0){ r = v; g = w; b = p; }
+  else if (i === 1){ r = q; g = v; b = p; }
+  else if (i === 2){ r = p; g = v; b = w; }
+  else if (i === 3){ r = p; g = q; b = v; }
+  else if (i === 4){ r = w; g = p; b = v; }
+  else { r = v; g = p; b = q; }
+  return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+}
+var PALETTE = [[255, 196, 124], [255, 112, 86], [110, 200, 255], [150, 255, 190]];
+var HUE = {
+  10: function(u, v, t){ return hsv(u * 0.55 + v * 0.15 + t * 0.07, 0.78, 1); },
+  11: function(u, v, t, i){ return hsv(Math.floor(u * 6) / 6 * 0.85, 0.80, 1); },
+  12: function(u, v, t, i){ return PALETTE[Math.floor(hash(i * 7.7) * PALETTE.length)]; }
+};
+
+var SHAPES = ["circle", "star", "diamond"];
+function shapeFor(step, i){
+  if (step >= 7) return SHAPES[Math.floor(hash(i * 3.3) * 3)];
+  return "circle";
+}
+
+function scatterAmt(step, t){
+  if (step !== 8) return 0;
+  var e = t - wipeStart;
+  if (e >= 0 && e < 1.4) return Math.sin((e / 1.4) * Math.PI);
+  return scatterManual;
+}
+
+function path(ctx, shape, x, y, r, rot){
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.rotate(rot);
+  ctx.beginPath();
+  if (shape === "circle"){
+    ctx.arc(0, 0, r, 0, Math.PI * 2);
+  } else if (shape === "diamond"){
+    ctx.moveTo(0, -r * 1.25); ctx.lineTo(r, 0); ctx.lineTo(0, r * 1.25); ctx.lineTo(-r, 0); ctx.closePath();
+  } else {
+    for (var k = 0; k < 10; k++){
+      var a = -Math.PI / 2 + k * Math.PI / 5;
+      var rr = (k % 2) ? r * 0.48 : r * 1.35;
+      var px = Math.cos(a) * rr, py = Math.sin(a) * rr;
+      if (k) ctx.lineTo(px, py); else ctx.moveTo(px, py);
+    }
+    ctx.closePath();
+  }
+  ctx.restore();
+}
+
+function draw(st, t){
+  var ctx = st.ctx, c = st.canvas;
+  if (!c.width) return;
+  var w = c.width / PR, h = c.height / PR;
+  ctx.setTransform(PR, 0, 0, PR, 0, 0);
+  ctx.globalCompositeOperation = "source-over";
+  ctx.fillStyle = "#171310";
+  ctx.fillRect(0, 0, w, h);
+
+  var cols = 13, rows = 9;
+  var padX = w * 0.085, padY = h * 0.115;
+  var cw = (w - padX * 2) / (cols - 1), chh = (h - padY * 2) / (rows - 1);
+  var r = Math.min(cw, chh) * 0.30;
+  var step = st.step, fn = VAL[step];
+  var sc = scatterAmt(step, t);
+  var useGlow = (step === 9) ? glowOn : true;
+  var items = [], i, u, v, x, y, rot;
+
+  for (var ry = 0; ry < rows; ry++){
+    for (var cxi = 0; cxi < cols; cxi++){
+      i = ry * cols + cxi;
+      u = cxi / (cols - 1);
+      v = ry / (rows - 1);
+      x = padX + cxi * cw;
+      y = padY + ry * chh;
+      rot = 0;
+      if (sc > 0){
+        x += (hash(i) - 0.5) * w * 0.30 * sc;
+        y += (hash(i + 77) - 0.5) * h * 1.35 * sc;
+        rot = (hash(i + 5) - 0.5) * 6.2 * sc;
+      }
+      items.push([x, y, clamp(fn(u, v, t)), rot, shapeFor(step, i),
+                  HUE[step] ? HUE[step](u, v, t, i) : null]);
+    }
+  }
+
+  for (i = 0; i < items.length; i++){
+    path(ctx, items[i][4], items[i][0], items[i][1], r, items[i][3]);
+    ctx.fillStyle = "#3B322A";
+    ctx.fill();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "rgba(255,238,214,0.10)";
+    ctx.stroke();
+  }
+
+  ctx.globalCompositeOperation = "lighter";
+  for (i = 0; i < items.length; i++){
+    var val = items[i][2];
+    if (val <= 0.01) continue;
+    x = items[i][0]; y = items[i][1];
+    var c = items[i][5];
+    var gl0, gl1, gl2, body, core;
+    if (c){
+      gl0  = "rgba(" + c[0] + "," + c[1] + "," + c[2] + ",";
+      gl1  = gl0; gl2 = gl0;
+      body = gl0;
+      core = "rgba(" + Math.min(255, c[0] + 95) + "," + Math.min(255, c[1] + 95) + "," +
+             Math.min(255, c[2] + 95) + ",";
+    } else {
+      gl0 = "rgba(255,186,110,"; gl1 = "rgba(255,150,55,"; gl2 = "rgba(255,120,20,";
+      body = "rgba(255,196,124,"; core = "rgba(255,250,238,";
+    }
+    if (useGlow){
+      var g = ctx.createRadialGradient(x, y, 0, x, y, r * 6);
+      g.addColorStop(0, gl0 + (0.50 * val).toFixed(3) + ")");
+      g.addColorStop(0.30, gl1 + (0.15 * val).toFixed(3) + ")");
+      g.addColorStop(1, gl2 + "0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(x, y, r * 6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    path(ctx, items[i][4], x, y, r, items[i][3]);
+    ctx.fillStyle = body + (0.92 * val).toFixed(3) + ")";
+    ctx.fill();
+    path(ctx, items[i][4], x, y, r * 0.55, items[i][3]);
+    ctx.fillStyle = core + (0.85 * val).toFixed(3) + ")";
+    ctx.fill();
+  }
+  ctx.globalCompositeOperation = "source-over";
+}
+
+var list = document.querySelectorAll("canvas.stage");
+for (var n = 0; n < list.length; n++){
+  stages.push({
+    canvas: list[n],
+    ctx: list[n].getContext("2d"),
+    step: parseInt(list[n].getAttribute("data-step"), 10),
+    vis: true
+  });
+}
+
+function resize(st){
+  var rect = st.canvas.getBoundingClientRect();
+  if (!rect.width) return;
+  st.canvas.width = Math.round(rect.width * PR);
+  st.canvas.height = Math.round(rect.height * PR);
+  draw(st, clock);
+}
+function resizeAll(){ for (var s = 0; s < stages.length; s++) resize(stages[s]); }
+window.addEventListener("resize", resizeAll);
+resizeAll();
+
+if (window.IntersectionObserver){
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      for (var s = 0; s < stages.length; s++){
+        if (stages[s].canvas === e.target) stages[s].vis = e.isIntersecting;
+      }
+    });
+  }, { rootMargin: "200px" });
+  for (var q = 0; q < stages.length; q++) io.observe(stages[q].canvas);
+}
+
+function redraw(step){
+  for (var s = 0; s < stages.length; s++) if (stages[s].step === step) draw(stages[s], clock);
+}
+
+var patLabel = document.querySelector("[data-pat]");
+function frame(ts){
+  if (!last) last = ts;
+  var dt = Math.min((ts - last) / 1000, 0.05);
+  last = ts;
+  if (running){
+    clock += dt;
+    for (var s = 0; s < stages.length; s++) if (stages[s].vis) draw(stages[s], clock);
+    if (patLabel && patLabel.textContent !== patNames[curPat]) patLabel.textContent = patNames[curPat];
+  }
+  requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+
+var playBtn = document.getElementById("playAll");
+playBtn.addEventListener("click", function(){
+  running = !running;
+  playBtn.textContent = running ? "❙❙ 全部止める" : "▶ 全部動かす";
+  playBtn.setAttribute("aria-pressed", running ? "true" : "false");
+});
+if (reduce){
+  playBtn.textContent = "▶ 全部動かす";
+  playBtn.setAttribute("aria-pressed", "false");
+}
+
+var scat = document.getElementById("scat"), scatv = document.getElementById("scatv");
+scat.addEventListener("input", function(){
+  scatterManual = parseFloat(scat.value);
+  scatv.textContent = scatterManual.toFixed(2);
+  wipeStart = -99;
+  redraw(8);
+});
+
+document.getElementById("wipe").addEventListener("click", function(){
+  wipeStart = clock;
+  if (!running){
+    var t0 = performance.now(), base = clock;
+    (function tick(){
+      var e = (performance.now() - t0) / 1000;
+      clock = base + Math.min(e, 1.4);
+      redraw(8);
+      if (e < 1.4) requestAnimationFrame(tick);
+    })();
+  }
+});
+
+var glowBox = document.getElementById("glow");
+glowBox.addEventListener("change", function(){
+  glowOn = glowBox.checked;
+  redraw(9);
+});
+
+/* ---- 個数から UV の数値を出す計算機 ---- */
+var cx = document.getElementById("cx"),
+    cy = document.getElementById("cy"),
+    cs = document.getElementById("cs");
+
+function fx(v){ return (Math.round(v * 1e6) / 1e6).toFixed(6).replace(/0+$/, "").replace(/\.$/, ""); }
+
+function calc(){
+  var nx = Math.max(2, Math.round(parseFloat(cx.value) || 2));
+  var ny = Math.max(2, Math.round(parseFloat(cy.value) || 2));
+  var s  = parseFloat(cs.value);
+  if (!(s > 0)) s = 10;
+
+  var mx = (nx - 1) / (s * nx), my = (ny - 1) / (s * ny);
+  var ax = 1 / (2 * nx),        ay = 1 / (2 * ny);
+
+  document.getElementById("o0").textContent = nx + " × " + ny + " px";
+  document.getElementById("o5").textContent = (nx * 100) + " × " + (ny * 100) + " px";
+  document.getElementById("o1").textContent = fx(s / 2) + ", " + fx(s / 2) + ", 0";
+  document.getElementById("o2").textContent = fx(mx) + ", " + fx(my) + ", 0";
+  document.getElementById("o3").textContent = fx(ax) + ", " + fx(ay) + ", 0";
+  document.getElementById("o4").textContent = fx(-my) + " ／ " + fx(1 - ay);
+}
+cx.addEventListener("input", calc);
+cy.addEventListener("input", calc);
+cs.addEventListener("input", calc);
+calc();
+
+/* ---- ノード構成図の原寸表示 ---- */
+var lb = document.getElementById("lb"),
+    lbimg = document.getElementById("lbimg"),
+    lbname = document.getElementById("lbname"),
+    lbfit = document.getElementById("lbfit"),
+    lbclose = document.getElementById("lbclose");
+var lastOpener = null;
+
+function openLb(src, name, opener){
+  lastOpener = opener || null;
+  lbimg.src = src;
+  lbname.textContent = name;
+  lb.classList.remove("fit");
+  lbfit.textContent = "画面に合わせる";
+  lb.hidden = false;
+  lb.scrollTop = 0;
+  lb.scrollLeft = 0;
+  document.body.style.overflow = "hidden";
+  lbclose.focus();
+}
+function closeLb(){
+  lb.hidden = true;
+  lbimg.removeAttribute("src");
+  document.body.style.overflow = "";
+  if (lastOpener) lastOpener.focus();
+}
+
+var figs = document.querySelectorAll(".dgm img");
+for (var fi = 0; fi < figs.length; fi++){
+  (function(img){
+    img.tabIndex = 0;
+    function go(){
+      var cap = img.parentNode.querySelector("figcaption");
+      openLb(img.getAttribute("src"), cap ? cap.textContent.split(" — ")[0] : "", img);
+    }
+    img.addEventListener("click", go);
+    img.addEventListener("keydown", function(e){
+      if (e.key === "Enter" || e.key === " "){ e.preventDefault(); go(); }
+    });
+  })(figs[fi]);
+}
+
+lbclose.addEventListener("click", closeLb);
+lbfit.addEventListener("click", function(){
+  var fit = lb.classList.toggle("fit");
+  lbfit.textContent = fit ? "原寸で見る" : "画面に合わせる";
+  lb.scrollTop = 0;
+  lb.scrollLeft = 0;
+});
+lb.addEventListener("click", function(e){ if (e.target === lb) closeLb(); });
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape" && !lb.hidden) closeLb();
+});
+})();
+</script>

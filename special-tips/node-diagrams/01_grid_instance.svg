@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1000" viewBox="0 0 1900 1000">
+<rect width="1900" height="1000" fill="#181513"/>
+<text x="56" y="74" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="44" fill="#FF9A3C">01</tspan><tspan font-size="30" fill="#FFFFFF">  Grid / Instance on Points</tspan></text>
+<text x="56" y="116" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#8A8076">電球を格子に並べる（まだ光らない）</text>
+<line x1="56" y1="146" x2="1844" y2="146" stroke="#4A423B" stroke-width="2"/>
+<rect x="120" y="250" width="420" height="264" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 308 L120 262 Q120 250 132 250 L528 250 Q540 250 540 262 L540 308 Z" fill="#2F6B55"/>
+<text x="144" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Grid</text>
+<circle cx="540" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="514" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Mesh</text>
+<text x="144" y="392" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Size X / Y   10 m</text>
+<text x="144" y="430" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Vertices X   13</text>
+<text x="144" y="468" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Vertices Y   9</text>
+<rect x="120" y="620" width="420" height="188" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 678 L120 632 Q120 620 132 620 L528 620 Q540 620 540 632 L540 678 Z" fill="#2F6B55"/>
+<text x="144" y="658" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">UV Sphere</text>
+<circle cx="540" cy="704" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="514" y="712" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Mesh</text>
+<text x="144" y="762" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Radius   0.2 m</text>
+<rect x="700" y="300" width="520" height="194" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M700 358 L700 312 Q700 300 712 300 L1208 300 Q1220 300 1220 312 L1220 358 Z" fill="#2F6B55"/>
+<text x="724" y="338" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Instance on Points</text>
+<circle cx="700" cy="384" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="726" y="392" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Points</text>
+<circle cx="700" cy="428" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="726" y="436" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instance</text>
+<circle cx="1220" cy="384" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1194" y="392" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instances</text>
+<rect x="1380" y="300" width="380" height="150" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1380 358 L1380 312 Q1380 300 1392 300 L1748 300 Q1760 300 1760 312 L1760 358 Z" fill="#3E3A36"/>
+<text x="1404" y="338" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Group Output</text>
+<circle cx="1380" cy="384" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1406" y="392" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Geometry</text>
+<path d="M540 334 C620.0 334 620.0 384 700 384" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M540 704 C620.0 704 620.0 428 700 428" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M1220 384 C1300.0 384 1300.0 384 1380 384" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<rect x="120" y="880" width="1280" height="62" rx="8" fill="#FF9A3C" opacity="0.12"/>
+<rect x="120" y="880" width="6" height="62" rx="3" fill="#FF9A3C"/>
+<text x="144" y="920" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" font-weight="700" fill="#FF9A3C">UV Sphere は「オブジェクト」ではなく、ノードとして追加する（Shift+A → Mesh）</text>
+</svg>

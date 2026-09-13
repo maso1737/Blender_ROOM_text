@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1060" viewBox="0 0 1900 1060">
+<rect width="1900" height="1060" fill="#181513"/>
+<text x="56" y="74" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="44" fill="#FF9A3C">07</tspan><tspan font-size="30" fill="#FFFFFF">  Collection Info / Pick Instance</tspan></text>
+<text x="56" y="116" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#8A8076">★ や ◆ に差し替える</text>
+<line x1="56" y1="146" x2="1844" y2="146" stroke="#4A423B" stroke-width="2"/>
+<rect x="120" y="250" width="500" height="226" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 308 L120 262 Q120 250 132 250 L608 250 Q620 250 620 262 L620 308 Z" fill="#2F6B55"/>
+<text x="144" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Collection Info</text>
+<circle cx="620" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="594" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instances</text>
+<rect x="140" y="368" width="299" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="154" y="392" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Separate Children  ON</text>
+<rect x="140" y="406" width="260" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="154" y="430" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Reset Children  ON</text>
+<rect x="120" y="640" width="420" height="226" rx="12" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M120 698 L120 652 Q120 640 132 640 L528 640 Q540 640 540 652 L540 698 Z" fill="#3F7145"/>
+<text x="144" y="678" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Random Value</text>
+<circle cx="540" cy="724" r="11" fill="#6FB374" stroke="#181513" stroke-width="2.5"/>
+<text x="514" y="732" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Value</text>
+<text x="144" y="782" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Integer</text>
+<text x="144" y="820" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="400" fill="#BCB2A4">Min 0   Max 2</text>
+<rect x="780" y="250" width="560" height="276" rx="12" fill="#2C2724" stroke="#FF9A3C" stroke-width="3"/>
+<path d="M780 308 L780 262 Q780 250 792 250 L1328 250 Q1340 250 1340 262 L1340 308 Z" fill="#2F6B55"/>
+<text x="804" y="288" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="27" font-weight="700" fill="#FFFFFF">Instance on Points</text>
+<circle cx="780" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="806" y="342" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Points</text>
+<circle cx="780" cy="378" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="806" y="386" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instance</text>
+<circle cx="780" cy="422" r="11" fill="#6FB374" stroke="#181513" stroke-width="2.5"/>
+<text x="806" y="430" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instance Index</text>
+<circle cx="1340" cy="334" r="11" fill="#00D6A3" stroke="#181513" stroke-width="2.5"/>
+<text x="1314" y="342" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="21" fill="#BCB2A4">Instances</text>
+<rect x="800" y="456" width="247" height="34" rx="6" fill="#FF9A3C" opacity="0.16"/>
+<text x="814" y="480" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="22" font-weight="700" fill="#FF9A3C">Pick Instance  ON</text>
+<path d="M620 334 C700.0 334 700.0 378 780 378" fill="none" stroke="#9A9188" stroke-width="6" stroke-linecap="round"/>
+<path d="M540 724 C660.0 724 660.0 422 780 422" fill="none" stroke="#FF9A3C" stroke-width="7" stroke-linecap="round"/>
+<text x="1500" y="300" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" fill="#8A8076">コレクションの中身</text>
+<g transform="translate(1500,340) scale(0.8)"><path d="M80 0 L99 58 L160 58 L111 94 L129 152 L80 116 L31 152 L49 94 L0 58 L61 58 Z" fill="#FFFFFF"/></g>
+<g transform="translate(1500,500)"><path d="M64 0 L120 60 L64 120 L8 60 Z" fill="#FFFFFF"/></g>
+<circle cx="1564" cy="700" r="56" fill="#FFFFFF"/>
+<rect x="120" y="940" width="1300" height="62" rx="8" fill="#FF9A3C" opacity="0.12"/>
+<rect x="120" y="940" width="6" height="62" rx="3" fill="#FF9A3C"/>
+<text x="144" y="980" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="24" font-weight="700" fill="#FF9A3C">Pick Instance が OFF だと、全ての点にコレクション丸ごとが乗る</text>
+</svg>
