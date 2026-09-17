@@ -54,7 +54,8 @@
 
 - `special-tips/` … 元は `Integrations/Blender/TSR_EL_stage_light/`
   （電球グリッドを Geometry Nodes で組む手順書 `bulb-node-steps.html`、`node-diagrams/` の SVG、
-  サンプル `bulb-node-steps_06.blend`、AEプロジェクト `bulb-node-steps.aep`、
+  完成形 `bulb-node-steps_07.blend`（2026-09-17 に `_06` から差し替え）、
+  完成形スクショ `GM.png` / `mat.png`、AEプロジェクト `bulb-node-steps.aep`、
   連番PNG `bulb-node-steps_renda2.zip`）。このリポジトリに**コピーして同梱**し、GitHub Pages 上でも
   開けるようにしてある。`start.html` の「第1回からはじめる」ボタン下の
   「【期間限定‼】スペシャルTIPS公開中！」から誘導。

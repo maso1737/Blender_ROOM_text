@@ -74,6 +74,7 @@ button{
 button:hover{border-color:var(--amber); color:var(--amber-ink)}
 button:focus-visible,input:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
 
+.step[id],[id^="chain"],#finished,#leftover{scroll-margin-top:22px}
 .steps{display:flex; flex-direction:column; gap:0; margin-top:44px}
 .step{
   display:grid; grid-template-columns:56px 1fr; gap:0 22px;
@@ -223,6 +224,80 @@ header .dgm{margin-top:28px}
 
 .tail{margin-top:48px; color:var(--ink-2); font-size:14.5px; max-width:62ch}
 .tail h2{font-size:17px; color:var(--ink); margin:0 0 8px; font-weight:900}
+
+/* ---- 完成形スクショ（ピン付き） ---- */
+.shot{position:relative; line-height:0}
+.shot img{cursor:zoom-in}
+.pin{
+  position:absolute; transform:translate(-50%,-50%);
+  width:26px; height:26px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:"JetBrains Mono",monospace; font-size:12px; font-weight:700;
+  background:var(--amber); color:#1A1206; border:2px solid #FFF3E0;
+  box-shadow:0 0 0 3px rgba(0,0,0,.45); text-decoration:none; line-height:1;
+  transition:transform .12s ease;
+}
+.pin:hover,.pin:focus-visible{transform:translate(-50%,-50%) scale(1.22); z-index:3}
+.pin.ghost{background:var(--panel-2); color:var(--ink-2); border-color:var(--rule-2)}
+.pinlist{
+  list-style:none; margin:14px 0 0; padding:0; line-height:1.7;
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(248px,1fr)); gap:8px 22px;
+}
+.pinlist.wide{position:relative; left:50%; width:min(1480px,94vw); margin-left:calc(-1 * min(740px,47vw))}
+.pinlist > li > span b{color:var(--ink); font-weight:700}
+.pinlist li{display:flex; gap:9px; align-items:baseline; font-size:13.5px; color:var(--ink-2)}
+.pinlist > li > b{
+  flex:none; width:19px; height:19px; border-radius:50%; background:var(--amber); color:#1A1206;
+  font-family:"JetBrains Mono",monospace; font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; align-self:center;
+}
+.pinlist > li.ghost > b{background:var(--panel-2); color:var(--ink-3); border:1px solid var(--rule-2)}
+.pinlist a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--rule-2); font-weight:700}
+.pinlist a:hover{color:var(--amber-ink); border-bottom-color:var(--amber)}
+
+/* ---- 折りたたみ（詳しい理由） ---- */
+details.why{margin:8px 0 0; font-size:13.5px}
+details.why > summary{
+  cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:6px;
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); text-transform:uppercase; padding:3px 0;
+}
+details.why > summary::-webkit-details-marker{display:none}
+details.why > summary::before{content:"▸"; color:var(--amber); font-size:12px}
+details.why[open] > summary::before{content:"▾"}
+details.why > summary:hover{color:var(--amber-ink)}
+details.why .inner{padding:6px 0 2px; color:var(--ink-2); line-height:1.8; border-top:1px solid var(--rule); margin-top:4px}
+
+/* ---- 属性の一覧表 ---- */
+.attrs{width:100%; border-collapse:collapse; margin:16px 0 0; font-size:13.5px}
+.attrs th,.attrs td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--rule); vertical-align:top}
+.attrs th{
+  font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:400; border-bottom:1px solid var(--rule-2);
+}
+.attrs td:first-child{font-family:"JetBrains Mono",monospace; font-weight:700; color:var(--amber-ink); white-space:nowrap}
+.attrs td b{color:var(--ink)}
+@media (max-width:620px){ .attrs,.attrs tbody,.attrs tr,.attrs td{display:block; width:100%}
+  .attrs thead{display:none} .attrs tr{border-bottom:1px solid var(--rule-2); padding:6px 0}
+  .attrs td{border:0; padding:2px 0} }
+
+/* ---- 繰り返し参照する図（割り込みパターン） ---- */
+.keyfig{
+  border:1px solid var(--rule-2); background:var(--panel); padding:16px 18px 14px; margin:16px 0 0;
+}
+.keyfig > h4{
+  font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--amber-ink); margin:0 0 12px; font-weight:700;
+}
+.keyfig svg{display:block; width:100%; height:auto}
+@media (max-width:700px){ .keyfig{overflow-x:auto} .keyfig svg{min-width:600px} }
+.keyfig p{margin:10px 0 0; font-size:13px; color:var(--ink-2); line-height:1.75}
+.backref{
+  font-size:13px; color:var(--ink-2); margin:10px 0 0; padding:9px 12px;
+  border:1px dashed var(--rule-2); background:var(--panel-2);
+}
+.backref a{color:var(--amber-ink); font-weight:700}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
 </style>
 
@@ -230,10 +305,10 @@ header .dgm{margin-top:28px}
 <header>
   <p class="eyebrow">Blender 5.x / Geometry Nodes / EEVEE</p>
   <h1>電球を<span class="amb">並べて</span><br>模様を<span class="amb">送る</span>。</h1>
-  <p class="lead">上から順に組むだけ。<b>1ステップ＝1つの結果</b>で、右のプレビューが「そこまで組めたら、こう見えるはず」です。見た目が違ったら、そのステップだけ見直せば大丈夫。<br>ノード名は英語のままなので、Blender の <code>Shift + A</code> → <code>Search</code> にそのまま貼れます。丸い点の色は、Blender のソケットの色に合わせてあります。</p>
-  <div class="note" style="margin-top:18px"><b>先に断っておくと：</b>01〜08の間、Blenderの3Dビュー上では地味な見た目のままです。「にじんで光ってる」感じは <b>09で足す Compositing の <code>Glare</code> ノード</b>が作っています。光らない／地味に見えるのが不安になったら、先に09だけ覗いてみてもOKです。</div>
+  <p class="lead">上から順に組むだけ。<b>1ステップ＝1つの結果</b>で、右のプレビューが「そこまで組めたら、こう見えるはず」です。ノード名は英語のままなので <code>Shift + A</code> → <code>Search</code> にそのまま貼れます。</p>
+  <div class="note" style="margin-top:18px"><b>01〜08 は地味な見た目のままです。</b>「にじんで光ってる」感じは <b>09 の Compositing <code>Glare</code></b> が作ります。不安になったら先に <a href="#s09">09</a> だけ覗いてOK。</div>
   <p style="margin-top:14px; display:flex; flex-wrap:wrap; gap:10px">
-    <a href="bulb-node-steps_06.blend" download style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)">⬇ サンプル .blend（06のテイク）をダウンロード</a>
+    <a href="bulb-node-steps_07.blend" download style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)">⬇ 完成形 .blend（07のテイク）をダウンロード</a>
     <a href="bulb-node-steps.aep" download style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)">⬇ After Effects プロジェクト（.aep）</a>
     <a href="bulb-node-steps_renda2.zip" download style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)">⬇ 連番PNG（13×9・60フレーム／renda2）</a>
   </p>
@@ -256,9 +331,70 @@ header .dgm{margin-top:28px}
   </figure>
 </header>
 
+<section class="exhead" id="finished" style="margin-top:56px">
+  <p class="eyebrow">Result / 到達点</p>
+  <h2>先に完成形</h2>
+  <p><code>bulb-node-steps_07.blend</code> の中身です。番号をクリックすると、それを組んだステップへ飛びます。<b>この手順書の9ステップ＋拡張編を全部足すと、こうなります。</b></p>
+</section>
+
+<figure class="dgm shot">
+  <img src="GM.png" alt="bulb-node-steps_07.blend のジオメトリノード全景">
+  <a class="pin" href="#s01" style="left:22.8%; top:30.6%" title="01〜05：波で光らせるライン">1</a>
+  <a class="pin" href="#s06" style="left:50.5%; top:23.3%" title="06：AE連番を貼るためのUVライン">2</a>
+  <a class="pin" href="#sC"  style="left:67.9%; top:10.5%" title="拡張C：電球ごとの色">3</a>
+  <a class="pin" href="#chain" style="left:42.4%; top:51.0%" title="Store Named Attribute の数珠つなぎ">4</a>
+  <a class="pin" href="#s07" style="left:58.9%; top:41.7%" title="07：形の差し替え">5</a>
+  <a class="pin" href="#s08" style="left:71.2%; top:81.7%" title="08：SCATTER で散らす">6</a>
+  <a class="pin" href="#s02" style="left:91.8%; top:37.3%" title="出口：Set Material → Group Output">7</a>
+  <a class="pin ghost" href="#leftover" style="left:54.3%; top:11.7%" title="使っていない残骸">×</a>
+  <figcaption>GEOMETRY NODES 全景 ／ bulb-node-steps_07.blend — <b>図をクリックで原寸</b></figcaption>
+</figure>
+
+<ol class="pinlist wide">
+  <li><b>1</b><span><a href="#s01">01〜05</a>：距離→波→カーブで <code>light_val</code> を作るライン</span></li>
+  <li><b>2</b><span><a href="#s06">06</a>：位置を 0〜1 に直して <code>bulb_uv</code> を作るライン</span></li>
+  <li><b>3</b><span><a href="#sC">拡張C</a>：Random Value で <code>hue</code> を作るライン</span></li>
+  <li><b>4</b><span><a href="#chain">数珠つなぎ</a>：Grid →（Store ×3）→ Instance on Points</span></li>
+  <li><b>5</b><span><a href="#s07">07</a>：Collection Info ＋ Pick Instance で形を差し替え</span></li>
+  <li><b>6</b><span><a href="#s08">08</a>：Group Input「SCATTER」で飛散させる</span></li>
+  <li><b>7</b><span><a href="#s02">出口</a>：Set Material → Group Output</span></li>
+  <li class="ghost"><b>×</b><span><a href="#leftover">使っていない残骸</a>：Map Range 一式（拡張Bの名残）</span></li>
+</ol>
+
+<figure class="dgm shot" style="margin-top:34px">
+  <img src="mat.png" alt="bulb-node-steps_07.blend のマテリアルノード全景">
+  <a class="pin" href="#sB" style="left:26.7%; top:7.7%" title="色：hue → Color Ramp → Emission Color">1</a>
+  <a class="pin" href="#s06" style="left:26.9%; top:39.6%" title="明滅：bulb_uv → Image Texture（連番）">2</a>
+  <a class="pin" href="#sA" style="left:60.0%; top:71.6%" title="明るさ：Separate Color(V) → ×2 → Strength">3</a>
+  <a class="pin" href="#s02" style="left:83.1%; top:51.2%" title="Emission → Material Output">4</a>
+  <a class="pin ghost" href="#leftover" style="left:10.0%; top:76.7%" title="light_val は繋がっていない">×</a>
+  <figcaption>MATERIAL 全景 ／ 色＝Color Ramp・明滅＝AE連番 の分担 — <b>図をクリックで原寸</b></figcaption>
+</figure>
+
+<ol class="pinlist wide">
+  <li><b>1</b><span><a href="#sB">色</a>：<code>hue</code> → Color Ramp（一定）→ Emission の <b>Color</b></span></li>
+  <li><b>2</b><span><a href="#s06">明滅</a>：<code>bulb_uv</code> → Image Texture（連番画像）</span></li>
+  <li><b>3</b><span><a href="#sA">明るさ</a>：Separate Color の V → Math(×2) → Emission の <b>Strength</b></span></li>
+  <li><b>4</b><span><a href="#s02">出口</a>：Emission → Material Output</span></li>
+  <li class="ghost"><b>×</b><span><a href="#leftover"><code>light_val</code> の Attribute</a> はどこにも繋がっていない</span></li>
+</ol>
+
+<div class="keyfig" id="leftover" style="margin-top:26px">
+  <h4>完成形が「教科書どおり」ではない3点</h4>
+  <table class="attrs" style="margin-top:0">
+    <thead><tr><th>手順書の説明</th><th>_07.blend の実際</th><th>なぜ</th></tr></thead>
+    <tbody>
+      <tr><td>05 は Greater Than</td><td><b>Float カーブも置いてある</b></td><td>05 の「余韻が欲しければ Float Curve」を試した跡。今つながっているのは Greater Than のほう</td></tr>
+      <tr><td><code>light_val</code> で光らせる</td><td><b>マテリアル側で未接続</b></td><td>明滅は 06 の AE 連番が全部やっている。01〜05 のラインは残してあるだけ</td></tr>
+      <tr><td>拡張Bは Position → Map Range</td><td><b>Map Range が浮いている</b></td><td>B から C（Random Value）へ乗り換えた名残。消してOK</td></tr>
+    </tbody>
+  </table>
+  <p>つまり <b>_07 の絵をつくっているのは「06＋拡張C＋07＋08」</b>です。01〜05 は仕組みを理解するための助走で、実制作では <a href="#s06">06</a> が主役になります。</p>
+</div>
+
 <div class="steps">
 
-  <section class="step">
+  <section class="step" id="s01">
     <div class="num">01<small>GEO</small></div>
     <div class="body">
       <h2>電球を格子に並べる</h2>
@@ -282,8 +418,10 @@ header .dgm{margin-top:28px}
             <div><dt>UV Sphere / Radius</dt><dd>0.2 m</dd></div>
           </dl>
           <div class="note"><b>ここだけ注意：</b>UV Sphere は「オブジェクトとして追加」ではなく <b>ノードとして</b> 追加します。<code>Shift + A</code> → <code>Mesh</code> → <code>UV Sphere</code>。</div>
-          <div class="note bad"><b>Size X と Size Y、同じ数値にしないでください。</b>Vertices が 13 / 9 のように縦横で数が違うのに Size を両方 10m（正方形）にすると、電球ひとつぶんの間隔が縦横で変わってしまい、06 で貼る画像が正方形の土台に押し込まれて縦横比が崩れます（見た目が潰れる）。<b>Size Y は Size X × (Vertices Y−1) / (Vertices X−1)</b> で決めます（13/9なら 10 × 8/12 = 6.67m）。06 の計算機にこの数値も自動で出るようにしてあるので、そこで出た Grid Size Y をそのまま使ってください。</div>
-          <div class="note"><b>電球の数は自由に変えられます。</b>13 / 9 はただの例です。ただし <b>06 の数値（Grid Size Y も含めて）は個数から計算した値</b>なので、数を変えたら差し替えが要ります。06 に計算機を置いてあるので、そこに数を入れるだけで済みます。</div>
+          <div class="note bad"><b>Size X と Size Y を同じ数値にしないでください。</b>Size Y ＝ <code>Size X × (Vertices Y−1) / (Vertices X−1)</code>。13×9 なら 10 × 8/12 ＝ 6.67m です。
+            <details class="why"><summary>同じにするとどうなる？</summary><div class="inner">電球ひとつぶんの間隔が縦横で変わります。06 で貼る AE の画像が正方形の土台に押し込まれ、模様が潰れて見えます。</div></details>
+          </div>
+          <div class="note"><b>13 / 9 はただの例です。</b>数を変えたら <a href="#s06">06 の計算機</a>に入れるだけ。Grid Size Y も 06 の数値も、そこに全部出ます。</div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="1" aria-label="消灯した電球が格子状に並んだプレビュー"></canvas>
@@ -297,11 +435,11 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="s02">
     <div class="num">02<small>MAT</small></div>
     <div class="body">
       <h2>光る器をつくる</h2>
-      <p class="goal">マテリアル側の配線です。やっているのは「明るさを外から受け取る穴を開ける」作業。<b>注意：ここではまだ light_val という属性そのものが存在しません</b>（実際に作るのは次の03）。なのでこのステップの「正解」は配線とAttributeの設定が合っていることで、球が実際に全部光って見えるのは03を終えてからです。今すぐ光ってるか確認したい場合は、下のnoteの通り一時的にValueノードで試してください。</p>
+      <p class="goal">マテリアル側の配線。「明るさを外から受け取る穴を開ける」作業です。<b>この時点で <code>light_val</code> はまだ存在しません</b>（作るのは次の03）。配線と Attribute の設定が合っていれば正解で、実際に光るのは03のあとです。</p>
       <div class="grid2">
         <div class="recipe">
           <p class="where">Shading（マテリアル）</p>
@@ -322,7 +460,9 @@ header .dgm{margin-top:28px}
             <div><dt>Attribute の Fac → Emission の</dt><dd>Strength</dd></div>
             <div><dt>Emission / Color</dt><dd>#FFC87A</dd></div>
           </dl>
-          <div class="note bad"><b>9割の人がここで真っ黒になります。</b><code>Attribute</code> の Type は初期値が <code>Geometry</code>。必ず <b><code>Instancer</code></b> に変えてください。球そのものではなく「球を配っている格子」から値をもらうからです。<br><br>不安なら、いったん <code>Value</code> ノード（1.0）を Emission の Strength に直結して、全部光ることだけ先に確認しておくと安心です（<code>light_val</code> がまだ無いこのステップでは、それが唯一「光るのを見る」方法です）。</div>
+          <div class="note bad"><b>9割の人がここで真っ黒になります。</b><code>Attribute</code> の Type は初期値が <code>Geometry</code>。必ず <b><code>Instancer</code></b> に変えてください。
+            <details class="why"><summary>なぜ Instancer なのか ／ 今すぐ光るか見たいとき</summary><div class="inner">値を持っているのは球そのものではなく、球を配っている<b>格子の側</b>だからです。<br>今すぐ確認したいなら <code>Value</code> ノード（1.0）を Emission の Strength に直結。<code>light_val</code> がまだ無いこの段階では、それが唯一「光るのを見る」方法です。</div></details>
+          </div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="2" aria-label="全ての電球が同じ明るさで点灯したプレビュー"></canvas>
@@ -336,7 +476,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="s03">
     <div class="num">03<small>GEO</small></div>
     <div class="body">
       <h2>角からの距離を測る</h2>
@@ -356,13 +496,46 @@ header .dgm{margin-top:28px}
             <div><dt>Store / Domain</dt><dd>Point</dd></div>
             <div><dt>Store / Name</dt><dd>light_val</dd></div>
           </dl>
-          <div class="note bad"><b>ここが一番つまずくポイントです：</b><code>Store Named Attribute</code> は「計算結果を Value に受け取るだけ」では働きません。<b>Geometry の入力・出力も本線に割り込ませる</b>必要があります。具体的には：<br><br>① <code>Grid</code> の <b>Mesh</b> 出力 → <code>Store Named Attribute</code> の <b>Geometry</b> 入力<br>② <code>Store Named Attribute</code> の <b>Geometry</b> 出力 → <code>Instance on Points</code> の <b>Points</b><br><br>（今まで Grid → Instance on Points に直結してた線は、②を繋いだ時点で自動的に外れます）<br><br><b>このパターンはこの後 何度も出てきます。</b>06のbulb_uv、拡張編Bのhue……新しい Store Named Attribute を足すたびに、既存の Geometry の鎖のどこかに同じように割り込ませる必要があります（Grid → light_val → bulb_uv → hue → Instance on Points、というふうに数珠つなぎになっていきます）。マテリアル側のAttributeノードとは繋ぎ方の考え方がそもそも違うので、ここだけ切り分けて覚えておくと迷いません。</div>
+          <div class="note bad"><b>ここが一番つまずくポイント。</b><code>Store Named Attribute</code> は「計算結果を <b>値</b> に繋ぐ」だけでは働きません。<b>ジオメトリの本線にも割り込ませます。</b></div>
+
+          
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="3" aria-label="左下の角から明るさが変化する静止グラデーションのプレビュー"></canvas>
           <p class="cap">見えるはず：<b>角からのグラデ・静止</b></p>
         </div>
       </div>
+      <div class="keyfig" id="chain">
+            <h4>これ以降ずっと使う「数珠つなぎ」の形</h4>
+            <svg viewBox="0 0 920 150" role="img" aria-label="Grid から Instance on Points まで、Store Named Attribute を3つ直列に挟んだ図">
+              <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--sk-geo)"/></marker>
+              <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="var(--ink-3)"/></marker></defs>
+              <g font-family="JetBrains Mono, monospace" font-size="12" fill="var(--ink)" text-anchor="middle">
+                <g stroke="var(--ink-3)" stroke-width="1.4" marker-end="url(#ah2)" fill="none">
+                  <path d="M235,24 L235,62"/><path d="M445,24 L445,62"/><path d="M655,24 L655,62"/>
+                </g>
+                <g fill="var(--ink-3)" font-size="11"><text x="235" y="16">値</text><text x="445" y="16">値</text><text x="655" y="16">値</text></g>
+                <g stroke="var(--sk-geo)" stroke-width="2.5" marker-end="url(#ah)" fill="none">
+                  <path d="M96,83 L144,83"/><path d="M320,83 L354,83"/><path d="M530,83 L564,83"/><path d="M740,83 L774,83"/>
+                </g>
+                <g fill="var(--panel-2)" stroke="var(--rule-2)">
+                  <rect x="0" y="64" width="96" height="38" rx="2"/><rect x="150" y="64" width="170" height="38" rx="2"/>
+                  <rect x="360" y="64" width="170" height="38" rx="2"/><rect x="570" y="64" width="170" height="38" rx="2"/>
+                  <rect x="780" y="64" width="140" height="38" rx="2"/>
+                </g>
+                <text x="48" y="88">Grid</text>
+                <text x="235" y="82" font-size="10" fill="var(--ink-3)">Store Named Attr.</text><text x="235" y="96" font-weight="700" fill="var(--amber-ink)">light_val</text>
+                <text x="445" y="82" font-size="10" fill="var(--ink-3)">Store Named Attr.</text><text x="445" y="96" font-weight="700" fill="var(--amber-ink)">bulb_uv</text>
+                <text x="655" y="82" font-size="10" fill="var(--ink-3)">Store Named Attr.</text><text x="655" y="96" font-weight="700" fill="var(--amber-ink)">hue</text>
+                <text x="850" y="82" font-size="10" fill="var(--ink-3)">Instance</text><text x="850" y="96" font-size="10" fill="var(--ink-3)">on Points</text>
+                <g font-size="10" fill="var(--ink-3)">
+                  <text x="235" y="122">03 でつくる</text><text x="445" y="122">06 で足す</text><text x="655" y="122">拡張B / C で足す</text>
+                </g>
+                <text x="460" y="145" font-size="11" fill="var(--sk-geo)">緑のジオメトリ線が、必ず全部の Store を通り抜けていること</text>
+              </g>
+            </svg>
+            <p>03 の時点では左の2つ（Grid → light_val → Instance on Points）だけ。<b>属性を増やすたびに、この鎖の途中に1つずつ挟んでいきます。</b>Grid → Instance on Points の直結線は、Store の出力を Points に繋いだ時点で自動的に外れます。</p>
+          </div>
       <figure class="dgm">
         <img src="node-diagrams/03_distance.svg" alt="STEP 03 のノード構成図。まだ繋がないノードは薄く表示。" loading="lazy">
         <figcaption>STEP 03 のノード構成 ／ 薄いノードは 04・05 で足す — <b>クリックで原寸</b></figcaption>
@@ -370,7 +543,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="s04">
     <div class="num">04<small>GEO</small></div>
     <div class="body">
       <h2>波にして送り出す</h2>
@@ -408,7 +581,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="s05">
     <div class="num">05<small>GEO</small></div>
     <div class="body">
       <h2>電球らしくパキッとさせる</h2>
@@ -425,7 +598,7 @@ header .dgm{margin-top:28px}
             <div><dt>Math / モード</dt><dd>Greater Than</dd></div>
             <div><dt>Math / しきい値</dt><dd>0.3</dd></div>
           </dl>
-          <div class="note">しきい値を<b>上げる</b>と点く球が減って「点が走る」。<b>下げる</b>と点く球が増えて「帯が流れる」。この数字ひとつで表情がかなり変わるので、まずここを振ってみてください。<br><br>じわっと消える余韻が欲しければ、<code>Greater Than</code> の代わりに <code>Float Curve</code> を使い、立ち上がりを急・落ちを緩やかに描きます。</div>
+          <div class="note"><b>まずこの数字を振ってみてください。</b>しきい値を上げると点く球が減って「点が走る」、下げると増えて「帯が流れる」。これひとつで表情がかなり変わります。<br><br>じわっと消える余韻が欲しければ <code>Greater Than</code> を <code>Float Curve</code> に差し替え（立ち上がり急・落ち緩やか）。<a href="#leftover">_07.blend には両方置いてあります</a>。</div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="5" aria-label="点灯と消灯がはっきり分かれた波のプレビュー"></canvas>
@@ -439,7 +612,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="s06">
     <div class="num">06<small>KEY</small></div>
     <div class="body">
       <h2>AE の白黒連番で自由に振り付ける</h2>
@@ -460,8 +633,8 @@ header .dgm{margin-top:28px}
             <div><dt>Store / Domain</dt><dd>Point</dd></div>
             <div><dt>Store / Name</dt><dd>bulb_uv</dd></div>
           </dl>
-          <div class="note bad"><b>Divide の数値は Grid の Size X / Size Y と必ず同じにしてください。</b>01で Size X=10, Size Y=6.67（13×9の場合）にした人は、ここも <code>10, 6.67, 1</code> です。Size と違う数値のまま Divide すると、UVが微妙にズレて縁の電球が違う画素を拾います。</div>
-          <div class="note bad"><b>ここも本線への割り込みが必要です（03と同じパターン）。</b>今 <code>light_val</code> の <code>Store Named Attribute</code> の Geometry出力が <code>Instance on Points</code> の Points に直結してるはずなので、それを新しく置く <code>bulb_uv</code> 用の <code>Store Named Attribute</code> の <b>Geometry入力</b>へ差し替え、<code>bulb_uv</code> 側の <b>Geometry出力</b>を <code>Instance on Points</code> の <b>Points</b> へ。<code>Grid → light_val → bulb_uv → Instance on Points</code> の一本鎖になっていればOKです。</div>
+          <div class="note bad"><b>Divide の数値は Grid の Size X / Size Y と必ず同じに。</b>13×9 なら <code>10, 6.67, 1</code>。違う数値だと UV がズレて、縁の電球が別の画素を拾います。</div>
+          <p class="backref">ジオメトリ線の割り込みも必要です。<a href="#chain">数珠つなぎの図</a>のとおり、<code>bulb_uv</code> の Store を鎖の途中に1つ挟んでください。</p>
           <p class="where" style="margin-top:14px">Shading（マテリアル）</p>
           <div class="flow">
             <span class="nd mat" data-sk="col">Attribute</span><i class="ar">→</i>
@@ -479,8 +652,10 @@ header .dgm{margin-top:28px}
             <div><dt>Image Texture の Color → Emission の</dt><dd>Strength</dd></div>
           </dl>
           <div class="note bad"><b>Extension は必ず <code>Extend</code> に。</b>初期値の <code>Repeat</code> のままだと、<b>いちばん右の列に画像のいちばん左の列が出ます</b>。ストライプだとハッキリ破綻します。</div>
-          <div class="note bad"><b>Attribute ノードをコピーして使い回す時の罠：</b>この後（拡張編B・C）でもう1〜2個 Attribute ノードを足すことになりますが、既存のAttributeノードを複製（<code>Shift+D</code>）して使うと、<b>Name欄を書き換え忘れたまま別の用途に繋いでしまう</b>ことがあります（例：<code>bulb_uv</code>用のはずが Name が <code>hue</code> のままImage Textureに繋がってる、等）。真っ黒や模様が出ない時は、まず<b>Image Texture / Color Ramp に繋がってるAttributeノードのName欄が、それぞれ正しい属性名になってるか</b>を1個ずつ確認してください。</div>
-          <div class="note"><b>Source を <code>Image Sequence</code> にすると</b> <code>Frames</code>（枚数）／<code>Start Frame</code>（再生開始）／<code>Offset</code>（何枚目を頭にするか）／<code>Cyclic</code>（ループ）が出ます。<br><br><code>Offset</code> があるので、<b>同じ連番を使い回して、カットごとに頭出しをずらす</b>ことができます。素材1本で何カットも持たせられます。</div>
+          <div class="note bad"><b>Attribute を <code>Shift+D</code> で複製したら、Name 欄を必ず書き換える。</b>模様が出ないときの定番の原因です。
+            <details class="why"><summary>よくある事故の中身</summary><div class="inner"><code>bulb_uv</code> 用のつもりが Name は <code>hue</code> のまま Image Texture に繋がっている、など。マテリアル側の Attribute ノードを1つずつクリックして、Name が繋ぎ先に対して正しいか確認してください。</div></details>
+          </div>
+          <div class="note"><b><code>Offset</code> が便利です。</b>同じ連番を使い回して、カットごとに頭出しだけずらせます。素材1本で何カットも持ちます。<br><code>Image Sequence</code> にすると <code>Frames</code>（枚数）／<code>Start Frame</code>／<code>Offset</code>／<code>Cyclic</code>（ループ）が出ます。</div>
 
           <p class="where" style="margin-top:20px">連番の解像度と、Vector Math の数値</p>
           <p class="goal" style="margin:8px 0 0">連番は正方形ではなく、<b>電球の数そのもの</b>で作るのが一番きれいです（1ピクセル＝1電球）。AE では大きいコンプでデザインし、それを電球の数のコンプにネストして書き出します。<br>電球の数を変えたら下の計算機に入れてください。そのまま Vector Math に打てる数字が出ます。</p>
@@ -502,8 +677,8 @@ header .dgm{margin-top:28px}
               <div><dt>上下が逆に出たら精密版②③の Y を</dt><dd id="o4">-0.088889 ／ 0.944444</dd></div>
             </dl>
           </div>
-          <div class="note bad"><b>Grid Size Y は必ずこの計算機の数値通りに。</b>Vertices X と Y の数が違うのに Size X = Size Y（正方形）にすると、AEの画像が正方形の土台に押し込まれて縦横比が潰れます。ここで出た <code>Grid Size Y</code> を、01の <code>Grid</code> ノードの Size Y にそのままコピーしてください。個数やSize Xを変えたら、ここも自動で再計算されます。</div>
-          <div class="note">左の手順に書いた簡易版（<code>Divide</code> → <code>Add 0.5</code>）は、電球の中心ではなく<b>ピクセルの境目</b>を拾うので、端の1列が半個ぶんずれます。ぼやけた大きい模様なら気づきませんが、<b>1px＝1電球でやるなら「精密版」の3行に差し替えてください。</b></div>
+          <div class="note bad"><b>ここで出た <code>Grid Size Y</code> を、01 の Grid にそのままコピー。</b>個数や Size X を変えれば自動で再計算されます。</div>
+          <div class="note"><b>1px＝1電球でやるなら「精密版」の3行に差し替え。</b>簡易版（<code>Divide</code> → <code>Add 0.5</code>）は電球の中心ではなく<b>ピクセルの境目</b>を拾うので、端の1列が半個ぶんずれます（ぼやけた大きい模様なら気づきません）。</div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="6" aria-label="ストライプ・点々・ダイヤの模様が順番に流れるプレビュー"></canvas>
@@ -518,7 +693,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="s07">
     <div class="num">07<small>GEO</small></div>
     <div class="body">
       <h2>★ や ◆ に差し替える</h2>
@@ -555,7 +730,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="s08">
     <div class="num">08<small>GEO</small></div>
     <div class="body">
       <h2>ワイプで上下に散らす</h2>
@@ -603,7 +778,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="s09">
     <div class="num">09<small>OUT</small></div>
     <div class="body">
       <h2>滲みを足して、AE に渡す</h2>
@@ -640,7 +815,7 @@ header .dgm{margin-top:28px}
 
 <div class="steps">
 
-  <section class="step">
+  <section class="step" id="sA">
     <div class="num">A<small>MAT</small></div>
     <div class="body">
       <h2>AE をカラーで作る</h2>
@@ -662,7 +837,11 @@ header .dgm{margin-top:28px}
             <div><dt>Separate Color の V → Emission の</dt><dd>Strength</dd></div>
           </dl>
           <div class="note"><b>色は AE の色そのまま、明るさは AE の明度そのまま</b>になります。レインボーを流すのも、特定の電球だけ赤にするのも、AE で描けば全部そのまま出ます。<br><br>拡張としてはこれが一番強い方法です。迷ったらこれを選んでください。</div>
-          <div class="note bad"><b>彩度の高い色（赤・青など）が白より暗く／光らないことがあります。</b>09の <code>Glare</code> は輝度（明るさ）を見て光らせるかどうか判定しますが、同じ明度1.0でも彩度の高い色は白より輝度が低い（特に青は極端に低い）ため、Glareの Threshold（初期値1.0）を超えられず光らないことがあります。<br><br>直し方は2つ合わせ技：<br>① <code>Separate Color</code> の Value 出力 と <code>Emission</code> の Strength の間に <code>Math</code>（Multiply）を挟んで、値を3倍くらいに底上げする<br>② コンポジターの <code>Glare</code> ノードの Threshold を <code>1.0</code> → <code>0.2〜0.3</code>くらいまで下げる<br>Thresholdだけ極端に下げると消灯してるはずの電球までうっすら光り出すので、①②のバランスで好みの見え方を探してください。</div>
+          <div class="note bad"><b>彩度の高い色（特に青）が光らないことがあります。</b>直し方は2つの合わせ技：<br>
+            ① <code>Separate Color</code> の V と Emission の Strength の間に <code>Math</code>（Multiply）を挟んで <b>2〜3倍に底上げ</b>（<a href="#finished">完成形の mat.png ③</a> がこれです）<br>
+            ② Compositing の <code>Glare</code> の Threshold を <code>1.0</code> → <code>0.2〜0.3</code> へ
+            <details class="why"><summary>なぜ青だけ光らないのか</summary><div class="inner"><code>Glare</code> は「輝度」を見て光らせるか決めます。同じ明度1.0でも彩度の高い色は白より輝度が低く（青は極端に低い）、Threshold 1.0 を超えられません。<br>②だけ極端に下げると消灯しているはずの電球までうっすら光るので、①②のバランスで探してください。</div></details>
+          </div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="10" aria-label="AEのカラー連番で虹色の帯が流れるプレビュー"></canvas>
@@ -672,7 +851,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="sB">
     <div class="num">B<small>GEO</small></div>
     <div class="body">
       <h2>列ごとに色を変える</h2>
@@ -694,8 +873,9 @@ header .dgm{margin-top:28px}
             <div><dt>Store / Domain</dt><dd>Point</dd></div>
             <div><dt>Store / Name</dt><dd>hue</dd></div>
           </dl>
-          <div class="note bad"><b>From Min, Max は Grid の実サイズに合わせてください。</b>上の <code>-5, 5</code> は Size X=10m 前提の値（±Size/2）です。<b>Y（行ごと）を使う場合</b>は Size Y の値で計算し直してください。例えば Size Y=6.67m なら <code>-3.33, 3.33</code> です。ズレたままでも真っ黒にはなりませんが、色の帯が端まで届かず、一部の色しか出ません。</div>
-          <div class="note bad"><b>ここも本線への割り込みが必要です。</b>今 <code>bulb_uv</code> の <code>Store Named Attribute</code> の Geometry出力が <code>Instance on Points</code> の Points に直結してるはずなので、それを新しく置く <code>hue</code> 用の <code>Store Named Attribute</code> の <b>Geometry入力</b>へ差し替え、<code>hue</code> 側の <b>Geometry出力</b>を <code>Instance on Points</code> の <b>Points</b> へ。<code>Grid → light_val → bulb_uv → hue → Instance on Points</code> の一本鎖になっていればOKです（順番はlight_val/bulb_uv/hueのどれが先でも構いません）。</div>
+          <div class="note bad"><b>From Min, Max は Grid の実サイズ（±Size/2）に合わせて。</b><code>-5, 5</code> は Size X=10m 前提。Y（行ごと）でやるなら Size Y=6.67m → <code>-3.33, 3.33</code> です。ズレても真っ黒にはなりませんが、色の帯が端まで届きません。</div>
+          <p class="backref">ジオメトリ線の割り込みも必要です。<a href="#chain">数珠つなぎの図</a>のとおり、<code>hue</code> の Store を鎖の途中に1つ挟んでください。</p>
+          <p class="backref" style="margin-top:6px">鎖の順番は <code>light_val</code> / <code>bulb_uv</code> / <code>hue</code> のどれが先でも構いません。</p>
           <p class="where" style="margin-top:14px">Shading（マテリアル）</p>
           <div class="flow">
             <span class="nd mat" data-sk="col">Attribute</span><i class="ar">→</i>
@@ -708,8 +888,8 @@ header .dgm{margin-top:28px}
             <div><dt>Attribute の <b>Fac</b> → Color Ramp の</dt><dd>Factor</dd></div>
             <div><dt>Color Ramp / Interpolation</dt><dd>Constant</dd></div>
           </dl>
-          <div class="note bad"><b>Color Ramp の Factor には Attribute の Fac 出力を使ってください（Alphaではありません）。</b>hue はFloat型の値なので、実際のデータは Fac に入っています。Alpha は基本的に常に1.0固定なので、Alphaに繋ぐと列ごとの色の違いが出ず、全部同じ色になります。</div>
-          <div class="note bad"><b>今 Emission の Color には 06/A で作った Image Texture（または以前の色）が繋がっているはずです。</b>ここを新しい Color Ramp の出力に<b>差し替え</b>てください（Image Texture→Emission.Colorの線は外します）。明るさ（Strength）側の配線はそのまま残してOKです——「色はB固定、明滅は06のAE白黒連番」という組み合わせが一番扱いやすい形です。</div>
+          <div class="note bad"><b>Color Ramp の Factor には Attribute の <code>Fac</code> を。</b>Alpha は常に1.0固定なので、繋ぐと全部同じ色になります。</div>
+          <div class="note bad"><b>Emission の Color は Color Ramp に<u>差し替え</u>。</b>Image Texture → Emission.Color の線は外します。Strength 側の配線はそのまま。<br>これで「<b>色は固定、明滅は 06 の AE 連番</b>」という一番扱いやすい形になります（<a href="#finished">完成形</a>もこれ）。</div>
           <div class="note"><code>Color Ramp</code> に虹の色を並べれば<b>列ごとのレインボー</b>です。Interpolation を <b><code>Constant</code></b> にすると色が混ざらず、<b>帯がくっきり分かれます</b>。電飾らしくするならこちらです。<br><br>X の代わりに <b>Y を使えば行ごと</b>、<code>Vector Math (Distance)</code> を使えば<b>中心から外へ虹が広がります</b>。</div>
         </div>
         <div class="stagebox">
@@ -720,7 +900,7 @@ header .dgm{margin-top:28px}
     </div>
   </section>
 
-  <section class="step">
+  <section class="step" id="sC">
     <div class="num">C<small>GEO</small></div>
     <div class="body">
       <h2>電球ごとにランダムな色</h2>
@@ -737,7 +917,9 @@ header .dgm{margin-top:28px}
             <div><dt>Random Value / Min, Max</dt><dd>0, 1</dd></div>
             <div><dt>Store / Name</dt><dd>hue</dd></div>
           </dl>
-          <div class="note bad"><b>Bから移ってきた人は要チェック：</b><code>Random Value</code> の <b>Min</b> に、Bで使った <code>Map Range</code> の結果がまだ繋がったままになっていませんか。繋がったままだと「位置に応じて下限が変わるランダム」という、CともBとも違うハイブリッドな挙動になります（それはそれで面白い効果ですが、doc通りの「完全にランダム」にしたいなら Min の線を外して <b>固定値 0</b> を直接入力してください）。使わなくなった <code>Position → Separate XYZ → Map Range</code> の一式はもう不要なので、消してもOKです。</div>
+          <div class="note bad"><b>B から移ってきたら：</b><code>Random Value</code> の <b>Min</b> に、B の <code>Map Range</code> が繋がったままになっていませんか。線を外して <b>固定値 0</b> を直接入力してください。
+            <details class="why"><summary>繋がったままだとどうなる？</summary><div class="inner">「位置に応じて下限が変わるランダム」という、B とも C とも違う挙動になります（効果としては面白い）。<br>使わなくなった <code>Position → Separate XYZ → Map Range</code> は消してOK。<a href="#leftover">_07.blend ではこれが浮いたまま残っています</a>。</div></details>
+          </div>
           <div class="note">マテリアル側は <b>B とまったく同じ</b>です。<br><br><code>Color Ramp</code> に<b>好きな色を3〜4色だけ</b>置くのがコツ。完全な虹より、少ない色がバラけて混ざるほうが看板らしく見えます。</div>
         </div>
         <div class="stagebox">
@@ -751,15 +933,19 @@ header .dgm{margin-top:28px}
 </div>
 
 <section class="trouble" style="margin-top:44px">
-  <h2>おすすめの分担</h2>
-  <p>色と明滅を別々のノードで受け持たせると、あとの調整が一番ラクになります。</p>
-  <div class="tr">
-    <h3>色は B か C で固定、明滅は 06 の AE 連番（白黒）で制御</h3>
-    <p>
-      <code>Attribute (hue)</code> → <code>Color Ramp</code> → Emission の <b>Color</b><br>
-      <code>Attribute (bulb_uv)</code> → <code>Image Texture</code> → Emission の <b>Strength</b>
-    </p>
-    <p style="margin-top:10px">色は一度決めたら触らず、振り付けだけ AE で何度でもやり直せます。06 にノードを2つ足すだけで組めます。</p>
+  <h2>属性は3本だけ</h2>
+  <p>ジオメトリノードで作る属性と、マテリアル側の行き先の対応表です。この3行が頭に入れば全体が掴めます。</p>
+  <table class="attrs">
+    <thead><tr><th>属性名</th><th>型 ／ 作る場所</th><th>マテリアル側の行き先</th><th>担当</th></tr></thead>
+    <tbody>
+      <tr><td>light_val</td><td>Float ／ <a href="#s03">03</a>〜<a href="#s05">05</a></td><td>Attribute → Emission の <b>Strength</b></td><td><b>明滅</b>（ノードで作る波）</td></tr>
+      <tr><td>bulb_uv</td><td>Vector ／ <a href="#s06">06</a></td><td>Attribute → Image Texture → <b>Strength</b></td><td><b>明滅</b>（AE で描く模様）</td></tr>
+      <tr><td>hue</td><td>Float ／ <a href="#sB">拡張B</a>・<a href="#sC">C</a></td><td>Attribute → Color Ramp → <b>Color</b></td><td><b>色</b></td></tr>
+    </tbody>
+  </table>
+  <div class="tr" style="margin-top:6px">
+    <h3>おすすめ：色は hue で固定、明滅は bulb_uv（AE の白黒連番）で制御</h3>
+    <p>色は一度決めたら触らず、振り付けだけ AE で何度でもやり直せます。<code>light_val</code> は使わなくてもOK——<a href="#finished">_07.blend もこの形</a>です。</p>
   </div>
 </section>
 
@@ -776,7 +962,7 @@ header .dgm{margin-top:28px}
   </div>
   <div class="tr">
     <h3>3 ／ <code>Store Named Attribute</code> の Geometry 入出力、本線に繋がってますか</h3>
-    <p><b>いちばん見落としやすい原因です。</b>Value（計算結果）だけ繋いで満足しがちですが、それだけでは属性は書き込まれません。<code>Grid</code> の Mesh出力 → <code>Store Named Attribute</code> の Geometry入力、<code>Store Named Attribute</code> の Geometry出力 → <code>Instance on Points</code> の Points（またはその先の別の Store Named Attribute）、という形で<b>ジオメトリの鎖に本当に割り込んでるか</b>を確認してください。<br><br>合わせて：<code>Instance on Points</code> より <b>前</b> にあるか。Domain が <code>Point</code> か。名前がマテリアル側と <b>1文字違わず</b> 同じか（大文字・小文字も区別されます）。</p>
+    <p><b>いちばん見落としやすい原因です。</b>値（計算結果）だけ繋いでも属性は書き込まれません。<a href="#chain">数珠つなぎの図</a>のとおり、緑のジオメトリ線が Store を通り抜けているか確認してください。<br>合わせて：<code>Instance on Points</code> より <b>前</b> にあるか／Domain が <code>Point</code> か／名前がマテリアル側と <b>1文字違わず</b> 同じか（大文字小文字も区別）。</p>
   </div>
   <div class="tr">
     <h3>4 ／ <code>Set Material</code> をつなぎましたか</h3>
@@ -784,13 +970,13 @@ header .dgm{margin-top:28px}
   </div>
   <div class="tr">
     <h3>5 ／ Attribute ノードを複製した時、Name欄を書き換え忘れてませんか</h3>
-    <p><code>light_val</code> / <code>bulb_uv</code> / <code>hue</code> と使う属性が増えてくると、既存の Attribute ノードを複製（<code>Shift+D</code>）して使い回しがちです。その時 <b>Name欄を新しい属性名に変え忘れた</b>まま Image Texture や Color Ramp に繋いでしまうミスが起きやすいです。マテリアルの Attribute ノードを全部クリックして、それぞれの Name欄が「今そのノードが繋がってる先に対して正しい属性名か」を1個ずつ確認してください。</p>
+    <p>属性が3本になると <code>Shift+D</code> で複製しがちです。<b>Name 欄を変え忘れたまま</b> Image Texture や Color Ramp に繋いでいないか、マテリアルの Attribute ノードを1個ずつクリックして確認してください。</p>
   </div>
 </section>
 
 <div class="tail">
   <h2>結局どれが速いか</h2>
-  <p>01〜05 は「仕組みの理解」で、模様を1つ作るたびにノードを組み替える必要があります。映像の尺合わせには向きません。<br><br><b>実制作では 06 を主役にしてください。</b>仕掛けを1本に固定して、模様の設計とタイミングは全部 AE 側でやる。これが一番速く、一番やり直しが効きます。01〜05 は 06 の上に重ねる「揺らぎの足し算」として残しておくと、機械的になりすぎません。</p>
+  <p>01〜05 は「仕組みの理解」です。模様を1つ作るたびにノードを組み替えるので、映像の尺合わせには向きません。<br><br><b>実制作では <a href="#s06">06</a> を主役に。</b>仕掛けを1本に固定して、模様の設計とタイミングは全部 AE 側でやる。これが一番速く、一番やり直しが効きます。01〜05 は「揺らぎの足し算」として重ねると、機械的になりすぎません。<br><br>→ <a href="#finished">完成形（_07.blend）を見る</a></p>
 </div>
 </div>
 
