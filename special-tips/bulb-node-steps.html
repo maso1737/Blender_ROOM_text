@@ -231,6 +231,8 @@ header .dgm{margin-top:28px}
   <p class="eyebrow">Blender 5.x / Geometry Nodes / EEVEE</p>
   <h1>電球を<span class="amb">並べて</span><br>模様を<span class="amb">送る</span>。</h1>
   <p class="lead">上から順に組むだけ。<b>1ステップ＝1つの結果</b>で、右のプレビューが「そこまで組めたら、こう見えるはず」です。見た目が違ったら、そのステップだけ見直せば大丈夫。<br>ノード名は英語のままなので、Blender の <code>Shift + A</code> → <code>Search</code> にそのまま貼れます。丸い点の色は、Blender のソケットの色に合わせてあります。</p>
+  <div class="note" style="margin-top:18px"><b>先に断っておくと：</b>01〜08の間、Blenderの3Dビュー上では地味な見た目のままです。「にじんで光ってる」感じは <b>09で足す Compositing の <code>Glare</code> ノード</b>が作っています。光らない／地味に見えるのが不安になったら、先に09だけ覗いてみてもOKです。</div>
+  <p style="margin-top:14px"><a href="bulb-node-steps_06.blend" download style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)">⬇ サンプル .blend（06のテイク）をダウンロード</a></p>
 
   <div class="toolbar">
     <div class="legend">
@@ -270,12 +272,14 @@ header .dgm{margin-top:28px}
             <span class="to">Instance on Points の <b>Instance</b> へ</span>
           </div>
           <dl class="set">
-            <div><dt>Grid / Size X, Y</dt><dd>10 m</dd></div>
+            <div><dt>Grid / Size X</dt><dd>10 m</dd></div>
+            <div><dt>Grid / Size Y</dt><dd>6.67 m</dd></div>
             <div><dt>Grid / Vertices X, Y</dt><dd>13 / 9</dd></div>
             <div><dt>UV Sphere / Radius</dt><dd>0.2 m</dd></div>
           </dl>
           <div class="note"><b>ここだけ注意：</b>UV Sphere は「オブジェクトとして追加」ではなく <b>ノードとして</b> 追加します。<code>Shift + A</code> → <code>Mesh</code> → <code>UV Sphere</code>。</div>
-          <div class="note"><b>電球の数は自由に変えられます。</b>13 / 9 はただの例です。ただし <b>06 の数値だけは個数から計算した値</b>なので、数を変えたら差し替えが要ります。06 に計算機を置いてあるので、そこに数を入れるだけで済みます。</div>
+          <div class="note bad"><b>Size X と Size Y、同じ数値にしないでください。</b>Vertices が 13 / 9 のように縦横で数が違うのに Size を両方 10m（正方形）にすると、電球ひとつぶんの間隔が縦横で変わってしまい、06 で貼る画像が正方形の土台に押し込まれて縦横比が崩れます（見た目が潰れる）。<b>Size Y は Size X × (Vertices Y−1) / (Vertices X−1)</b> で決めます（13/9なら 10 × 8/12 = 6.67m）。06 の計算機にこの数値も自動で出るようにしてあるので、そこで出た Grid Size Y をそのまま使ってください。</div>
+          <div class="note"><b>電球の数は自由に変えられます。</b>13 / 9 はただの例です。ただし <b>06 の数値（Grid Size Y も含めて）は個数から計算した値</b>なので、数を変えたら差し替えが要ります。06 に計算機を置いてあるので、そこに数を入れるだけで済みます。</div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="1" aria-label="消灯した電球が格子状に並んだプレビュー"></canvas>
@@ -293,7 +297,7 @@ header .dgm{margin-top:28px}
     <div class="num">02<small>MAT</small></div>
     <div class="body">
       <h2>光る器をつくる</h2>
-      <p class="goal">マテリアル側の配線です。この時点では全球が同じ明るさで光ります。やっているのは「明るさを外から受け取る穴を開ける」作業。</p>
+      <p class="goal">マテリアル側の配線です。やっているのは「明るさを外から受け取る穴を開ける」作業。<b>注意：ここではまだ light_val という属性そのものが存在しません</b>（実際に作るのは次の03）。なのでこのステップの「正解」は配線とAttributeの設定が合っていることで、球が実際に全部光って見えるのは03を終えてからです。今すぐ光ってるか確認したい場合は、下のnoteの通り一時的にValueノードで試してください。</p>
       <div class="grid2">
         <div class="recipe">
           <p class="where">Shading（マテリアル）</p>
@@ -314,7 +318,7 @@ header .dgm{margin-top:28px}
             <div><dt>Attribute の Fac → Emission の</dt><dd>Strength</dd></div>
             <div><dt>Emission / Color</dt><dd>#FFC87A</dd></div>
           </dl>
-          <div class="note bad"><b>9割の人がここで真っ黒になります。</b><code>Attribute</code> の Type は初期値が <code>Geometry</code>。必ず <b><code>Instancer</code></b> に変えてください。球そのものではなく「球を配っている格子」から値をもらうからです。<br><br>不安なら、いったん <code>Value</code> ノード（1.0）を Emission の Strength に直結して、全部光ることだけ先に確認しておくと安心です。</div>
+          <div class="note bad"><b>9割の人がここで真っ黒になります。</b><code>Attribute</code> の Type は初期値が <code>Geometry</code>。必ず <b><code>Instancer</code></b> に変えてください。球そのものではなく「球を配っている格子」から値をもらうからです。<br><br>不安なら、いったん <code>Value</code> ノード（1.0）を Emission の Strength に直結して、全部光ることだけ先に確認しておくと安心です（<code>light_val</code> がまだ無いこのステップでは、それが唯一「光るのを見る」方法です）。</div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="2" aria-label="全ての電球が同じ明るさで点灯したプレビュー"></canvas>
@@ -348,7 +352,7 @@ header .dgm{margin-top:28px}
             <div><dt>Store / Domain</dt><dd>Point</dd></div>
             <div><dt>Store / Name</dt><dd>light_val</dd></div>
           </dl>
-          <div class="note"><b>順番が命です。</b><code>Grid</code> → <code>Store Named Attribute</code> → <code>Instance on Points</code>。点に入れた値は、インスタンス化のときに自動で球へ引き継がれます。逆だと引き継がれません。</div>
+          <div class="note bad"><b>ここが一番つまずくポイントです：</b><code>Store Named Attribute</code> は「計算結果を Value に受け取るだけ」では働きません。<b>Geometry の入力・出力も本線に割り込ませる</b>必要があります。具体的には：<br><br>① <code>Grid</code> の <b>Mesh</b> 出力 → <code>Store Named Attribute</code> の <b>Geometry</b> 入力<br>② <code>Store Named Attribute</code> の <b>Geometry</b> 出力 → <code>Instance on Points</code> の <b>Points</b><br><br>（今まで Grid → Instance on Points に直結してた線は、②を繋いだ時点で自動的に外れます）<br><br><b>このパターンはこの後 何度も出てきます。</b>06のbulb_uv、拡張編Bのhue……新しい Store Named Attribute を足すたびに、既存の Geometry の鎖のどこかに同じように割り込ませる必要があります（Grid → light_val → bulb_uv → hue → Instance on Points、というふうに数珠つなぎになっていきます）。マテリアル側のAttributeノードとは繋ぎ方の考え方がそもそも違うので、ここだけ切り分けて覚えておくと迷いません。</div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="3" aria-label="左下の角から明るさが変化する静止グラデーションのプレビュー"></canvas>
@@ -446,12 +450,14 @@ header .dgm{margin-top:28px}
             <span class="nd" data-sk="geo">Store</span>
           </div>
           <dl class="set">
-            <div><dt>Vector Math ① Divide</dt><dd>10, 10, 1</dd></div>
+            <div><dt>Vector Math ① Divide</dt><dd>Grid Size X, Grid Size Y, 1</dd></div>
             <div><dt>Vector Math ② Add</dt><dd>0.5, 0.5, 0</dd></div>
             <div><dt>Store / Data Type</dt><dd>Vector</dd></div>
             <div><dt>Store / Domain</dt><dd>Point</dd></div>
             <div><dt>Store / Name</dt><dd>bulb_uv</dd></div>
           </dl>
+          <div class="note bad"><b>Divide の数値は Grid の Size X / Size Y と必ず同じにしてください。</b>01で Size X=10, Size Y=6.67（13×9の場合）にした人は、ここも <code>10, 6.67, 1</code> です。Size と違う数値のまま Divide すると、UVが微妙にズレて縁の電球が違う画素を拾います。</div>
+          <div class="note bad"><b>ここも本線への割り込みが必要です（03と同じパターン）。</b>今 <code>light_val</code> の <code>Store Named Attribute</code> の Geometry出力が <code>Instance on Points</code> の Points に直結してるはずなので、それを新しく置く <code>bulb_uv</code> 用の <code>Store Named Attribute</code> の <b>Geometry入力</b>へ差し替え、<code>bulb_uv</code> 側の <b>Geometry出力</b>を <code>Instance on Points</code> の <b>Points</b> へ。<code>Grid → light_val → bulb_uv → Instance on Points</code> の一本鎖になっていればOKです。</div>
           <p class="where" style="margin-top:14px">Shading（マテリアル）</p>
           <div class="flow">
             <span class="nd mat" data-sk="col">Attribute</span><i class="ar">→</i>
@@ -469,6 +475,7 @@ header .dgm{margin-top:28px}
             <div><dt>Image Texture の Color → Emission の</dt><dd>Strength</dd></div>
           </dl>
           <div class="note bad"><b>Extension は必ず <code>Extend</code> に。</b>初期値の <code>Repeat</code> のままだと、<b>いちばん右の列に画像のいちばん左の列が出ます</b>。ストライプだとハッキリ破綻します。</div>
+          <div class="note bad"><b>Attribute ノードをコピーして使い回す時の罠：</b>この後（拡張編B・C）でもう1〜2個 Attribute ノードを足すことになりますが、既存のAttributeノードを複製（<code>Shift+D</code>）して使うと、<b>Name欄を書き換え忘れたまま別の用途に繋いでしまう</b>ことがあります（例：<code>bulb_uv</code>用のはずが Name が <code>hue</code> のままImage Textureに繋がってる、等）。真っ黒や模様が出ない時は、まず<b>Image Texture / Color Ramp に繋がってるAttributeノードのName欄が、それぞれ正しい属性名になってるか</b>を1個ずつ確認してください。</div>
           <div class="note"><b>Source を <code>Image Sequence</code> にすると</b> <code>Frames</code>（枚数）／<code>Start Frame</code>（再生開始）／<code>Offset</code>（何枚目を頭にするか）／<code>Cyclic</code>（ループ）が出ます。<br><br><code>Offset</code> があるので、<b>同じ連番を使い回して、カットごとに頭出しをずらす</b>ことができます。素材1本で何カットも持たせられます。</div>
 
           <p class="where" style="margin-top:20px">連番の解像度と、Vector Math の数値</p>
@@ -478,18 +485,21 @@ header .dgm{margin-top:28px}
             <div class="calc-in">
               <label>Vertices X <input type="number" id="cx" value="13" min="2" max="400" step="1"></label>
               <label>Vertices Y <input type="number" id="cy" value="9" min="2" max="400" step="1"></label>
-              <label>Grid Size <input type="number" id="cs" value="10" min="0.1" max="1000" step="0.1"> m</label>
+              <label>Grid Size X <input type="number" id="cs" value="10" min="0.1" max="1000" step="0.1"> m</label>
             </div>
             <dl class="set">
+              <div><dt>Grid Size Y（自動算出・Blenderの Size Y に入れる値）</dt><dd id="osy">6.666667 m</dd></div>
               <div><dt>AE のコンプ解像度</dt><dd id="o0">13 × 9 px</dd></div>
               <div><dt>デザイン用コンプ（100倍）</dt><dd id="o5">1300 × 900 px</dd></div>
-              <div><dt>Vector Math ① Add</dt><dd id="o1">5, 5, 0</dd></div>
-              <div><dt>Vector Math ② Multiply</dt><dd id="o2">0.092308, 0.088889, 0</dd></div>
-              <div><dt>Vector Math ③ Add</dt><dd id="o3">0.038462, 0.055556, 0</dd></div>
-              <div><dt>上下が逆に出たら ②③ の Y を</dt><dd id="o4">-0.088889 ／ 0.944444</dd></div>
+              <div><dt>06 簡易版 Vector Math① Divide</dt><dd id="odiv">10, 6.666667, 1</dd></div>
+              <div><dt>1px=1電球 精密版 Vector Math ① Add</dt><dd id="o1">5, 3.333333, 0</dd></div>
+              <div><dt>精密版 Vector Math ② Multiply</dt><dd id="o2">0.092308, 0.088889, 0</dd></div>
+              <div><dt>精密版 Vector Math ③ Add</dt><dd id="o3">0.038462, 0.055556, 0</dd></div>
+              <div><dt>上下が逆に出たら精密版②③の Y を</dt><dd id="o4">-0.088889 ／ 0.944444</dd></div>
             </dl>
           </div>
-          <div class="note">左の手順に書いた簡易版（<code>Divide 10</code> → <code>Add 0.5</code>）は、電球の中心ではなく<b>ピクセルの境目</b>を拾うので、端の1列が半個ぶんずれます。ぼやけた大きい模様なら気づきませんが、<b>1px＝1電球でやるならこの3行に差し替えてください。</b></div>
+          <div class="note bad"><b>Grid Size Y は必ずこの計算機の数値通りに。</b>Vertices X と Y の数が違うのに Size X = Size Y（正方形）にすると、AEの画像が正方形の土台に押し込まれて縦横比が潰れます。ここで出た <code>Grid Size Y</code> を、01の <code>Grid</code> ノードの Size Y にそのままコピーしてください。個数やSize Xを変えたら、ここも自動で再計算されます。</div>
+          <div class="note">左の手順に書いた簡易版（<code>Divide</code> → <code>Add 0.5</code>）は、電球の中心ではなく<b>ピクセルの境目</b>を拾うので、端の1列が半個ぶんずれます。ぼやけた大きい模様なら気づきませんが、<b>1px＝1電球でやるなら「精密版」の3行に差し替えてください。</b></div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="6" aria-label="ストライプ・点々・ダイヤの模様が順番に流れるプレビュー"></canvas>
@@ -648,6 +658,7 @@ header .dgm{margin-top:28px}
             <div><dt>Separate Color の V → Emission の</dt><dd>Strength</dd></div>
           </dl>
           <div class="note"><b>色は AE の色そのまま、明るさは AE の明度そのまま</b>になります。レインボーを流すのも、特定の電球だけ赤にするのも、AE で描けば全部そのまま出ます。<br><br>拡張としてはこれが一番強い方法です。迷ったらこれを選んでください。</div>
+          <div class="note bad"><b>彩度の高い色（赤・青など）が白より暗く／光らないことがあります。</b>09の <code>Glare</code> は輝度（明るさ）を見て光らせるかどうか判定しますが、同じ明度1.0でも彩度の高い色は白より輝度が低い（特に青は極端に低い）ため、Glareの Threshold（初期値1.0）を超えられず光らないことがあります。<br><br>直し方は2つ合わせ技：<br>① <code>Separate Color</code> の Value 出力 と <code>Emission</code> の Strength の間に <code>Math</code>（Multiply）を挟んで、値を3倍くらいに底上げする<br>② コンポジターの <code>Glare</code> ノードの Threshold を <code>1.0</code> → <code>0.2〜0.3</code>くらいまで下げる<br>Thresholdだけ極端に下げると消灯してるはずの電球までうっすら光り出すので、①②のバランスで好みの見え方を探してください。</div>
         </div>
         <div class="stagebox">
           <canvas class="stage" data-step="10" aria-label="AEのカラー連番で虹色の帯が流れるプレビュー"></canvas>
@@ -679,6 +690,8 @@ header .dgm{margin-top:28px}
             <div><dt>Store / Domain</dt><dd>Point</dd></div>
             <div><dt>Store / Name</dt><dd>hue</dd></div>
           </dl>
+          <div class="note bad"><b>From Min, Max は Grid の実サイズに合わせてください。</b>上の <code>-5, 5</code> は Size X=10m 前提の値（±Size/2）です。<b>Y（行ごと）を使う場合</b>は Size Y の値で計算し直してください。例えば Size Y=6.67m なら <code>-3.33, 3.33</code> です。ズレたままでも真っ黒にはなりませんが、色の帯が端まで届かず、一部の色しか出ません。</div>
+          <div class="note bad"><b>ここも本線への割り込みが必要です。</b>今 <code>bulb_uv</code> の <code>Store Named Attribute</code> の Geometry出力が <code>Instance on Points</code> の Points に直結してるはずなので、それを新しく置く <code>hue</code> 用の <code>Store Named Attribute</code> の <b>Geometry入力</b>へ差し替え、<code>hue</code> 側の <b>Geometry出力</b>を <code>Instance on Points</code> の <b>Points</b> へ。<code>Grid → light_val → bulb_uv → hue → Instance on Points</code> の一本鎖になっていればOKです（順番はlight_val/bulb_uv/hueのどれが先でも構いません）。</div>
           <p class="where" style="margin-top:14px">Shading（マテリアル）</p>
           <div class="flow">
             <span class="nd mat" data-sk="col">Attribute</span><i class="ar">→</i>
@@ -688,8 +701,11 @@ header .dgm{margin-top:28px}
           <dl class="set">
             <div><dt>Attribute / Type</dt><dd>Instancer</dd></div>
             <div><dt>Attribute / Name</dt><dd>hue</dd></div>
+            <div><dt>Attribute の <b>Fac</b> → Color Ramp の</dt><dd>Factor</dd></div>
             <div><dt>Color Ramp / Interpolation</dt><dd>Constant</dd></div>
           </dl>
+          <div class="note bad"><b>Color Ramp の Factor には Attribute の Fac 出力を使ってください（Alphaではありません）。</b>hue はFloat型の値なので、実際のデータは Fac に入っています。Alpha は基本的に常に1.0固定なので、Alphaに繋ぐと列ごとの色の違いが出ず、全部同じ色になります。</div>
+          <div class="note bad"><b>今 Emission の Color には 06/A で作った Image Texture（または以前の色）が繋がっているはずです。</b>ここを新しい Color Ramp の出力に<b>差し替え</b>てください（Image Texture→Emission.Colorの線は外します）。明るさ（Strength）側の配線はそのまま残してOKです——「色はB固定、明滅は06のAE白黒連番」という組み合わせが一番扱いやすい形です。</div>
           <div class="note"><code>Color Ramp</code> に虹の色を並べれば<b>列ごとのレインボー</b>です。Interpolation を <b><code>Constant</code></b> にすると色が混ざらず、<b>帯がくっきり分かれます</b>。電飾らしくするならこちらです。<br><br>X の代わりに <b>Y を使えば行ごと</b>、<code>Vector Math (Distance)</code> を使えば<b>中心から外へ虹が広がります</b>。</div>
         </div>
         <div class="stagebox">
@@ -717,6 +733,7 @@ header .dgm{margin-top:28px}
             <div><dt>Random Value / Min, Max</dt><dd>0, 1</dd></div>
             <div><dt>Store / Name</dt><dd>hue</dd></div>
           </dl>
+          <div class="note bad"><b>Bから移ってきた人は要チェック：</b><code>Random Value</code> の <b>Min</b> に、Bで使った <code>Map Range</code> の結果がまだ繋がったままになっていませんか。繋がったままだと「位置に応じて下限が変わるランダム」という、CともBとも違うハイブリッドな挙動になります（それはそれで面白い効果ですが、doc通りの「完全にランダム」にしたいなら Min の線を外して <b>固定値 0</b> を直接入力してください）。使わなくなった <code>Position → Separate XYZ → Map Range</code> の一式はもう不要なので、消してもOKです。</div>
           <div class="note">マテリアル側は <b>B とまったく同じ</b>です。<br><br><code>Color Ramp</code> に<b>好きな色を3〜4色だけ</b>置くのがコツ。完全な虹より、少ない色がバラけて混ざるほうが看板らしく見えます。</div>
         </div>
         <div class="stagebox">
@@ -744,7 +761,7 @@ header .dgm{margin-top:28px}
 
 <section class="trouble">
   <h2>真っ黒になったら</h2>
-  <p>この4つで、ほぼ全部の「光らない」が直ります。上から順に確認してください。</p>
+  <p>この5つで、ほぼ全部の「光らない」が直ります。上から順に確認してください。</p>
   <div class="tr">
     <h3>1 ／ <code>Attribute</code> の Type が <code>Geometry</code> のままになっていませんか</h3>
     <p>いちばん多い原因です。<code>Instancer</code> に変えてください。球そのものではなく、球を配っている格子が値を持っています。</p>
@@ -754,12 +771,16 @@ header .dgm{margin-top:28px}
     <p>これが入った瞬間、Instancer からの受け渡しが切れて真っ黒になります。しかも数千個で極端に重くなります。<b>入れないのが正解です。</b></p>
   </div>
   <div class="tr">
-    <h3>3 ／ <code>Store Named Attribute</code> の位置と名前</h3>
-    <p><code>Instance on Points</code> より <b>前</b> にあるか。Domain が <code>Point</code> か。名前がマテリアル側と <b>1文字違わず</b> 同じか（<code>light_val</code>）。大文字・小文字も区別されます。</p>
+    <h3>3 ／ <code>Store Named Attribute</code> の Geometry 入出力、本線に繋がってますか</h3>
+    <p><b>いちばん見落としやすい原因です。</b>Value（計算結果）だけ繋いで満足しがちですが、それだけでは属性は書き込まれません。<code>Grid</code> の Mesh出力 → <code>Store Named Attribute</code> の Geometry入力、<code>Store Named Attribute</code> の Geometry出力 → <code>Instance on Points</code> の Points（またはその先の別の Store Named Attribute）、という形で<b>ジオメトリの鎖に本当に割り込んでるか</b>を確認してください。<br><br>合わせて：<code>Instance on Points</code> より <b>前</b> にあるか。Domain が <code>Point</code> か。名前がマテリアル側と <b>1文字違わず</b> 同じか（大文字・小文字も区別されます）。</p>
   </div>
   <div class="tr">
     <h3>4 ／ <code>Set Material</code> をつなぎましたか</h3>
     <p>ジオメトリノードで作った形には、オブジェクトのマテリアルが自動では乗りません。<code>Set Material</code> ノードで明示的に指定します。</p>
+  </div>
+  <div class="tr">
+    <h3>5 ／ Attribute ノードを複製した時、Name欄を書き換え忘れてませんか</h3>
+    <p><code>light_val</code> / <code>bulb_uv</code> / <code>hue</code> と使う属性が増えてくると、既存の Attribute ノードを複製（<code>Shift+D</code>）して使い回しがちです。その時 <b>Name欄を新しい属性名に変え忘れた</b>まま Image Texture や Color Ramp に繋いでしまうミスが起きやすいです。マテリアルの Attribute ノードを全部クリックして、それぞれの Name欄が「今そのノードが繋がってる先に対して正しい属性名か」を1個ずつ確認してください。</p>
   </div>
 </section>
 
@@ -1065,15 +1086,18 @@ function fx(v){ return (Math.round(v * 1e6) / 1e6).toFixed(6).replace(/0+$/, "")
 function calc(){
   var nx = Math.max(2, Math.round(parseFloat(cx.value) || 2));
   var ny = Math.max(2, Math.round(parseFloat(cy.value) || 2));
-  var s  = parseFloat(cs.value);
-  if (!(s > 0)) s = 10;
+  var sx = parseFloat(cs.value);
+  if (!(sx > 0)) sx = 10;
+  var sy = sx * (ny - 1) / (nx - 1); /* 間隔を縦横で揃えて、画像の縦横比が潰れないようにする */
 
-  var mx = (nx - 1) / (s * nx), my = (ny - 1) / (s * ny);
-  var ax = 1 / (2 * nx),        ay = 1 / (2 * ny);
+  var mx = (nx - 1) / (sx * nx), my = (ny - 1) / (sy * ny);
+  var ax = 1 / (2 * nx),         ay = 1 / (2 * ny);
 
+  document.getElementById("osy").textContent = fx(sy) + " m";
   document.getElementById("o0").textContent = nx + " × " + ny + " px";
   document.getElementById("o5").textContent = (nx * 100) + " × " + (ny * 100) + " px";
-  document.getElementById("o1").textContent = fx(s / 2) + ", " + fx(s / 2) + ", 0";
+  document.getElementById("odiv").textContent = fx(sx) + ", " + fx(sy) + ", 1";
+  document.getElementById("o1").textContent = fx(sx / 2) + ", " + fx(sy / 2) + ", 0";
   document.getElementById("o2").textContent = fx(mx) + ", " + fx(my) + ", 0";
   document.getElementById("o3").textContent = fx(ax) + ", " + fx(ay) + ", 0";
   document.getElementById("o4").textContent = fx(-my) + " ／ " + fx(1 - ay);
