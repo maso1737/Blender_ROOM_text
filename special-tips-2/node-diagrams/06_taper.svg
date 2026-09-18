@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="740" viewBox="0 0 1600 740">
+<rect width="1600" height="740" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">06</tspan><tspan font-size="22" fill="#FFFFFF">  頭を明るく・太く、尾を細く</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">Trim の「あと」の Spline Parameter を使う。振り直されるのを逆に利用する。</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<g>
+<rect x="60" y="170" width="250" height="86" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 210 L60 178 Q60 170 68 170 L302 170 Q310 170 310 210 Z" fill="#2F6B55"/>
+<text x="76" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブトリム</text>
+<circle cx="310" cy="227" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="296" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+</g>
+<g>
+<rect x="60" y="380" width="270" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 420 L60 388 Q60 380 68 380 L322 380 Q330 380 330 420 Z" fill="#8C3D50"/>
+<text x="76" y="407" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">スプラインパラメーター</text>
+<circle cx="330" cy="437" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="316" y="442" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">係数</text>
+<rect x="70" y="458" width="250" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="474" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">尾 = 0 ／ 頭 = 1</text>
+</g>
+<g>
+<rect x="400" y="170" width="290" height="176" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M400 210 L400 178 Q400 170 408 170 L682 170 Q690 170 690 210 Z" fill="#2F6B55"/>
+<text x="416" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">名前付き属性格納</text>
+<circle cx="690" cy="227" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="676" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="400" cy="227" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="414" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="400" cy="261" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="414" y="266" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="410" y="282" width="270" height="22" rx="4" fill="#3A3430"/>
+<text x="420" y="298" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">head</text>
+<rect x="410" y="310" width="270" height="22" rx="4" fill="#3A3430"/>
+<text x="420" y="326" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">Float / ポイント</text>
+</g>
+<g>
+<rect x="400" y="430" width="270" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M400 470 L400 438 Q400 430 408 430 L662 430 Q670 430 670 470 Z" fill="#36688F"/>
+<text x="416" y="457" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">範囲マッピング</text>
+<circle cx="670" cy="487" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="656" y="492" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">結果</text>
+<circle cx="400" cy="487" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="414" y="492" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="410" y="508" width="250" height="22" rx="4" fill="#3A3430"/>
+<text x="420" y="524" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">0→1  を  0.25→1.0  へ</text>
+</g>
+<g>
+<rect x="760" y="430" width="240" height="142" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M760 470 L760 438 Q760 430 768 430 L992 430 Q1000 430 1000 470 Z" fill="#2F6B55"/>
+<text x="776" y="457" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブ円</text>
+<circle cx="1000" cy="487" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="986" y="492" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+<rect x="770" y="508" width="220" height="22" rx="4" fill="#3A3430"/>
+<text x="780" y="524" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">解像度 8</text>
+<rect x="770" y="536" width="220" height="22" rx="4" fill="#3A3430"/>
+<text x="780" y="552" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">半径 Thickness</text>
+</g>
+<g>
+<rect x="1080" y="200" width="300" height="154" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1080 240 L1080 208 Q1080 200 1088 200 L1372 200 Q1380 200 1380 240 Z" fill="#2F6B55"/>
+<text x="1096" y="227" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブのメッシュ化</text>
+<circle cx="1380" cy="257" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1366" y="262" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">メッシュ</text>
+<circle cx="1080" cy="257" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1094" y="262" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+<circle cx="1080" cy="291" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1094" y="296" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">断面カーブ</text>
+<circle cx="1080" cy="325" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1094" y="330" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">スケール</text>
+</g>
+<path d="M310 227 C350 227 359 227 400 227" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M330 437 C368 437 362 261 400 261" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M330 437 C368 437 362 487 400 487" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M690 227 C865 227 904 257 1080 257" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M1000 487 C1038 487 1042 291 1080 291" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M670 487 C854 487 895 325 1080 325" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+<rect x="60" y="600" width="1480" height="74" rx="4" fill="#2A1C17" stroke="#FF7A5C" stroke-width="1.5"/>
+<rect x="60" y="600" width="4" height="74" fill="#FF7A5C"/>
+<text x="78" y="628" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">太さは Curve to Mesh の「スケール」入力で変える。5.x は Set Curve Radius の半径を暗黙には見てくれない。</text>
+<text x="78" y="654" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">この 係数 は明るさにも使う（09）。これだけで、キーフレームなしに参照の彗星の形が出る。</text>
+</svg>

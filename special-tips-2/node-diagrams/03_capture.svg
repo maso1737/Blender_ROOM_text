@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="860" viewBox="0 0 1600 860">
+<rect width="1600" height="860" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">03</tspan><tspan font-size="22" fill="#FFFFFF">  1本に1つの値を配る</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">この手順書で一番大事な設計判断。Domain をインスタンスにする。</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<g>
+<rect x="60" y="170" width="250" height="170" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 210 L60 178 Q60 170 68 170 L302 170 Q310 170 310 210 Z" fill="#8C3D50"/>
+<text x="76" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">ランダム値</text>
+<circle cx="310" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="296" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="70" y="248" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="264" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">最小  0.0</text>
+<rect x="70" y="276" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="292" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">最大  1.0</text>
+<rect x="70" y="304" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="320" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">シード  11</text>
+</g>
+<g>
+<rect x="60" y="380" width="250" height="170" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 420 L60 388 Q60 380 68 380 L302 380 Q310 380 310 420 Z" fill="#8C3D50"/>
+<text x="76" y="407" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">ランダム値</text>
+<circle cx="310" cy="437" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="296" y="442" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="70" y="458" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="474" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">最小  0.8</text>
+<rect x="70" y="486" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="502" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">最大  1.2</text>
+<rect x="70" y="514" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="530" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">シード  22</text>
+</g>
+<g>
+<rect x="60" y="590" width="250" height="170" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 630 L60 598 Q60 590 68 590 L302 590 Q310 590 310 630 Z" fill="#8C3D50"/>
+<text x="76" y="617" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">ランダム値</text>
+<circle cx="310" cy="647" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="296" y="652" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="70" y="668" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="684" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">最小  0.0</text>
+<rect x="70" y="696" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="712" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">最大  1.0</text>
+<rect x="70" y="724" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="740" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">シード  33</text>
+</g>
+<g>
+<rect x="420" y="150" width="260" height="86" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M420 190 L420 158 Q420 150 428 150 L672 150 Q680 150 680 190 Z" fill="#2F6B55"/>
+<text x="436" y="177" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">ポイントインスタンス作成</text>
+<circle cx="680" cy="207" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="666" y="212" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">インスタンス</text>
+</g>
+<g>
+<rect x="760" y="300" width="300" height="216" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M760 340 L760 308 Q760 300 768 300 L1052 300 Q1060 300 1060 340 Z" fill="#3E6B6B"/>
+<text x="776" y="327" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">属性キャプチャ</text>
+<circle cx="1060" cy="357" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1046" y="362" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="1060" cy="391" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1046" y="396" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">t_offset</text>
+<circle cx="1060" cy="425" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1046" y="430" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">speed_mul</text>
+<circle cx="1060" cy="459" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1046" y="464" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">color_id</text>
+<circle cx="760" cy="357" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="774" y="362" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="760" cy="391" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="774" y="396" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">t_offset</text>
+<circle cx="760" cy="425" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="774" y="430" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">speed_mul</text>
+<circle cx="760" cy="459" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="774" y="464" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">color_id</text>
+<rect x="770" y="480" width="280" height="22" rx="4" fill="#3A3430"/>
+<text x="780" y="496" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">Domain  インスタンス</text>
+</g>
+<path d="M680 207 C718 207 722 357 760 357" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M310 227 C512 227 557 391 760 391" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M310 437 C512 437 557 425 760 425" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M310 647 C512 647 557 459 760 459" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<rect x="1140" y="300" width="420" height="230" rx="8" fill="#1F1B18" stroke="#4A423B" stroke-width="1.5"/>
+<text x="1162" y="334" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#FF9A3C" font-weight="400">Domain を間違えるとこうなる</text>
+<rect x="1162" y="352" width="170" height="60" rx="4" fill="#2A1C17" stroke="#FF7A5C"/>
+<text x="1176" y="378" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#FF7A5C" font-weight="400">ポイント</text>
+<text x="1176" y="400" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4" font-weight="400">1本が虹色にバラける</text>
+<rect x="1352" y="352" width="188" height="60" rx="4" fill="#1B2A20" stroke="#00D6A3"/>
+<text x="1366" y="378" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#00D6A3" font-weight="400">インスタンス</text>
+<text x="1366" y="400" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4" font-weight="400">1本 = 1色（正解）</text>
+<text x="1162" y="448" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076" font-weight="400">Realize したあとの Index は「点の通し番号」</text>
+<text x="1162" y="472" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076" font-weight="400">になる。0〜36万の連番で Random を引くから、</text>
+<text x="1162" y="496" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076" font-weight="400">1本のレールの中で色が変わってしまう。</text>
+<rect x="420" y="640" width="700" height="74" rx="4" fill="#2A1C17" stroke="#FF7A5C" stroke-width="1.5"/>
+<rect x="420" y="640" width="4" height="74" fill="#FF7A5C"/>
+<text x="438" y="668" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">順番が大事。Instance on Points の直後、Realize より前に置く。</text>
+<text x="438" y="694" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">ここで捕まえた3つは、このあと Realize と Trim を通り抜けて最後まで届く。</text>
+</svg>

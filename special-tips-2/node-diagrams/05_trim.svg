@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="830" viewBox="0 0 1600 830">
+<rect width="1600" height="830" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">05</tspan><tspan font-size="22" fill="#FFFFFF">  彗星を走らせる</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">キーフレームは打たない。フレーム番号から直接いまの位置を計算する。</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<g>
+<rect x="60" y="170" width="230" height="120" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 210 L60 178 Q60 170 68 170 L282 170 Q290 170 290 210 Z" fill="#8C3D50"/>
+<text x="76" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">シーンタイム</text>
+<circle cx="290" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="276" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">秒</text>
+<circle cx="290" cy="261" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="276" y="266" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">フレーム</text>
+</g>
+<g>
+<rect x="350" y="170" width="220" height="148" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M350 210 L350 178 Q350 170 358 170 L562 170 Q570 170 570 210 Z" fill="#36688F"/>
+<text x="366" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">乗算</text>
+<circle cx="570" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="556" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="350" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="364" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="350" cy="261" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="364" y="266" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="360" y="282" width="200" height="22" rx="4" fill="#3A3430"/>
+<text x="370" y="298" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">× Speed</text>
+</g>
+<g>
+<rect x="630" y="170" width="220" height="148" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M630 210 L630 178 Q630 170 638 170 L842 170 Q850 170 850 210 Z" fill="#36688F"/>
+<text x="646" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">乗算</text>
+<circle cx="850" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="836" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="630" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="644" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="630" cy="261" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="644" y="266" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="640" y="282" width="200" height="22" rx="4" fill="#3A3430"/>
+<text x="650" y="298" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">× speed_mul</text>
+</g>
+<g>
+<rect x="910" y="170" width="220" height="148" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M910 210 L910 178 Q910 170 918 170 L1122 170 Q1130 170 1130 210 Z" fill="#36688F"/>
+<text x="926" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">加算</text>
+<circle cx="1130" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1116" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="910" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="924" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="910" cy="261" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="924" y="266" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="920" y="282" width="200" height="22" rx="4" fill="#3A3430"/>
+<text x="930" y="298" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">+ t_offset</text>
+</g>
+<g>
+<rect x="1190" y="170" width="200" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1190 210 L1190 178 Q1190 170 1198 170 L1382 170 Q1390 170 1390 210 Z" fill="#36688F"/>
+<text x="1206" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">小数部</text>
+<circle cx="1390" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1376" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="1190" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1204" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="1200" y="248" width="180" height="22" rx="4" fill="#3A3430"/>
+<text x="1210" y="264" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">Fract</text>
+</g>
+<g>
+<rect x="910" y="430" width="220" height="148" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M910 470 L910 438 Q910 430 918 430 L1122 430 Q1130 430 1130 470 Z" fill="#36688F"/>
+<text x="926" y="457" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">減算</text>
+<circle cx="1130" cy="487" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1116" y="492" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="910" cy="487" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="924" y="492" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="910" cy="521" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="924" y="526" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="920" y="542" width="200" height="22" rx="4" fill="#3A3430"/>
+<text x="930" y="558" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">− Tail</text>
+</g>
+<g>
+<rect x="1190" y="380" width="280" height="182" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1190 420 L1190 388 Q1190 380 1198 380 L1462 380 Q1470 380 1470 420 Z" fill="#2F6B55"/>
+<text x="1206" y="407" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブトリム</text>
+<circle cx="1470" cy="437" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1456" y="442" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+<circle cx="1190" cy="437" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1204" y="442" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+<circle cx="1190" cy="471" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1204" y="476" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">開始</text>
+<circle cx="1190" cy="505" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1204" y="510" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">終了</text>
+<rect x="1200" y="526" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="1210" y="542" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">係数</text>
+</g>
+<path d="M290 261 C328 261 312 261 350 261" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M570 227 C608 227 592 261 630 261" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M850 227 C888 227 872 261 910 261" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M1130 227 C1168 227 1152 227 1190 227" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M1390 227 C1480 227 1100 505 1190 505" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+<path d="M1390 227 C1606 227 694 521 910 521" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M1130 487 C1168 487 1152 471 1190 471" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+<text x="60" y="400" text-anchor="start" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" fill="#FF9A3C" font-weight="700">head = Fract( フレーム × Speed × speed_mul + t_offset )</text>
+<text x="60" y="430" text-anchor="start" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="17" fill="#BCB2A4" font-weight="400">Trim の 開始 = head − Tail ／ 終了 = head</text>
+<rect x="60" y="500" width="780" height="74" rx="4" fill="#2A1C17" stroke="#FF7A5C" stroke-width="1.5"/>
+<rect x="60" y="500" width="4" height="74" fill="#FF7A5C"/>
+<text x="78" y="528" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">Modulo ではなく Fract。</text>
+<text x="78" y="554" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">Blender の Modulo は負の値で符号が残るので、ループの一部で挙動が変わる。</text>
+<rect x="60" y="620" width="780" height="74" rx="4" fill="#2A2015" stroke="#FF9A3C" stroke-width="1.5"/>
+<rect x="60" y="620" width="4" height="74" fill="#FF9A3C"/>
+<text x="78" y="648" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">秒ではなくフレームを使うと、Speed が「1フレームあたりどれだけ進むか」になる。</text>
+<text x="78" y="674" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">Speed 0.010 なら 100 フレームで 1 周。</text>
+<rect x="880" y="620" width="680" height="74" rx="4" fill="#2A2015" stroke="#FF9A3C" stroke-width="1.5"/>
+<rect x="880" y="620" width="4" height="74" fill="#FF9A3C"/>
+<text x="898" y="648" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">head − Tail が負になる瞬間、Trim が 0 でクランプして頭が潰れる。</text>
+<text x="898" y="674" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">J字の始点をカメラの外まで伸ばしてあるので、そこは見えない。</text>
+</svg>

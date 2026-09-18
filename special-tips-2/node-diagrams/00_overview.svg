@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700">
+<rect width="1600" height="700" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">MAP</tspan><tspan font-size="22" fill="#FFFFFF">  全体は4本のライン</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">上から順に組む。帯ごとに役割が違う。</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="40" y="140" width="1520" height="88" rx="8" fill="#1F1B18" stroke="#4A423B" stroke-width="1"/>
+<text x="62" y="172" text-anchor="start" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="28" fill="#FF9A3C" font-weight="700">A</text>
+<text x="62" y="196" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#8A8076" font-weight="400">形をつくる</text>
+<g><rect x="230" y="152" width="180" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="230" y="152" width="6" height="46" rx="3" fill="#2F6B55"/>
+<text x="248" y="181" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Object Info</text></g>
+<path d="M410 175 L428 175" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M436 175 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="436" y="152" width="200" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="436" y="152" width="6" height="46" rx="3" fill="#2F6B55"/>
+<text x="454" y="181" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Resample Curve</text></g>
+<path d="M636 175 L654 175" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M662 175 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="662" y="152" width="170" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="662" y="152" width="6" height="46" rx="3" fill="#2F6B55"/>
+<text x="680" y="181" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Curve Circle</text></g>
+<path d="M832 175 L850 175" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M858 175 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="858" y="152" width="200" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="858" y="152" width="6" height="46" rx="3" fill="#2F6B55"/>
+<text x="876" y="181" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Delete Geometry</text></g>
+<path d="M1058 175 L1076 175" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M1084 175 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="1084" y="152" width="215" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="1084" y="152" width="6" height="46" rx="3" fill="#2F6B55"/>
+<text x="1102" y="181" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Instance on Points</text></g>
+<rect x="40" y="270" width="1520" height="88" rx="8" fill="#1F1B18" stroke="#4A423B" stroke-width="1"/>
+<text x="62" y="302" text-anchor="start" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="28" fill="#FF9A3C" font-weight="700">B</text>
+<text x="62" y="326" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#8A8076" font-weight="400">1本に1つの値を配る</text>
+<g><rect x="230" y="282" width="195" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="230" y="282" width="6" height="46" rx="3" fill="#8C3D50"/>
+<text x="248" y="311" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Random Value x3</text></g>
+<path d="M425 305 L443 305" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M451 305 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="451" y="282" width="200" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="451" y="282" width="6" height="46" rx="3" fill="#8C3D50"/>
+<text x="469" y="311" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Capture Attribute</text></g>
+<path d="M651 305 L669 305" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M677 305 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="677" y="282" width="235" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="677" y="282" width="6" height="46" rx="3" fill="#8C3D50"/>
+<text x="695" y="311" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Domain = インスタンス</text></g>
+<rect x="40" y="400" width="1520" height="88" rx="8" fill="#1F1B18" stroke="#4A423B" stroke-width="1"/>
+<text x="62" y="432" text-anchor="start" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="28" fill="#FF9A3C" font-weight="700">C</text>
+<text x="62" y="456" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#8A8076" font-weight="400">彗星を走らせる</text>
+<g><rect x="230" y="412" width="195" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="230" y="412" width="6" height="46" rx="3" fill="#36688F"/>
+<text x="248" y="441" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Realize Instances</text></g>
+<path d="M425 435 L443 435" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M451 435 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="451" y="412" width="165" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="451" y="412" width="6" height="46" rx="3" fill="#36688F"/>
+<text x="469" y="441" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Capture (arc)</text></g>
+<path d="M616 435 L634 435" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M642 435 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="642" y="412" width="145" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="642" y="412" width="6" height="46" rx="3" fill="#36688F"/>
+<text x="660" y="441" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Scene Time</text></g>
+<path d="M787 435 L805 435" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M813 435 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="813" y="412" width="105" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="813" y="412" width="6" height="46" rx="3" fill="#36688F"/>
+<text x="831" y="441" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Fract</text></g>
+<path d="M918 435 L936 435" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M944 435 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="944" y="412" width="155" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="944" y="412" width="6" height="46" rx="3" fill="#36688F"/>
+<text x="962" y="441" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Trim Curve</text></g>
+<rect x="40" y="530" width="1520" height="88" rx="8" fill="#1F1B18" stroke="#4A423B" stroke-width="1"/>
+<text x="62" y="562" text-anchor="start" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="28" fill="#FF9A3C" font-weight="700">D</text>
+<text x="62" y="586" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#8A8076" font-weight="400">見た目にする</text>
+<g><rect x="230" y="542" width="190" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="230" y="542" width="6" height="46" rx="3" fill="#4B7A3F"/>
+<text x="248" y="571" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Spline Parameter</text></g>
+<path d="M420 565 L438 565" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M446 565 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="446" y="542" width="260" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="446" y="542" width="6" height="46" rx="3" fill="#4B7A3F"/>
+<text x="464" y="571" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Store Named Attribute x4</text></g>
+<path d="M706 565 L724 565" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M732 565 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="732" y="542" width="170" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="732" y="542" width="6" height="46" rx="3" fill="#4B7A3F"/>
+<text x="750" y="571" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Curve to Mesh</text></g>
+<path d="M902 565 L920 565" stroke="#8A8076" stroke-width="2.4" fill="none"/>
+<path d="M928 565 l-9 -6 l0 12 z" fill="#8A8076"/>
+<g><rect x="928" y="542" width="155" height="46" rx="6" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="928" y="542" width="6" height="46" rx="3" fill="#4B7A3F"/>
+<text x="946" y="571" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="16" font-weight="700" fill="#FFFFFF">Set Material</text></g>
+<rect x="40" y="648" width="1520" height="48" rx="4" fill="#2A2015" stroke="#FF9A3C" stroke-width="1.5"/>
+<rect x="40" y="648" width="4" height="48" fill="#FF9A3C"/>
+<text x="58" y="676" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">4本が合流して1本のメッシュになる。真っ黒なときは、まずどの帯の話かを切り分ける。</text>
+</svg>

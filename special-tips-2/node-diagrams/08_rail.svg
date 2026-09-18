@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700">
+<rect width="1600" height="700" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">08</tspan><tspan font-size="22" fill="#FFFFFF">  レールをうっすら出す</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">Trim していない全長を、細く暗くもう1本描く。</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<g>
+<rect x="60" y="180" width="280" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 220 L60 188 Q60 180 68 180 L332 180 Q340 180 340 220 Z" fill="#3E6B6B"/>
+<text x="76" y="207" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">属性キャプチャ (arc)</text>
+<circle cx="340" cy="237" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="326" y="242" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<rect x="70" y="258" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="274" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">Trim していない全長</text>
+</g>
+<g>
+<rect x="420" y="180" width="290" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M420 220 L420 188 Q420 180 428 180 L702 180 Q710 180 710 220 Z" fill="#2F6B55"/>
+<text x="436" y="207" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">名前付き属性格納 ×3</text>
+<circle cx="710" cy="237" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="696" y="242" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="420" cy="237" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="434" y="242" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<rect x="430" y="258" width="270" height="22" rx="4" fill="#3A3430"/>
+<text x="440" y="274" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">color_id / arc / dot</text>
+</g>
+<g>
+<rect x="420" y="400" width="240" height="142" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M420 440 L420 408 Q420 400 428 400 L652 400 Q660 400 660 440 Z" fill="#2F6B55"/>
+<text x="436" y="427" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブ円</text>
+<circle cx="660" cy="457" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="646" y="462" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+<rect x="430" y="478" width="220" height="22" rx="4" fill="#3A3430"/>
+<text x="440" y="494" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">解像度 6</text>
+<rect x="430" y="506" width="220" height="22" rx="4" fill="#3A3430"/>
+<text x="440" y="522" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">半径 RailThick</text>
+</g>
+<g>
+<rect x="790" y="240" width="280" height="120" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M790 280 L790 248 Q790 240 798 240 L1062 240 Q1070 240 1070 280 Z" fill="#2F6B55"/>
+<text x="806" y="267" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブのメッシュ化</text>
+<circle cx="1070" cy="297" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1056" y="302" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">メッシュ</text>
+<circle cx="790" cy="297" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="804" y="302" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+<circle cx="790" cy="331" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="804" y="336" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">断面カーブ</text>
+</g>
+<g>
+<rect x="1130" y="240" width="250" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1130 280 L1130 248 Q1130 240 1138 240 L1372 240 Q1380 240 1380 280 Z" fill="#4B7A3F"/>
+<text x="1146" y="267" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">マテリアル設定</text>
+<circle cx="1380" cy="297" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1366" y="302" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="1130" cy="297" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1144" y="302" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<rect x="1140" y="318" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="1150" y="334" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">M_Rail</text>
+</g>
+<g>
+<rect x="1130" y="420" width="250" height="86" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1130 460 L1130 428 Q1130 420 1138 420 L1372 420 Q1380 420 1380 460 Z" fill="#2F6B55"/>
+<text x="1146" y="447" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">ジオメトリ統合</text>
+<circle cx="1380" cy="477" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1366" y="482" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="1130" cy="477" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1144" y="482" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+</g>
+<path d="M340 237 C378 237 382 237 420 237" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M710 237 C748 237 752 297 790 297" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M660 457 C718 457 731 331 790 331" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M1070 297 C1108 297 1092 297 1130 297" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M1380 297 C1492 297 1017 477 1130 477" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<rect x="60" y="570" width="1000" height="74" rx="4" fill="#2A2015" stroke="#FF9A3C" stroke-width="1.5"/>
+<rect x="60" y="570" width="4" height="74" fill="#FF9A3C"/>
+<text x="78" y="598" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">彗星側（06）の枝と、このレールの枝を Join Geometry で合流させる。</text>
+<text x="78" y="624" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">レールが無いと「光が走っている道」が見えず、ただ光が宙に浮いて見える。</text>
+</svg>

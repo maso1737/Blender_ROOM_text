@@ -1,0 +1,710 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>駆け上がる光 ノード手順</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --ground:#EDEAE3; --panel:#FFFFFF; --panel-2:#F6F3ED;
+  --ink:#221E19; --ink-2:#5C544A; --ink-3:#8C8377;
+  --rule:#DCD6CB; --rule-2:#C8C0B2;
+  --amber:#C77400; --amber-ink:#8A5100; --amber-wash:#FBEFDC;
+  --stage:#171310;
+  --warn:#B03A1E; --warn-wash:#FBE7E1;
+  --sk-geo:#00A884; --sk-vec:#6363C7; --sk-val:#9A9186; --sk-col:#B8A400; --sk-int:#4E8C52; --sk-rot:#8A6BA8;
+  --maxw:960px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+    --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+    --rule:#332C24; --rule-2:#473D31;
+    --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+    --warn:#FF8C6B; --warn-wash:#2E1A14;
+    --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374; --sk-rot:#C0A0D0;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+  --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+  --rule:#332C24; --rule-2:#473D31;
+  --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+  --warn:#FF8C6B; --warn-wash:#2E1A14;
+  --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374; --sk-rot:#C0A0D0;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.85; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; margin:0;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 96px}
+a{color:var(--amber-ink)}
+
+header{padding:52px 0 28px}
+.eyebrow{
+  font-family:"JetBrains Mono",ui-monospace,monospace; font-size:11px; letter-spacing:.22em;
+  color:var(--ink-3); text-transform:uppercase; margin:0 0 16px;
+}
+h1{
+  font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400;
+  font-size:clamp(30px,6.2vw,54px); line-height:1.12; margin:0; text-wrap:balance; color:var(--ink);
+}
+h1 .amb{color:var(--amber)}
+.lead{max-width:62ch; color:var(--ink-2); margin:20px 0 0; font-size:16px}
+.lead b{color:var(--ink); font-weight:700}
+
+.toolbar{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+  margin-top:26px; padding:14px 16px; border:1px solid var(--rule); border-radius:2px; background:var(--panel);
+}
+.legend{display:flex; flex-wrap:wrap; gap:6px 16px; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-2)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.legend i{width:8px; height:8px; border-radius:50%; display:block}
+
+.step[id],#finished,#params,#trouble{scroll-margin-top:22px}
+.steps{display:flex; flex-direction:column; gap:0; margin-top:44px}
+.step{display:grid; grid-template-columns:56px 1fr; gap:0 22px; padding:34px 0 38px; border-top:1px solid var(--rule)}
+.step:first-child{border-top:2px solid var(--rule-2)}
+.num{font-family:"Bungee",monospace; font-size:26px; line-height:1; color:var(--amber); padding-top:4px}
+.num small{display:block; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.2em; color:var(--ink-3); margin-top:7px}
+.body h2{font-size:21px; line-height:1.45; margin:0 0 6px; font-weight:900; text-wrap:balance}
+.goal{color:var(--ink-2); margin:0 0 18px; max-width:62ch}
+@media (max-width:760px){ .step{grid-template-columns:40px 1fr; gap:0 14px} .num{font-size:20px} }
+
+.recipe{display:flex; flex-direction:column; gap:12px; min-width:0}
+.flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.nd{
+  font-family:"JetBrains Mono",monospace; font-size:12.5px; font-weight:700;
+  background:var(--panel); border:1px solid var(--rule-2); border-radius:2px;
+  padding:5px 10px 5px 8px; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+}
+.nd::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--sk-val); flex:none}
+.nd[data-sk="geo"]::before{background:var(--sk-geo)}
+.nd[data-sk="vec"]::before{background:var(--sk-vec)}
+.nd[data-sk="col"]::before{background:var(--sk-col)}
+.nd[data-sk="int"]::before{background:var(--sk-int)}
+.nd[data-sk="rot"]::before{background:var(--sk-rot)}
+.nd.mat{border-style:dashed}
+.ar{color:var(--ink-3); font-style:normal; font-size:13px; padding:0 1px}
+.to{font-family:"Zen Kaku Gothic New",sans-serif; font-size:12.5px; color:var(--ink-2)}
+.to b{color:var(--ink)}
+.where{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em; color:var(--ink-3); text-transform:uppercase; margin:0 0 -4px}
+.where b{color:var(--amber-ink)}
+
+.set{margin:2px 0 0; border-top:1px solid var(--rule); font-size:13.5px}
+.set > div{display:flex; gap:12px; padding:7px 2px; border-bottom:1px solid var(--rule)}
+.set dt{flex:1 1 auto; color:var(--ink-2); font-family:"JetBrains Mono",monospace; font-size:12px; line-height:1.6}
+.set dd{margin:0; flex:none; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); line-height:1.6}
+
+.note{border-left:3px solid var(--amber); background:var(--amber-wash); padding:12px 14px; font-size:14px; color:var(--ink); margin:4px 0 0; line-height:1.8}
+.note.bad{border-left-color:var(--warn); background:var(--warn-wash)}
+.note b{font-weight:900}
+code{font-family:"JetBrains Mono",monospace; font-size:.88em; font-weight:700; background:color-mix(in srgb, var(--ink) 9%, transparent); padding:1px 5px; border-radius:2px}
+
+details.why{margin:8px 0 0; font-size:13.5px}
+details.why > summary{
+  cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:6px;
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em; color:var(--ink-3);
+  text-transform:uppercase; padding:3px 0;
+}
+details.why > summary::-webkit-details-marker{display:none}
+details.why > summary::before{content:"\25B8"; color:var(--amber); font-size:12px}
+details.why[open] > summary::before{content:"\25BE"}
+details.why > summary:hover{color:var(--amber-ink)}
+details.why .inner{padding:6px 0 2px; color:var(--ink-2); line-height:1.8; border-top:1px solid var(--rule); margin-top:4px}
+
+.attrs{width:100%; border-collapse:collapse; margin:16px 0 0; font-size:13.5px}
+.attrs th,.attrs td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--rule); vertical-align:top}
+.attrs th{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); font-weight:400; border-bottom:1px solid var(--rule-2)}
+.attrs td:first-child{font-family:"JetBrains Mono",monospace; font-weight:700; color:var(--amber-ink); white-space:nowrap}
+.attrs td b{color:var(--ink)}
+.attrs tr.warn td:first-child{color:var(--warn)}
+@media (max-width:620px){
+  .attrs,.attrs tbody,.attrs tr,.attrs td{display:block; width:100%}
+  .attrs thead{display:none} .attrs tr{border-bottom:1px solid var(--rule-2); padding:6px 0}
+  .attrs td{border:0; padding:2px 0}
+}
+
+.dgm{
+  --rail:0px; position:relative; left:50%;
+  width:min(1480px, 94vw);
+  margin:24px 0 0 calc(-1 * min(740px, 47vw) - var(--rail));
+}
+.step .dgm{--rail:39px}
+@media (max-width:760px){ .step .dgm{--rail:27px} }
+.dgm img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#181513; cursor:zoom-in}
+.dgm figcaption{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.1em; color:var(--ink-3); margin-top:8px; text-transform:uppercase}
+.dgm figcaption b{color:var(--amber-ink); font-weight:700}
+header .dgm{margin-top:28px}
+
+.shots{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px}
+@media (max-width:700px){ .shots{grid-template-columns:1fr} }
+.shots figure{margin:0}
+.shots img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#0B0B0D; cursor:zoom-in}
+.shots figcaption{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; color:var(--ink-3); margin-top:7px}
+
+.exhead{margin-top:64px; padding-top:30px; border-top:3px double var(--rule-2)}
+.exhead h2{font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400; font-size:clamp(24px,4vw,36px); margin:0; color:var(--ink)}
+.exhead p{color:var(--ink-2); margin:12px 0 0; max-width:62ch; font-size:15px}
+.exhead + .steps{margin-top:22px}
+
+.trouble{margin-top:56px; border:1px solid var(--rule-2); background:var(--panel); padding:26px 26px 10px}
+.trouble h2{font-family:"Bungee",sans-serif; font-weight:400; font-size:19px; margin:0 0 4px; color:var(--ink)}
+.trouble > p{color:var(--ink-2); margin:0 0 18px; font-size:14px}
+.tr{border-top:1px solid var(--rule); padding:16px 0}
+.tr h3{margin:0 0 6px; font-size:15px; font-weight:900; line-height:1.6}
+.tr p{margin:0; color:var(--ink-2); font-size:14px}
+
+.tail{margin-top:48px; color:var(--ink-2); font-size:14.5px; max-width:62ch}
+.tail h2{font-size:17px; color:var(--ink); margin:0 0 8px; font-weight:900}
+
+.lb[hidden]{display:none}
+.lb{position:fixed; inset:0; z-index:60; background:rgba(12,10,8,.97); overflow:auto; padding:70px 24px 40px}
+.lb img{display:block; margin:0 auto; max-width:none; background:#181513}
+.lb.fit img{width:100%; max-width:1600px; height:auto}
+.lbbar{position:fixed; top:0; left:0; right:0; height:56px; z-index:61; background:var(--panel); border-bottom:1px solid var(--rule-2); display:flex; align-items:center; gap:10px; padding:0 20px}
+.lbbar .name{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-2); flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+button{font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.08em; background:var(--panel-2); color:var(--ink); border:1px solid var(--rule-2); border-radius:2px; padding:7px 13px; cursor:pointer}
+button:hover{border-color:var(--amber); color:var(--amber-ink)}
+button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Blender 5.2 LTS / Geometry Nodes / EEVEE</p>
+  <h1>光を<span class="amb">下から</span><br><span class="amb">駆け上げる</span>。</h1>
+  <p class="lead">円周に並べた J 字のレールを、色とりどりの光が下から上へ走り抜けます。<b>キーフレームは1つも打ちません。</b>フレーム番号から「いまどこを走っているか」を直接計算するので、尺を変えても速度を変えても壊れません。</p>
+  <div class="note" style="margin-top:18px"><b>はじめての人へ：</b>手順は10ステップですが、<b>詰まるところは3か所だけ</b>です。<a href="#s03">03（ドメイン）</a>・<a href="#s04">04（順番）</a>・<a href="#s10">10（光らせ方）</a>。ここだけ落ち着いて読めば、あとは繋ぐだけです。</div>
+  <p style="margin-top:14px">
+    <a href="UP_roll_light_04.blend" download style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)">⬇ 完成形 .blend（04のテイク）をダウンロード</a>
+  </p>
+
+  <div class="toolbar">
+    <div class="legend">
+      <span><i style="background:var(--sk-geo)"></i>Geometry</span>
+      <span><i style="background:var(--sk-vec)"></i>Vector</span>
+      <span><i style="background:var(--sk-val)"></i>Float</span>
+      <span><i style="background:var(--sk-col)"></i>Color</span>
+      <span><i style="background:var(--sk-int)"></i>Integer</span>
+      <span><i style="background:var(--sk-rot)"></i>Rotation</span>
+    </div>
+  </div>
+</header>
+
+<section class="exhead" id="finished" style="margin-top:44px; border-top:0; padding-top:0">
+  <p class="eyebrow">Result / 到達点</p>
+  <h2>できあがり</h2>
+  <p><code>UP_roll_light_04.blend</code> の絵です。1本ごとに色・速度・スタート位置がバラバラで、下から上へ何度でもループします。</p>
+</section>
+
+<div class="shots">
+  <figure><img src="_look_f025.png" alt="完成形のレンダー（フレーム25）"><figcaption>FRAME 025 — クリックで原寸</figcaption></figure>
+  <figure><img src="_look_f055.png" alt="完成形のレンダー（フレーム55）"><figcaption>FRAME 055 — クリックで原寸</figcaption></figure>
+</div>
+
+<figure class="dgm">
+  <img src="node-diagrams/00_overview.svg" alt="全体のノード構成。4本のラインに分かれている。">
+  <figcaption>全体マップ ／ 4つのラインに分かれている — <b>クリックで原寸</b></figcaption>
+</figure>
+
+<div class="steps">
+
+  <section class="step" id="s01">
+    <div class="num">01<small>CURVE</small></div>
+    <div class="body">
+      <h2>J 字のレールを手で描く</h2>
+      <p class="goal">ノードではなく、ふつうのカーブオブジェクトを1本置きます。ベジエ3点。床を走って、裾で立ち上がって、まっすぐ上へ抜ける形です。</p>
+      <div class="recipe">
+        <p class="where">追加 → カーブ → ベジエ ／ 名前は <b>J_Rail</b></p>
+        <dl class="set">
+          <div><dt>A　床の外端（光のスタート）</dt><dd>9, 0, 0</dd></div>
+          <div><dt>B　曲がりはじめ（裾の張り出し）</dt><dd>1.8, 0, 0</dd></div>
+          <div><dt>C　上端（光のゴール）</dt><dd>0, 0, 8</dd></div>
+          <div><dt>A・B のハンドル</dt><dd>水平に揃える</dd></div>
+          <div><dt>C のハンドル（下向き）</dt><dd>Z −3.2</dd></div>
+          <div><dt>Cyclic（閉じる）</dt><dd>OFF</dd></div>
+        </dl>
+        <div class="note bad"><b>垂直部はローカル X = 0 に置いてください。</b>02 で作る円（半径 <code>Radius</code>）の上に、ちょうど乗るようにするためです。
+          <details class="why"><summary>ずれるとどうなる？</summary><div class="inner">レールの立ち上がりが円からはみ出して、円筒の壁がガタガタになります。X=0 に置いておけば、円をどれだけ大きくしても壁はまっすぐのままです。</div></details>
+        </div>
+        <div class="note bad"><b>Cyclic は OFF。</b>閉じたカーブには <code>Trim Curve</code> が効きません。05 で光が動かなくなります。</div>
+        <div class="note"><b>A はカメラの画角の外まで伸ばします。</b>ループが一周して光が「湧く」瞬間はどうしても不自然なので、見えない場所で起こしてしまうのがコツです。</div>
+        <div class="note"><b>形は好きに変えてOK。</b>B の X で裾の張り出し、C のハンドルの長さで裾のなだらかさが決まります。</div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/01_jcurve.svg" alt="STEP 01 の J 字カーブの形" loading="lazy">
+        <figcaption>STEP 01 ／ 3点の役割 — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s02">
+    <div class="num">02<small>GEO</small></div>
+    <div class="body">
+      <h2>円周に並べる</h2>
+      <p class="goal">空のメッシュにジオメトリノードを付けて、そこに J_Rail を呼び込みます。円の上に、外向きで立てて並べます。</p>
+      <div class="recipe">
+        <p class="where">Geometry Nodes</p>
+        <div class="flow">
+          <span class="nd" data-sk="geo">Object Info</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Resample Curve</span><i class="ar">→</i>
+          <span class="to">Instance on Points の <b>Instance</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd" data-sk="geo">Curve Circle</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Delete Geometry</span><i class="ar">→</i>
+          <span class="to">Instance on Points の <b>Points</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd" data-sk="vec">Position</span><i class="ar">→</i>
+          <span class="nd" data-sk="rot">Align Rotation to Vector</span><i class="ar">→</i>
+          <span class="to">Instance on Points の <b>Rotation</b> へ</span>
+        </div>
+        <dl class="set">
+          <div><dt>Object Info / Object</dt><dd>J_Rail</dd></div>
+          <div><dt>Object Info / Transform Space</dt><dd>Original</dd></div>
+          <div><dt>Resample Curve / Count</dt><dd>600</dd></div>
+          <div><dt>Curve Circle / Resolution</dt><dd>60</dd></div>
+          <div><dt>Curve Circle / Radius</dt><dd>3.3</dd></div>
+          <div><dt>Align Rotation to Vector / Axis</dt><dd>X</dd></div>
+          <div><dt>Align Rotation to Vector / Pivot</dt><dd>Z</dd></div>
+          <div><dt>Delete Geometry / Domain</dt><dd>Point</dd></div>
+          <div><dt>Delete Geometry / Selection</dt><dd>Index &gt; Count</dd></div>
+        </dl>
+        <div class="note bad"><b>Resample の Count は 600。</b>ここをケチると 07 の点線が解像せず、干渉縞（モアレ）になります。
+          <details class="why"><summary>600 の根拠</summary><div class="inner">カーブ全長が約17mなので、600点なら点の間隔が約2.8cm。07 で作る点線の周期（既定20cm）に対して7点あるので、きれいに解像します。200点だと間隔8.5cmで、点線のほうが細かくなって破綻します。</div></details>
+        </div>
+        <div class="note bad"><b>本数を Curve Circle の Resolution で決めないでください。</b>60本つくっておいて、<code>Index &gt; Count</code> の <code>Delete Geometry</code> で減らします。
+          <details class="why"><summary>なぜ遠回りするのか</summary><div class="inner">あとで「冒頭に一気に本数が増える」ワイプをやるときに、<code>Count</code> というただの数値にキーを打つだけで済むからです。Resolution を直接アニメーションさせると、増えるたびに全部のレールの位置が変わってしまいます（<a href="#sX1">拡張編</a>）。</div></details>
+        </div>
+        <div class="note"><b>Axis = X の意味。</b>01 で「床の走りをローカル +X」に描いたので、その +X が円の外側を向きます。Pivot = Z は「Z 軸まわりにだけ回す」＝レールが倒れない、という意味です。</div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/02_ring.svg" alt="STEP 02 のノード構成図" loading="lazy">
+        <figcaption>STEP 02 のノード構成 — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s03">
+    <div class="num">03<small>KEY</small></div>
+    <div class="body">
+      <h2>1本に1つの値を配る</h2>
+      <p class="goal">「このレールは何色か」「どれくらい速いか」「どこからスタートするか」を、レール1本につき1つずつ決めます。<b>この手順書で一番大事な設計判断です。</b></p>
+      <div class="recipe">
+        <p class="where">Instance on Points の <b>直後</b>（Realize より前）</p>
+        <div class="flow">
+          <span class="nd" data-sk="geo">Instance on Points</span><i class="ar">→</i>
+          <span class="nd">Capture Attribute</span>
+        </div>
+        <div class="flow">
+          <span class="nd">Random Value</span><i class="ar">×3</i>
+          <span class="to">→ Capture Attribute の値入力へ</span>
+        </div>
+        <dl class="set">
+          <div><dt>Capture Attribute / <b>Domain</b></dt><dd>Instance</dd></div>
+          <div><dt>capture 1 ／ t_offset</dt><dd>Random 0.0 〜 1.0 ／ seed 11</dd></div>
+          <div><dt>capture 2 ／ speed_mul</dt><dd>Random 0.8 〜 1.2 ／ seed 22</dd></div>
+          <div><dt>capture 3 ／ color_id</dt><dd>Random 0.0 〜 1.0 ／ seed 33</dd></div>
+        </dl>
+        <div class="note bad"><b>Domain を <code>Instance</code> にしてください。</b>初期値の <code>Point</code> のままだと、<b>1本のレールの中で色が虹色にバラけます。</b>
+          <details class="why"><summary>なぜ Point だとバラけるのか</summary><div class="inner">次の 04 で <code>Realize Instances</code> を通すと、それまで「60本のインスタンス」だったものが「36万個の点」になります。Point ドメインで Random Value を引くと、その点ひとつひとつが別の乱数をもらってしまう。<br>Instance ドメインなら、まだ「60本」だった時点で値が決まるので、1本につき1つの値が保証されます。<br>捕まえた値はこのあと Realize と Trim を通り抜けて、最後まで届きます。</div></details>
+        </div>
+        <div class="note"><b>seed は好きな数字でOK。</b>3つとも違う数字にしてください。同じだと、速い球がいつも同じ色になります。</div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/03_capture.svg" alt="STEP 03 のノード構成図とドメインの違い" loading="lazy">
+        <figcaption>STEP 03 ／ ドメインを間違えるとこうなる — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s04">
+    <div class="num">04<small>GEO</small></div>
+    <div class="body">
+      <h2>レール上の位置を先に覚えておく</h2>
+      <p class="goal">実体化してから、「レールの根元から何メートルの地点か」を全部の点に覚えさせます。07 の点線をレールに貼り付けるための仕込みです。<b>やる順番が全てです。</b></p>
+      <div class="recipe">
+        <p class="where">Capture Attribute（03）の <b>あと</b></p>
+        <div class="flow">
+          <span class="nd" data-sk="geo">Realize Instances</span><i class="ar">→</i>
+          <span class="nd">Capture Attribute</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Trim Curve</span>
+        </div>
+        <div class="flow">
+          <span class="nd">Spline Parameter</span><i class="ar">→</i>
+          <span class="to">Capture Attribute の値入力へ（<b>Length</b> を使う）</span>
+        </div>
+        <dl class="set">
+          <div><dt>Capture Attribute / Domain</dt><dd>Point</dd></div>
+          <div><dt>capture ／ 名前</dt><dd>arc</dd></div>
+          <div><dt>Spline Parameter のどの出力か</dt><dd>Length（メートル）</dd></div>
+        </dl>
+        <div class="note bad"><b>この Capture は Trim の「前」に置きます。</b>Trim のあとだと、点線が光と一緒に滑っていってしまいます。
+          <details class="why"><summary>なぜ滑るのか</summary><div class="inner">Trim のあとの <code>Spline Parameter</code> は、切り取った光の区間で 0→1 に振り直されます。つまり「光の中での位置」になってしまう。それを使って点線を作ると、点線が光にくっついて動きます。<br>Trim の前に「レールの根元から何メートルか」を覚えておけば、Trim はその値を引き継ぐだけなので、点線はレールに貼り付いたまま動きません。LEDテープの上を光が通っていく、という絵にはこちらが必要です。</div></details>
+        </div>
+        <div class="note bad"><b>Realize Instances は Trim より前。</b>Realize しないと、60本が同じカーブデータを参照したままなので、<b>全部のレールが一斉に光ります。</b></div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/04_arc.svg" alt="STEP 04 のノード構成図" loading="lazy">
+        <figcaption>STEP 04 ／ Trim の前で捕まえる — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s05">
+    <div class="num">05<small>GEO</small></div>
+    <div class="body">
+      <h2>光を走らせる</h2>
+      <p class="goal">ここで動きます。フレーム番号から「いま頭がどこか」を計算して、レールのその区間だけを切り取ります。キーフレームは打ちません。</p>
+      <div class="recipe">
+        <p class="where">Geometry Nodes</p>
+        <div class="flow">
+          <span class="nd">Scene Time</span><i class="ar">→</i>
+          <span class="nd">Math</span><i class="ar">→</i>
+          <span class="nd">Math</span><i class="ar">→</i>
+          <span class="nd">Math</span><i class="ar">→</i>
+          <span class="nd">Math (Fract)</span>
+        </div>
+        <dl class="set">
+          <div><dt>Scene Time のどの出力か</dt><dd>Frame</dd></div>
+          <div><dt>Math ① Multiply</dt><dd>× Speed（0.010）</dd></div>
+          <div><dt>Math ② Multiply</dt><dd>× speed_mul（03）</dd></div>
+          <div><dt>Math ③ Add</dt><dd>＋ t_offset（03）</dd></div>
+          <div><dt>Math ④</dt><dd>Fract</dd></div>
+          <div><dt>Trim Curve / Mode</dt><dd>Factor</dd></div>
+          <div><dt>Trim Curve / Start</dt><dd>head − Tail</dd></div>
+          <div><dt>Trim Curve / End</dt><dd>head</dd></div>
+        </dl>
+        <div class="note bad"><b><code>Modulo</code> ではなく <code>Fract</code>。</b>Blender の Modulo は負の値で符号が残るので、ループの一部だけ挙動が変わります。</div>
+        <div class="note"><b>Frame を使うと <code>Speed</code> が「1フレームで進む割合」になります。</b>0.010 なら 100 フレームで 1 周。尺に合わせて決められるので分かりやすいです。</div>
+        <div class="note"><b>head − Tail が負になる瞬間</b>は Trim が 0 でクランプして頭が潰れます。01 で始点をカメラの外へ伸ばしてあるので、そこは見えません。</div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/05_trim.svg" alt="STEP 05 のノード構成図" loading="lazy">
+        <figcaption>STEP 05 ／ head の計算式と Trim — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s06">
+    <div class="num">06<small>GEO</small></div>
+    <div class="body">
+      <h2>頭を太く、尾を細く</h2>
+      <p class="goal">切り取った区間を筒にします。このとき頭から尾に向かって細くすると、一気に「光の玉が走っている」ように見えます。</p>
+      <div class="recipe">
+        <p class="where">Trim Curve の <b>あと</b></p>
+        <div class="flow">
+          <span class="nd">Spline Parameter</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Store Named Attribute</span>
+          <span class="to">／ <b>Factor</b> を使う</span>
+        </div>
+        <div class="flow">
+          <span class="nd">Spline Parameter</span><i class="ar">→</i>
+          <span class="nd">Map Range</span><i class="ar">→</i>
+          <span class="to">Curve to Mesh の <b>Scale</b> へ</span>
+        </div>
+        <dl class="set">
+          <div><dt>Store / Name</dt><dd>head</dd></div>
+          <div><dt>Store / Data Type, Domain</dt><dd>Float / Point</dd></div>
+          <div><dt>Map Range / From</dt><dd>0 → 1</dd></div>
+          <div><dt>Map Range / To</dt><dd>0.25 → 1.0</dd></div>
+          <div><dt>Curve to Mesh / Profile</dt><dd>Curve Circle（Resolution 8）</dd></div>
+          <div><dt>Curve Circle / Radius</dt><dd>0.07（Thickness）</dd></div>
+        </dl>
+        <div class="note"><b>今度は Trim の「あと」の Spline Parameter を使います。</b>04 では邪魔だった「振り直し」を、ここでは逆に利用します。切り取った区間の中で <b>尾が 0、頭が 1</b> になるので、そのまま太さと明るさに配れます。</div>
+        <div class="note bad"><b>太さは <code>Curve to Mesh</code> の <code>Scale</code> 入力で。</b>5.x は <code>Set Curve Radius</code> の半径属性を暗黙には見てくれません。太さが変わらないときはここです。</div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/06_taper.svg" alt="STEP 06 のノード構成図" loading="lazy">
+        <figcaption>STEP 06 ／ 尾＝0・頭＝1 を太さに配る — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s07">
+    <div class="num">07<small>GEO</small></div>
+    <div class="body">
+      <h2>点線にする</h2>
+      <p class="goal">ベタ塗りの光ではなく、LEDテープのような粒々にします。04 で覚えておいた <code>arc</code> をここで使います。</p>
+      <div class="recipe">
+        <p class="where">Geometry Nodes</p>
+        <div class="flow">
+          <span class="nd">arc</span><i class="ar">→</i>
+          <span class="nd">Math (Multiply)</span><i class="ar">→</i>
+          <span class="nd">Math (Fract)</span><i class="ar">→</i>
+          <span class="nd">Math (Greater Than)</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Store Named Attribute</span>
+        </div>
+        <dl class="set">
+          <div><dt>Multiply</dt><dd>× DotDensity（5.0）</dd></div>
+          <div><dt>Greater Than / しきい値</dt><dd>0.5</dd></div>
+          <div><dt>Store / Name</dt><dd>dot</dd></div>
+        </dl>
+        <div class="note bad"><b><code>DotDensity</code> の単位は「1メートルあたりの本数」です。</b>周期 = 1 ÷ DotDensity。5 なら 20cm おき。
+          <details class="why"><summary>大きい数字を入れると壊れます</summary><div class="inner">04 で捕まえた <code>arc</code> は <code>Spline Parameter</code> の <b>Length</b>、つまりメートルの値です。0〜1 の割合ではありません。<br>ここに 140 のような数字を入れると周期が 7mm になり、02 の Resample の点間隔（2.8cm）より細かくなって、点線ではなく干渉縞（モアレ）が出ます。<b>実用上の上限は 12 くらい</b>です。</div></details>
+        </div>
+        <div class="note"><b>しきい値 0.5 は「点と隙間が半々」という意味です。</b>0.7 にすると点が短く、0.3 にすると点が長くなります。</div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/07_dot.svg" alt="STEP 07 のノード構成図と密度の見え方" loading="lazy">
+        <figcaption>STEP 07 ／ 密度ごとの見え方 — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s08">
+    <div class="num">08<small>GEO</small></div>
+    <div class="body">
+      <h2>レールをうっすら出す</h2>
+      <p class="goal">光が走る「道」も、かすかに見えているほうがそれらしくなります。Trim していない全長を、細く暗くもう1本描いて合流させます。</p>
+      <div class="recipe">
+        <p class="where">04 の Capture Attribute から枝分かれ</p>
+        <div class="flow">
+          <span class="nd">Capture (arc)</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Store Named Attribute ×3</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Curve to Mesh</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Set Material</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Join Geometry</span>
+        </div>
+        <dl class="set">
+          <div><dt>Store する属性</dt><dd>color_id / arc / dot</dd></div>
+          <div><dt>Profile / Resolution</dt><dd>6</dd></div>
+          <div><dt>Profile / Radius</dt><dd>0.016（RailThick）</dd></div>
+          <div><dt>Set Material</dt><dd>M_Rail</dd></div>
+        </dl>
+        <div class="note"><b>彗星の枝とレールの枝を <code>Join Geometry</code> で合流させます。</b>マテリアルはそれぞれの枝で <code>Set Material</code> しておけば、1つのオブジェクトに2枚のマテリアルが乗ります。</div>
+      </div>
+      <div class="shots" style="grid-template-columns:1fr">
+        <figure><img src="_step_rails.png" alt="レールだけを明るくした状態"><figcaption>レールだけを明るくしてみたところ。この上を光が走る — クリックで原寸</figcaption></figure>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/08_rail.svg" alt="STEP 08 のノード構成図" loading="lazy">
+        <figcaption>STEP 08 のノード構成 — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s09">
+    <div class="num">09<small>MAT</small></div>
+    <div class="body">
+      <h2>色と明るさをつける</h2>
+      <p class="goal">マテリアルは2枚。彗星用とレール用です。<b>色は <code>color_id</code>、明るさは <code>head</code> と <code>dot</code></b> と役割を分けておくと、あとの調整がラクです。</p>
+      <div class="recipe">
+        <p class="where">Shading ／ M_Comet</p>
+        <div class="flow">
+          <span class="nd mat" data-sk="col">Attribute (color_id)</span><i class="ar">→</i>
+          <span class="nd mat" data-sk="col">Color Ramp</span><i class="ar">→</i>
+          <span class="to">Emission の <b>Color</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd mat">Attribute (head)</span><i class="ar">→</i>
+          <span class="nd mat">Power 2</span><i class="ar">→</i>
+          <span class="nd mat">× 55</span><i class="ar">→</i>
+          <span class="nd mat">Multiply</span><i class="ar">→</i>
+          <span class="to">Emission の <b>Strength</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd mat">Attribute (dot)</span><i class="ar">→</i>
+          <span class="nd mat">Maximum</span><i class="ar">→</i>
+          <span class="to">↑ の Multiply のもう片方へ（もう一方の入力は <b>head の4乗</b>）</span>
+        </div>
+        <dl class="set">
+          <div><dt>Color Ramp / Interpolation</dt><dd>Constant</dd></div>
+          <div><dt>Color Ramp / 色</dt><dd>マゼンタ・シアン・イエロー・青・紫</dd></div>
+          <div><dt>Attribute / Type</dt><dd>Geometry</dd></div>
+          <div><dt>M_Rail の明るさ</dt><dd>0.08 × dot（head は使わない）</dd></div>
+        </dl>
+        <div class="note bad"><b>Color Ramp の Interpolation は <code>Constant</code>。</b>Linear のままだと色が混ざって「1本1色」になりません。</div>
+        <div class="note bad"><b><code>Maximum(dot, head⁴)</code> がこのステップの肝です。</b>頭のところだけ点線の隙間が埋まって<b>ベタ光り</b>になり、尾に向かって点線に戻ります。
+          <details class="why"><summary>これが無いとどうなるか</summary><div class="inner">光が点線に食われて、画面全体が「ただの破線の壁」に見えます。頭が solid になることで初めて「玉が走っている」と読めるようになります。<code>head⁴</code> は「頭のごく近くだけ 1 に近づく」カーブです。</div></details>
+        </div>
+        <div class="note"><b>Attribute の Type は <code>Geometry</code> のままでOK。</b>04 で <code>Realize</code> 済みなので、属性はメッシュの点そのものが持っています（インスタンスのままなら <code>Instancer</code> が要りますが、この組み方では不要です）。</div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/09_material.svg" alt="STEP 09 のマテリアル構成図" loading="lazy">
+        <figcaption>STEP 09 ／ 色と明るさを分ける — <b>クリックで原寸</b></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="step" id="s10">
+    <div class="num">10<small>OUT</small></div>
+    <div class="body">
+      <h2>光らせる（ここで9割つまずきます）</h2>
+      <p class="goal">ノードは完成しているのに「光らない」「色が眠い」となる場所です。ノードではなく<b>レンダー設定</b>の話です。</p>
+      <div class="recipe">
+        <dl class="set">
+          <div><dt>Compositing → Glare / Type</dt><dd>Bloom</dd></div>
+          <div><dt>Glare / Quality</dt><dd>High</dd></div>
+          <div><dt>Glare / Threshold</dt><dd>1.0</dd></div>
+          <div><dt>Glare / Strength, Size</dt><dd>1.0 ／ 6.0</dd></div>
+          <div><dt>Color Management → <b>View Transform</b></dt><dd>Standard</dd></div>
+          <div><dt>World の背景</dt><dd>黒（Strength 0）</dd></div>
+          <div><dt>出力解像度</dt><dd>1512 × 1296</dd></div>
+        </dl>
+        <div class="note bad"><b>EEVEE の Bloom は無くなりました。</b>昔のチュートリアルに出てくる Render Properties の「Bloom」チェックは、5.2 には存在しません。光の滲みは <b>Compositing タブの <code>Glare</code> ノード</b>で作ります。3Dビューで見たいときは、ビューポート右上の <b>Viewport Compositing を ON</b>。</div>
+        <div class="note bad"><b>View Transform が <code>Filmic</code> のままだと、絶対にあの見た目になりません。</b><code>Standard</code> に変えてください。<b>見た目の差で一番効く設定です。</b>
+          <details class="why"><summary>Filmic だと何が起きるか</summary><div class="inner">黒が浮いてグレーになり、色が眠くなります。参照にあるような「真っ黒の中に鮮やかな発光」は、Filmic の性質上どうやっても出ません。明るさをいくら上げても解決しないので、先にここを疑ってください。</div></details>
+        </div>
+        <div class="note"><b>電球の位置にライトを置かないこと。</b>数百個のライトは EEVEE でも破綻します。Emission マテリアル＋Glare だけで絵は成立します。</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<section class="exhead">
+  <p class="eyebrow">Extra / 拡張編</p>
+  <h2>ワイプをつける</h2>
+  <p>「冒頭で一気に増えて、最後は中央に寄って一本の柱になり、そのまま上へ抜ける」——これを後から足せるように、02 で下ごしらえしてあります。<b>ノードは1つも足しません。</b></p>
+</section>
+
+<div class="steps">
+  <section class="step" id="sX1">
+    <div class="num">X1<small>ANIM</small></div>
+    <div class="body">
+      <h2>数値2つにキーを打つだけ</h2>
+      <p class="goal">モディファイアのパネルに出ている <code>Count</code> と <code>Radius</code> に、普通のプロパティと同じように <code>I</code> キーでキーフレームが打てます。</p>
+      <div class="recipe">
+        <dl class="set">
+          <div><dt>冒頭「一気に増える」</dt><dd>Count を 0 → 60</dd></div>
+          <div><dt>最後「中央に寄って柱になる」</dt><dd>Radius を 3.3 → 0</dd></div>
+          <div><dt>そのまま上へ抜ける</dt><dd>Speed を上げる／カメラを上へ</dd></div>
+        </dl>
+        <div class="note"><b>02 で「本数を Resolution で決めない」「半径を1つの値にまとめる」を守っておいたのは、このためです。</b>どちらも数値1つなので、グラフエディタでイージングまで作り込めます。</div>
+        <div class="note"><b>散らすときは Motion Blur を ON に。</b>尾が引いた瞬間に「本当に動いた」ように見えます。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="sX2">
+    <div class="num">X2<small>GEO</small></div>
+    <div class="body">
+      <h2>J 字を手描きせずに作る</h2>
+      <p class="goal">形を数値で管理したくなったとき用。01 の手描きカーブを、ノードだけで置き換えられます。</p>
+      <div class="recipe">
+        <div class="flow">
+          <span class="nd" data-sk="geo">Mesh Line（3点）</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Mesh to Curve</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">Fillet Curve</span><i class="ar">→</i>
+          <span class="to">02 の Object Info の代わりに</span>
+        </div>
+        <div class="note"><b>Fillet Curve の Radius が「裾のなだらかさ」になります。</b>手描きの C のハンドルに相当します。<br>ただし最初は手描きのほうが速いです。形が決まってから置き換えるくらいでちょうどいいです。</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="trouble" id="attrs" style="margin-top:44px">
+  <h2>属性は4つだけ</h2>
+  <p>ジオメトリノードで作る属性と、その行き先の対応表です。この4行が頭に入れば全体が掴めます。</p>
+  <table class="attrs">
+    <thead><tr><th>属性名</th><th>作る場所</th><th>ドメイン</th><th>行き先</th></tr></thead>
+    <tbody>
+      <tr><td>t_offset</td><td><a href="#s03">03</a></td><td><b>Instance</b></td><td>05 の head の計算（スタート位置をずらす）</td></tr>
+      <tr><td>speed_mul</td><td><a href="#s03">03</a></td><td><b>Instance</b></td><td>05 の head の計算（1本ごとの速さ）</td></tr>
+      <tr><td>color_id</td><td><a href="#s03">03</a></td><td><b>Instance</b></td><td>Color Ramp → Emission の <b>Color</b></td></tr>
+      <tr><td>arc</td><td><a href="#s04">04</a></td><td>Point</td><td>07 の点線（Trim の<b>前</b>で捕まえる）</td></tr>
+      <tr><td>head</td><td><a href="#s06">06</a></td><td>Point</td><td>太さ（Curve to Mesh の Scale）と明るさ</td></tr>
+      <tr><td>dot</td><td><a href="#s07">07</a></td><td>Point</td><td>明るさに掛ける点線マスク</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="trouble" id="trouble">
+  <h2>思ったとおりに出ないとき</h2>
+  <p>この6つで、ほぼ全部が直ります。上から順に確認してください。</p>
+  <div class="tr">
+    <h3>1 ／ 光らない・真っ黒</h3>
+    <p><b>View Transform が <code>Filmic</code> ではありませんか。</b><code>Standard</code> にしてください（<a href="#s10">10</a>）。次に Compositing の <code>Glare</code> が繋がっているか。EEVEE の Bloom チェックは<b>もう存在しません</b>。</p>
+  </div>
+  <div class="tr">
+    <h3>2 ／ 1本のレールの中で色が虹色にバラける</h3>
+    <p><code>Capture Attribute</code> の <b>Domain が <code>Point</code> のまま</b>です。<code>Instance</code> に変えてください（<a href="#s03">03</a>）。</p>
+  </div>
+  <div class="tr">
+    <h3>3 ／ 全部のレールが一斉に光る</h3>
+    <p><code>Realize Instances</code> が <code>Trim Curve</code> より<b>後ろ</b>にあります。Realize 前はインスタンスが同じカーブデータを参照しているので、差が付きません（<a href="#s04">04</a>）。</p>
+  </div>
+  <div class="tr">
+    <h3>4 ／ 点線が光と一緒に滑っていく</h3>
+    <p><code>arc</code> の <code>Capture Attribute</code> が <b>Trim より後ろ</b>にあります。前に移してください（<a href="#s04">04</a>）。</p>
+  </div>
+  <div class="tr">
+    <h3>5 ／ 点線ではなく干渉縞（モアレ）が出る</h3>
+    <p><code>DotDensity</code> が大きすぎます。単位は<b>1メートルあたりの本数</b>で、実用上限は 12 くらい。あわせて <code>Resample Curve</code> の Count が 600 あるか確認してください（<a href="#s07">07</a>）。</p>
+  </div>
+  <div class="tr">
+    <h3>6 ／ 筒が極太の円盤になる／太さが変わらない</h3>
+    <p>太さは <code>Curve to Mesh</code> の <b><code>Scale</code> 入力</b>で変えます。5.x は <code>Set Curve Radius</code> の半径属性を暗黙には見てくれません（<a href="#s06">06</a>）。<br>あわせて、<code>Trim Curve</code> はカーブが <b>Cyclic だと効きません</b>（<a href="#s01">01</a>）。</p>
+  </div>
+</section>
+
+<section class="trouble" id="params">
+  <h2>パラメータ早見表</h2>
+  <p><code>UP_roll_light_04.blend</code> の実際の値です。モディファイアのパネルから触れます。</p>
+  <table class="attrs">
+    <thead><tr><th>名前</th><th>既定値</th><th>動かすとどうなる</th><th>備考</th></tr></thead>
+    <tbody>
+      <tr><td>Radius</td><td>3.3</td><td>円筒が太く／細くなる</td><td>0 にすると中央の柱になる</td></tr>
+      <tr><td>Count</td><td>60</td><td>レールの本数</td><td>最大は Curve Circle の Resolution（60）</td></tr>
+      <tr><td>Speed</td><td>0.010</td><td>光の速さ</td><td>0.010 で 100 フレーム 1 周</td></tr>
+      <tr><td>Tail</td><td>0.09</td><td>尾の長さ</td><td>カーブ全長に対する割合</td></tr>
+      <tr><td>DotDensity</td><td>5.0</td><td>点線の細かさ</td><td><b>1mあたりの本数。</b>12 以上はモアレ</td></tr>
+      <tr><td>Thickness</td><td>0.07</td><td>光の太さ</td><td>Curve to Mesh の Scale に入る</td></tr>
+      <tr><td>RailThick</td><td>0.016</td><td>レールの太さ</td><td>レールだけに効く</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<div class="tail">
+  <h2>この組み方の良いところ</h2>
+  <p>キーフレームが1つも無いので、<b>尺を変えても壊れません。</b>フレーム番号から直接いまの位置を計算しているだけなので、100フレームでも1000フレームでも同じように流れます。<br><br>調整したくなったら、触るのは<a href="#params">7つの数値</a>だけです。ノードを組み替える必要はありません。<br><br>→ <a href="#finished">できあがりを見る</a></p>
+</div>
+</div>
+
+<div class="lb" id="lb" hidden>
+  <div class="lbbar">
+    <span class="name" id="lbname"></span>
+    <button id="lbfit">画面に合わせる</button>
+    <button id="lbclose">閉じる ✕</button>
+  </div>
+  <img id="lbimg" alt="図の原寸表示">
+</div>
+
+<script>
+(function(){
+"use strict";
+var lb = document.getElementById("lb"),
+    lbimg = document.getElementById("lbimg"),
+    lbname = document.getElementById("lbname"),
+    lbfit = document.getElementById("lbfit"),
+    lbclose = document.getElementById("lbclose");
+function closeLb(){ lb.hidden = true; lbimg.removeAttribute("src"); document.body.style.overflow = ""; }
+var imgs = document.querySelectorAll(".dgm img, .shots img");
+Array.prototype.forEach.call(imgs, function(img){
+  img.tabIndex = 0;
+  function go(){
+    lbimg.src = img.getAttribute("src");
+    var fig = img.closest("figure");
+    var cap = fig ? fig.querySelector("figcaption") : null;
+    lbname.textContent = cap ? cap.textContent.replace(/\s*—\s*クリックで原寸\s*$/, "") : img.getAttribute("src");
+    lb.classList.add("fit");
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  img.addEventListener("click", go);
+  img.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+});
+lbclose.addEventListener("click", closeLb);
+lbfit.addEventListener("click", function(){ lb.classList.toggle("fit"); });
+lb.addEventListener("click", function(e){ if (e.target === lb) closeLb(); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !lb.hidden) closeLb(); });
+})();
+</script>

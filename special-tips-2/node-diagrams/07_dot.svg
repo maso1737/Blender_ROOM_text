@@ -1,0 +1,246 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="800" viewBox="0 0 1600 800">
+<rect width="1600" height="800" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">07</tspan><tspan font-size="22" fill="#FFFFFF">  点線にする（LEDテープの粒）</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">04 で覚えた arc（メートル）から作る。密度の単位に注意。</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<g>
+<rect x="60" y="170" width="260" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 210 L60 178 Q60 170 68 170 L312 170 Q320 170 320 210 Z" fill="#3E6B6B"/>
+<text x="76" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">属性キャプチャ</text>
+<circle cx="320" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="306" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">arc</text>
+<rect x="70" y="248" width="240" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="264" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">長さ（メートル）</text>
+</g>
+<g>
+<rect x="380" y="170" width="240" height="148" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M380 210 L380 178 Q380 170 388 170 L612 170 Q620 170 620 210 Z" fill="#36688F"/>
+<text x="396" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">乗算</text>
+<circle cx="620" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="606" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="380" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="394" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="380" cy="261" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="394" y="266" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="390" y="282" width="220" height="22" rx="4" fill="#3A3430"/>
+<text x="400" y="298" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">× DotDensity</text>
+</g>
+<g>
+<rect x="680" y="170" width="200" height="86" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M680 210 L680 178 Q680 170 688 170 L872 170 Q880 170 880 210 Z" fill="#36688F"/>
+<text x="696" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">小数部</text>
+<circle cx="880" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="866" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="680" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="694" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+</g>
+<g>
+<rect x="940" y="170" width="230" height="148" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M940 210 L940 178 Q940 170 948 170 L1162 170 Q1170 170 1170 210 Z" fill="#36688F"/>
+<text x="956" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">演算（大きい）</text>
+<circle cx="1170" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1156" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="940" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="954" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="940" cy="261" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="954" y="266" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="950" y="282" width="210" height="22" rx="4" fill="#3A3430"/>
+<text x="960" y="298" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">しきい値 0.5</text>
+</g>
+<g>
+<rect x="1230" y="170" width="280" height="142" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1230 210 L1230 178 Q1230 170 1238 170 L1502 170 Q1510 170 1510 210 Z" fill="#2F6B55"/>
+<text x="1246" y="197" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">名前付き属性格納</text>
+<circle cx="1510" cy="227" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1496" y="232" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="1230" cy="227" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1244" y="232" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="1240" y="248" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="1250" y="264" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">dot</text>
+<rect x="1240" y="276" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="1250" y="292" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">Float / ポイント</text>
+</g>
+<path d="M320 227 C358 227 342 261 380 261" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M620 227 C658 227 642 227 680 227" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M880 227 C918 227 902 261 940 261" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M1170 227 C1208 227 1192 227 1230 227" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<text x="60" y="406" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#FF9A3C" font-weight="400">DotDensity は「1メートルあたりの点線の本数」。周期 = 1 ÷ DotDensity</text>
+<text x="60" y="462" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#BCB2A4" font-weight="400">DotDensity 2</text>
+<text x="300" y="462" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076" font-weight="400">周期 500 mm</text>
+<rect x="470" y="440" width="1040" height="26" rx="3" fill="#221E1B" stroke="#4A423B"/>
+<rect x="470.0" y="440" width="260.0" height="26" fill="#00D6A3"/>
+<rect x="990.0" y="440" width="260.0" height="26" fill="#00D6A3"/>
+<text x="60" y="538" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#BCB2A4" font-weight="400">DotDensity 5（既定）</text>
+<text x="300" y="538" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076" font-weight="400">周期 200 mm</text>
+<rect x="470" y="516" width="1040" height="26" rx="3" fill="#221E1B" stroke="#4A423B"/>
+<rect x="470.0" y="516" width="104.0" height="26" fill="#00D6A3"/>
+<rect x="678.0" y="516" width="104.0" height="26" fill="#00D6A3"/>
+<rect x="886.0" y="516" width="104.0" height="26" fill="#00D6A3"/>
+<rect x="1094.0" y="516" width="104.0" height="26" fill="#00D6A3"/>
+<rect x="1302.0" y="516" width="104.0" height="26" fill="#00D6A3"/>
+<text x="60" y="614" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#BCB2A4" font-weight="400">DotDensity 12</text>
+<text x="300" y="614" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076" font-weight="400">周期 83 mm</text>
+<rect x="470" y="592" width="1040" height="26" rx="3" fill="#221E1B" stroke="#4A423B"/>
+<rect x="470.0" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="556.3" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="642.6" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="729.0" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="815.3" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="901.6" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="987.9" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="1074.2" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="1160.6" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="1246.9" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="1333.2" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<rect x="1419.5" y="592" width="43.2" height="26" fill="#00D6A3"/>
+<text x="60" y="690" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#FF7A5C" font-weight="400">DotDensity 140</text>
+<text x="300" y="690" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076" font-weight="400">周期 7 mm</text>
+<rect x="470" y="668" width="1040" height="26" rx="3" fill="#221E1B" stroke="#4A423B"/>
+<rect x="470.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="477.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="484.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="491.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="499.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="506.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="513.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="521.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="528.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="535.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="542.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="550.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="557.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="564.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="571.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="579.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="586.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="593.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="601.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="608.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="615.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="622.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="630.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="637.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="644.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="652.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="659.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="666.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="673.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="681.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="688.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="695.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="703.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="710.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="717.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="724.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="732.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="739.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="746.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="753.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="761.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="768.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="775.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="783.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="790.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="797.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="804.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="812.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="819.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="826.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="834.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="841.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="848.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="855.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="863.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="870.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="877.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="885.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="892.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="899.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="906.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="914.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="921.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="928.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="935.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="943.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="950.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="957.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="965.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="972.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="979.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="986.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="994.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1001.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1008.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1016.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1023.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1030.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1037.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1045.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1052.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1059.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1067.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1074.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1081.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1088.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1096.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1103.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1110.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1117.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1125.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1132.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1139.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1147.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1154.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1161.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1168.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1176.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1183.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1190.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1198.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1205.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1212.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1219.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1227.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1234.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1241.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1249.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1256.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1263.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1270.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1278.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1285.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1292.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1299.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1307.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1314.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1321.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1329.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1336.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1343.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1350.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1358.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1365.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1372.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1380.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1387.3" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1394.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1401.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1409.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1416.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1423.7" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1431.0" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1438.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1445.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1452.8" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1460.1" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1467.4" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1474.6" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1481.9" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1489.2" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<rect x="1496.5" y="668" width="3.6" height="26" fill="#FF7A5C"/>
+<text x="1526" y="687" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#FF7A5C" font-weight="400">点間隔より細かい → モアレ</text>
+<rect x="60" y="690" width="1480" height="74" rx="4" fill="#2A1C17" stroke="#FF7A5C" stroke-width="1.5"/>
+<rect x="60" y="690" width="4" height="74" fill="#FF7A5C"/>
+<text x="78" y="718" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">Resample Curve の 数 600（点間隔 ≒ 2.8 cm）が上限を決める。DotDensity は 12 くらいまで。</text>
+<text x="78" y="744" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">設計メモにあった「密度 100〜200」は 0〜1 の係数を使う前提の数字。メートルの arc に使うと干渉縞になる。</text>
+</svg>

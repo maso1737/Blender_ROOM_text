@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="880" viewBox="0 0 1600 880">
+<rect width="1600" height="880" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">09</tspan><tspan font-size="22" fill="#FFFFFF">  マテリアル</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">色は color_id、明るさは head と dot。2つを分けておくと後がラク。</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<g>
+<rect x="60" y="160" width="250" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 200 L60 168 Q60 160 68 160 L302 160 Q310 160 310 200 Z" fill="#8C3D50"/>
+<text x="76" y="187" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">属性</text>
+<circle cx="310" cy="217" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="296" y="222" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">係数</text>
+<rect x="70" y="238" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="254" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">color_id</text>
+</g>
+<g>
+<rect x="390" y="160" width="280" height="142" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M390 200 L390 168 Q390 160 398 160 L662 160 Q670 160 670 200 Z" fill="#36688F"/>
+<text x="406" y="187" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カラーランプ</text>
+<circle cx="670" cy="217" r="7" fill="#C7C729" stroke="#181513" stroke-width="2"/>
+<text x="656" y="222" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カラー</text>
+<circle cx="390" cy="217" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="404" y="222" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">係数</text>
+<rect x="400" y="238" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="410" y="254" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">一定（Constant）</text>
+<rect x="400" y="266" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="410" y="282" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">5色</text>
+</g>
+<g>
+<rect x="60" y="390" width="250" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 430 L60 398 Q60 390 68 390 L302 390 Q310 390 310 430 Z" fill="#8C3D50"/>
+<text x="76" y="417" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">属性</text>
+<circle cx="310" cy="447" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="296" y="452" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">係数</text>
+<rect x="70" y="468" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="484" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">head</text>
+</g>
+<g>
+<rect x="390" y="390" width="220" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M390 430 L390 398 Q390 390 398 390 L602 390 Q610 390 610 430 Z" fill="#36688F"/>
+<text x="406" y="417" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">累乗</text>
+<circle cx="610" cy="447" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="596" y="452" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="390" cy="447" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="404" y="452" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="400" y="468" width="200" height="22" rx="4" fill="#3A3430"/>
+<text x="410" y="484" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">2</text>
+</g>
+<g>
+<rect x="670" y="390" width="220" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M670 430 L670 398 Q670 390 678 390 L882 390 Q890 390 890 430 Z" fill="#36688F"/>
+<text x="686" y="417" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">乗算</text>
+<circle cx="890" cy="447" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="876" y="452" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="670" cy="447" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="684" y="452" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="680" y="468" width="200" height="22" rx="4" fill="#3A3430"/>
+<text x="690" y="484" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">× 55</text>
+</g>
+<g>
+<rect x="60" y="600" width="250" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 640 L60 608 Q60 600 68 600 L302 600 Q310 600 310 640 Z" fill="#8C3D50"/>
+<text x="76" y="627" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">属性</text>
+<circle cx="310" cy="657" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="296" y="662" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">係数</text>
+<rect x="70" y="678" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="694" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">dot</text>
+</g>
+<g>
+<rect x="390" y="600" width="220" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M390 640 L390 608 Q390 600 398 600 L602 600 Q610 600 610 640 Z" fill="#36688F"/>
+<text x="406" y="627" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">累乗</text>
+<circle cx="610" cy="657" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="596" y="662" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="390" cy="657" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="404" y="662" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="400" y="678" width="200" height="22" rx="4" fill="#3A3430"/>
+<text x="410" y="694" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">head の 4乗</text>
+</g>
+<g>
+<rect x="670" y="600" width="220" height="120" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M670 640 L670 608 Q670 600 678 600 L882 600 Q890 600 890 640 Z" fill="#36688F"/>
+<text x="686" y="627" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">最大値</text>
+<circle cx="890" cy="657" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="876" y="662" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="670" cy="657" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="684" y="662" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="670" cy="691" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="684" y="696" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+</g>
+<g>
+<rect x="950" y="490" width="200" height="120" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M950 530 L950 498 Q950 490 958 490 L1142 490 Q1150 490 1150 530 Z" fill="#36688F"/>
+<text x="966" y="517" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">乗算</text>
+<circle cx="1150" cy="547" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1136" y="552" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="950" cy="547" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="964" y="552" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<circle cx="950" cy="581" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="964" y="586" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+</g>
+<g>
+<rect x="1210" y="230" width="220" height="120" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M1210 270 L1210 238 Q1210 230 1218 230 L1422 230 Q1430 230 1430 270 Z" fill="#4B7A3F"/>
+<text x="1226" y="257" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">放射</text>
+<circle cx="1430" cy="287" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1416" y="292" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">放射</text>
+<circle cx="1210" cy="287" r="7" fill="#C7C729" stroke="#181513" stroke-width="2"/>
+<text x="1224" y="292" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カラー</text>
+<circle cx="1210" cy="321" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="1224" y="326" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">強さ</text>
+</g>
+<path d="M310 217 C348 217 352 217 390 217" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M670 217 C913 217 967 287 1210 287" fill="none" stroke="#C7C729" stroke-width="2.6"/>
+<path d="M310 447 C348 447 352 447 390 447" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M610 447 C648 447 632 447 670 447" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M890 447 C928 447 912 581 950 581" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M310 657 C472 657 508 691 670 691" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M610 657 C648 657 632 691 670 691" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M890 657 C928 657 912 581 950 581" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M1150 547 C1188 547 1172 321 1210 321" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+<text x="1210" y="400" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#BCB2A4" font-weight="400">色 = color_id → カラーランプ</text>
+<text x="1210" y="428" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#BCB2A4" font-weight="400">明るさ = head² × 55 ×</text>
+<text x="1210" y="452" text-anchor="start" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#FF9A3C" font-weight="400">　　　 Maximum(dot, head⁴)</text>
+<rect x="60" y="760" width="1100" height="74" rx="4" fill="#2A1C17" stroke="#FF7A5C" stroke-width="1.5"/>
+<rect x="60" y="760" width="4" height="74" fill="#FF7A5C"/>
+<text x="78" y="788" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">カラーランプの補間は「一定」。リニアだと色が混ざって「1本1色」にならない。</text>
+<text x="78" y="814" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">Maximum(dot, head⁴) がポイント。頭だけ点線の隙間が埋まってベタ光りになり、尾に向かって点線に戻る。</text>
+</svg>

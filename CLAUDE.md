@@ -60,3 +60,8 @@
   開けるようにしてある。`start.html` の「第1回からはじめる」ボタン下の
   「【期間限定‼】スペシャルTIPS公開中！」から誘導。
   元ファイルを更新したら手動でコピーし直す（自動同期はしていない）。
+- `special-tips-2/` … 第2弾。元は `Integrations/Blender/TSR_EL_UP_roll_light/`
+  （下から駆け上がる光の手順書 `roll-light-node-steps.html`、`node-diagrams/` の SVG10枚、
+  完成形 `UP_roll_light_04.blend`、完成形ショット `_look_f025.png` / `_look_f055.png` / `_step_rails.png`）。
+  同じく `start.html` の特典ボタン列に「【期間限定‼】スペシャルTIPS公開中！第2弾」として追加。
+  元プロジェクトの `_Archive/` / `_ref_sequence/`（参照連番）/ `CLAUDE.md` はコピー対象外。
