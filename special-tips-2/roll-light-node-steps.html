@@ -171,6 +171,50 @@ header .dgm{margin-top:28px}
 button{font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.08em; background:var(--panel-2); color:var(--ink); border:1px solid var(--rule-2); border-radius:2px; padding:7px 13px; cursor:pointer}
 button:hover{border-color:var(--amber); color:var(--amber-ink)}
 button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+
+.viewchk{
+  display:flex; gap:12px; align-items:flex-start; margin:10px 0 0; padding:11px 14px;
+  border:1px solid var(--rule-2); border-radius:2px; background:var(--panel-2); font-size:13.5px; color:var(--ink-2);
+}
+.viewchk b{color:var(--ink)}
+.gout{
+  display:flex; gap:12px; align-items:flex-start; margin:8px 0 0; padding:11px 14px;
+  border:1px solid var(--amber); border-radius:2px; background:var(--amber-wash);
+  font-size:13.5px; color:var(--ink);
+}
+.gout::before{
+  content:"つなぐ"; flex:none; font-family:"Zen Kaku Gothic New",sans-serif; font-size:10px;
+  color:#241A0C; background:var(--amber); border-radius:2px; padding:2px 6px; margin-top:3px; font-weight:700;
+}
+.gout b{font-weight:900}
+.viewchk::before{
+  content:"3D VIEW"; flex:none; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.12em;
+  color:var(--amber-ink); border:1px solid var(--amber); border-radius:2px; padding:2px 5px; margin-top:3px;
+}
+.nd em{font-style:normal; font-weight:400; color:var(--ink-3); font-size:11px; margin-left:2px}
+.body{min-width:0}
+@media (max-width:620px){
+  .nd{white-space:normal; align-items:flex-start}
+  .nd em{display:block; margin-left:0; line-height:1.4}
+  .nd::before{margin-top:6px}
+  .set > div{flex-direction:column; gap:2px}
+  .set dd{flex:1 1 auto; align-self:flex-start}
+}
+.newtag,.oldtag{
+  font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.1em; border-radius:9px;
+  padding:2px 7px; margin-left:6px; vertical-align:1px; white-space:nowrap;
+}
+.newtag{background:var(--amber); color:#241A0C; font-weight:700}
+.oldtag{background:var(--rule); color:var(--ink-2)}
+.namemap{margin-top:14px}
+.namemap summary{
+  cursor:pointer; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); list-style:none; padding:4px 0;
+}
+.namemap summary::-webkit-details-marker{display:none}
+.namemap summary::before{content:"\25B8"; color:var(--amber); margin-right:6px}
+.namemap[open] summary::before{content:"\25BE"}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
 </style>
 
@@ -183,6 +227,32 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
   <p style="margin-top:14px">
     <a href="UP_roll_light_04.blend" download style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:.04em; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)">⬇ 完成形 .blend（04のテイク）をダウンロード</a>
   </p>
+
+  <div class="note" style="margin-top:12px"><b>このページの読み方</b><br>
+    ノード名は <b>日本語UI の表記</b>で書いてあります（英語名は <em style="font-style:normal;color:var(--ink-3)">小さい灰色</em> で併記）。<br>
+    各ステップのノードには <span class="newtag">新規</span>（ここで足す）と <span class="oldtag">既存</span>（もう置いてある）を付けてあります。<b>図の中のノードにも同じバッジが付いています。</b><br>
+    <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--amber-ink);border:1px solid var(--amber);border-radius:2px;padding:1px 5px">3D VIEW</span> の行は「ここまでで画面がどうなっているか」です。合っていなければ、そのステップを見直してください。
+    <details class="namemap"><summary>日本語UI ↔ 英語 のノード名 早見表</summary>
+      <table class="attrs" style="margin-top:8px">
+        <tbody>
+          <tr><td>オブジェクト情報</td><td>Object Info</td><td>カーブリサンプル</td><td>Resample Curve</td></tr>
+          <tr><td>カーブ円</td><td>Curve Circle</td><td>ジオメトリ削除</td><td>Delete Geometry</td></tr>
+          <tr><td>ポイントインスタンス作成</td><td>Instance on Points</td><td>回転をベクトルに整列</td><td>Align Rotation to Vector</td></tr>
+          <tr><td>属性キャプチャ</td><td>Capture Attribute</td><td>インスタンス実体化</td><td>Realize Instances</td></tr>
+          <tr><td>スプラインパラメーター</td><td>Spline Parameter</td><td>カーブトリム</td><td>Trim Curve</td></tr>
+          <tr><td>名前付き属性格納</td><td>Store Named Attribute</td><td>範囲マッピング</td><td>Map Range</td></tr>
+          <tr><td>カーブのメッシュ化</td><td>Curve to Mesh</td><td>マテリアル設定</td><td>Set Material</td></tr>
+          <tr><td>ジオメトリ統合</td><td>Join Geometry</td><td>シーンタイム</td><td>Scene Time</td></tr>
+          <tr><td>ランダム値</td><td>Random Value</td><td>演算</td><td>Math</td></tr>
+          <tr><td>演算 ＞ 乗算</td><td>Multiply</td><td>演算 ＞ 加算</td><td>Add</td></tr>
+          <tr><td>演算 ＞ 減算</td><td>Subtract</td><td>演算 ＞ 小数部</td><td><b>Fraction</b>（Fract ではない）</td></tr>
+          <tr><td>演算 ＞ 大きい</td><td>Greater Than</td><td>演算 ＞ 累乗</td><td>Power</td></tr>
+          <tr><td>演算 ＞ 最大値</td><td>Maximum</td><td>カラーランプ</td><td>Color Ramp</td></tr>
+          <tr><td>放射</td><td>Emission</td><td>属性（マテリアル側）</td><td>Attribute</td></tr>
+        </tbody>
+      </table>
+    </details>
+  </div>
 
   <div class="toolbar">
     <div class="legend">
@@ -229,10 +299,20 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
           <div><dt>C のハンドル（下向き）</dt><dd>Z −3.2</dd></div>
           <div><dt>Cyclic（閉じる）</dt><dd>OFF</dd></div>
         </dl>
+        <p class="viewchk"><b>J 字のカーブが1本、横から見て見えていればOK。</b>この時点ではまだ1本だけです。</p>
         <div class="note bad"><b>垂直部はローカル X = 0 に置いてください。</b>02 で作る円（半径 <code>Radius</code>）の上に、ちょうど乗るようにするためです。
           <details class="why"><summary>ずれるとどうなる？</summary><div class="inner">レールの立ち上がりが円からはみ出して、円筒の壁がガタガタになります。X=0 に置いておけば、円をどれだけ大きくしても壁はまっすぐのままです。</div></details>
         </div>
-        <div class="note bad"><b>Cyclic は OFF。</b>閉じたカーブには <code>Trim Curve</code> が効きません。05 で光が動かなくなります。</div>
+        <div class="note bad"><b>★ 描く順番は「床 → 上端」。★</b>A（床）から描きはじめて、C（上端）で終わること。
+          <b>光はカーブの向きに沿って進みます。</b>逆向きに描くと、05 で <code>Speed</code> をマイナスにしないと上へ行かず、しかも<b>尻尾から先に上がる</b>という変な動きになります。
+          <details class="why"><summary>向きの確かめ方と、逆だったときの直し方</summary><div class="inner">
+            <b>確かめ方</b>：編集モードに入って、<b>いちばん床側の点</b>をクリック。サイドバー（<code>N</code>）の「アイテム」に出る番号が <b>0 番</b>なら正しい向きです。<br>
+            もっと確実なのは、オーバーレイの <b>カーブ → ノーマル</b> を ON。矢印が床から上へ向いていればOK。<br><br>
+            <b>直し方</b>：編集モードで <code>A</code>（全選択）→ メニューの <b>セグメント → 方向を反転</b>（英語UI：<code>Curve → Segments → Switch Direction</code>）。<br>
+            ノードで直すなら、02 のカーブリサンプルの後ろに <b>カーブ反転</b>（<code>Reverse Curve</code>）を1つ挟んでも同じです。
+          </div></details>
+        </div>
+        <div class="note bad"><b>Cyclic は OFF。</b>閉じたカーブには「カーブトリム」が効きません。05 で光が動かなくなります。</div>
         <div class="note"><b>A はカメラの画角の外まで伸ばします。</b>ループが一周して光が「湧く」瞬間はどうしても不自然なので、見えない場所で起こしてしまうのがコツです。</div>
         <div class="note"><b>形は好きに変えてOK。</b>B の X で裾の張り出し、C のハンドルの長さで裾のなだらかさが決まります。</div>
       </div>
@@ -247,46 +327,96 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
     <div class="num">02<small>GEO</small></div>
     <div class="body">
       <h2>円周に並べる</h2>
-      <p class="goal">空のメッシュにジオメトリノードを付けて、そこに J_Rail を呼び込みます。円の上に、外向きで立てて並べます。</p>
+      <p class="goal">空のメッシュを1つ置いて、ジオメトリノードのモディファイアを付けます。そこに J_Rail を呼び込んで、円の上に外向きで並べます。<b>このステップで足すノードは9個です。</b></p>
       <div class="recipe">
-        <p class="where">Geometry Nodes</p>
+        <div class="note bad" style="margin-bottom:6px"><b>★ 長さの単位に注意。★</b>
+          この手順書の長さは<b>全部メートル</b>です。シーンの単位設定が<b>センチメートル</b>になっていると、
+          <code>3.3 m</code> は入力欄に <b>330</b> と打つことになります。
+          <details class="why"><summary>なぜこうなるのか</summary><div class="inner">
+            Blender の内部の値はいつもメートルで、<b>表示だけ</b>が単位設定で変わります。<br>
+            シーンプロパティ → 単位 → <b>長さ</b> を見てください。「センチメートル」なら、この手順書の数値を<b>100倍して打つ</b>か、「メートル」に変えてください。<br>
+            舞台の実寸データを読み込んだファイルだとセンチ設定になっていることがよくあります。<b>半径 3.3 と打って何も見えないのは、たいていこれです（3.3cm の円になっている）。</b>
+          </div></details>
+        </div>
+        <div class="note bad" style="margin-bottom:6px"><b>★ ここを間違えると 02 が丸ごと動きません。★</b><br>
+          ジオメトリノードは <b>J_Rail に付けるのではありません。</b><b>新しい空のオブジェクトを1つ作って、そちらに付けます。</b>
+          <dl class="set" style="margin-top:8px">
+            <div><dt>① 追加 → メッシュ → 平面</dt><dd>原点に置く</dd></div>
+            <div><dt>② 名前を変える</dt><dd><b>RollLight</b></dd></div>
+            <div><dt>③ 編集モードで頂点を全部削除</dt><dd>中身は空でOK</dd></div>
+            <div><dt>④ RollLight にモディファイア</dt><dd>ジオメトリノード → 新規</dd></div>
+          </dl>
+          <b>この「RollLight」が、これ以降ずっと作業する対象です。</b>J_Rail は素材として参照されるだけで、もう直接は触りません。
+          <details class="why"><summary>J_Rail に付けるとこのエラーが出ます</summary><div class="inner">
+            <code>モディファイヤーオブジェクトからジオメトリを取得できません</code><br>
+            （英語UI：<code>Could not get geometry from modifier object</code>）<br><br>
+            オブジェクト情報ノードが指している J_Rail と、モディファイアが乗っている J_Rail が<b>同じオブジェクト</b>だからです。自分の結果を自分の材料にしようとして、Blender が計算を止めます。<b>グループ出力に繋いだ瞬間に消えるのはこれが原因です。</b><br>
+            すでに J_Rail に付けてしまった場合は、モディファイアを削除して、上の手順で作り直した RollLight に付け直してください。
+          </div></details>
+        </div>
+        <div class="note"><b>最初から「グループ入力」と「グループ出力」の2つが置いてあります。</b><span class="oldtag">既存</span><br>
+          グループ入力は<b>あとで使うパラメータの入口</b>なので、いまは何も繋がっていなくて正常です。<b>グループ出力に繋いだものだけが3Dビューに出ます。</b>
+        </div>
+
+        <p class="where" style="margin-top:14px">① レールを読み込む</p>
         <div class="flow">
-          <span class="nd" data-sk="geo">Object Info</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Resample Curve</span><i class="ar">→</i>
-          <span class="to">Instance on Points の <b>Instance</b> へ</span>
+          <span class="nd" data-sk="geo">オブジェクト情報<em>Object Info</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">カーブリサンプル<em>Resample Curve</em></span><span class="newtag">新規</span>
+        </div>
+        <p class="where" style="margin-top:14px">② 並べる土台の円をつくる</p>
+        <div class="flow">
+          <span class="nd" data-sk="geo">カーブ円<em>Curve Circle</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">ジオメトリ削除<em>Delete Geometry</em></span><span class="newtag">新規</span>
         </div>
         <div class="flow">
-          <span class="nd" data-sk="geo">Curve Circle</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Delete Geometry</span><i class="ar">→</i>
-          <span class="to">Instance on Points の <b>Points</b> へ</span>
+          <span class="nd" data-sk="int">インデックス<em>Index</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd">演算（大きい）<em>Math / Greater Than</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="to">ジオメトリ削除の <b>選択</b> へ</span>
         </div>
+        <p class="where" style="margin-top:14px">③ 外向きに立てる</p>
         <div class="flow">
-          <span class="nd" data-sk="vec">Position</span><i class="ar">→</i>
-          <span class="nd" data-sk="rot">Align Rotation to Vector</span><i class="ar">→</i>
-          <span class="to">Instance on Points の <b>Rotation</b> へ</span>
+          <span class="nd" data-sk="vec">位置<em>Position</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="rot">回転をベクトルに整列<em>Align Rotation to Vector</em></span><span class="newtag">新規</span>
+        </div>
+        <p class="where" style="margin-top:14px">④ 合流させて出力へ</p>
+        <div class="flow">
+          <span class="nd" data-sk="geo">ポイントインスタンス作成<em>Instance on Points</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">グループ出力<em>Group Output</em></span><span class="oldtag">既存</span>
         </div>
         <dl class="set">
-          <div><dt>Object Info / Object</dt><dd>J_Rail</dd></div>
-          <div><dt>Object Info / Transform Space</dt><dd>Original</dd></div>
-          <div><dt>Resample Curve / Count</dt><dd>600</dd></div>
-          <div><dt>Curve Circle / Resolution</dt><dd>60</dd></div>
-          <div><dt>Curve Circle / Radius</dt><dd>3.3</dd></div>
-          <div><dt>Align Rotation to Vector / Axis</dt><dd>X</dd></div>
-          <div><dt>Align Rotation to Vector / Pivot</dt><dd>Z</dd></div>
-          <div><dt>Delete Geometry / Domain</dt><dd>Point</dd></div>
-          <div><dt>Delete Geometry / Selection</dt><dd>Index &gt; Count</dd></div>
+          <div><dt>オブジェクト情報 / オブジェクト</dt><dd>J_Rail</dd></div>
+          <div><dt>オブジェクト情報 / 空間</dt><dd>オリジナル</dd></div>
+          <div><dt>カーブリサンプル / 数</dt><dd>600</dd></div>
+          <div><dt>カーブ円 / 解像度</dt><dd>60</dd></div>
+          <div><dt>カーブ円 / 半径</dt><dd>3.3</dd></div>
+          <div><dt>ジオメトリ削除 / ドメイン</dt><dd>ポイント</dd></div>
+          <div><dt>回転をベクトルに整列 / 軸</dt><dd>X</dd></div>
+          <div><dt>回転をベクトルに整列 / ピボット</dt><dd>Z</dd></div>
         </dl>
-        <div class="note bad"><b>Resample の Count は 600。</b>ここをケチると 07 の点線が解像せず、干渉縞（モアレ）になります。
+        <p class="where" style="margin-top:8px">つなぐ先</p>
+        <dl class="set">
+          <div><dt>カーブリサンプル の カーブ →</dt><dd>ポイントインスタンス作成 の <b>インスタンス</b></dd></div>
+          <div><dt>ジオメトリ削除 の ジオメトリ →</dt><dd>ポイントインスタンス作成 の <b>ポイント</b></dd></div>
+          <div><dt>回転をベクトルに整列 の 回転 →</dt><dd>ポイントインスタンス作成 の <b>回転</b></dd></div>
+          <div><dt>ポイントインスタンス作成 の インスタンス →</dt><dd>グループ出力 の <b>ジオメトリ</b></dd></div>
+        </dl>
+        <p class="gout">いま <b>ポイントインスタンス作成</b> の「インスタンス」を <b>グループ出力</b> の「ジオメトリ」へ。</p>
+        <p class="viewchk"><b>J 字のレールが円を描いて60本立ち、下が外へ広がったスカート状になります。</b>色は付いていない灰色のカーブのままでOK。<br>
+        何も出ない／消えるときは、上の★（モディファイアを付ける先）を確認してください。</p>
+        <div class="note bad"><b>【選択】は打ち込む欄ではありません。</b>ジオメトリ削除の「選択」に、<b>演算（大きい）から線を引いてきます。</b>
+          <details class="why"><summary>「Index &gt; Count」はどこに書くのか</summary><div class="inner">どこにも書きません。「インデックス」ノードを演算（大きい）の<b>上の値</b>に、Count を<b>下の値</b>に挿す——その<b>配線そのもの</b>が「Index &gt; Count」という意味です。<br>Count はまだ作っていないので、いまは下の値に <code>60</code> と直接打っておいても構いません（<a href="#sX1">拡張編</a>でパラメータ化します）。</div></details>
+        </div>
+        <div class="note bad"><b>本数をカーブ円の「解像度」で決めないでください。</b>60本つくっておいて、ジオメトリ削除で減らします。
+          <details class="why"><summary>なぜ遠回りするのか</summary><div class="inner">あとで「冒頭に一気に本数が増える」ワイプをやるときに、数値1つにキーを打つだけで済むからです。解像度を直接アニメーションさせると、増えるたびに全部のレールの位置が変わってしまいます（<a href="#sX1">拡張編</a>）。</div></details>
+        </div>
+        <div class="note bad"><b>カーブリサンプルの「数」は 600。</b>ここをケチると 07 の点線が解像せず、干渉縞（モアレ）になります。
           <details class="why"><summary>600 の根拠</summary><div class="inner">カーブ全長が約17mなので、600点なら点の間隔が約2.8cm。07 で作る点線の周期（既定20cm）に対して7点あるので、きれいに解像します。200点だと間隔8.5cmで、点線のほうが細かくなって破綻します。</div></details>
         </div>
-        <div class="note bad"><b>本数を Curve Circle の Resolution で決めないでください。</b>60本つくっておいて、<code>Index &gt; Count</code> の <code>Delete Geometry</code> で減らします。
-          <details class="why"><summary>なぜ遠回りするのか</summary><div class="inner">あとで「冒頭に一気に本数が増える」ワイプをやるときに、<code>Count</code> というただの数値にキーを打つだけで済むからです。Resolution を直接アニメーションさせると、増えるたびに全部のレールの位置が変わってしまいます（<a href="#sX1">拡張編</a>）。</div></details>
-        </div>
-        <div class="note"><b>Axis = X の意味。</b>01 で「床の走りをローカル +X」に描いたので、その +X が円の外側を向きます。Pivot = Z は「Z 軸まわりにだけ回す」＝レールが倒れない、という意味です。</div>
+        <div class="note"><b>軸 = X の意味。</b>01 で「床の走りをローカル +X」に描いたので、その +X が円の外側を向きます。ピボット = Z は「Z 軸まわりにだけ回す」＝レールが倒れない、という意味です。</div>
       </div>
       <figure class="dgm">
         <img src="node-diagrams/02_ring.svg" alt="STEP 02 のノード構成図" loading="lazy">
-        <figcaption>STEP 02 のノード構成 — <b>クリックで原寸</b></figcaption>
+        <figcaption>STEP 02 のノード構成 ／ オレンジ＝新規・破線＝既存 — <b>クリックで原寸</b></figcaption>
       </figure>
     </div>
   </section>
@@ -297,25 +427,28 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
       <h2>1本に1つの値を配る</h2>
       <p class="goal">「このレールは何色か」「どれくらい速いか」「どこからスタートするか」を、レール1本につき1つずつ決めます。<b>この手順書で一番大事な設計判断です。</b></p>
       <div class="recipe">
-        <p class="where">Instance on Points の <b>直後</b>（Realize より前）</p>
+        <p class="where">置き場所：ポイントインスタンス作成 の <b>すぐ後ろ</b></p>
         <div class="flow">
-          <span class="nd" data-sk="geo">Instance on Points</span><i class="ar">→</i>
-          <span class="nd">Capture Attribute</span>
+          <span class="nd" data-sk="geo">ポイントインスタンス作成<em>Instance on Points</em></span><span class="oldtag">既存</span><i class="ar">→</i>
+          <span class="nd">属性キャプチャ<em>Capture Attribute</em></span><span class="newtag">新規</span>
         </div>
         <div class="flow">
-          <span class="nd">Random Value</span><i class="ar">×3</i>
-          <span class="to">→ Capture Attribute の値入力へ</span>
+          <span class="nd">ランダム値<em>Random Value</em></span><span class="newtag">新規 ×3</span><i class="ar">→</i>
+          <span class="to">属性キャプチャの値入力へ</span>
         </div>
         <dl class="set">
-          <div><dt>Capture Attribute / <b>Domain</b></dt><dd>Instance</dd></div>
-          <div><dt>capture 1 ／ t_offset</dt><dd>Random 0.0 〜 1.0 ／ seed 11</dd></div>
-          <div><dt>capture 2 ／ speed_mul</dt><dd>Random 0.8 〜 1.2 ／ seed 22</dd></div>
-          <div><dt>capture 3 ／ color_id</dt><dd>Random 0.0 〜 1.0 ／ seed 33</dd></div>
+          <div><dt>属性キャプチャ / <b>ドメイン</b></dt><dd>インスタンス</dd></div>
+          <div><dt>項目1 ／ 名前 t_offset</dt><dd>ランダム値 0.0 〜 1.0 ／ シード 11</dd></div>
+          <div><dt>項目2 ／ 名前 speed_mul</dt><dd>ランダム値 0.8 〜 1.2 ／ シード 22</dd></div>
+          <div><dt>項目3 ／ 名前 color_id</dt><dd>ランダム値 0.0 〜 1.0 ／ シード 33</dd></div>
         </dl>
-        <div class="note bad"><b>Domain を <code>Instance</code> にしてください。</b>初期値の <code>Point</code> のままだと、<b>1本のレールの中で色が虹色にバラけます。</b>
-          <details class="why"><summary>なぜ Point だとバラけるのか</summary><div class="inner">次の 04 で <code>Realize Instances</code> を通すと、それまで「60本のインスタンス」だったものが「36万個の点」になります。Point ドメインで Random Value を引くと、その点ひとつひとつが別の乱数をもらってしまう。<br>Instance ドメインなら、まだ「60本」だった時点で値が決まるので、1本につき1つの値が保証されます。<br>捕まえた値はこのあと Realize と Trim を通り抜けて、最後まで届きます。</div></details>
+        <div class="note"><b>属性キャプチャは1個だけです。</b>その中に項目を3つ作ります（作り方は <a href="#s04">04</a> に書いてあります）。ランダム値ノードは3個必要です。</div>
+        <p class="gout"><b>属性キャプチャ</b> の「ジオメトリ」を <b>グループ出力</b> へ繋ぎ替える。<br>（ポイントインスタンス作成から直接繋いでいた線は、これで自動的に外れます）</p>
+        <p class="viewchk"><b>見た目は 02 のまま変わりません。</b>値を用意しただけで、まだ何にも使っていないからです。<b>ここは「変わらないのが正解」</b>です。</p>
+        <div class="note bad"><b>ドメインを <code>インスタンス</code> にしてください。</b>初期値の <code>ポイント</code> のままだと、<b>1本のレールの中で色が虹色にバラけます。</b>
+          <details class="why"><summary>なぜ「ポイント」だとバラけるのか</summary><div class="inner">次の 04 で「インスタンス実体化」を通すと、それまで「60本のインスタンス」だったものが「36万個の点」になります。ポイント・ドメインで乱数を引くと、その点ひとつひとつが別の乱数をもらってしまう。<br>インスタンス・ドメインなら、まだ「60本」だった時点で値が決まるので、1本につき1つの値が保証されます。<br>捕まえた値はこのあと実体化とトリムを通り抜けて、最後まで届きます。</div></details>
         </div>
-        <div class="note"><b>seed は好きな数字でOK。</b>3つとも違う数字にしてください。同じだと、速い球がいつも同じ色になります。</div>
+        <div class="note"><b>シードは好きな数字でOK。</b>3つとも違う数字にしてください。同じだと、速い球がいつも同じ色になります。</div>
       </div>
       <figure class="dgm">
         <img src="node-diagrams/03_capture.svg" alt="STEP 03 のノード構成図とドメインの違い" loading="lazy">
@@ -330,29 +463,38 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
       <h2>レール上の位置を先に覚えておく</h2>
       <p class="goal">実体化してから、「レールの根元から何メートルの地点か」を全部の点に覚えさせます。07 の点線をレールに貼り付けるための仕込みです。<b>やる順番が全てです。</b></p>
       <div class="recipe">
-        <p class="where">Capture Attribute（03）の <b>あと</b></p>
         <div class="flow">
-          <span class="nd" data-sk="geo">Realize Instances</span><i class="ar">→</i>
-          <span class="nd">Capture Attribute</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Trim Curve</span>
+          <span class="nd">属性キャプチャ<em>03 で置いたもの</em></span><span class="oldtag">既存</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">インスタンス実体化<em>Realize Instances</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd">属性キャプチャ<em>Capture Attribute</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">カーブトリム<em>Trim Curve</em></span><span class="newtag">新規</span>
         </div>
         <div class="flow">
-          <span class="nd">Spline Parameter</span><i class="ar">→</i>
-          <span class="to">Capture Attribute の値入力へ（<b>Length</b> を使う）</span>
+          <span class="nd">スプラインパラメーター<em>Spline Parameter</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="to">2つ目の属性キャプチャの値入力へ（<b>長さ</b> を使う）</span>
         </div>
         <dl class="set">
-          <div><dt>Capture Attribute / Domain</dt><dd>Point</dd></div>
-          <div><dt>capture ／ 名前</dt><dd>arc</dd></div>
-          <div><dt>Spline Parameter のどの出力か</dt><dd>Length（メートル）</dd></div>
+          <div><dt>2つ目の属性キャプチャ / ドメイン</dt><dd>ポイント</dd></div>
+          <div><dt>項目 ／ 名前</dt><dd>arc</dd></div>
+          <div><dt>スプラインパラメーターのどの出力か</dt><dd>長さ（メートル）</dd></div>
+          <div><dt>カーブトリム / モード</dt><dd>係数（Factor）</dd></div>
         </dl>
-        <div class="note bad"><b>この Capture は Trim の「前」に置きます。</b>Trim のあとだと、点線が光と一緒に滑っていってしまいます。
-          <details class="why"><summary>なぜ滑るのか</summary><div class="inner">Trim のあとの <code>Spline Parameter</code> は、切り取った光の区間で 0→1 に振り直されます。つまり「光の中での位置」になってしまう。それを使って点線を作ると、点線が光にくっついて動きます。<br>Trim の前に「レールの根元から何メートルか」を覚えておけば、Trim はその値を引き継ぐだけなので、点線はレールに貼り付いたまま動きません。LEDテープの上を光が通っていく、という絵にはこちらが必要です。</div></details>
+        <div class="note"><b>属性キャプチャの項目の作り方・名前の変え方</b><br>
+          ノードの上で <b>＋ボタン</b>（項目リストの右）を押すと <code>Value</code> という項目が1つ増えます。<br>
+          <b>その項目名をダブルクリック</b>すると書き換えられます。ここを <code>arc</code> にしてください。<br>
+          リストが見えないときは <code>N</code> キーでサイドバーを開き、<b>アイテム → ノード</b> を見てください。
+          <details class="why"><summary>名前を間違えるとどうなる？</summary><div class="inner">この名前はノードの内部だけで使われる目印です。07 で「どの出力を使うか」を目で探すときに困るだけなので、綴りが違っても動きます。ただし迷子になるので合わせておくのが無難です。</div></details>
         </div>
-        <div class="note bad"><b>Realize Instances は Trim より前。</b>Realize しないと、60本が同じカーブデータを参照したままなので、<b>全部のレールが一斉に光ります。</b></div>
+        <p class="gout"><b>カーブトリム</b> の「カーブ」を <b>グループ出力</b> へ繋ぎ替える。</p>
+        <p class="viewchk"><b>レールが短い線の集まりに切り詰められます。</b>カーブトリムを入れた瞬間、レールの一部しか残らなくなるのが正解です（まだ動きません）。</p>
+        <div class="note bad"><b>この属性キャプチャはカーブトリムの「前」に置きます。</b>後だと、点線が光と一緒に滑っていってしまいます。
+          <details class="why"><summary>なぜ滑るのか</summary><div class="inner">トリムのあとのスプラインパラメーターは、切り取った光の区間で 0→1 に振り直されます。つまり「光の中での位置」になってしまう。それを使って点線を作ると、点線が光にくっついて動きます。<br>トリムの前に「レールの根元から何メートルか」を覚えておけば、トリムはその値を引き継ぐだけなので、点線はレールに貼り付いたまま動きません。</div></details>
+        </div>
+        <div class="note bad"><b>インスタンス実体化はカーブトリムより前。</b>実体化しないと、60本が同じカーブデータを参照したままなので、<b>全部のレールが一斉に光ります。</b></div>
       </div>
       <figure class="dgm">
         <img src="node-diagrams/04_arc.svg" alt="STEP 04 のノード構成図" loading="lazy">
-        <figcaption>STEP 04 ／ Trim の前で捕まえる — <b>クリックで原寸</b></figcaption>
+        <figcaption>STEP 04 ／ トリムの前で捕まえる — <b>クリックで原寸</b></figcaption>
       </figure>
     </div>
   </section>
@@ -361,33 +503,55 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
     <div class="num">05<small>GEO</small></div>
     <div class="body">
       <h2>光を走らせる</h2>
-      <p class="goal">ここで動きます。フレーム番号から「いま頭がどこか」を計算して、レールのその区間だけを切り取ります。キーフレームは打ちません。</p>
+      <p class="goal">ここで動きます。フレーム番号から「いま頭がどこか」を計算して、レールのその区間だけを切り取ります。キーフレームは打ちません。<b>演算ノードを5個つなぎます。</b></p>
       <div class="recipe">
-        <p class="where">Geometry Nodes</p>
         <div class="flow">
-          <span class="nd">Scene Time</span><i class="ar">→</i>
-          <span class="nd">Math</span><i class="ar">→</i>
-          <span class="nd">Math</span><i class="ar">→</i>
-          <span class="nd">Math</span><i class="ar">→</i>
-          <span class="nd">Math (Fract)</span>
+          <span class="nd" data-sk="geo">シーンタイム<em>Scene Time</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd">演算（乗算）<em>Multiply</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd">演算（乗算）<em>Multiply</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd">演算（加算）<em>Add</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd">演算（小数部）<em>Fraction</em></span><span class="newtag">新規</span>
+        </div>
+        <div class="flow">
+          <span class="nd">演算（減算）<em>Subtract</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="to">カーブトリムの <b>開始</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd" data-sk="geo">カーブトリム<em>04 で置いたもの</em></span><span class="oldtag">既存</span>
+          <span class="to">新しく出すのではなく、04 のものにつなぎます</span>
         </div>
         <dl class="set">
-          <div><dt>Scene Time のどの出力か</dt><dd>Frame</dd></div>
-          <div><dt>Math ① Multiply</dt><dd>× Speed（0.010）</dd></div>
-          <div><dt>Math ② Multiply</dt><dd>× speed_mul（03）</dd></div>
-          <div><dt>Math ③ Add</dt><dd>＋ t_offset（03）</dd></div>
-          <div><dt>Math ④</dt><dd>Fract</dd></div>
-          <div><dt>Trim Curve / Mode</dt><dd>Factor</dd></div>
-          <div><dt>Trim Curve / Start</dt><dd>head − Tail</dd></div>
-          <div><dt>Trim Curve / End</dt><dd>head</dd></div>
+          <div><dt>シーンタイムのどの出力か</dt><dd>フレーム</dd></div>
+          <div><dt>演算① 乗算 ／ 値 下</dt><dd>0.010（Speed）</dd></div>
+          <div><dt>演算② 乗算 ／ 値 下</dt><dd>03 の speed_mul</dd></div>
+          <div><dt>演算③ 加算 ／ 値 下</dt><dd>03 の t_offset</dd></div>
+          <div><dt>演算④</dt><dd>小数部（Fraction）</dd></div>
+          <div><dt>演算⑤ 減算 ／ 値 上</dt><dd>小数部の出力</dd></div>
+          <div><dt>演算⑤ 減算 ／ 値 下</dt><dd>0.09（Tail）</dd></div>
+          <div><dt>カーブトリム / 開始</dt><dd>減算の出力</dd></div>
+          <div><dt>カーブトリム / 終了</dt><dd>小数部の出力</dd></div>
         </dl>
-        <div class="note bad"><b><code>Modulo</code> ではなく <code>Fract</code>。</b>Blender の Modulo は負の値で符号が残るので、ループの一部だけ挙動が変わります。</div>
-        <div class="note"><b>Frame を使うと <code>Speed</code> が「1フレームで進む割合」になります。</b>0.010 なら 100 フレームで 1 周。尺に合わせて決められるので分かりやすいです。</div>
-        <div class="note"><b>head − Tail が負になる瞬間</b>は Trim が 0 でクランプして頭が潰れます。01 で始点をカメラの外へ伸ばしてあるので、そこは見えません。</div>
+        <div class="note bad"><b>名前は「小数部」です。</b>英語UIでは <code>Fraction</code>。<b><code>Fract</code> という項目はありません。</b>演算ノードのドロップダウンの中ほどにあります。</div>
+        <div class="note bad"><b>上下どちらに挿すかは、ノードによって違います。</b>
+          <table class="attrs" style="margin-top:8px">
+            <tbody>
+              <tr><td>乗算・加算・最大値</td><td colspan="3">上下どちらでも同じ結果。気にしなくてOK</td></tr>
+              <tr class="warn"><td>減算・累乗・大きい</td><td colspan="3"><b>順番に意味がある。</b>必ず 値 上 ＝ 引かれる側／底／比べる値</td></tr>
+            </tbody>
+          </table>
+          この 05 では <b>減算だけ</b>注意してください。値 上 ＝ 小数部の出力、値 下 ＝ 0.09 です。逆にすると光が裏返ります。
+        </div>
+        <p class="gout"><b>グループ出力は 04 のまま（カーブトリム）</b>。繋ぎ替えは不要です。</p>
+        <p class="viewchk"><b>再生（スペースキー）すると、短い光の区間が下から上へ流れます。</b>1本ごとにタイミングと速さがバラバラなら成功。まだ細さも点線も色もありません。</p>
+        <div class="note bad"><b><code>Speed</code> をマイナスにしないと上へ行かないときは、01 のカーブの向きが逆です。</b>
+          マイナスにすれば上へは行きますが、<b>頭と尻尾が入れ替わって尻尾から上がってしまいます</b>（トリムの「終了」側が頭なので）。
+          符号でごまかさず、<a href="#s01">01 でカーブの向きを反転</a>してください。</div>
+        <div class="note"><b>フレームを使うと Speed が「1フレームで進む割合」になります。</b>0.010 なら 100 フレームで 1 周。尺に合わせて決められるので分かりやすいです。</div>
+        <div class="note"><b>head − Tail が負になる瞬間</b>はトリムが 0 でクランプして頭が潰れます。01 で始点をカメラの外へ伸ばしてあるので、そこは見えません。</div>
       </div>
       <figure class="dgm">
         <img src="node-diagrams/05_trim.svg" alt="STEP 05 のノード構成図" loading="lazy">
-        <figcaption>STEP 05 ／ head の計算式と Trim — <b>クリックで原寸</b></figcaption>
+        <figcaption>STEP 05 ／ head の計算式とトリム — <b>クリックで原寸</b></figcaption>
       </figure>
     </div>
   </section>
@@ -398,27 +562,46 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
       <h2>頭を太く、尾を細く</h2>
       <p class="goal">切り取った区間を筒にします。このとき頭から尾に向かって細くすると、一気に「光の玉が走っている」ように見えます。</p>
       <div class="recipe">
-        <p class="where">Trim Curve の <b>あと</b></p>
         <div class="flow">
-          <span class="nd">Spline Parameter</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Store Named Attribute</span>
-          <span class="to">／ <b>Factor</b> を使う</span>
+          <span class="nd" data-sk="geo">カーブトリム<em>04 で置いたもの</em></span><span class="oldtag">既存</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">名前付き属性格納<em>Store Named Attribute</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">カーブのメッシュ化<em>Curve to Mesh</em></span><span class="newtag">新規</span>
         </div>
         <div class="flow">
-          <span class="nd">Spline Parameter</span><i class="ar">→</i>
-          <span class="nd">Map Range</span><i class="ar">→</i>
-          <span class="to">Curve to Mesh の <b>Scale</b> へ</span>
+          <span class="nd">スプラインパラメーター<em>Spline Parameter</em></span><span class="newtag">新規（2つ目）</span><i class="ar">→</i>
+          <span class="to">名前付き属性格納の <b>値</b>／範囲マッピングの <b>値</b> へ（<b>係数</b> を使う）</span>
+        </div>
+        <div class="flow">
+          <span class="nd">範囲マッピング<em>Map Range</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="to">カーブのメッシュ化の <b>スケール</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd" data-sk="geo">カーブ円<em>Curve Circle</em></span><span class="newtag">新規（2つ目）</span><i class="ar">→</i>
+          <span class="to">カーブのメッシュ化の <b>断面カーブ</b> へ</span>
         </div>
         <dl class="set">
-          <div><dt>Store / Name</dt><dd>head</dd></div>
-          <div><dt>Store / Data Type, Domain</dt><dd>Float / Point</dd></div>
-          <div><dt>Map Range / From</dt><dd>0 → 1</dd></div>
-          <div><dt>Map Range / To</dt><dd>0.25 → 1.0</dd></div>
-          <div><dt>Curve to Mesh / Profile</dt><dd>Curve Circle（Resolution 8）</dd></div>
-          <div><dt>Curve Circle / Radius</dt><dd>0.07（Thickness）</dd></div>
+          <div><dt>名前付き属性格納 / 名前</dt><dd>head</dd></div>
+          <div><dt>名前付き属性格納 / 型・ドメイン</dt><dd>Float / ポイント</dd></div>
+          <div><dt>範囲マッピング / 最小から・最大から</dt><dd>0 ／ 1</dd></div>
+          <div><dt>範囲マッピング / 最小へ・最大へ</dt><dd>0.25 ／ 1.0</dd></div>
+          <div><dt>カーブ円（2つ目）/ 解像度</dt><dd>8</dd></div>
+          <div><dt>カーブ円（2つ目）/ 半径</dt><dd>0.07（Thickness）</dd></div>
         </dl>
-        <div class="note"><b>今度は Trim の「あと」の Spline Parameter を使います。</b>04 では邪魔だった「振り直し」を、ここでは逆に利用します。切り取った区間の中で <b>尾が 0、頭が 1</b> になるので、そのまま太さと明るさに配れます。</div>
-        <div class="note bad"><b>太さは <code>Curve to Mesh</code> の <code>Scale</code> 入力で。</b>5.x は <code>Set Curve Radius</code> の半径属性を暗黙には見てくれません。太さが変わらないときはここです。</div>
+        <div class="note bad"><b>名前付き属性格納は、ここで <u>3つ</u> 数珠つなぎにします。</b>08 のマテリアルが <code>color_id</code> も読むからです。<br>
+          <code>カーブトリム → head → color_id → arc → カーブのメッシュ化</code>
+          <dl class="set" style="margin-top:8px">
+            <div><dt>1つ目 / 名前</dt><dd>head　←　スプラインパラメーターの 係数</dd></div>
+            <div><dt>2つ目 / 名前</dt><dd>color_id　←　<b>03 の属性キャプチャの color_id 出力</b></dd></div>
+            <div><dt>3つ目 / 名前</dt><dd>arc　←　<b>04 の属性キャプチャの arc 出力</b></dd></div>
+          </dl>
+          3つとも Float / ポイント。<b>07 でここにもう1つ（dot）を足して4つになります。</b>
+          <details class="why"><summary>なぜ色の値をここでも格納するのか</summary><div class="inner">03・04 で「キャプチャ」した値は、ノードの中だけを流れる一時的な値です。マテリアルの「属性」ノードから読むには、<b>メッシュに名前を付けて焼き付ける</b>必要があります。それが名前付き属性格納の役目です。<br>09 のレール側でも同じ3つ（＋dot）を格納します。枝が分かれているので、両方に必要です。</div></details>
+        </div>
+        <div class="note"><b>カーブ円は 02 のものとは別に、もう1つ新しく出します。</b>02 のは「並べる土台の円」、こちらは「筒の断面の円」です。役割がまったく違います。</div>
+        <div class="note"><b>スプラインパラメーターも 04 とは別に、もう1つ出します。</b>04 のはトリムの前、こちらはトリムの後ろ。<b>置く場所が違うと値の意味が変わる</b>のがこのノードの特徴です。切り取った区間の中で <b>尾が 0、頭が 1</b> になります。</div>
+        <p class="gout"><b>カーブのメッシュ化</b> の「メッシュ」を <b>グループ出力</b> へ繋ぎ替える。</p>
+        <p class="viewchk"><b>光が「筒」になり、頭が太く尾が細いしずく型になります。</b>ここで一気に彗星らしくなります。色はまだ灰色です。</p>
+        <div class="note bad"><b>太さは「カーブのメッシュ化」の <code>スケール</code> 入力で。</b>5.x は Set Curve Radius の半径属性を暗黙には見てくれません。太さが変わらないときはここです。</div>
       </div>
       <figure class="dgm">
         <img src="node-diagrams/06_taper.svg" alt="STEP 06 のノード構成図" loading="lazy">
@@ -433,21 +616,31 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
       <h2>点線にする</h2>
       <p class="goal">ベタ塗りの光ではなく、LEDテープのような粒々にします。04 で覚えておいた <code>arc</code> をここで使います。</p>
       <div class="recipe">
-        <p class="where">Geometry Nodes</p>
+        <div class="note"><b><code>arc</code> というノードはありません。</b>04 で置いた<b>属性キャプチャの「arc」出力ソケット</b>から線を引いてくる、という意味です。<span class="oldtag">既存</span></div>
         <div class="flow">
-          <span class="nd">arc</span><i class="ar">→</i>
-          <span class="nd">Math (Multiply)</span><i class="ar">→</i>
-          <span class="nd">Math (Fract)</span><i class="ar">→</i>
-          <span class="nd">Math (Greater Than)</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Store Named Attribute</span>
+          <span class="nd">属性キャプチャ の arc 出力<em>04 で置いたもの</em></span><span class="oldtag">既存</span><i class="ar">→</i>
+          <span class="nd">演算（乗算）<em>Multiply</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd">演算（小数部）<em>Fraction</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd">演算（大きい）<em>Greater Than</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">名前付き属性格納<em>Store Named Attribute</em></span><span class="newtag">新規（2つ目）</span>
         </div>
         <dl class="set">
-          <div><dt>Multiply</dt><dd>× DotDensity（5.0）</dd></div>
-          <div><dt>Greater Than / しきい値</dt><dd>0.5</dd></div>
-          <div><dt>Store / Name</dt><dd>dot</dd></div>
+          <div><dt>演算（乗算）/ 値 上</dt><dd>属性キャプチャの arc</dd></div>
+          <div><dt>演算（乗算）/ 値 下</dt><dd>5.0（DotDensity）を直接打つ</dd></div>
+          <div><dt>演算（大きい）/ 値 下</dt><dd>0.5 を直接打つ</dd></div>
+          <div><dt>名前付き属性格納 / 名前</dt><dd>dot</dd></div>
+          <div><dt>名前付き属性格納 / 型・ドメイン</dt><dd>Float / ポイント</dd></div>
+          <div><dt>置く場所</dt><dd><b>06 の鎖のいちばん後ろ</b></dd></div>
         </dl>
-        <div class="note bad"><b><code>DotDensity</code> の単位は「1メートルあたりの本数」です。</b>周期 = 1 ÷ DotDensity。5 なら 20cm おき。
-          <details class="why"><summary>大きい数字を入れると壊れます</summary><div class="inner">04 で捕まえた <code>arc</code> は <code>Spline Parameter</code> の <b>Length</b>、つまりメートルの値です。0〜1 の割合ではありません。<br>ここに 140 のような数字を入れると周期が 7mm になり、02 の Resample の点間隔（2.8cm）より細かくなって、点線ではなく干渉縞（モアレ）が出ます。<b>実用上の上限は 12 くらい</b>です。</div></details>
+        <div class="note bad"><b>この格納ノードは、06 の鎖の <u>4つ目</u> として足します。</b><br>
+          <code>カーブトリム → head → color_id → arc → <b>dot</b> → カーブのメッシュ化</code><br>
+          06 で <code>arc</code> → カーブのメッシュ化 に繋いでいた線を、<b>dot を間に挟んで繋ぎ直します。</b></div>
+        <div class="note"><b>「× DotDensity（5.0）」の意味。</b>乗算ノードの<b>下の値の欄に 5.0 と打つ</b>だけです。<br>
+          DotDensity というのは<b>この数値につけた呼び名</b>で、<a href="#sX1">拡張編</a>でグループ入力に出してスライダーにすると、その名前で表示されます。いまは直接打って構いません。</div>
+        <p class="gout"><b>グループ出力は 06 のまま（カーブのメッシュ化）</b>。繋ぎ替えは不要です。</p>
+        <p class="viewchk"><b>この時点ではまだ見た目は変わりません。</b>点線の値を作って格納しただけで、使うのは 08 のマテリアルです。<b>ここも「変わらないのが正解」。</b></p>
+        <div class="note bad"><b><code>DotDensity</code> の単位は「1メートルあたりの本数」です。</b>周期 = 1 ÷ 数値。5 なら 20cm おき。
+          <details class="why"><summary>大きい数字を入れると壊れます</summary><div class="inner">04 で捕まえた <code>arc</code> はスプラインパラメーターの <b>長さ</b>、つまりメートルの値です。0〜1 の割合ではありません。<br>ここに 140 のような数字を入れると周期が 7mm になり、02 のリサンプルの点間隔（2.8cm）より細かくなって、点線ではなく干渉縞（モアレ）が出ます。<b>実用上の上限は 12 くらい</b>です。</div></details>
         </div>
         <div class="note"><b>しきい値 0.5 は「点と隙間が半々」という意味です。</b>0.7 にすると点が短く、0.3 にすると点が長くなります。</div>
       </div>
@@ -459,76 +652,127 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
   </section>
 
   <section class="step" id="s08">
-    <div class="num">08<small>GEO</small></div>
+    <div class="num">08<small>MAT</small></div>
     <div class="body">
-      <h2>レールをうっすら出す</h2>
-      <p class="goal">光が走る「道」も、かすかに見えているほうがそれらしくなります。Trim していない全長を、細く暗くもう1本描いて合流させます。</p>
+      <h2>マテリアルを2枚つくる</h2>
+      <p class="goal">彗星用とレール用。どちらも「放射」ノード1つだけのシンプルな構成です。<b>09 の「マテリアル設定」で選べるのは、ここで作っておいたマテリアルだけ</b>なので、先にこちらをやります。</p>
       <div class="recipe">
-        <p class="where">04 の Capture Attribute から枝分かれ</p>
+        <p class="where">マテリアルプロパティ → 新規 → 名前を <b>M_Comet</b> ／ もう1枚 <b>M_Rail</b></p>
+        <div class="note"><b>作り方。</b>3Dビューで <b>RollLight</b>（02 で作った、ジオメトリノードが乗っているオブジェクト。<b>J_Rail ではありません</b>）を選び、マテリアルプロパティの ＋ で2枚作ります。編集は <b>Shading タブ</b>（または シェーダーエディター）で行います。<br>
+          初期状態の「プリンシプルBSDF」は<b>消して</b>、代わりに「放射」を置いてください。</div>
+
+        <p class="where" style="margin-top:16px">M_Comet ／ 色の線</p>
         <div class="flow">
-          <span class="nd">Capture (arc)</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Store Named Attribute ×3</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Curve to Mesh</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Set Material</span><i class="ar">→</i>
-          <span class="nd" data-sk="geo">Join Geometry</span>
+          <span class="nd mat" data-sk="col">属性<em>Attribute</em></span><span class="newtag">新規</span>
+          <span class="to">名前 <b>color_id</b></span><i class="ar">→</i>
+          <span class="nd mat" data-sk="col">カラーランプ<em>Color Ramp</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="to">放射の <b>カラー</b> へ</span>
+        </div>
+        <p class="where" style="margin-top:12px">M_Comet ／ 明るさの線</p>
+        <div class="flow">
+          <span class="nd mat">属性<em>head</em></span><i class="ar">→</i>
+          <span class="nd mat">演算（累乗）<em>Power</em></span><i class="ar">→</i>
+          <span class="nd mat">演算（乗算）<em>Multiply</em></span><i class="ar">→</i>
+          <span class="to">最後の乗算の <b>値 上</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd mat">属性<em>dot</em></span><i class="ar">→</i>
+          <span class="nd mat">演算（最大値）<em>Maximum</em></span><i class="ar">→</i>
+          <span class="to">最後の乗算の <b>値 下</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd mat">属性<em>head</em></span><i class="ar">→</i>
+          <span class="nd mat">演算（累乗）<em>Power</em></span><i class="ar">→</i>
+          <span class="to">最大値の <b>値 下</b> へ</span>
         </div>
         <dl class="set">
-          <div><dt>Store する属性</dt><dd>color_id / arc / dot</dd></div>
-          <div><dt>Profile / Resolution</dt><dd>6</dd></div>
-          <div><dt>Profile / Radius</dt><dd>0.016（RailThick）</dd></div>
-          <div><dt>Set Material</dt><dd>M_Rail</dd></div>
+          <div><dt>属性ノード / 型</dt><dd>ジオメトリ（初期値のまま）</dd></div>
+          <div><dt>カラーランプ / 補間</dt><dd><b>一定</b>（Constant）</dd></div>
+          <div><dt>カラーランプ / 色</dt><dd>マゼンタ・シアン・イエロー・青・紫</dd></div>
+          <div><dt>累乗①（head の）/ 値 下</dt><dd>2</dd></div>
+          <div><dt>乗算（head の）/ 値 下</dt><dd>55</dd></div>
+          <div><dt>累乗②（head の）/ 値 下</dt><dd>4</dd></div>
+          <div><dt>最後の乗算 →</dt><dd>放射の <b>強さ</b></dd></div>
         </dl>
-        <div class="note"><b>彗星の枝とレールの枝を <code>Join Geometry</code> で合流させます。</b>マテリアルはそれぞれの枝で <code>Set Material</code> しておけば、1つのオブジェクトに2枚のマテリアルが乗ります。</div>
-      </div>
-      <div class="shots" style="grid-template-columns:1fr">
-        <figure><img src="_step_rails.png" alt="レールだけを明るくした状態"><figcaption>レールだけを明るくしてみたところ。この上を光が走る — クリックで原寸</figcaption></figure>
+        <div class="note bad"><b>1つのソケットに2本は挿せません。</b>最後の乗算には<b>入力が2つ</b>あります。<br>
+          <b>値 上</b> ← 乗算（×55）の出力／<b>値 下</b> ← 最大値の出力。<b>別々のソケット</b>です。
+          <details class="why"><summary>属性ノードは3つ？ 4つ？</summary><div class="inner">属性ノードは <code>color_id</code> / <code>head</code> / <code>dot</code> の<b>3つ</b>です。<code>head</code> の属性ノードは1つでよく、その出力から<b>2本に枝分かれ</b>させて累乗①と累乗②の両方に挿します。<b>出力から2本出すのはOK</b>（入力に2本挿すのがNG）。</div></details>
+        </div>
+        <div class="note bad"><b>カラーランプの補間は <code>一定</code>。</b>リニアのままだと色が混ざって「1本1色」になりません。</div>
+        <div class="note bad"><b>最大値（dot と head の4乗）がこのステップの肝です。</b>頭のところだけ点線の隙間が埋まって<b>ベタ光り</b>になり、尾に向かって点線に戻ります。
+          <details class="why"><summary>これが無いとどうなるか</summary><div class="inner">光が点線に食われて、画面全体が「ただの破線の壁」に見えます。頭がベタ光りになることで初めて「玉が走っている」と読めるようになります。head の4乗は「頭のごく近くだけ 1 に近づく」カーブです。</div></details>
+        </div>
       </div>
       <figure class="dgm">
-        <img src="node-diagrams/08_rail.svg" alt="STEP 08 のノード構成図" loading="lazy">
-        <figcaption>STEP 08 のノード構成 — <b>クリックで原寸</b></figcaption>
+        <img src="node-diagrams/08_material.svg" alt="M_Comet のマテリアル構成図" loading="lazy">
+        <figcaption>M_COMET ／ 色と明るさを分ける — <b>クリックで原寸</b></figcaption>
+      </figure>
+
+      <div class="recipe" style="margin-top:22px">
+        <p class="where">M_Rail ／ head を使わないだけ</p>
+        <div class="flow">
+          <span class="nd mat">値<em>Value</em></span><span class="newtag">新規</span>
+          <span class="to"><b>0.08</b> と打つ</span><i class="ar">→</i>
+          <span class="nd mat">演算（乗算）<em>Multiply</em></span><i class="ar">→</i>
+          <span class="to">放射の <b>強さ</b> へ</span>
+        </div>
+        <div class="flow">
+          <span class="nd mat">属性<em>dot</em></span><i class="ar">→</i>
+          <span class="to">乗算の <b>値 下</b> へ</span>
+        </div>
+        <dl class="set">
+          <div><dt>色の線</dt><dd>M_Comet と<b>まったく同じ</b>（color_id → カラーランプ）</dd></div>
+          <div><dt>値ノード</dt><dd>0.08</dd></div>
+          <div><dt>使わないもの</dt><dd>head の枝は<b>丸ごと不要</b></dd></div>
+        </dl>
+        <div class="note"><b>M_Comet を複製（<code>Shift+D</code>）して作るのが早いです。</b>マテリアルプロパティの複製ボタンで M_Comet をコピーし、名前を M_Rail に変えて、head の枝（累乗・乗算・最大値）を消して「値 0.08」に差し替えます。</div>
+      </div>
+      <figure class="dgm">
+        <img src="node-diagrams/08b_rail_material.svg" alt="M_Rail のマテリアル構成図" loading="lazy">
+        <figcaption>M_RAIL ／ 値 0.08 × dot だけ — <b>クリックで原寸</b></figcaption>
       </figure>
     </div>
   </section>
 
   <section class="step" id="s09">
-    <div class="num">09<small>MAT</small></div>
+    <div class="num">09<small>GEO</small></div>
     <div class="body">
-      <h2>色と明るさをつける</h2>
-      <p class="goal">マテリアルは2枚。彗星用とレール用です。<b>色は <code>color_id</code>、明るさは <code>head</code> と <code>dot</code></b> と役割を分けておくと、あとの調整がラクです。</p>
+      <h2>レールをうっすら出す</h2>
+      <p class="goal">光が走る「道」も、かすかに見えているほうがそれらしくなります。トリムしていない全長を、細く暗くもう1本描いて合流させます。</p>
       <div class="recipe">
-        <p class="where">Shading ／ M_Comet</p>
+        <p class="where">04 の属性キャプチャ（2つ目）から<b>枝分かれ</b>させる</p>
         <div class="flow">
-          <span class="nd mat" data-sk="col">Attribute (color_id)</span><i class="ar">→</i>
-          <span class="nd mat" data-sk="col">Color Ramp</span><i class="ar">→</i>
-          <span class="to">Emission の <b>Color</b> へ</span>
+          <span class="nd">属性キャプチャ<em>04 で置いたもの</em></span><span class="oldtag">既存</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">名前付き属性格納 ×3<em>Store Named Attribute</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">カーブのメッシュ化<em>Curve to Mesh</em></span><span class="newtag">新規（2つ目）</span>
         </div>
         <div class="flow">
-          <span class="nd mat">Attribute (head)</span><i class="ar">→</i>
-          <span class="nd mat">Power 2</span><i class="ar">→</i>
-          <span class="nd mat">× 55</span><i class="ar">→</i>
-          <span class="nd mat">Multiply</span><i class="ar">→</i>
-          <span class="to">Emission の <b>Strength</b> へ</span>
+          <span class="nd" data-sk="geo">カーブ円<em>Curve Circle</em></span><span class="newtag">新規（3つ目）</span><i class="ar">→</i>
+          <span class="to">カーブのメッシュ化（2つ目）の <b>断面カーブ</b> へ</span>
         </div>
         <div class="flow">
-          <span class="nd mat">Attribute (dot)</span><i class="ar">→</i>
-          <span class="nd mat">Maximum</span><i class="ar">→</i>
-          <span class="to">↑ の Multiply のもう片方へ（もう一方の入力は <b>head の4乗</b>）</span>
+          <span class="nd" data-sk="geo">マテリアル設定<em>Set Material</em></span><span class="newtag">新規 ×2</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">ジオメトリ統合<em>Join Geometry</em></span><span class="newtag">新規</span><i class="ar">→</i>
+          <span class="nd" data-sk="geo">グループ出力<em>Group Output</em></span><span class="oldtag">既存</span>
         </div>
         <dl class="set">
-          <div><dt>Color Ramp / Interpolation</dt><dd>Constant</dd></div>
-          <div><dt>Color Ramp / 色</dt><dd>マゼンタ・シアン・イエロー・青・紫</dd></div>
-          <div><dt>Attribute / Type</dt><dd>Geometry</dd></div>
-          <div><dt>M_Rail の明るさ</dt><dd>0.08 × dot（head は使わない）</dd></div>
+          <div><dt>格納する属性（3つ）</dt><dd>color_id / arc / dot</dd></div>
+          <div><dt>カーブ円（3つ目）/ 解像度</dt><dd>6</dd></div>
+          <div><dt>カーブ円（3つ目）/ 半径</dt><dd>0.016（RailThick）</dd></div>
+          <div><dt>マテリアル設定（彗星側）</dt><dd>M_Comet</dd></div>
+          <div><dt>マテリアル設定（レール側）</dt><dd>M_Rail</dd></div>
         </dl>
-        <div class="note bad"><b>Color Ramp の Interpolation は <code>Constant</code>。</b>Linear のままだと色が混ざって「1本1色」になりません。</div>
-        <div class="note bad"><b><code>Maximum(dot, head⁴)</code> がこのステップの肝です。</b>頭のところだけ点線の隙間が埋まって<b>ベタ光り</b>になり、尾に向かって点線に戻ります。
-          <details class="why"><summary>これが無いとどうなるか</summary><div class="inner">光が点線に食われて、画面全体が「ただの破線の壁」に見えます。頭が solid になることで初めて「玉が走っている」と読めるようになります。<code>head⁴</code> は「頭のごく近くだけ 1 に近づく」カーブです。</div></details>
-        </div>
-        <div class="note"><b>Attribute の Type は <code>Geometry</code> のままでOK。</b>04 で <code>Realize</code> 済みなので、属性はメッシュの点そのものが持っています（インスタンスのままなら <code>Instancer</code> が要りますが、この組み方では不要です）。</div>
+        <div class="note"><b>マテリアル設定は2つ必要です。</b>06 で作った彗星のメッシュに M_Comet、ここで作ったレールのメッシュに M_Rail。<b>それぞれの枝で指定してから</b>、ジオメトリ統合で合流させます。</div>
+        <p class="gout"><b>ジオメトリ統合</b> の「ジオメトリ」を <b>グループ出力</b> へ繋ぎ替える。<b>これが最終形です。</b></p>
+        <p class="viewchk"><b>色が付き、走る光と、その下のうっすらしたレールの両方が見えます。</b>ほぼ完成形。あとは 10 で光らせるだけです。</p>
+        <div class="note bad"><b>マテリアル設定のドロップダウンが空のときは、08 をまだやっていません。</b>先にマテリアルを2枚つくってください。</div>
+      </div>
+      <div class="shots" style="grid-template-columns:1fr">
+        <figure><img src="_step_rails.png" alt="レールだけを明るくした状態"><figcaption>レールだけを明るくしてみたところ。この上を光が走る — クリックで原寸</figcaption></figure>
       </div>
       <figure class="dgm">
-        <img src="node-diagrams/09_material.svg" alt="STEP 09 のマテリアル構成図" loading="lazy">
-        <figcaption>STEP 09 ／ 色と明るさを分ける — <b>クリックで原寸</b></figcaption>
+        <img src="node-diagrams/09_rail.svg" alt="STEP 09 のノード構成図" loading="lazy">
+        <figcaption>STEP 09 のノード構成 — <b>クリックで原寸</b></figcaption>
       </figure>
     </div>
   </section>
@@ -540,19 +784,20 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
       <p class="goal">ノードは完成しているのに「光らない」「色が眠い」となる場所です。ノードではなく<b>レンダー設定</b>の話です。</p>
       <div class="recipe">
         <dl class="set">
-          <div><dt>Compositing → Glare / Type</dt><dd>Bloom</dd></div>
-          <div><dt>Glare / Quality</dt><dd>High</dd></div>
-          <div><dt>Glare / Threshold</dt><dd>1.0</dd></div>
-          <div><dt>Glare / Strength, Size</dt><dd>1.0 ／ 6.0</dd></div>
-          <div><dt>Color Management → <b>View Transform</b></dt><dd>Standard</dd></div>
-          <div><dt>World の背景</dt><dd>黒（Strength 0）</dd></div>
+          <div><dt>コンポジティング → グレア / タイプ</dt><dd>ブルーム</dd></div>
+          <div><dt>グレア / 品質</dt><dd>高</dd></div>
+          <div><dt>グレア / しきい値</dt><dd>1.0</dd></div>
+          <div><dt>グレア / 強さ・サイズ</dt><dd>1.0 ／ 6.0</dd></div>
+          <div><dt>カラーマネジメント → <b>ビュー変換</b></dt><dd>標準（Standard）</dd></div>
+          <div><dt>ワールドの背景</dt><dd>黒（強さ 0）</dd></div>
           <div><dt>出力解像度</dt><dd>1512 × 1296</dd></div>
         </dl>
-        <div class="note bad"><b>EEVEE の Bloom は無くなりました。</b>昔のチュートリアルに出てくる Render Properties の「Bloom」チェックは、5.2 には存在しません。光の滲みは <b>Compositing タブの <code>Glare</code> ノード</b>で作ります。3Dビューで見たいときは、ビューポート右上の <b>Viewport Compositing を ON</b>。</div>
-        <div class="note bad"><b>View Transform が <code>Filmic</code> のままだと、絶対にあの見た目になりません。</b><code>Standard</code> に変えてください。<b>見た目の差で一番効く設定です。</b>
+        <p class="viewchk"><b>光がにじんで、背景が真っ黒になります。</b>ビューポートで見るには、3Dビュー右上の<b>ビューポートコンポジティングを ON</b>。</p>
+        <div class="note bad"><b>EEVEE の Bloom は無くなりました。</b>昔のチュートリアルに出てくるレンダープロパティの「Bloom」チェックは、5.2 には存在しません。光の滲みは <b>コンポジティングタブの「グレア」ノード</b>で作ります。</div>
+        <div class="note bad"><b>ビュー変換が <code>Filmic</code> のままだと、絶対にあの見た目になりません。</b><code>標準</code> に変えてください。<b>見た目の差で一番効く設定です。</b>
           <details class="why"><summary>Filmic だと何が起きるか</summary><div class="inner">黒が浮いてグレーになり、色が眠くなります。参照にあるような「真っ黒の中に鮮やかな発光」は、Filmic の性質上どうやっても出ません。明るさをいくら上げても解決しないので、先にここを疑ってください。</div></details>
         </div>
-        <div class="note"><b>電球の位置にライトを置かないこと。</b>数百個のライトは EEVEE でも破綻します。Emission マテリアル＋Glare だけで絵は成立します。</div>
+        <div class="note"><b>光る場所にライトを置かないこと。</b>数百個のライトは EEVEE でも破綻します。放射マテリアル＋グレアだけで絵は成立します。</div>
       </div>
     </div>
   </section>
@@ -611,8 +856,8 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
       <tr><td>speed_mul</td><td><a href="#s03">03</a></td><td><b>Instance</b></td><td>05 の head の計算（1本ごとの速さ）</td></tr>
       <tr><td>color_id</td><td><a href="#s03">03</a></td><td><b>Instance</b></td><td>Color Ramp → Emission の <b>Color</b></td></tr>
       <tr><td>arc</td><td><a href="#s04">04</a></td><td>Point</td><td>07 の点線（Trim の<b>前</b>で捕まえる）</td></tr>
-      <tr><td>head</td><td><a href="#s06">06</a></td><td>Point</td><td>太さ（Curve to Mesh の Scale）と明るさ</td></tr>
-      <tr><td>dot</td><td><a href="#s07">07</a></td><td>Point</td><td>明るさに掛ける点線マスク</td></tr>
+      <tr><td>head</td><td><a href="#s06">06</a></td><td>Point</td><td>太さ（カーブのメッシュ化の スケール）と明るさ</td></tr>
+      <tr><td>dot</td><td><a href="#s07">07</a></td><td>Point</td><td>08 のマテリアルで明るさに掛ける点線マスク</td></tr>
     </tbody>
   </table>
 </section>
@@ -620,6 +865,27 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
 <section class="trouble" id="trouble">
   <h2>思ったとおりに出ないとき</h2>
   <p>この6つで、ほぼ全部が直ります。上から順に確認してください。</p>
+  <div class="tr">
+    <h3>0 ／ グループ出力に繋ぐと消える・<code>モディファイヤーオブジェクトからジオメトリを取得できません</code></h3>
+    <p><b>ジオメトリノードを J_Rail 自身に付けています。</b>オブジェクト情報が指している J_Rail と、モディファイアが乗っているオブジェクトが同じだと、自己参照になって計算が止まります。<br>
+    <b>空のメッシュ（RollLight）を別に作って、そちらに付け直してください</b>（<a href="#s02">02</a>）。</p>
+  </div>
+  <div class="tr">
+    <h3>0b ／ 半径 3.3 と打ったのに何も見えない・極端に小さい</h3>
+    <p><b>シーンの単位がセンチメートルになっています。</b>入力欄には <b>330</b> と打ってください。<br>
+    シーンプロパティ → 単位 → 長さ、で確認できます。この手順書の数値はすべて<b>メートル</b>です（<a href="#s02">02</a>）。</p>
+  </div>
+  <div class="tr">
+    <h3>0c ／ Speed をマイナスにしないと上へ行かない・尻尾から上がる</h3>
+    <p><b>01 のカーブの向きが「上端 → 床」で描かれています。</b>光はカーブの向きに沿って進むので、逆向きだと符号を反転させないと上へ行かず、しかも頭と尻尾が入れ替わります。<br>
+    編集モードで <code>A</code> → <b>セグメント → 方向を反転</b>。そのうえで <code>Speed</code> を <b>プラス</b>に戻してください（<a href="#s01">01</a>）。</p>
+  </div>
+  <div class="tr">
+    <h3>0d ／ モディファイアのパネルで、ある入力だけグレーアウトして触れない</h3>
+    <p><b>そのパラメータが、最終的な出力に効いていないからです。</b>Blender は「結果に関係しない入力」を自動でグレーにします。<br>
+    たいていは <b>繋ぎ先のノードが出力までつながっていない</b>か、<b>同じ役割のソケットを2つ作ってしまった</b>かのどちらかです。<br>
+    たとえば「Thickness」と「幅」の2つを作って、Thickness のほうが<b>どこにも繋がっていないカーブ円</b>に刺さっていると、Thickness だけグレーになります。<b>使っていないほうのソケットとノードを消して、1つに統一</b>してください。</p>
+  </div>
   <div class="tr">
     <h3>1 ／ 光らない・真っ黒</h3>
     <p><b>View Transform が <code>Filmic</code> ではありませんか。</b><code>Standard</code> にしてください（<a href="#s10">10</a>）。次に Compositing の <code>Glare</code> が繋がっているか。EEVEE の Bloom チェックは<b>もう存在しません</b>。</p>
@@ -648,7 +914,8 @@ button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
 
 <section class="trouble" id="params">
   <h2>パラメータ早見表</h2>
-  <p><code>UP_roll_light_04.blend</code> の実際の値です。モディファイアのパネルから触れます。</p>
+  <p><code>UP_roll_light_04.blend</code> の実際の値です。モディファイアのパネルから触れます。<br>
+  <b>長さはメートル表記。</b>シーンの単位がセンチメートルなら、入力欄には<b>100倍して</b>打ってください（Radius 3.3 → 330）。</p>
   <table class="attrs">
     <thead><tr><th>名前</th><th>既定値</th><th>動かすとどうなる</th><th>備考</th></tr></thead>
     <tbody>
