@@ -1,0 +1,641 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>光の柱 ノード手順</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --ground:#EDEAE3; --panel:#FFFFFF; --panel-2:#F6F3ED;
+  --ink:#221E19; --ink-2:#5C544A; --ink-3:#8C8377;
+  --rule:#DCD6CB; --rule-2:#C8C0B2;
+  --amber:#C77400; --amber-ink:#8A5100; --amber-wash:#FBEFDC;
+  --stage:#171310;
+  --warn:#B03A1E; --warn-wash:#FBE7E1;
+  --sk-geo:#00A884; --sk-vec:#6363C7; --sk-val:#9A9186; --sk-col:#B8A400; --sk-int:#4E8C52; --sk-rot:#8A6BA8;
+  --maxw:960px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+    --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+    --rule:#332C24; --rule-2:#473D31;
+    --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+    --warn:#FF8C6B; --warn-wash:#2E1A14;
+    --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374; --sk-rot:#C0A0D0;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+  --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+  --rule:#332C24; --rule-2:#473D31;
+  --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+  --warn:#FF8C6B; --warn-wash:#2E1A14;
+  --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374; --sk-rot:#C0A0D0;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.85; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; margin:0;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 96px}
+a{color:var(--amber-ink)}
+
+header{padding:52px 0 28px}
+.eyebrow{
+  font-family:"JetBrains Mono",ui-monospace,monospace; font-size:11px; letter-spacing:.22em;
+  color:var(--ink-3); text-transform:uppercase; margin:0 0 16px;
+}
+h1{
+  font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400;
+  font-size:clamp(30px,6.2vw,54px); line-height:1.12; margin:0; text-wrap:balance; color:var(--ink);
+}
+h1 .amb{color:var(--amber)}
+.lead{max-width:62ch; color:var(--ink-2); margin:20px 0 0; font-size:16px}
+.lead b{color:var(--ink); font-weight:700}
+
+.toolbar{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+  margin-top:26px; padding:14px 16px; border:1px solid var(--rule); border-radius:2px; background:var(--panel);
+}
+.legend{display:flex; flex-wrap:wrap; gap:6px 16px; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-2)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.legend i{width:8px; height:8px; border-radius:50%; display:block}
+
+.step[id],#finished,#params,#trouble{scroll-margin-top:22px}
+.steps{display:flex; flex-direction:column; gap:0; margin-top:44px}
+.step{display:grid; grid-template-columns:56px 1fr; gap:0 22px; padding:34px 0 38px; border-top:1px solid var(--rule)}
+.step:first-child{border-top:2px solid var(--rule-2)}
+.num{font-family:"Bungee",monospace; font-size:26px; line-height:1; color:var(--amber); padding-top:4px}
+.num small{display:block; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.2em; color:var(--ink-3); margin-top:7px}
+.body h2{font-size:21px; line-height:1.45; margin:0 0 6px; font-weight:900; text-wrap:balance}
+.goal{color:var(--ink-2); margin:0 0 18px; max-width:62ch}
+@media (max-width:760px){ .step{grid-template-columns:40px 1fr; gap:0 14px} .num{font-size:20px} }
+
+.recipe{display:flex; flex-direction:column; gap:12px; min-width:0}
+.flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.nd{
+  font-family:"JetBrains Mono",monospace; font-size:12.5px; font-weight:700;
+  background:var(--panel); border:1px solid var(--rule-2); border-radius:2px;
+  padding:5px 10px 5px 8px; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+}
+.nd::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--sk-val); flex:none}
+.nd[data-sk="geo"]::before{background:var(--sk-geo)}
+.nd[data-sk="vec"]::before{background:var(--sk-vec)}
+.nd[data-sk="col"]::before{background:var(--sk-col)}
+.nd[data-sk="int"]::before{background:var(--sk-int)}
+.nd[data-sk="rot"]::before{background:var(--sk-rot)}
+.nd.mat{border-style:dashed}
+.ar{color:var(--ink-3); font-style:normal; font-size:13px; padding:0 1px}
+.to{font-family:"Zen Kaku Gothic New",sans-serif; font-size:12.5px; color:var(--ink-2)}
+.to b{color:var(--ink)}
+.where{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em; color:var(--ink-3); text-transform:uppercase; margin:0 0 -4px}
+.where b{color:var(--amber-ink)}
+
+.set{margin:2px 0 0; border-top:1px solid var(--rule); font-size:13.5px}
+.set > div{display:flex; gap:12px; padding:7px 2px; border-bottom:1px solid var(--rule)}
+.set dt{flex:1 1 auto; color:var(--ink-2); font-family:"JetBrains Mono",monospace; font-size:12px; line-height:1.6}
+.set dd{margin:0; flex:none; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); line-height:1.6}
+
+.note{border-left:3px solid var(--amber); background:var(--amber-wash); padding:12px 14px; font-size:14px; color:var(--ink); margin:4px 0 0; line-height:1.8}
+.note.bad{border-left-color:var(--warn); background:var(--warn-wash)}
+.note b{font-weight:900}
+code{font-family:"JetBrains Mono",monospace; font-size:.88em; font-weight:700; background:color-mix(in srgb, var(--ink) 9%, transparent); padding:1px 5px; border-radius:2px}
+
+details.why{margin:8px 0 0; font-size:13.5px}
+details.why > summary{
+  cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:6px;
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em; color:var(--ink-3);
+  text-transform:uppercase; padding:3px 0;
+}
+details.why > summary::-webkit-details-marker{display:none}
+details.why > summary::before{content:"\25B8"; color:var(--amber); font-size:12px}
+details.why[open] > summary::before{content:"\25BE"}
+details.why > summary:hover{color:var(--amber-ink)}
+details.why .inner{padding:6px 0 2px; color:var(--ink-2); line-height:1.8; border-top:1px solid var(--rule); margin-top:4px}
+
+.attrs{width:100%; border-collapse:collapse; margin:16px 0 0; font-size:13.5px}
+.attrs th,.attrs td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--rule); vertical-align:top}
+.attrs th{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); font-weight:400; border-bottom:1px solid var(--rule-2)}
+.attrs td:first-child{font-family:"JetBrains Mono",monospace; font-weight:700; color:var(--amber-ink); white-space:nowrap}
+.attrs td b{color:var(--ink)}
+.attrs tr.warn td:first-child{color:var(--warn)}
+@media (max-width:620px){
+  .attrs,.attrs tbody,.attrs tr,.attrs td{display:block; width:100%}
+  .attrs thead{display:none} .attrs tr{border-bottom:1px solid var(--rule-2); padding:6px 0}
+  .attrs td{border:0; padding:2px 0}
+}
+
+.dgm{
+  --rail:0px; position:relative; left:50%;
+  width:min(1480px, 94vw);
+  margin:24px 0 0 calc(-1 * min(740px, 47vw) - var(--rail));
+}
+.step .dgm{--rail:39px}
+@media (max-width:760px){ .step .dgm{--rail:27px} }
+.dgm img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#181513; cursor:zoom-in}
+.dgm figcaption{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.1em; color:var(--ink-3); margin-top:8px; text-transform:uppercase}
+.dgm figcaption b{color:var(--amber-ink); font-weight:700}
+header .dgm{margin-top:28px}
+
+.shots{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px}
+@media (max-width:700px){ .shots{grid-template-columns:1fr} }
+.shots figure{margin:0}
+.shots img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#0B0B0D; cursor:zoom-in}
+.shots figcaption{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; color:var(--ink-3); margin-top:7px}
+
+.exhead{margin-top:64px; padding-top:30px; border-top:3px double var(--rule-2)}
+.exhead h2{font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400; font-size:clamp(24px,4vw,36px); margin:0; color:var(--ink)}
+.exhead p{color:var(--ink-2); margin:12px 0 0; max-width:62ch; font-size:15px}
+.exhead + .steps{margin-top:22px}
+
+.trouble{margin-top:56px; border:1px solid var(--rule-2); background:var(--panel); padding:26px 26px 10px}
+.trouble h2{font-family:"Bungee",sans-serif; font-weight:400; font-size:19px; margin:0 0 4px; color:var(--ink)}
+.trouble > p{color:var(--ink-2); margin:0 0 18px; font-size:14px}
+.tr{border-top:1px solid var(--rule); padding:16px 0}
+.tr h3{margin:0 0 6px; font-size:15px; font-weight:900; line-height:1.6}
+.tr p{margin:0; color:var(--ink-2); font-size:14px}
+
+.tail{margin-top:48px; color:var(--ink-2); font-size:14.5px; max-width:62ch}
+.tail h2{font-size:17px; color:var(--ink); margin:0 0 8px; font-weight:900}
+
+.lb[hidden]{display:none}
+.lb{position:fixed; inset:0; z-index:60; background:rgba(12,10,8,.97); overflow:auto; padding:70px 24px 40px}
+.lb img{display:block; margin:0 auto; max-width:none; background:#181513}
+.lb.fit img{width:100%; max-width:1600px; height:auto}
+.lbbar{position:fixed; top:0; left:0; right:0; height:56px; z-index:61; background:var(--panel); border-bottom:1px solid var(--rule-2); display:flex; align-items:center; gap:10px; padding:0 20px}
+.lbbar .name{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-2); flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+button{font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.08em; background:var(--panel-2); color:var(--ink); border:1px solid var(--rule-2); border-radius:2px; padding:7px 13px; cursor:pointer}
+button:hover{border-color:var(--amber); color:var(--amber-ink)}
+button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+
+.viewchk{
+  display:flex; gap:12px; align-items:flex-start; margin:10px 0 0; padding:11px 14px;
+  border:1px solid var(--rule-2); border-radius:2px; background:var(--panel-2); font-size:13.5px; color:var(--ink-2);
+}
+.viewchk b{color:var(--ink)}
+.gout{
+  display:flex; gap:12px; align-items:flex-start; margin:8px 0 0; padding:11px 14px;
+  border:1px solid var(--amber); border-radius:2px; background:var(--amber-wash);
+  font-size:13.5px; color:var(--ink);
+}
+.gout::before{
+  content:"つなぐ"; flex:none; font-family:"Zen Kaku Gothic New",sans-serif; font-size:10px;
+  color:#241A0C; background:var(--amber); border-radius:2px; padding:2px 6px; margin-top:3px; font-weight:700;
+}
+.gout b{font-weight:900}
+.viewchk::before{
+  content:"3D VIEW"; flex:none; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.12em;
+  color:var(--amber-ink); border:1px solid var(--amber); border-radius:2px; padding:2px 5px; margin-top:3px;
+}
+.nd em{font-style:normal; font-weight:400; color:var(--ink-3); font-size:11px; margin-left:2px}
+.en{font-style:normal; font-family:"JetBrains Mono",monospace; font-weight:400; color:var(--ink-3); font-size:10.5px; margin-left:6px}
+.body{min-width:0}
+@media (max-width:620px){
+  .nd{white-space:normal; align-items:flex-start}
+  .nd em{display:block; margin-left:0; line-height:1.4}
+  .nd::before{margin-top:6px}
+  .set > div{flex-direction:column; gap:2px}
+  .set dd{flex:1 1 auto; align-self:flex-start}
+}
+.newtag,.oldtag{
+  font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.1em; border-radius:9px;
+  padding:2px 7px; margin-left:6px; vertical-align:1px; white-space:nowrap;
+}
+.newtag{background:var(--amber); color:#241A0C; font-weight:700}
+.oldtag{background:var(--rule); color:var(--ink-2)}
+.gitag{
+  background:transparent; color:var(--sk-rot); border:1px solid var(--sk-rot); font-weight:700;
+  cursor:help;
+}
+.namemap{margin-top:14px}
+.namemap summary{
+  cursor:pointer; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); list-style:none; padding:4px 0;
+}
+.namemap summary::-webkit-details-marker{display:none}
+.namemap summary::before{content:"\25B8"; color:var(--amber); margin-right:6px}
+.namemap[open] summary::before{content:"\25BE"}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+.dl{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)}
+.view{display:grid; grid-template-columns:minmax(0,340px) 1fr; gap:14px; align-items:start; margin-top:18px}
+.view.view-r{grid-template-columns:minmax(0,200px) 1fr}
+.view img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#0B0B0D; cursor:zoom-in}
+.view .viewchk{margin:0}
+@media (max-width:620px){ .view,.view.view-r{grid-template-columns:1fr} }
+.frames{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:18px; max-width:640px}
+.frames figure{margin:0}
+.frames img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#000; cursor:zoom-in}
+.frames figcaption{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--ink-3); margin-top:4px; text-align:center}
+.ramp{margin:6px 0 0}
+.ramp img{display:block; width:100%; height:auto; border-radius:3px; cursor:zoom-in}
+.ramp figcaption{font-size:12.5px; color:var(--ink-2); margin-top:6px}
+.flow + .flow{margin-top:-4px}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Blender 5.2 LTS / Geometry Nodes / EEVEE</p>
+  <h1>光の柱に<br><span class="amb">パワーを</span>ためる。</h1>
+  <p class="lead">リングを100本積んだ筒に、<b>赤と青の光</b>が下から昇ります。青は途中から加速して赤に追いつき、赤は筒の縁だけ光って<b>黒いカプセル</b>のような抜けをつくります。キーフレームは打ちません。</p>
+
+  <div class="note" style="margin-top:18px"><b>このページの読み方</b><br>
+    各ステップは <b>①出すノード → ②打つ値 → ③つなぐ → ④ビューで確認</b> の順です。<br>
+    <span class="newtag">新規</span> ＝ここで新しく出す　<span class="oldtag">既存</span> ＝もう置いてある（出さない）<br>
+    図の中も同じバッジです。<b>実線</b>＝今回つなぐ線、<b>点線</b>＝もう繋がっている線。<br>
+    <span class="gitag" title="値をノードに直打ちする代わりに、この入力ソケットまで線を伸ばしてグループ入力（Group Input）に足すと、モディファイアのプロパティパネルにスライダーが出てそこでキーフレームが打てるようになる。今回は直打ちのまま進める。">GI</span> ＝あとで<b>グループ入力に足すとモディファイアからアニメできる</b>値（今回は直打ちのまま）</div>
+
+  <p style="margin-top:14px; display:flex; flex-wrap:wrap; gap:10px">
+    <a class="dl" href="light_power_start.blend" download>⬇ 開始ファイル（カメラ・出力・グロー設定済み）</a>
+    <a class="dl" href="TSR_EL_light_power_04.blend" download>⬇ 完成形 .blend</a>
+  </p>
+</header>
+
+<section class="exhead" id="finished" style="margin-top:28px; border-top:0; padding-top:0">
+  <p class="eyebrow">Result / 到達点</p>
+  <h2>できあがり</h2>
+</section>
+<div class="frames">
+  <figure><img src="steps/s11_f002.png" alt="完成 フレーム2"><figcaption>F 2</figcaption></figure>
+  <figure><img src="steps/s11_f009.png" alt="完成 フレーム9"><figcaption>F 9</figcaption></figure>
+  <figure><img src="steps/s11_f016.png" alt="完成 フレーム16"><figcaption>F 16</figcaption></figure>
+  <figure><img src="steps/s11_f023.png" alt="完成 フレーム23"><figcaption>F 23</figcaption></figure>
+</div>
+
+<div class="steps">
+
+  <section class="step" id="s00">
+    <div class="num">00<small>START</small></div>
+    <div class="body">
+      <h2>開始ファイルを開いて、モディファイアを付ける</h2>
+      <div class="recipe">
+        <dl class="set">
+          <div><dt>開く</dt><dd>light_power_start.blend</dd></div>
+          <div><dt>選ぶオブジェクト</dt><dd>LightPower（空のメッシュ）</dd></div>
+          <div><dt>モディファイア追加<span class="en">Add Modifier</span></dt><dd>ジオメトリノード → 新規<span class="en">Geometry Nodes → New</span></dd></div>
+        </dl>
+        <p class="viewchk"><b>まだ何も出ていなくて正解。</b></p>
+        <div class="note">単位は <b>メートル表示</b> にしてあります。このページの数値はそのまま打てばOK。</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="s01">
+    <div class="num">01<small>GEO</small></div>
+    <div class="body">
+      <h2>リングの高さを並べる</h2>
+      <div class="recipe">
+        <div class="flow"><span class="nd" data-sk="geo">メッシュライン<em>Mesh Line</em><span class="newtag">新規</span></span></div>
+        <dl class="set">
+          <div><dt>モード<span class="en">Mode</span></dt><dd>端点<span class="en">End Points</span></dd></div>
+          <div><dt>数<span class="en">Count</span></dt><dd>100 <span class="gitag" title="Rings：リング本数。グループ入力に足すとモディファイアからアニメできる">GI</span></dd></div>
+          <div><dt>終了位置 Z<span class="en">End Location Z</span></dt><dd>10 <span class="gitag" title="Height：筒の高さ。グループ入力は Float で作り、XYZ合成(Combine XYZ) の Z → 終了位置 につなぐ。ベクトルで作ると X・Y も欄に出てしまう">GI</span><span class="en">GI: 高さ(Float) → Combine XYZ Z → End Location</span></dd></div>
+        </dl>
+        <p class="gout">メッシュライン → <b>グループ出力</b></p>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/01_line.svg" alt="STEP 01 構成図" loading="lazy"><figcaption>STEP 01 — <b>クリックで原寸</b></figcaption></figure>
+      <div class="view"><img src="steps/s01.png" alt="01 のビュー" loading="lazy">
+        <p class="viewchk"><b>縦に1本の線に見えればOK。</b>高さ 10m ぶん。</p></div>
+    </div>
+  </section>
+
+  <section class="step" id="s02">
+    <div class="num">02<small>GEO</small></div>
+    <div class="body">
+      <h2>点ごとにリングを置く</h2>
+      <div class="recipe">
+        <div class="flow">
+          <span class="nd" data-sk="geo">カーブ円<em>Curve Circle</em><span class="newtag">新規</span></span>
+          <span class="nd" data-sk="geo">ポイントインスタンス作成<em>Instance on Points</em><span class="newtag">新規</span></span>
+          <span class="nd mat" data-sk="geo">メッシュライン<span class="oldtag">既存</span></span>
+        </div>
+        <dl class="set">
+          <div><dt>カーブ円　解像度<span class="en">Curve Circle &gt; Resolution</span></dt><dd>96</dd></div>
+          <div><dt>カーブ円　半径<span class="en">Curve Circle &gt; Radius</span></dt><dd>1.9 <span class="gitag" title="Radius：筒の半径。グループ入力に足すとモディファイアからアニメできる">GI</span></dd></div>
+        </dl>
+        <p class="gout">メッシュライン → ポイント ／ カーブ円 → インスタンス ／ ポイントインスタンス作成 → <b>グループ出力</b></p>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/02_ring.svg" alt="STEP 02 構成図" loading="lazy"><figcaption>STEP 02 — <b>クリックで原寸</b></figcaption></figure>
+      <div class="view"><img src="steps/s02.png" alt="02 のビュー" loading="lazy">
+        <p class="viewchk"><b>細い輪が100本、筒になる。</b></p></div>
+    </div>
+  </section>
+
+  <section class="step" id="s03">
+    <div class="num">03<small>GEO</small></div>
+    <div class="body">
+      <h2>実体化する</h2>
+      <div class="recipe">
+        <div class="flow">
+          <span class="nd" data-sk="geo">インスタンス実体化<em>Realize Instances</em><span class="newtag">新規</span></span>
+          <span class="nd mat" data-sk="geo">ポイントインスタンス作成<span class="oldtag">既存</span></span>
+        </div>
+        <p class="gout">ポイントインスタンス作成 → 実体化 → <b>グループ出力</b></p>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/03_realize.svg" alt="STEP 03 構成図" loading="lazy"><figcaption>STEP 03 — <b>クリックで原寸</b></figcaption></figure>
+      <p class="viewchk"><b>見た目は 02 と同じで正解。</b></p>
+    </div>
+  </section>
+
+  <section class="step" id="s04">
+    <div class="num">04<small>GEO</small></div>
+    <div class="body">
+      <h2>線を太らせてチューブにする</h2>
+      <div class="recipe">
+        <div class="flow">
+          <span class="nd" data-sk="geo">カーブ円<em>もう1個</em><span class="newtag">新規</span></span>
+          <span class="nd" data-sk="geo">カーブのメッシュ化<em>Curve to Mesh</em><span class="newtag">新規</span></span>
+          <span class="nd mat" data-sk="geo">インスタンス実体化<span class="oldtag">既存</span></span>
+        </div>
+        <dl class="set">
+          <div><dt>新しいカーブ円　解像度<span class="en">Curve Circle &gt; Resolution</span></dt><dd>6</dd></div>
+          <div><dt>新しいカーブ円　半径<span class="en">Curve Circle &gt; Radius</span></dt><dd>0.018 <span class="gitag" title="Thick：線の太さ。グループ入力に足すとモディファイアからアニメできる">GI</span></dd></div>
+        </dl>
+        <p class="gout">実体化 → カーブ ／ 新しいカーブ円 → プロファイルカーブ ／ カーブのメッシュ化 → <b>グループ出力</b></p>
+        <div class="note bad"><b>02 のカーブ円は使わない。</b>断面用にもう1個出す（半径 1.9 のままだと極太になる）。</div>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/04_tube.svg" alt="STEP 04 構成図" loading="lazy"><figcaption>STEP 04 — <b>クリックで原寸</b></figcaption></figure>
+      <div class="view"><img src="steps/s04.png" alt="04 のビュー" loading="lazy">
+        <p class="viewchk"><b>輪に太さが付く。</b>ここで形は完成。</p></div>
+    </div>
+  </section>
+
+  <section class="step" id="s05">
+    <div class="num">05<small>MAT</small></div>
+    <div class="body">
+      <h2>光る素材を付ける</h2>
+      <div class="recipe">
+        <p class="where">マテリアル　<b>LightPower を選んで → マテリアルタブ → 新規 → 名前 M_Power</b><span class="en">Select LightPower → Material Properties → New → Name M_Power</span></p>
+        <div class="flow">
+          <span class="nd" data-sk="col">放射<em>Emission</em><span class="newtag">新規</span></span>
+          <span class="nd">透過BSDF<em>Transparent</em><span class="newtag">新規</span></span>
+          <span class="nd">シェーダー加算<em>Add Shader</em><span class="newtag">新規</span></span>
+        </div>
+        <dl class="set">
+          <div><dt>放射　カラー／強さ<span class="en">Emission &gt; Color / Strength</span></dt><dd>青 ／ 3</dd></div>
+          <div><dt>マテリアル設定 → レンダー方式<span class="en">Settings &gt; Render Method</span></dt><dd>ブレンド<span class="en">Blended</span></dd></div>
+        </dl>
+        <p class="gout">放射 → 加算 上 ／ 透過BSDF → 加算 下 ／ 加算 → <b>マテリアル出力 サーフェス</b></p>
+        <div class="note bad"><b>最初からある「プリンシプルBSDF」は消す。</b></div>
+        <p class="where" style="margin-top:10px">ジオメトリノード</p>
+        <div class="flow"><span class="nd" data-sk="geo">マテリアル設定<em>Set Material</em><span class="newtag">新規</span></span>
+          <span class="nd mat" data-sk="geo">カーブのメッシュ化<span class="oldtag">既存</span></span></div>
+        <p class="gout">カーブのメッシュ化 → マテリアル設定（M_Power）→ <b>グループ出力</b></p>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/05_material.svg" alt="STEP 05 構成図" loading="lazy"><figcaption>STEP 05 — <b>クリックで原寸</b></figcaption></figure>
+      <div class="view view-r"><img src="steps/s05_f002.png" alt="05 のビュー" loading="lazy">
+        <p class="viewchk"><b>カメラビュー（テンキー0）＋ レンダープレビュー。</b>青い筒が光ればOK。にじみが見えないときは ビューの右上 <b>ビューポートコンポジット</b> を ON。</p></div>
+    </div>
+  </section>
+
+  <section class="step" id="s06">
+    <div class="num">06<small>GEO</small></div>
+    <div class="body">
+      <h2>赤の時計 <code>phase_r</code> を焼き付ける</h2>
+      <div class="recipe">
+        <div class="flow">
+          <span class="nd" data-sk="vec">位置<em>Position</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd" data-sk="vec">XYZ分離<em>Separate XYZ</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd">除算<em>Divide</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd">乗算<em>Multiply</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd">減算<em>Subtract</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd">除算<em>Divide</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd">小数部<em>Fract</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd">名前付き属性格納<em>Store Named Attribute</em><span class="newtag">新規</span></span>
+        </div>
+        <div class="flow"><span class="nd">シーンタイム<em>Scene Time</em><span class="newtag">新規</span></span>
+          <span class="nd mat" data-sk="geo">インスタンス実体化<span class="oldtag">既存</span></span>
+          <span class="nd mat" data-sk="geo">カーブのメッシュ化<span class="oldtag">既存</span></span></div>
+        <dl class="set">
+          <div><dt>1つ目の 除算　下<span class="en">Divide</span></dt><dd>10 <span class="gitag" title="01 で作った高さ(Float)をそのままここへ。ベクトルのままだと3成分の平均(10÷3)で割ってしまう">GI</span><span class="en">GI: 高さ(Float) → Divide</span></dd></div>
+          <div><dt>乗算　下<span class="en">Multiply</span></dt><dd>27 <span class="gitag" title="RiseRed：赤が登るフレーム数。グループ入力に足すとモディファイアからアニメできる">GI</span></dd></div>
+          <div><dt>減算　上 ← シーンタイム フレーム ／ 下 ← 乗算<span class="en">Subtract ← Scene Time Frame / Multiply</span></dt><dd>—</dd></div>
+          <div><dt>2つ目の 除算　下<span class="en">Divide</span></dt><dd>28 <span class="gitag" title="Loop：模様が1周するフレーム数。グループ入力に足すとモディファイアからアニメできる">GI</span></dd></div>
+          <div><dt>名前付き属性格納<span class="en">Store Named Attribute</span></dt><dd>浮動小数点 / ポイント / phase_r<span class="en">Float / Point</span></dd></div>
+        </dl>
+        <p class="gout">実体化 → <b>格納</b> → カーブのメッシュ化（間に割り込ませる）　小数部 → 格納の <b>値</b></p>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/06_phase_r.svg" alt="STEP 06 構成図" loading="lazy"><figcaption>STEP 06 — <b>クリックで原寸</b></figcaption></figure>
+      <p class="viewchk"><b>見た目は変わらなくて正解。</b>スプレッドシートに <code>phase_r</code> の列が増えていればOK。</p>
+    </div>
+  </section>
+
+  <section class="step" id="s07">
+    <div class="num">07<small>MAT</small></div>
+    <div class="body">
+      <h2>phase_r で色を決める（赤が昇る）</h2>
+      <div class="recipe">
+        <p class="where">マテリアル</p>
+        <div class="flow">
+          <span class="nd">属性<em>Attribute</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd" data-sk="col">カラーランプ<em>Color Ramp</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd mat" data-sk="col">放射<span class="oldtag">既存</span></span>
+        </div>
+        <dl class="set">
+          <div><dt>属性　名前<span class="en">Attribute &gt; Name</span></dt><dd>phase_r</dd></div>
+          <div><dt>つなぐ出力</dt><dd>係数 → カラーランプ<span class="en">Fac → Color Ramp</span></dd></div>
+        </dl>
+        <p class="gout">カラーランプ カラー → <b>放射 カラー</b>（05 の青は上書きされる）<span class="en">Color Ramp Color → Emission Color</span></p>
+        <figure class="ramp"><img src="node-diagrams/ramp_red.png" alt="赤のカラーランプ"><figcaption>赤のカラーランプ。▲の位置に色を置く（0＝赤の頭／0.99＝紫）</figcaption></figure>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/07_red.svg" alt="STEP 07 構成図" loading="lazy"><figcaption>STEP 07 — <b>クリックで原寸</b></figcaption></figure>
+      <div class="frames">
+        <figure><img src="steps/s07_f002.png" alt="" loading="lazy"><figcaption>F 2</figcaption></figure>
+        <figure><img src="steps/s07_f009.png" alt="" loading="lazy"><figcaption>F 9</figcaption></figure>
+        <figure><img src="steps/s07_f016.png" alt="" loading="lazy"><figcaption>F 16</figcaption></figure>
+        <figure><img src="steps/s07_f023.png" alt="" loading="lazy"><figcaption>F 23</figcaption></figure>
+      </div>
+      <p class="viewchk"><b>再生（スペース）で赤い帯が下から昇る。</b>28フレームで1周。</p>
+    </div>
+  </section>
+
+  <section class="step" id="s08">
+    <div class="num">08<small>GEO</small></div>
+    <div class="body">
+      <h2>青の時計 <code>phase_b</code>（緩急つき）</h2>
+      <div class="recipe">
+        <div class="flow">
+          <span class="nd">フロートカーブ<em>Float Curve</em><span class="newtag">新規</span></span>
+          <span class="nd">乗算・減算・除算・小数部・格納<em>06 を Shift+D でコピー</em><span class="newtag">新規</span></span>
+        </div>
+        <div class="flow">
+          <span class="nd mat">除算 ÷10<span class="oldtag">既存</span></span>
+          <span class="nd mat">シーンタイム<span class="oldtag">既存</span></span>
+          <span class="nd mat">格納 phase_r<span class="oldtag">既存</span></span>
+        </div>
+        <dl class="set">
+          <div><dt>コピーした 乗算　下<span class="en">Multiply</span></dt><dd>27 → <b>22</b> <span class="gitag" title="RiseBlue：青が登るフレーム数。グループ入力に足すとモディファイアからアニメできる">GI</span></dd></div>
+          <div><dt>コピーした 格納　名前<span class="en">Store Named Attribute &gt; Name</span></dt><dd>phase_r → <b>phase_b</b></dd></div>
+          <div><dt>フロートカーブの点<span class="en">Float Curve</span></dt><dd>下の図</dd></div>
+        </dl>
+        <p class="gout">除算 ÷10 → <b>フロートカーブ</b> → コピーの乗算 ／ 格納 phase_r → <b>格納 phase_b</b> → カーブのメッシュ化<span class="en">Divide ÷10 → Float Curve → Multiply / Store phase_r → Store phase_b → Curve to Mesh</span></p>
+        <figure class="ramp" style="max-width:420px"><img src="node-diagrams/curve_blue.png" alt="フロートカーブの形"><figcaption>点を2つ足して (0.3, 0.4)(0.7, 0.8)。直線より少し上にふくらめばOK</figcaption></figure>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/08_phase_b.svg" alt="STEP 08 構成図" loading="lazy"><figcaption>STEP 08 — <b>クリックで原寸</b></figcaption></figure>
+      <p class="viewchk"><b>見た目は変わらなくて正解。</b></p>
+    </div>
+  </section>
+
+  <section class="step" id="s09">
+    <div class="num">09<small>MAT</small></div>
+    <div class="body">
+      <h2>青を足す（青が赤を追いかける）</h2>
+      <div class="recipe">
+        <p class="where">マテリアル</p>
+        <div class="flow">
+          <span class="nd">属性<em>Attribute</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd" data-sk="col">カラーランプ<em>Color Ramp</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd" data-sk="col">放射<em>Emission</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd">シェーダー加算<em>Add Shader</em><span class="newtag">新規</span></span>
+        </div>
+        <div class="flow"><span class="nd mat">放射（赤）<span class="oldtag">既存</span></span>
+          <span class="nd mat">シェーダー加算（05）<span class="oldtag">既存</span></span></div>
+        <dl class="set">
+          <div><dt>属性　名前<span class="en">Attribute &gt; Name</span></dt><dd>phase_b</dd></div>
+          <div><dt>新しい放射　強さ<span class="en">Emission &gt; Strength</span></dt><dd>3</dd></div>
+        </dl>
+        <p class="gout">青の放射 → 新しい加算 上 ／ 赤の放射 → 新しい加算 下 ／ 新しい加算 → <b>05 の加算 上</b></p>
+        <figure class="ramp"><img src="node-diagrams/ramp_blue.png" alt="青のカラーランプ"><figcaption>青のカラーランプ。0.30 の緑が頭、0.42〜0.66 が青の胴</figcaption></figure>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/09_blue.svg" alt="STEP 09 構成図" loading="lazy"><figcaption>STEP 09 — <b>クリックで原寸</b></figcaption></figure>
+      <div class="frames">
+        <figure><img src="steps/s09_f002.png" alt="" loading="lazy"><figcaption>F 2</figcaption></figure>
+        <figure><img src="steps/s09_f009.png" alt="" loading="lazy"><figcaption>F 9</figcaption></figure>
+        <figure><img src="steps/s09_f016.png" alt="" loading="lazy"><figcaption>F 16</figcaption></figure>
+        <figure><img src="steps/s09_f023.png" alt="" loading="lazy"><figcaption>F 23</figcaption></figure>
+      </div>
+      <p class="viewchk"><b>赤のあとから緑→青が昇り、上の方で赤に追いつく。</b></p>
+    </div>
+  </section>
+
+  <section class="step" id="s10">
+    <div class="num">10<small>GEO</small></div>
+    <div class="body">
+      <h2>筒の外向き <code>radial</code> を焼き付ける</h2>
+      <div class="recipe">
+        <div class="flow">
+          <span class="nd" data-sk="vec">ベクトル演算（乗算）<em>Vector Math (Multiply)</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd" data-sk="vec">ベクトル演算（正規化）<em>Vector Math (Normalize)</em><span class="newtag">新規</span></span><i class="ar">→</i>
+          <span class="nd">名前付き属性格納<em>Store Named Attribute</em><span class="newtag">新規</span></span>
+        </div>
+        <div class="flow"><span class="nd mat" data-sk="vec">位置<span class="oldtag">既存</span></span>
+          <span class="nd mat">格納 phase_b<span class="oldtag">既存</span></span></div>
+        <dl class="set">
+          <div><dt>乗算　下<span class="en">Multiply</span></dt><dd>1 / 1 / 0</dd></div>
+          <div><dt>名前付き属性格納<span class="en">Store Named Attribute</span></dt><dd><b>ベクトル</b> / ポイント / radial<span class="en">Vector / Point</span></dd></div>
+        </dl>
+        <p class="gout">位置 → 乗算 → 正規化 → 格納の <b>値</b> ／ 格納 phase_b → <b>格納 radial</b> → カーブのメッシュ化<span class="en">Position → Multiply → Normalize → Store &gt; Value / Store phase_b → Store radial → Curve to Mesh</span></p>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/10_radial.svg" alt="STEP 10 構成図" loading="lazy"><figcaption>STEP 10 — <b>クリックで原寸</b></figcaption></figure>
+      <p class="viewchk"><b>見た目は変わらなくて正解。</b></p>
+    </div>
+  </section>
+
+  <section class="step" id="s11">
+    <div class="num">11<small>MAT</small></div>
+    <div class="body">
+      <h2>赤を筒の横だけ光らせる（黒いカプセル）</h2>
+      <div class="recipe">
+        <p class="where">マテリアル</p>
+        <div class="flow">
+          <span class="nd">属性 radial<em>Attribute</em><span class="newtag">新規</span></span>
+          <span class="nd" data-sk="vec">ジオメトリ<em>Geometry</em><span class="newtag">新規</span></span>
+          <span class="nd" data-sk="vec">ベクトル演算（ドット積）<em>Vector Math (Dot Product)</em><span class="newtag">新規</span></span>
+          <span class="nd">演算 ×4（絶対値・減算・累乗・乗算）<em>Math ×4 (Absolute / Subtract / Power / Multiply)</em><span class="newtag">新規</span></span>
+          <span class="nd" data-sk="col">カラーランプ<em>Color Ramp</em><span class="newtag">新規</span></span>
+          <span class="nd">ミックス<em>Mix</em><span class="newtag">新規</span></span>
+        </div>
+        <div class="flow"><span class="nd mat">属性 phase_r<span class="oldtag">既存</span></span>
+          <span class="nd mat" data-sk="col">放射（赤）<span class="oldtag">既存</span></span></div>
+        <dl class="set">
+          <div><dt>ジオメトリ　使う出力<span class="en">Geometry &gt; output</span></dt><dd>入射<span class="en">Incoming</span></dd></div>
+          <div><dt>減算　上<span class="en">Subtract</span></dt><dd>1.0</dd></div>
+          <div><dt>累乗　下（縁の細さ）<span class="en">Power</span></dt><dd>5</dd></div>
+          <div><dt>ミックス<span class="en">Mix</span></dt><dd>浮動小数点 ／ B 1.0<span class="en">Float / B 1.0</span></dd></div>
+          <div><dt>乗算　下<span class="en">Multiply</span></dt><dd>3</dd></div>
+        </dl>
+        <p class="gout">乗算 → <b>赤の放射 強さ</b>（3 と打ってあった欄に線が入る）<span class="en">Multiply → Emission (red) Strength</span></p>
+        <figure class="ramp"><img src="node-diagrams/ramp_fill.png" alt="正面の量のカラーランプ"><figcaption>新しいカラーランプ（白黒）。白＝正面も光る／黒＝縁だけ光る</figcaption></figure>
+      </div>
+      <figure class="dgm"><img src="node-diagrams/11_rim.svg" alt="STEP 11 構成図" loading="lazy"><figcaption>STEP 11 — <b>クリックで原寸</b></figcaption></figure>
+      <div class="frames">
+        <figure><img src="steps/s11_f002.png" alt="" loading="lazy"><figcaption>F 2</figcaption></figure>
+        <figure><img src="steps/s11_f009.png" alt="" loading="lazy"><figcaption>F 9</figcaption></figure>
+        <figure><img src="steps/s11_f016.png" alt="" loading="lazy"><figcaption>F 16</figcaption></figure>
+        <figure><img src="steps/s11_f023.png" alt="" loading="lazy"><figcaption>F 23</figcaption></figure>
+      </div>
+      <p class="viewchk"><b>赤の帯の真ん中が暗く抜けて、縁だけ赤い筋が残る。</b>09 と見比べると違いがわかる。</p>
+    </div>
+  </section>
+
+  <section class="step" id="s12">
+    <div class="num">12<small>OUT</small></div>
+    <div class="body">
+      <h2>書き出し</h2>
+      <div class="recipe">
+        <dl class="set">
+          <div><dt>フレーム<span class="en">Frame Range</span></dt><dd>0 〜 27（設定済み）</dd></div>
+          <div><dt>解像度<span class="en">Resolution</span></dt><dd>1512×2160 の 250%（設定済み）</dd></div>
+          <div><dt>出力先<span class="en">Output</span></dt><dd>//_out/column/</dd></div>
+          <div><dt>実行<span class="en">Render</span></dt><dd>レンダー → アニメーションレンダリング<span class="en">Render → Render Animation</span></dd></div>
+        </dl>
+        <div class="note">28枚で約500MB。まっすぐ版は AE で 40% に縮小、床の版はそのままコーナーピン。</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="trouble" id="trouble">
+  <h2>うまくいかないとき</h2>
+  <div class="tr"><h3>グループ出力につないだら消えた</h3><p>モディファイアが LightPower 以外に付いていないか。</p></div>
+  <div class="tr"><h3>真っ黒／光らない</h3><p>ビューが <b>レンダープレビュー</b><span class="en">Rendered</span> か。属性ノードの名前のスペル（<code>phase_r</code> など）が格納と同じか。</p></div>
+  <div class="tr"><h3>筒が極太になった</h3><p>04 の断面用カーブ円の半径が 0.018 か。02 のカーブ円をつないでいないか。</p></div>
+  <div class="tr"><h3>全部のリングが同時に光る</h3><p>06 の 位置 → XYZ分離 の <b>Z</b> から線が出ているか。<span class="en">Position → Separate XYZ</span></p></div>
+  <div class="tr"><h3>11 で赤が消えた／全面が赤い</h3><p>絶対値 → 減算の <b>下</b>、累乗 → ミックスの <b>A</b> につながっているか。<span class="en">Absolute → Subtract / Power → Mix</span></p></div>
+</section>
+</div>
+
+<div class="lb" id="lb" hidden>
+  <div class="lbbar">
+    <span class="name" id="lbname"></span>
+    <button id="lbfit">画面に合わせる</button>
+    <button id="lbclose">閉じる ✕</button>
+  </div>
+  <img id="lbimg" alt="図の原寸表示">
+</div>
+
+<script>
+(function(){
+"use strict";
+var lb = document.getElementById("lb"),
+    lbimg = document.getElementById("lbimg"),
+    lbname = document.getElementById("lbname"),
+    lbfit = document.getElementById("lbfit"),
+    lbclose = document.getElementById("lbclose");
+function closeLb(){ lb.hidden = true; lbimg.removeAttribute("src"); document.body.style.overflow = ""; }
+var imgs = document.querySelectorAll(".dgm img, .shots img, .view img, .frames img, .ramp img");
+Array.prototype.forEach.call(imgs, function(img){
+  img.tabIndex = 0;
+  function go(){
+    lbimg.src = img.getAttribute("src");
+    var fig = img.closest("figure");
+    var cap = fig ? fig.querySelector("figcaption") : null;
+    lbname.textContent = cap ? cap.textContent.replace(/\s*—\s*クリックで原寸\s*$/, "") : img.getAttribute("src");
+    lb.classList.add("fit");
+    lb.hidden = false;
+    document.body.style.overflow = "hidden";
+  }
+  img.addEventListener("click", go);
+  img.addEventListener("keydown", function(e){ if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+});
+lbclose.addEventListener("click", closeLb);
+lbfit.addEventListener("click", function(){ lb.classList.toggle("fit"); });
+lb.addEventListener("click", function(e){ if (e.target === lb) closeLb(); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape" && !lb.hidden) closeLb(); });
+})();
+</script>

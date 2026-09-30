@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520">
+<rect width="1600" height="520" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">04</tspan><tspan font-size="22" fill="#FFFFFF">  線を太らせてチューブにする</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076"></text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="1000" y="118" width="560" height="46" rx="6" fill="#1F1B18" stroke="#4A423B"/>
+<rect x="1012" y="130" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="1050" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<rect x="1100" y="130" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1126" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<path d="M1176 141 L1226 141" stroke="#FF9A3C" stroke-width="3"/>
+<text x="1234" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">今回つなぐ線</text>
+<path d="M1350 141 L1400 141" stroke="#8A8076" stroke-width="3" stroke-dasharray="7 6"/>
+<text x="1408" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">もう繋がっている線</text>
+<g>
+<rect x="60" y="200" width="280" height="86" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M60 240 L60 208 Q60 200 68 200 L332 200 Q340 200 340 240 Z" fill="#2F6B55"/>
+<text x="76" y="227" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">インスタンス実体化</text>
+<rect x="278" y="209" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="304" y="225" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="340" cy="257" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="326" y="262" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+</g>
+<g>
+<rect x="60" y="330" width="280" height="142" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 370 L60 338 Q60 330 68 330 L332 330 Q340 330 340 370 Z" fill="#2F6B55"/>
+<text x="76" y="357" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブ円</text>
+<rect x="254" y="339" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="292" y="355" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="340" cy="387" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="326" y="392" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+<rect x="70" y="408" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="424" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">解像度  6</text>
+<rect x="70" y="436" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="452" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">半径  0.018 m</text>
+</g>
+<text x="60" y="320" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#FF9A3C">02とは別に、もう1個新しく出す</text>
+<g>
+<rect x="540" y="210" width="300" height="120" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M540 250 L540 218 Q540 210 548 210 L832 210 Q840 210 840 250 Z" fill="#2F6B55"/>
+<text x="556" y="237" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブのメッシュ化</text>
+<rect x="754" y="219" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="792" y="235" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="840" cy="267" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="826" y="272" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">メッシュ</text>
+<circle cx="540" cy="267" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="554" y="272" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+<circle cx="540" cy="301" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="554" y="306" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">プロファイルカーブ</text>
+</g>
+<g>
+<rect x="1100" y="210" width="220" height="86" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M1100 250 L1100 218 Q1100 210 1108 210 L1312 210 Q1320 210 1320 250 Z" fill="#3A3A3A"/>
+<text x="1116" y="237" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">グループ出力</text>
+<rect x="1258" y="219" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1284" y="235" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="1100" cy="267" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1114" y="272" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+</g>
+<path d="M340 257 C430 257 450 267 540 267" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M340 387 C430 387 450 301 540 301" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M840 267 C957 267 983 267 1100 267" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+</svg>

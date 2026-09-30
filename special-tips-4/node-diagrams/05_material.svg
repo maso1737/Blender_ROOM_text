@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820">
+<rect width="1600" height="820" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">05</tspan><tspan font-size="22" fill="#FFFFFF">  光る素材を付ける</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">上：マテリアル（シェーダーエディタ）　下：ジオメトリノード</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="1000" y="118" width="560" height="46" rx="6" fill="#1F1B18" stroke="#4A423B"/>
+<rect x="1012" y="130" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="1050" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<rect x="1100" y="130" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1126" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<path d="M1176 141 L1226 141" stroke="#FF9A3C" stroke-width="3"/>
+<text x="1234" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">今回つなぐ線</text>
+<path d="M1350 141 L1400 141" stroke="#8A8076" stroke-width="3" stroke-dasharray="7 6"/>
+<text x="1408" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">もう繋がっている線</text>
+<rect x="40" y="160" width="1520" height="330" rx="6" fill="none" stroke="#8A8076" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text x="52" y="152" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#8A8076">マテリアル M_Power</text>
+<g>
+<rect x="80" y="200" width="260" height="176" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M80 240 L80 208 Q80 200 88 200 L332 200 Q340 200 340 240 Z" fill="#4B7A3F"/>
+<text x="96" y="227" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">放射</text>
+<rect x="254" y="209" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="292" y="225" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="340" cy="257" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="326" y="262" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">放射</text>
+<circle cx="80" cy="257" r="7" fill="#C7C729" stroke="#181513" stroke-width="2"/>
+<text x="94" y="262" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カラー</text>
+<circle cx="80" cy="291" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="94" y="296" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">強さ</text>
+<rect x="90" y="312" width="240" height="22" rx="4" fill="#3A3430"/>
+<text x="100" y="328" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">カラー  青</text>
+<rect x="90" y="340" width="240" height="22" rx="4" fill="#3A3430"/>
+<text x="100" y="356" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">強さ  3</text>
+</g>
+<g>
+<rect x="80" y="380" width="260" height="86" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M80 420 L80 388 Q80 380 88 380 L332 380 Q340 380 340 420 Z" fill="#4B7A3F"/>
+<text x="96" y="407" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">透過BSDF</text>
+<rect x="254" y="389" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="292" y="405" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="340" cy="437" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="326" y="442" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">BSDF</text>
+</g>
+<g>
+<rect x="560" y="260" width="260" height="120" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M560 300 L560 268 Q560 260 568 260 L812 260 Q820 260 820 300 Z" fill="#4B7A3F"/>
+<text x="576" y="287" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">シェーダー加算</text>
+<rect x="734" y="269" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="772" y="285" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="820" cy="317" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="806" y="322" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">シェーダー</text>
+<circle cx="560" cy="317" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="574" y="322" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">シェーダー 上</text>
+<circle cx="560" cy="351" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="574" y="356" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">シェーダー 下</text>
+</g>
+<g>
+<rect x="1060" y="260" width="260" height="86" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M1060 300 L1060 268 Q1060 260 1068 260 L1312 260 Q1320 260 1320 300 Z" fill="#5A5248"/>
+<text x="1076" y="287" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">マテリアル出力</text>
+<rect x="1258" y="269" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1284" y="285" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="1060" cy="317" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1074" y="322" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">サーフェス</text>
+</g>
+<path d="M340 257 C439 257 461 317 560 317" fill="none" stroke="#C77400" stroke-width="2.6"/>
+<path d="M340 437 C439 437 461 351 560 351" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M820 317 C928 317 952 317 1060 317" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+<rect x="40" y="540" width="1520" height="240" rx="6" fill="none" stroke="#8A8076" stroke-width="1.5" stroke-dasharray="8 6"/>
+<text x="52" y="532" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="15" fill="#8A8076">ジオメトリノード</text>
+<g>
+<rect x="80" y="590" width="300" height="86" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M80 630 L80 598 Q80 590 88 590 L372 590 Q380 590 380 630 Z" fill="#2F6B55"/>
+<text x="96" y="617" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブのメッシュ化</text>
+<rect x="318" y="599" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="344" y="615" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="380" cy="647" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="366" y="652" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">メッシュ</text>
+</g>
+<g>
+<rect x="560" y="580" width="280" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M560 620 L560 588 Q560 580 568 580 L832 580 Q840 580 840 620 Z" fill="#2F6B55"/>
+<text x="576" y="607" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">マテリアル設定</text>
+<rect x="754" y="589" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="792" y="605" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="840" cy="637" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="826" y="642" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="560" cy="637" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="574" y="642" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<rect x="570" y="658" width="260" height="22" rx="4" fill="#3A3430"/>
+<text x="580" y="674" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">マテリアル  M_Power</text>
+</g>
+<g>
+<rect x="1060" y="590" width="220" height="86" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M1060 630 L1060 598 Q1060 590 1068 590 L1272 590 Q1280 590 1280 630 Z" fill="#3A3A3A"/>
+<text x="1076" y="617" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">グループ出力</text>
+<rect x="1218" y="599" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1244" y="615" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="1060" cy="647" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1074" y="652" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+</g>
+<path d="M380 647 C461 647 479 637 560 637" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M840 637 C939 637 961 647 1060 647" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+</svg>

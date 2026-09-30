@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="470" viewBox="0 0 1600 470">
+<rect width="1600" height="470" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">01</tspan><tspan font-size="22" fill="#FFFFFF">  リングの高さを並べる</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">点を縦に100個。まだリングではない</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="1000" y="118" width="560" height="46" rx="6" fill="#1F1B18" stroke="#4A423B"/>
+<rect x="1012" y="130" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="1050" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<rect x="1100" y="130" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1126" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<path d="M1176 141 L1226 141" stroke="#FF9A3C" stroke-width="3"/>
+<text x="1234" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">今回つなぐ線</text>
+<path d="M1350 141 L1400 141" stroke="#8A8076" stroke-width="3" stroke-dasharray="7 6"/>
+<text x="1408" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">もう繋がっている線</text>
+<g>
+<rect x="360" y="200" width="330" height="198" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M360 240 L360 208 Q360 200 368 200 L682 200 Q690 200 690 240 Z" fill="#2F6B55"/>
+<text x="376" y="227" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">メッシュライン</text>
+<rect x="604" y="209" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="642" y="225" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="690" cy="257" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="676" y="262" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">メッシュ</text>
+<circle cx="360" cy="257" r="7" fill="#598C5C" stroke="#181513" stroke-width="2"/>
+<text x="374" y="262" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">数</text>
+<rect x="370" y="278" width="310" height="22" rx="4" fill="#3A3430"/>
+<text x="380" y="294" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">モード  端点</text>
+<rect x="370" y="306" width="310" height="22" rx="4" fill="#3A3430"/>
+<text x="380" y="322" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">数  100</text>
+<rect x="370" y="334" width="310" height="22" rx="4" fill="#3A3430"/>
+<text x="380" y="350" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">開始位置  0 / 0 / 0</text>
+<rect x="370" y="362" width="310" height="22" rx="4" fill="#3A3430"/>
+<text x="380" y="378" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">終了位置  0 / 0 / 10</text>
+</g>
+<g>
+<rect x="1000" y="220" width="220" height="86" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M1000 260 L1000 228 Q1000 220 1008 220 L1212 220 Q1220 220 1220 260 Z" fill="#3A3A3A"/>
+<text x="1016" y="247" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">グループ出力</text>
+<rect x="1158" y="229" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1184" y="245" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="1000" cy="277" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1014" y="282" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+</g>
+<path d="M690 257 C829 257 860 277 1000 277" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+<rect x="60" y="200" width="250" height="110" rx="4" fill="#2A2015" stroke="#FF9A3C" stroke-width="1.5"/>
+<rect x="60" y="200" width="4" height="110" fill="#FF9A3C"/>
+<text x="78" y="228" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">グループ入力は</text>
+<text x="78" y="254" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">使わない。</text>
+<text x="78" y="280" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">線は上書きで消える</text>
+</svg>

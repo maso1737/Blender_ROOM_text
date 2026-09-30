@@ -67,3 +67,14 @@
   元プロジェクトの `_Archive/` / `_ref_sequence/`（参照連番）/ `CLAUDE.md` はコピー対象外。
   2026-09-22更新：08/09を入れ替え、`08_material.svg` / `08b_rail_material.svg` / `09_rail.svg`
   （旧 `08_rail.svg` / `09_material.svg` は廃止）に差し替え。手順書とダウンロードリンクも同時更新。
+- `special-tips-3/` … 第3弾。元は `Integrations/Blender/TSR_EL_light_music/`
+  （音に合わせて光る球体の手順書 `light-music-node-steps.html`、実写スクショ `steps/` 30枚、
+  開始ファイル `TSR_EL_light_music_start.blend`、完成形 `TSR_EL_light_music_04_A.blend`）。
+  ダウンロードリンクは元htmlに最初から入っていたのでそのまま。`node-diagrams/` は
+  この作品では最終的に未使用（`steps/` の実写スクショに置き換わった）ためコピー対象外。
+  `start.html` に「【期間限定‼】スペシャルTIPS公開中！第3弾」として追加。
+- `special-tips-4/` … 第4弾。元は `Integrations/Blender/TSR_EL_light_power/`
+  （リング積層の光る柱の手順書 `light-power-node-steps.html`、`node-diagrams/`（SVG11枚＋PNG4枚）、
+  実写スクショ `steps/` 16枚、開始ファイル `light_power_start.blend`、
+  完成形 `TSR_EL_light_power_04.blend`）。ダウンロードリンクは元htmlに最初から入っていたのでそのまま。
+  `start.html` に「【期間限定‼】スペシャルTIPS公開中！第4弾」として追加。

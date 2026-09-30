@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="430" viewBox="0 0 1600 430">
+<rect width="1600" height="430" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">07</tspan><tspan font-size="22" fill="#FFFFFF">  phase_r で色を決める</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">マテリアル側。放射のカラーを差し替える</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="1000" y="118" width="560" height="46" rx="6" fill="#1F1B18" stroke="#4A423B"/>
+<rect x="1012" y="130" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="1050" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<rect x="1100" y="130" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1126" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<path d="M1176 141 L1226 141" stroke="#FF9A3C" stroke-width="3"/>
+<text x="1234" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">今回つなぐ線</text>
+<path d="M1350 141 L1400 141" stroke="#8A8076" stroke-width="3" stroke-dasharray="7 6"/>
+<text x="1408" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">もう繋がっている線</text>
+<g>
+<rect x="60" y="210" width="250" height="182" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M60 250 L60 218 Q60 210 68 210 L302 210 Q310 210 310 250 Z" fill="#8C3D50"/>
+<text x="76" y="237" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">属性</text>
+<rect x="224" y="219" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="262" y="235" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="310" cy="267" r="7" fill="#C7C729" stroke="#181513" stroke-width="2"/>
+<text x="296" y="272" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カラー</text>
+<circle cx="310" cy="301" r="7" fill="#6363C7" stroke="#181513" stroke-width="2"/>
+<text x="296" y="306" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ベクトル</text>
+<circle cx="310" cy="335" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="296" y="340" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">係数</text>
+<rect x="70" y="356" width="230" height="22" rx="4" fill="#3A3430"/>
+<text x="80" y="372" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">名前  phase_r</text>
+</g>
+<g>
+<rect x="480" y="210" width="300" height="148" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M480 250 L480 218 Q480 210 488 210 L772 210 Q780 210 780 250 Z" fill="#36688F"/>
+<text x="496" y="237" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カラーランプ</text>
+<rect x="694" y="219" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="732" y="235" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="780" cy="267" r="7" fill="#C7C729" stroke="#181513" stroke-width="2"/>
+<text x="766" y="272" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カラー</text>
+<circle cx="780" cy="301" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="766" y="306" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">アルファ</text>
+<circle cx="480" cy="267" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="494" y="272" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">係数</text>
+<rect x="490" y="322" width="280" height="22" rx="4" fill="#3A3430"/>
+<text x="500" y="338" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">色は下の表のとおり</text>
+</g>
+<g>
+<rect x="980" y="210" width="260" height="120" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M980 250 L980 218 Q980 210 988 210 L1232 210 Q1240 210 1240 250 Z" fill="#4B7A3F"/>
+<text x="996" y="237" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">放射</text>
+<rect x="1178" y="219" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1204" y="235" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="1240" cy="267" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1226" y="272" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">放射</text>
+<circle cx="980" cy="267" r="7" fill="#C7C729" stroke="#181513" stroke-width="2"/>
+<text x="994" y="272" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カラー</text>
+<circle cx="980" cy="301" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="994" y="306" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">強さ</text>
+</g>
+<path d="M310 335 C386 335 403 267 480 267" fill="none" stroke="#A1A1A1" stroke-width="2.6"/>
+<path d="M780 267 C870 267 890 267 980 267" fill="none" stroke="#C7C729" stroke-width="2.6"/>
+</svg>

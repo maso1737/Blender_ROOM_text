@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="560" viewBox="0 0 1600 560">
+<rect width="1600" height="560" fill="#181513"/>
+<text x="40" y="52" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-weight="700"><tspan font-size="32" fill="#FF9A3C">10</tspan><tspan font-size="22" fill="#FFFFFF">  筒の外向き radial を焼き付ける</tspan></text>
+<text x="40" y="84" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="17" fill="#8A8076">見た目は変わらない。11 で「筒の横だけ光らせる」ための材料</text>
+<line x1="40" y1="102" x2="1560" y2="102" stroke="#4A423B" stroke-width="1.5"/>
+<rect x="1000" y="118" width="560" height="46" rx="6" fill="#1F1B18" stroke="#4A423B"/>
+<rect x="1012" y="130" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="1050" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<rect x="1100" y="130" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1126" y="146" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<path d="M1176 141 L1226 141" stroke="#FF9A3C" stroke-width="3"/>
+<text x="1234" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">今回つなぐ線</text>
+<path d="M1350 141 L1400 141" stroke="#8A8076" stroke-width="3" stroke-dasharray="7 6"/>
+<text x="1408" y="146" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#BCB2A4">もう繋がっている線</text>
+<g>
+<rect x="40" y="380" width="150" height="86" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M40 420 L40 388 Q40 380 48 380 L182 380 Q190 380 190 420 Z" fill="#8C3D50"/>
+<text x="56" y="407" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">位置</text>
+<rect x="128" y="389" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="154" y="405" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="190" cy="437" r="7" fill="#6363C7" stroke="#181513" stroke-width="2"/>
+<text x="176" y="442" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">位置</text>
+</g>
+<g>
+<rect x="250" y="360" width="260" height="176" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M250 400 L250 368 Q250 360 258 360 L502 360 Q510 360 510 400 Z" fill="#4A4682"/>
+<text x="266" y="387" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">ベクトル演算</text>
+<rect x="424" y="369" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="462" y="385" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="510" cy="417" r="7" fill="#6363C7" stroke="#181513" stroke-width="2"/>
+<text x="496" y="422" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ベクトル</text>
+<circle cx="250" cy="417" r="7" fill="#6363C7" stroke="#181513" stroke-width="2"/>
+<text x="264" y="422" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ベクトル 上</text>
+<circle cx="250" cy="451" r="7" fill="#6363C7" stroke="#181513" stroke-width="2"/>
+<text x="264" y="456" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ベクトル 下</text>
+<rect x="260" y="472" width="240" height="22" rx="4" fill="#3A3430"/>
+<text x="270" y="488" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">乗算</text>
+<rect x="260" y="500" width="240" height="22" rx="4" fill="#3A3430"/>
+<text x="270" y="516" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">下  1 / 1 / 0</text>
+</g>
+<g>
+<rect x="570" y="380" width="240" height="114" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M570 420 L570 388 Q570 380 578 380 L802 380 Q810 380 810 420 Z" fill="#4A4682"/>
+<text x="586" y="407" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">ベクトル演算</text>
+<rect x="724" y="389" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="762" y="405" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="810" cy="437" r="7" fill="#6363C7" stroke="#181513" stroke-width="2"/>
+<text x="796" y="442" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ベクトル</text>
+<circle cx="570" cy="437" r="7" fill="#6363C7" stroke="#181513" stroke-width="2"/>
+<text x="584" y="442" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ベクトル</text>
+<rect x="580" y="458" width="220" height="22" rx="4" fill="#3A3430"/>
+<text x="590" y="474" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">正規化</text>
+</g>
+<g>
+<rect x="40" y="190" width="300" height="114" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M40 230 L40 198 Q40 190 48 190 L332 190 Q340 190 340 230 Z" fill="#3E6B6B"/>
+<text x="56" y="217" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">名前付き属性格納</text>
+<rect x="278" y="199" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="304" y="215" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="340" cy="247" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="326" y="252" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<rect x="50" y="268" width="280" height="22" rx="4" fill="#3A3430"/>
+<text x="60" y="284" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">phase_b</text>
+</g>
+<g>
+<rect x="870" y="180" width="320" height="244" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M870 220 L870 188 Q870 180 878 180 L1182 180 Q1190 180 1190 220 Z" fill="#3E6B6B"/>
+<text x="886" y="207" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">名前付き属性格納</text>
+<rect x="1104" y="189" width="76" height="22" rx="11" fill="#FF9A3C"/>
+<text x="1142" y="205" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#241A0C">新規追加</text>
+<circle cx="1190" cy="237" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1176" y="242" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="870" cy="237" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="884" y="242" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">ジオメトリ</text>
+<circle cx="870" cy="271" r="7" fill="#CC50B0" stroke="#181513" stroke-width="2"/>
+<text x="884" y="276" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">選択</text>
+<circle cx="870" cy="305" r="7" fill="#A1A1A1" stroke="#181513" stroke-width="2"/>
+<text x="884" y="310" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">名前</text>
+<circle cx="870" cy="339" r="7" fill="#6363C7" stroke="#181513" stroke-width="2"/>
+<text x="884" y="344" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">値</text>
+<rect x="880" y="360" width="300" height="22" rx="4" fill="#3A3430"/>
+<text x="890" y="376" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">ベクトル / ポイント</text>
+<rect x="880" y="388" width="300" height="22" rx="4" fill="#3A3430"/>
+<text x="890" y="404" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="14" fill="#E4DACB">名前  radial</text>
+</g>
+<g>
+<rect x="1270" y="190" width="290" height="86" rx="8" fill="#2C2724" stroke="#7E736A" stroke-width="1.5" stroke-dasharray="9 6"/>
+<path d="M1270 230 L1270 198 Q1270 190 1278 190 L1552 190 Q1560 190 1560 230 Z" fill="#2F6B55"/>
+<text x="1286" y="217" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="19" font-weight="700" fill="#FFFFFF">カーブのメッシュ化</text>
+<rect x="1498" y="199" width="52" height="22" rx="11" fill="#4A423B"/>
+<text x="1524" y="215" text-anchor="middle" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="12" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="1560" cy="247" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1546" y="252" text-anchor="end" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">メッシュ</text>
+<circle cx="1270" cy="247" r="7" fill="#00D6A3" stroke="#181513" stroke-width="2"/>
+<text x="1284" y="252" font-family="'Helvetica Neue',Helvetica,Arial,sans-serif" font-size="15" fill="#BCB2A4">カーブ</text>
+</g>
+<path d="M340 247 C578 247 631 237 870 237" fill="none" stroke="#00D6A3" stroke-width="2.6"/>
+<path d="M1190 237 C1228 237 1232 247 1270 247" fill="none" stroke="#FF9A3C" stroke-width="2.6"/>
+<path d="M190 437 C228 437 212 417 250 417" fill="none" stroke="#6363C7" stroke-width="2.6"/>
+<path d="M510 417 C548 417 532 437 570 437" fill="none" stroke="#6363C7" stroke-width="2.6"/>
+<path d="M810 437 C848 437 832 339 870 339" fill="none" stroke="#6363C7" stroke-width="2.6"/>
+<rect x="1250" y="360" width="310" height="80" rx="4" fill="#2A2015" stroke="#FF9A3C" stroke-width="1.5"/>
+<rect x="1250" y="360" width="4" height="80" fill="#FF9A3C"/>
+<text x="1268" y="388" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">データ型を</text>
+<text x="1268" y="414" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="16" fill="#EFE7D9">「ベクトル」にする</text>
+</svg>
