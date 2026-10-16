@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>透過ブルームの書き出し</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --ground:#EDEAE3; --panel:#FFFFFF; --panel-2:#F6F3ED;
+  --ink:#221E19; --ink-2:#5C544A; --ink-3:#8C8377;
+  --rule:#DCD6CB; --rule-2:#C8C0B2;
+  --amber:#C77400; --amber-ink:#8A5100; --amber-wash:#FBEFDC;
+  --stage:#171310;
+  --warn:#B03A1E; --warn-wash:#FBE7E1;
+  --sk-geo:#00A884; --sk-vec:#6363C7; --sk-val:#9A9186; --sk-col:#B8A400; --sk-int:#4E8C52; --sk-rot:#8A6BA8;
+  --maxw:960px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+    --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+    --rule:#332C24; --rule-2:#473D31;
+    --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+    --warn:#FF8C6B; --warn-wash:#2E1A14;
+    --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374; --sk-rot:#C0A0D0;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+  --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+  --rule:#332C24; --rule-2:#473D31;
+  --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+  --warn:#FF8C6B; --warn-wash:#2E1A14;
+  --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374; --sk-rot:#C0A0D0;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.85; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; margin:0;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 96px}
+a{color:var(--amber-ink)}
+
+header{padding:52px 0 28px}
+.eyebrow{
+  font-family:"JetBrains Mono",ui-monospace,monospace; font-size:11px; letter-spacing:.22em;
+  color:var(--ink-3); text-transform:uppercase; margin:0 0 16px;
+}
+h1{
+  font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400;
+  font-size:clamp(30px,6.2vw,54px); line-height:1.12; margin:0; text-wrap:balance; color:var(--ink);
+}
+h1 .amb{color:var(--amber)}
+.lead{max-width:62ch; color:var(--ink-2); margin:20px 0 0; font-size:16px}
+.lead b{color:var(--ink); font-weight:700}
+
+.toolbar{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+  margin-top:26px; padding:14px 16px; border:1px solid var(--rule); border-radius:2px; background:var(--panel);
+}
+.legend{display:flex; flex-wrap:wrap; gap:6px 16px; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-2)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.legend i{width:8px; height:8px; border-radius:50%; display:block}
+
+.step[id],#finished,#params,#trouble{scroll-margin-top:22px}
+.steps{display:flex; flex-direction:column; gap:0; margin-top:44px}
+.step{display:grid; grid-template-columns:56px 1fr; gap:0 22px; padding:34px 0 38px; border-top:1px solid var(--rule)}
+.step:first-child{border-top:2px solid var(--rule-2)}
+.num{font-family:"Bungee",monospace; font-size:26px; line-height:1; color:var(--amber); padding-top:4px}
+.num small{display:block; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.2em; color:var(--ink-3); margin-top:7px}
+.body h2{font-size:21px; line-height:1.45; margin:0 0 6px; font-weight:900; text-wrap:balance}
+.goal{color:var(--ink-2); margin:0 0 18px; max-width:62ch}
+@media (max-width:760px){ .step{grid-template-columns:40px 1fr; gap:0 14px} .num{font-size:20px} }
+
+.recipe{display:flex; flex-direction:column; gap:12px; min-width:0}
+.flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.nd{
+  font-family:"JetBrains Mono",monospace; font-size:12.5px; font-weight:700;
+  background:var(--panel); border:1px solid var(--rule-2); border-radius:2px;
+  padding:5px 10px 5px 8px; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+}
+.nd::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--sk-val); flex:none}
+.nd[data-sk="geo"]::before{background:var(--sk-geo)}
+.nd[data-sk="vec"]::before{background:var(--sk-vec)}
+.nd[data-sk="col"]::before{background:var(--sk-col)}
+.nd[data-sk="int"]::before{background:var(--sk-int)}
+.nd[data-sk="rot"]::before{background:var(--sk-rot)}
+.nd.mat{border-style:dashed}
+.ar{color:var(--ink-3); font-style:normal; font-size:13px; padding:0 1px}
+.to{font-family:"Zen Kaku Gothic New",sans-serif; font-size:12.5px; color:var(--ink-2)}
+.to b{color:var(--ink)}
+.where{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em; color:var(--ink-3); text-transform:uppercase; margin:0 0 -4px}
+.where b{color:var(--amber-ink)}
+
+.set{margin:2px 0 0; border-top:1px solid var(--rule); font-size:13.5px}
+.set > div{display:flex; gap:12px; padding:7px 2px; border-bottom:1px solid var(--rule)}
+.set dt{flex:1 1 auto; color:var(--ink-2); font-family:"JetBrains Mono",monospace; font-size:12px; line-height:1.6}
+.set dd{margin:0; flex:none; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); line-height:1.6}
+
+.note{border-left:3px solid var(--amber); background:var(--amber-wash); padding:12px 14px; font-size:14px; color:var(--ink); margin:4px 0 0; line-height:1.8}
+.note.bad{border-left-color:var(--warn); background:var(--warn-wash)}
+.note b{font-weight:900}
+code{font-family:"JetBrains Mono",monospace; font-size:.88em; font-weight:700; background:color-mix(in srgb, var(--ink) 9%, transparent); padding:1px 5px; border-radius:2px}
+
+details.why{margin:8px 0 0; font-size:13.5px}
+details.why > summary{
+  cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:6px;
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em; color:var(--ink-3);
+  text-transform:uppercase; padding:3px 0;
+}
+details.why > summary::-webkit-details-marker{display:none}
+details.why > summary::before{content:"\25B8"; color:var(--amber); font-size:12px}
+details.why[open] > summary::before{content:"\25BE"}
+details.why > summary:hover{color:var(--amber-ink)}
+details.why .inner{padding:6px 0 2px; color:var(--ink-2); line-height:1.8; border-top:1px solid var(--rule); margin-top:4px}
+
+.attrs{width:100%; border-collapse:collapse; margin:16px 0 0; font-size:13.5px}
+.attrs th,.attrs td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--rule); vertical-align:top}
+.attrs th{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); font-weight:400; border-bottom:1px solid var(--rule-2)}
+.attrs td:first-child{font-family:"JetBrains Mono",monospace; font-weight:700; color:var(--amber-ink); white-space:nowrap}
+.attrs td b{color:var(--ink)}
+.attrs tr.warn td:first-child{color:var(--warn)}
+@media (max-width:620px){
+  .attrs,.attrs tbody,.attrs tr,.attrs td{display:block; width:100%}
+  .attrs thead{display:none} .attrs tr{border-bottom:1px solid var(--rule-2); padding:6px 0}
+  .attrs td{border:0; padding:2px 0}
+}
+
+.dgm{
+  --rail:0px; position:relative; left:50%;
+  width:min(1480px, 94vw);
+  margin:24px 0 0 calc(-1 * min(740px, 47vw) - var(--rail));
+}
+.step .dgm{--rail:39px}
+@media (max-width:760px){ .step .dgm{--rail:27px} }
+.dgm img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#181513; cursor:zoom-in}
+.dgm figcaption{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.1em; color:var(--ink-3); margin-top:8px; text-transform:uppercase}
+.dgm figcaption b{color:var(--amber-ink); font-weight:700}
+header .dgm{margin-top:28px}
+
+.shots{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px}
+@media (max-width:700px){ .shots{grid-template-columns:1fr} }
+.shots figure{margin:0}
+.shots img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#0B0B0D; cursor:zoom-in}
+.shots figcaption{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; color:var(--ink-3); margin-top:7px}
+
+.exhead{margin-top:64px; padding-top:30px; border-top:3px double var(--rule-2)}
+.exhead h2{font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400; font-size:clamp(24px,4vw,36px); margin:0; color:var(--ink)}
+.exhead p{color:var(--ink-2); margin:12px 0 0; max-width:62ch; font-size:15px}
+.exhead + .steps{margin-top:22px}
+
+.trouble{margin-top:56px; border:1px solid var(--rule-2); background:var(--panel); padding:26px 26px 10px}
+.trouble h2{font-family:"Bungee",sans-serif; font-weight:400; font-size:19px; margin:0 0 4px; color:var(--ink)}
+.trouble > p{color:var(--ink-2); margin:0 0 18px; font-size:14px}
+.tr{border-top:1px solid var(--rule); padding:16px 0}
+.tr h3{margin:0 0 6px; font-size:15px; font-weight:900; line-height:1.6}
+.tr p{margin:0; color:var(--ink-2); font-size:14px}
+
+.tail{margin-top:48px; color:var(--ink-2); font-size:14.5px; max-width:62ch}
+.tail h2{font-size:17px; color:var(--ink); margin:0 0 8px; font-weight:900}
+
+.lb[hidden]{display:none}
+.lb{position:fixed; inset:0; z-index:60; background:rgba(12,10,8,.97); overflow:auto; padding:70px 24px 40px}
+.lb img{display:block; margin:0 auto; max-width:none; background:#181513}
+.lb.fit img{width:100%; max-width:1600px; height:auto}
+.lbbar{position:fixed; top:0; left:0; right:0; height:56px; z-index:61; background:var(--panel); border-bottom:1px solid var(--rule-2); display:flex; align-items:center; gap:10px; padding:0 20px}
+.lbbar .name{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-2); flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+button{font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.08em; background:var(--panel-2); color:var(--ink); border:1px solid var(--rule-2); border-radius:2px; padding:7px 13px; cursor:pointer}
+button:hover{border-color:var(--amber); color:var(--amber-ink)}
+button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+
+.viewchk{
+  display:flex; gap:12px; align-items:flex-start; margin:10px 0 0; padding:11px 14px;
+  border:1px solid var(--rule-2); border-radius:2px; background:var(--panel-2); font-size:13.5px; color:var(--ink-2);
+}
+.viewchk b{color:var(--ink)}
+.gout{
+  display:flex; gap:12px; align-items:flex-start; margin:8px 0 0; padding:11px 14px;
+  border:1px solid var(--amber); border-radius:2px; background:var(--amber-wash);
+  font-size:13.5px; color:var(--ink);
+}
+.gout::before{
+  content:"つなぐ"; flex:none; font-family:"Zen Kaku Gothic New",sans-serif; font-size:10px;
+  color:#241A0C; background:var(--amber); border-radius:2px; padding:2px 6px; margin-top:3px; font-weight:700;
+}
+.gout b{font-weight:900}
+.viewchk::before{
+  content:"3D VIEW"; flex:none; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.12em;
+  color:var(--amber-ink); border:1px solid var(--amber); border-radius:2px; padding:2px 5px; margin-top:3px;
+}
+.nd em{font-style:normal; font-weight:400; color:var(--ink-3); font-size:11px; margin-left:2px}
+.en{font-style:normal; font-family:"JetBrains Mono",monospace; font-weight:400; color:var(--ink-3); font-size:10.5px; margin-left:6px}
+.body{min-width:0}
+@media (max-width:620px){
+  .nd{white-space:normal; align-items:flex-start}
+  .nd em{display:block; margin-left:0; line-height:1.4}
+  .nd::before{margin-top:6px}
+  .set > div{flex-direction:column; gap:2px}
+  .set dd{flex:1 1 auto; align-self:flex-start}
+}
+.newtag,.oldtag{
+  font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.1em; border-radius:9px;
+  padding:2px 7px; margin-left:6px; vertical-align:1px; white-space:nowrap;
+}
+.newtag{background:var(--amber); color:#241A0C; font-weight:700}
+.oldtag{background:var(--rule); color:var(--ink-2)}
+.gitag{
+  background:transparent; color:var(--sk-rot); border:1px solid var(--sk-rot); font-weight:700;
+  cursor:help;
+}
+.namemap{margin-top:14px}
+.namemap summary{
+  cursor:pointer; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); list-style:none; padding:4px 0;
+}
+.namemap summary::-webkit-details-marker{display:none}
+.namemap summary::before{content:"\25B8"; color:var(--amber); margin-right:6px}
+.namemap[open] summary::before{content:"\25BE"}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+.dl{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)}
+.view{display:grid; grid-template-columns:minmax(0,340px) 1fr; gap:14px; align-items:start; margin-top:18px}
+.view.view-r{grid-template-columns:minmax(0,200px) 1fr}
+.view img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#0B0B0D; cursor:zoom-in}
+.view .viewchk{margin:0}
+@media (max-width:620px){ .view,.view.view-r{grid-template-columns:1fr} }
+.frames{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:18px; max-width:640px}
+.frames figure{margin:0}
+.frames img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#000; cursor:zoom-in}
+.frames figcaption{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--ink-3); margin-top:4px; text-align:center}
+.ramp{margin:6px 0 0}
+.ramp img{display:block; width:100%; height:auto; border-radius:3px; cursor:zoom-in}
+.ramp figcaption{font-size:12.5px; color:var(--ink-2); margin-top:6px}
+.flow + .flow{margin-top:-4px}
+
+.dgm svg{width:100%; height:auto; display:block; border-radius:2px; user-select:text}
+.dgm figcaption{font-size:12px; color:var(--ink-3); margin-top:6px}
+ol.todo{margin:14px 0 0; padding:0; list-style:none; counter-reset:t; display:flex; flex-direction:column; gap:10px}
+ol.todo > li{counter-increment:t; display:grid; grid-template-columns:28px 1fr; gap:10px; align-items:start}
+ol.todo > li::before{content:counter(t); font-family:"Bungee",monospace; color:var(--amber); font-size:18px; line-height:1.4}
+ol.todo .lbl{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.14em; color:var(--ink-3); display:block; margin-bottom:4px}
+ul.wires{margin:0; padding:10px 14px; list-style:none; border:1px solid var(--amber); background:var(--amber-wash); border-radius:2px;
+  font-size:13.5px; line-height:1.9}
+ul.wires li{white-space:normal}
+ul.wires li .to{color:var(--amber-ink); font-weight:700; padding:0 4px}
+.views{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:8px; margin-top:14px}
+.views figure{margin:0}
+.views img{width:100%; display:block; border-radius:2px; background:#000}
+.views figcaption{font-size:12px; color:var(--ink-3)}
+table.cue{border-collapse:collapse; width:100%; font-size:12.5px; margin-top:10px; font-family:"JetBrains Mono",monospace}
+table.cue th, table.cue td{border:1px solid var(--rule); padding:4px 6px; text-align:right; white-space:nowrap}
+table.cue th{background:var(--panel-2); font-family:"Zen Kaku Gothic New",sans-serif; font-weight:700; font-size:11.5px}
+table.cue td.l, table.cue th.l{text-align:left}
+table.cue td.off{color:var(--ink-3)}
+.tblwrap{overflow-x:auto}
+.pal{display:inline-block; width:14px; height:14px; border-radius:2px; vertical-align:-2px; margin-right:6px; border:1px solid var(--rule-2)}
+ol.todo .dgm{left:auto; width:100%; margin:8px 0 0}
+ol.todo > li > div{min-width:0}
+table.cue td.l:last-child{white-space:normal; min-width:16em}
+kbd{font-family:"JetBrains Mono",monospace; font-size:12px; border:1px solid var(--rule-2); border-bottom-width:2px; border-radius:3px; padding:0 5px; background:var(--panel)}
+</style>
+<style>.views a{display:block}.views img{border:1px solid var(--rule-2)}#noise{scroll-margin-top:22px}</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Blender 5.2 LTS / コンポジター / グレア（ブルーム） / 背景の透過</p>
+  <h1>透過でも、<br><span class="amb">ボケ</span>を残して出す。</h1>
+  <p class="lead">ブルームをかけたまま <b>背景の透過 ON</b> で書き出すと、ボケが切り取られて球だけになります。<br>
+  <b>「本体」と「ボケだけ」を 2 本に分けて出し、AE で加算</b>すれば、Blender で見たままの光が戻ります。</p>
+  <div class="note" style="margin-top:18px"><b>このページの読み方</b><br>
+    各ステップは <b>出すノード・打つ値・つなぐ → 見え方</b> の順です。<br>
+    <span class="newtag">新規</span> ＝ここで新しく出す　<span class="oldtag">既存</span> ＝もう置いてある。<b>つなぐ</b> は 1 行 1 本。<br>
+    「仕組み」は折りたたんであります。やって見えてから開けばOK。</div>
+  <p style="margin-top:14px; display:flex; flex-wrap:wrap; gap:10px">
+    <a class="dl" href="14.html">◂ 第14回にもどる</a>
+  </p>
+</header>
+
+<section class="exhead" id="finished" style="margin-top:28px; border-top:0; padding-top:0">
+  <p class="eyebrow">Before / After</p>
+  <h2>同じレンダーを、紺の背景に重ねた</h2>
+</section>
+<div class="views">
+  <figure><a href="assets/lec14/bloom_ng.png" target="_blank"><img src="assets/lec14/bloom_ng.png" alt="透過PNGをそのまま重ねた：ボケが消えて球だけ" loading="lazy"></a><figcaption>✕ 透過 PNG 1 本：ボケが消える</figcaption></figure>
+  <figure><a href="assets/lec14/bloom_ok.png" target="_blank"><img src="assets/lec14/bloom_ok.png" alt="本体＋ボケだけを加算：ボケが残る" loading="lazy"></a><figcaption>◯ 本体 ＋ ボケだけ（加算）</figcaption></figure>
+</div>
+
+<div class="steps">
+
+<section class="step" id="s00">
+<div class="num">00<small>START</small></div><div class="body">
+<h2>いまの状態（第14回の続き）</h2>
+<ol class="todo">
+<li><div><span class="lbl">もう組んである</span><div class="flow"><span class="nd">レンダーレイヤー<em>Render Layers</em><span class="oldtag">既存</span></span><i class="ar">→</i><span class="nd">グレア<em>Glare</em><span class="oldtag">既存</span></span><i class="ar">→</i><span class="nd">グループ出力<em>Group Output</em><span class="oldtag">既存</span></span></div></div></li>
+<li><div><span class="lbl">グレアの値</span><dl class="set"><div><dt>種類</dt><dd>ブルーム<span class="en">Bloom</span></dd></div></dl></div></li>
+<li><div><span class="lbl">レンダープロパティ → フィルム</span><dl class="set"><div><dt>透過</dt><dd>✓ オン<span class="en">Film → Transparent</span></dd></div></dl></div></li>
+</ol>
+<details class="why"><summary>仕組み：なぜボケが切れる？</summary><div class="note">
+ボケは <b>透明なところ（アルファ 0）に乗った光</b>です。<br>
+PNG は「透明なところの色は捨てる」形式なので、<b>ボケがまるごと消えます</b>（テストで光の量の 89% が消えた）。<br>
+EXR は色を残せますが、読み込む側（AE など）で透明なところの色が捨てられることがあります。<br>
+→ <b>ボケを不透明な黒背景の別ファイルにしておけば、どこに持って行っても消えません。</b></div></details>
+</div></section>
+
+<section class="step" id="s01">
+<div class="num">01<small>SHAPE</small></div><div class="body">
+<h2>ボケの形を固定する（品質 高）</h2>
+<ol class="todo">
+<li><div><span class="lbl">グレアの値</span><dl class="set"><div><dt>品質</dt><dd>中 → <b>高</b><span class="en">Quality: High</span></dd></div><div><dt>サイズ</dt><dd>そのまま（画面に対する割合）</dd></div></dl></div></li>
+</ol>
+<div class="note bad"><b>初期値は「中」。</b>中だとボケを縮小して計算するので、ボケあしが少し広く・ゆるくなります（テストで「高」と約 10% 違う）。<b>確認も本番も「高」で固定。</b></div>
+<details class="why"><summary>25% チェックと 100% 本番で変わらない？</summary><div class="note">ブルームの <b>サイズは画面幅に対する割合</b>です。解像度を下げても広がりはほぼ同じ（テストで 50% のとき約 4% 広い程度）。<br>形が大きく変わって見えるときは、まず品質が「中」に戻っていないかを見ます。</div></details>
+</div></section>
+
+<section class="step" id="s02">
+<div class="num">02<small>SPLIT</small></div><div class="body">
+<h2>「本体」と「ボケだけ」の 2 本に分けて書き出す</h2>
+<figure class="dgm" style="left:auto; width:100%; margin:18px 0 0"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 1200 470" aria-label="ノードのつなぎ方">
+<rect width="1200" height="470" fill="#181513"/>
+<text x="30" y="44" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="700"><tspan font-size="26" fill="#FF9A3C">02</tspan><tspan font-size="19" fill="#FFFFFF">  コンポジター（ノードは 1 個だけ足す）</tspan></text>
+<line x1="30" y1="62" x2="1170" y2="62" stroke="#4A423B" stroke-width="1.5"/>
+<g font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif">
+<!-- Render Layers -->
+<rect x="40" y="110" width="250" height="140" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M40 148 L40 118 Q40 110 48 110 L282 110 Q290 110 290 118 L290 148 Z" fill="#8C3D50"/>
+<text x="56" y="136" font-size="17" font-weight="700" fill="#FFF">レンダーレイヤー</text>
+<rect x="206" y="119" width="72" height="20" rx="10" fill="#4A423B"/><text x="242" y="134" text-anchor="middle" font-size="11" font-weight="700" fill="#D9CFC2">既存</text>
+<text x="274" y="190" text-anchor="end" font-size="15" fill="#E8DFD2">画像</text><circle cx="290" cy="185" r="7" fill="#C7C29A"/>
+<text x="274" y="226" text-anchor="end" font-size="15" fill="#8A8076">アルファ</text><circle cx="290" cy="221" r="7" fill="#9A9186"/>
+<!-- Glare -->
+<rect x="450" y="90" width="250" height="210" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M450 128 L450 98 Q450 90 458 90 L692 90 Q700 90 700 98 L700 128 Z" fill="#5A4A8C"/>
+<text x="466" y="116" font-size="17" font-weight="700" fill="#FFF">グレア</text>
+<rect x="616" y="99" width="72" height="20" rx="10" fill="#4A423B"/><text x="652" y="114" text-anchor="middle" font-size="11" font-weight="700" fill="#D9CFC2">既存</text>
+<text x="684" y="160" text-anchor="end" font-size="15" fill="#E8DFD2">画像</text><circle cx="700" cy="155" r="7" fill="#C7C29A"/>
+<text x="684" y="195" text-anchor="end" font-size="15" fill="#FFB454" font-weight="700">グレア</text><circle cx="700" cy="190" r="7" fill="#C7C29A"/>
+<text x="684" y="230" text-anchor="end" font-size="15" fill="#8A8076">ハイライト</text><circle cx="700" cy="225" r="7" fill="#C7C29A"/>
+<circle cx="450" cy="185" r="7" fill="#C7C29A"/><text x="466" y="190" font-size="15" fill="#E8DFD2">画像</text>
+<text x="466" y="272" font-size="13" fill="#8A8076">ブルーム／品質 高</text>
+<!-- File Output -->
+<rect x="880" y="250" width="270" height="170" rx="8" fill="#2C2724" stroke="#FF9A3C" stroke-width="2"/>
+<path d="M880 288 L880 258 Q880 250 888 250 L1142 250 Q1150 250 1150 258 L1150 288 Z" fill="#3D5A8C"/>
+<text x="896" y="276" font-size="17" font-weight="700" fill="#FFF">ファイル出力</text>
+<rect x="1058" y="259" width="80" height="20" rx="10" fill="#FF9A3C"/><text x="1098" y="274" text-anchor="middle" font-size="11" font-weight="700" fill="#241A0C">新規</text>
+<circle cx="880" cy="330" r="7" fill="#C7C29A"/><text x="898" y="335" font-size="15" fill="#E8DFD2" font-weight="700">body</text><text x="950" y="335" font-size="13" fill="#8A8076">本体（透過）</text>
+<circle cx="880" cy="375" r="7" fill="#C7C29A"/><text x="898" y="380" font-size="15" fill="#FFB454" font-weight="700">glow</text><text x="950" y="380" font-size="13" fill="#8A8076">ボケだけ（黒）</text>
+<!-- Group Output -->
+<rect x="880" y="90" width="270" height="110" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M880 128 L880 98 Q880 90 888 90 L1142 90 Q1150 90 1150 98 L1150 128 Z" fill="#4A423B"/>
+<text x="896" y="116" font-size="17" font-weight="700" fill="#FFF">グループ出力</text>
+<rect x="1058" y="99" width="80" height="20" rx="10" fill="#5C544A"/><text x="1098" y="114" text-anchor="middle" font-size="11" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="880" cy="160" r="7" fill="#C7C29A"/><text x="898" y="165" font-size="15" fill="#E8DFD2">画像</text><text x="950" y="165" font-size="13" fill="#8A8076">見る用（いままで通り）</text>
+</g>
+<!-- wires -->
+<path d="M297 185 C380 185 370 185 443 185" stroke="#8A8076" stroke-width="3" fill="none"/>
+<path d="M707 155 C790 155 790 160 873 160" stroke="#8A8076" stroke-width="3" fill="none"/>
+<path d="M297 185 C420 185 380 330 520 330 L873 330" stroke="#FF9A3C" stroke-width="3.5" fill="none"/>
+<path d="M707 190 C800 190 780 375 873 375" stroke="#FF9A3C" stroke-width="3.5" fill="none"/>
+<text x="560" y="350" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="13" fill="#FF9A3C">グレアの「前」から取る</text>
+<text x="30" y="452" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076">オレンジ ＝ 今回つなぐ線</text>
+</svg><figcaption>図の文字は選択・コピーできます</figcaption></figure>
+<ol class="todo">
+<li><div><span class="lbl">出すノード</span><div class="flow"><span class="nd">ファイル出力<em>File Output</em><span class="newtag">新規</span></span></div><p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-2)">追加 → 出力 → ファイル出力</p></div></li>
+<li><div><span class="lbl">打つ値（ノードを選んで N → ノード タブ）</span><dl class="set">
+<div><dt>ディレクトリ</dt><dd>//_out/bloom/</dd></div>
+<div><dt>ファイル名</dt><dd>shot_</dd></div>
+<div><dt>メディアタイプ</dt><dd>画像<span class="en">Media Type: Image</span></dd></div>
+<div><dt>ノードフォーマット → ファイルフォーマット</dt><dd>PNG ／ RGBA ／ 16</dd></div>
+<div><dt>画像／レイヤー の ＋ で 2 つ作る</dt><dd>body ・ glow<span class="en">Images/Layers</span></dd></div>
+</dl></div></li>
+<li><div><span class="lbl">つなぐ</span><ul class="wires">
+<li>レンダーレイヤー 画像<span class="to">→</span>ファイル出力 body</li>
+<li>グレア グレア<span class="to">→</span>ファイル出力 glow</li>
+<li>グレア 画像<span class="to">→</span>グループ出力（いままで通り・見る用）</li>
+</ul></div></li>
+</ol>
+<div class="note bad"><b>body はグレアの「前」から。</b>グレアの「画像」を body に入れると、AE で glow を足したときに <b>ボケが二重</b>になって明るすぎます。</div>
+<details class="why"><summary>仕組み：グレアの 3 つの出口</summary><div class="note">
+<b>画像</b> ＝ 元の絵 ＋ ボケ（見る用）<br>
+<b>グレア</b> ＝ ボケだけ。黒い背景で、透明なところがない → 切れない<br>
+<b>ハイライト</b> ＝ ボケの元になった明るいところ（今回は使わない）<br>
+<b>元の絵 ＋ ボケだけ ＝ 画像</b> がぴったり成り立つので、2 本に分けても見た目は変わりません（テストで差 0.000002）。<br>
+PNG の深度 16 は、ボケのなだらかなグラデーションに段々が出にくくするため。</div></details>
+</div></section>
+
+<section class="step" id="s03">
+<div class="num">03<small>RENDER</small></div><div class="body">
+<h2>レンダーする</h2>
+<ol class="todo">
+<li><div><span class="lbl">いつも通り</span><dl class="set"><div><dt>アニメーションレンダリング</dt><dd><kbd>Ctrl</kbd>+<kbd>F12</kbd></dd></div></dl></div></li>
+<li><div><span class="lbl">できるもの（_out/bloom/）</span><dl class="set"><div><dt>本体（透過）</dt><dd>shot_body0001.png …</dd></div><div><dt>ボケだけ（黒背景）</dt><dd>shot_glow0001.png …</dd></div></dl></div></li>
+</ol>
+<div class="views"><figure><a href="assets/lec14/bloom_glow_only.png" target="_blank"><img src="assets/lec14/bloom_glow_only.png" alt="glow：黒背景にボケだけ" loading="lazy"></a><figcaption>glow ＝ 黒の上にボケだけ</figcaption></figure></div>
+<p class="viewchk"><b>glow が真っ黒なら</b>、グレアの「画像」ではなく「グレア」の出口から線が出ているか確認。</p>
+<details class="why"><summary>出力プロパティの出力先は？</summary><div class="note">いつもの出力（出力プロパティの出力先）もそのまま書き出されます。いらなければ出力先を空のフォルダにしておくか、そちらはプレビュー用と割り切ってOK。</div></details>
+</div></section>
+
+<section class="step" id="s04">
+<div class="num">04<small>AE</small></div><div class="body">
+<h2>AE で重ねる（ボケは加算）</h2>
+<ol class="todo">
+<li><div><span class="lbl">レイヤーの順（上から）</span><dl class="set">
+<div><dt>1. shot_glow</dt><dd>描画モード <b>加算</b><span class="en">Add</span></dd></div>
+<div><dt>2. shot_body</dt><dd>通常</dd></div>
+<div><dt>3. 背景</dt><dd>通常</dd></div>
+</dl></div></li>
+</ol>
+<p class="viewchk"><b>背景を黒にすると、Blender のレンダー画面とほぼ同じ</b>（テストで平均 0.3/255 の差）。</p>
+<details class="why"><summary>楽しみ方：ボケだけ後から触れる</summary><div class="note">ボケが別レイヤーなので、<b>不透明度でボケの強さ</b>、色調補正で <b>ボケの色だけ</b>変えられます。撮影でグローを足すのと同じ感覚で、Blender で見た光をそのまま出発点にできます。<br>
+グレアの「サイズ」はボケの広がり、「強さ」は明るさ。ここを Blender 側で決めて、AE では微調整だけにすると迷いません。</div></details>
+</div></section>
+
+</div><!-- /steps -->
+
+<section class="exhead" id="noise">
+  <p class="eyebrow">Noise / ノイズとボケあし</p>
+  <h2>ノイズを抑えても、ボケあしを変えない</h2>
+  <p>ノイズ対策の設定には、<b>ボケまで弱くしてしまうもの</b>があります。テストで実際に測った結果です。</p>
+</section>
+<div class="steps">
+
+<section class="step" id="s05">
+<div class="num">05<small>CLAMP</small></div><div class="body">
+<h2>クランプは「間接光」だけ。「直接光」は 0 のまま</h2>
+<ol class="todo">
+<li><div><span class="lbl">レンダープロパティ → ライトパス → クランプ（Cycles）</span><dl class="set">
+<div><dt>直接光</dt><dd><b>0</b>（オフのまま）<span class="en">Direct Light</span></dd></div>
+<div><dt>間接光</dt><dd>10 くらい<span class="en">Indirect Light</span></dd></div>
+</dl></div></li>
+</ol>
+<table class="attrs"><thead><tr><th>クランプ</th><th>ボケの量</th></tr></thead><tbody>
+<tr><td>直接 0 ／ 間接 0</td><td>100%（基準）</td></tr>
+<tr><td>直接 0 ／ 間接 10</td><td><b>100%（変わらない）</b></td></tr>
+<tr class="warn"><td>直接 10 ／ 間接 10</td><td>59%（4 割減る）</td></tr>
+<tr class="warn"><td>直接 1 ／ 間接 1</td><td>3%（ほぼ消える）</td></tr>
+</tbody></table>
+<details class="why"><summary>仕組み</summary><div class="note">カメラから直接見えている光る球も「直接光」として頭打ちにされます。球が暗くなる → ボケの元が減る → <b>ボケあしが短くなる</b>。<br>ちらつく白い点（ホタル）はたいてい間接光から出るので、間接光だけクランプすればボケは守れます。</div></details>
+</div></section>
+
+<section class="step" id="s06">
+<div class="num">06<small>DENOISE</small></div><div class="body">
+<h2>サンプルを減らすなら、デノイズは ON でいい</h2>
+<ol class="todo">
+<li><div><span class="lbl">レンダープロパティ → サンプリング → レンダー</span><dl class="set"><div><dt>デノイズ</dt><dd>✓ オン<span class="en">Denoise</span></dd></div></dl></div></li>
+</ol>
+<div class="note">テストでは、デノイズあり／なしで <b>ボケの差は 0.5% 程度</b>。ボケあしの見た目を変える原因は、デノイズより <b>01 の品質</b>と <b>05 の直接光クランプ</b>のほうです。</div>
+</div></section>
+
+<section class="step" id="s07">
+<div class="num">07<small>EMIT</small></div><div class="body">
+<h2>（もっと安定させたいとき）ボケの元を「放射」パスから取る</h2>
+<p class="goal">光る球そのものはノイズがほぼ出ません。ボケをそこからだけ作ると、少ないサンプルでもボケがちらつきません。</p>
+<ol class="todo">
+<li><div><span class="lbl">ビューレイヤープロパティ → パス → ライト</span><dl class="set"><div><dt>放射</dt><dd>✓ オン<span class="en">Emission</span></dd></div></dl></div></li>
+<li><div><span class="lbl">出すノード</span><div class="flow"><span class="nd">ミックス（カラー・加算）<em>Mix Color / Add</em><span class="newtag">新規</span></span></div><p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-2)">追加 → カラー → カラーミックス → 種類を「加算」</p></div></li>
+<li><div><span class="lbl">つなぐ（グレアの入口だけ付け替える）</span><ul class="wires">
+<li>レンダーレイヤー 放射<span class="to">→</span>グレア 画像（いままでの 画像 の線と入れ替え）</li>
+<li>レンダーレイヤー 画像<span class="to">→</span>ミックス A</li>
+<li>グレア グレア<span class="to">→</span>ミックス B</li>
+<li>ミックス 結果<span class="to">→</span>グループ出力（見る用）</li>
+</ul><p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-2)">ファイル出力の body ・ glow はそのまま。</p></div></li>
+</ol>
+<table class="attrs"><thead><tr><th>ボケの元</th><th>4 サンプル</th><th>16 サンプル</th></tr></thead><tbody>
+<tr><td>画像（いつも）</td><td>ずれ 1.6%</td><td>ずれ 0.5%</td></tr>
+<tr><td>画像 ＋ デノイズ</td><td>ずれ 1.0%</td><td>ずれ 0.6%</td></tr>
+<tr><td>放射パス</td><td><b>ずれ 0.6%</b></td><td><b>ずれ 0.2%</b></td></tr>
+</tbody></table>
+<p style="font-size:12.5px; color:var(--ink-3); margin:6px 0 0">ずれ ＝ 512 サンプルで出したボケとの差</p>
+<div class="note bad"><b>見た目が変わる点：</b>光る物そのものだけがボケます。<b>光に照らされた床や、反射のハイライトはボケなくなります。</b>照明の球が主役のショット向き。</div>
+</div></section>
+
+</div><!-- /steps -->
+
+<section class="trouble" id="trouble">
+  <h2>TROUBLE</h2>
+  <p>困ったら、ここから。</p>
+  <div class="tr"><h3>PNG で出したら、ボケが消えて球だけになった</h3><p>透明なところの光は PNG に残りません → <a href="#s02">02</a> で「ボケだけ」を別に出す。</p></div>
+  <div class="tr"><h3>AE で加算したら、Blender より明るい・白く飛ぶ</h3><p>body にグレアの「画像」を入れていてボケが二重 → body は <b>レンダーレイヤーの画像</b>から（<a href="#s02">02</a>）。</p></div>
+  <div class="tr"><h3>チェックと本番で、ボケあしが違って見える</h3><p>グレアの品質が「中」 → <b>高</b>に（<a href="#s01">01</a>）。</p></div>
+  <div class="tr"><h3>ノイズを減らしたら、ボケが小さくなった</h3><p>クランプの <b>直接光</b>が入っている → 0 に戻して間接光だけに（<a href="#s05">05</a>）。</p></div>
+  <div class="tr"><h3>ボケがチラチラする</h3><p>グレアの「しきい値」を少し上げる。それでも残れば <a href="#s07">07</a>（放射パスから）。</p></div>
+</section>
+
+<div class="tail">
+  <p><a class="dl" href="14.html">◂ 第14回にもどる</a></p>
+</div>
+</div>
+</body>
+</html>
