@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AOとZ深度の書き出し</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bungee&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
+<style>
+:root{
+  --ground:#EDEAE3; --panel:#FFFFFF; --panel-2:#F6F3ED;
+  --ink:#221E19; --ink-2:#5C544A; --ink-3:#8C8377;
+  --rule:#DCD6CB; --rule-2:#C8C0B2;
+  --amber:#C77400; --amber-ink:#8A5100; --amber-wash:#FBEFDC;
+  --stage:#171310;
+  --warn:#B03A1E; --warn-wash:#FBE7E1;
+  --sk-geo:#00A884; --sk-vec:#6363C7; --sk-val:#9A9186; --sk-col:#B8A400; --sk-int:#4E8C52; --sk-rot:#8A6BA8;
+  --maxw:960px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+    --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+    --rule:#332C24; --rule-2:#473D31;
+    --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+    --warn:#FF8C6B; --warn-wash:#2E1A14;
+    --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374; --sk-rot:#C0A0D0;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14110E; --panel:#1D1915; --panel-2:#231E19;
+  --ink:#EFE7D9; --ink-2:#B3A794; --ink-3:#847A6C;
+  --rule:#332C24; --rule-2:#473D31;
+  --amber:#FFB454; --amber-ink:#FFC87A; --amber-wash:#2A2015;
+  --warn:#FF8C6B; --warn-wash:#2E1A14;
+  --sk-geo:#00D6A3; --sk-vec:#8B8BE0; --sk-val:#B0A79B; --sk-col:#D6C23A; --sk-int:#6FB374; --sk-rot:#C0A0D0;
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  font-size:15.5px; line-height:1.85; letter-spacing:.01em;
+  -webkit-font-smoothing:antialiased; margin:0;
+}
+.wrap{max-width:var(--maxw); margin:0 auto; padding:0 22px 96px}
+a{color:var(--amber-ink)}
+
+header{padding:52px 0 28px}
+.eyebrow{
+  font-family:"JetBrains Mono",ui-monospace,monospace; font-size:11px; letter-spacing:.22em;
+  color:var(--ink-3); text-transform:uppercase; margin:0 0 16px;
+}
+h1{
+  font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400;
+  font-size:clamp(30px,6.2vw,54px); line-height:1.12; margin:0; text-wrap:balance; color:var(--ink);
+}
+h1 .amb{color:var(--amber)}
+.lead{max-width:62ch; color:var(--ink-2); margin:20px 0 0; font-size:16px}
+.lead b{color:var(--ink); font-weight:700}
+
+.toolbar{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 14px;
+  margin-top:26px; padding:14px 16px; border:1px solid var(--rule); border-radius:2px; background:var(--panel);
+}
+.legend{display:flex; flex-wrap:wrap; gap:6px 16px; font-family:"JetBrains Mono",monospace; font-size:11px; color:var(--ink-2)}
+.legend span{display:inline-flex; align-items:center; gap:6px}
+.legend i{width:8px; height:8px; border-radius:50%; display:block}
+
+.step[id],#finished,#params,#trouble{scroll-margin-top:22px}
+.steps{display:flex; flex-direction:column; gap:0; margin-top:44px}
+.step{display:grid; grid-template-columns:56px 1fr; gap:0 22px; padding:34px 0 38px; border-top:1px solid var(--rule)}
+.step:first-child{border-top:2px solid var(--rule-2)}
+.num{font-family:"Bungee",monospace; font-size:26px; line-height:1; color:var(--amber); padding-top:4px}
+.num small{display:block; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.2em; color:var(--ink-3); margin-top:7px}
+.body h2{font-size:21px; line-height:1.45; margin:0 0 6px; font-weight:900; text-wrap:balance}
+.goal{color:var(--ink-2); margin:0 0 18px; max-width:62ch}
+@media (max-width:760px){ .step{grid-template-columns:40px 1fr; gap:0 14px} .num{font-size:20px} }
+
+.recipe{display:flex; flex-direction:column; gap:12px; min-width:0}
+.flow{display:flex; flex-wrap:wrap; align-items:center; gap:6px}
+.nd{
+  font-family:"JetBrains Mono",monospace; font-size:12.5px; font-weight:700;
+  background:var(--panel); border:1px solid var(--rule-2); border-radius:2px;
+  padding:5px 10px 5px 8px; display:inline-flex; align-items:center; gap:7px; white-space:nowrap;
+}
+.nd::before{content:""; width:8px; height:8px; border-radius:50%; background:var(--sk-val); flex:none}
+.nd[data-sk="geo"]::before{background:var(--sk-geo)}
+.nd[data-sk="vec"]::before{background:var(--sk-vec)}
+.nd[data-sk="col"]::before{background:var(--sk-col)}
+.nd[data-sk="int"]::before{background:var(--sk-int)}
+.nd[data-sk="rot"]::before{background:var(--sk-rot)}
+.nd.mat{border-style:dashed}
+.ar{color:var(--ink-3); font-style:normal; font-size:13px; padding:0 1px}
+.to{font-family:"Zen Kaku Gothic New",sans-serif; font-size:12.5px; color:var(--ink-2)}
+.to b{color:var(--ink)}
+.where{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em; color:var(--ink-3); text-transform:uppercase; margin:0 0 -4px}
+.where b{color:var(--amber-ink)}
+
+.set{margin:2px 0 0; border-top:1px solid var(--rule); font-size:13.5px}
+.set > div{display:flex; gap:12px; padding:7px 2px; border-bottom:1px solid var(--rule)}
+.set dt{flex:1 1 auto; color:var(--ink-2); font-family:"JetBrains Mono",monospace; font-size:12px; line-height:1.6}
+.set dd{margin:0; flex:none; font-weight:700; font-variant-numeric:tabular-nums; color:var(--ink); line-height:1.6}
+
+.note{border-left:3px solid var(--amber); background:var(--amber-wash); padding:12px 14px; font-size:14px; color:var(--ink); margin:4px 0 0; line-height:1.8}
+.note.bad{border-left-color:var(--warn); background:var(--warn-wash)}
+.note b{font-weight:900}
+code{font-family:"JetBrains Mono",monospace; font-size:.88em; font-weight:700; background:color-mix(in srgb, var(--ink) 9%, transparent); padding:1px 5px; border-radius:2px}
+
+details.why{margin:8px 0 0; font-size:13.5px}
+details.why > summary{
+  cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:6px;
+  font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em; color:var(--ink-3);
+  text-transform:uppercase; padding:3px 0;
+}
+details.why > summary::-webkit-details-marker{display:none}
+details.why > summary::before{content:"\25B8"; color:var(--amber); font-size:12px}
+details.why[open] > summary::before{content:"\25BE"}
+details.why > summary:hover{color:var(--amber-ink)}
+details.why .inner{padding:6px 0 2px; color:var(--ink-2); line-height:1.8; border-top:1px solid var(--rule); margin-top:4px}
+
+.attrs{width:100%; border-collapse:collapse; margin:16px 0 0; font-size:13.5px}
+.attrs th,.attrs td{text-align:left; padding:9px 10px; border-bottom:1px solid var(--rule); vertical-align:top}
+.attrs th{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); font-weight:400; border-bottom:1px solid var(--rule-2)}
+.attrs td:first-child{font-family:"JetBrains Mono",monospace; font-weight:700; color:var(--amber-ink); white-space:nowrap}
+.attrs td b{color:var(--ink)}
+.attrs tr.warn td:first-child{color:var(--warn)}
+@media (max-width:620px){
+  .attrs,.attrs tbody,.attrs tr,.attrs td{display:block; width:100%}
+  .attrs thead{display:none} .attrs tr{border-bottom:1px solid var(--rule-2); padding:6px 0}
+  .attrs td{border:0; padding:2px 0}
+}
+
+.dgm{
+  --rail:0px; position:relative; left:50%;
+  width:min(1480px, 94vw);
+  margin:24px 0 0 calc(-1 * min(740px, 47vw) - var(--rail));
+}
+.step .dgm{--rail:39px}
+@media (max-width:760px){ .step .dgm{--rail:27px} }
+.dgm img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#181513; cursor:zoom-in}
+.dgm figcaption{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.1em; color:var(--ink-3); margin-top:8px; text-transform:uppercase}
+.dgm figcaption b{color:var(--amber-ink); font-weight:700}
+header .dgm{margin-top:28px}
+
+.shots{display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:24px}
+@media (max-width:700px){ .shots{grid-template-columns:1fr} }
+.shots figure{margin:0}
+.shots img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#0B0B0D; cursor:zoom-in}
+.shots figcaption{font-family:"JetBrains Mono",monospace; font-size:10.5px; letter-spacing:.08em; color:var(--ink-3); margin-top:7px}
+
+.exhead{margin-top:64px; padding-top:30px; border-top:3px double var(--rule-2)}
+.exhead h2{font-family:"Bungee","Zen Kaku Gothic New",sans-serif; font-weight:400; font-size:clamp(24px,4vw,36px); margin:0; color:var(--ink)}
+.exhead p{color:var(--ink-2); margin:12px 0 0; max-width:62ch; font-size:15px}
+.exhead + .steps{margin-top:22px}
+
+.trouble{margin-top:56px; border:1px solid var(--rule-2); background:var(--panel); padding:26px 26px 10px}
+.trouble h2{font-family:"Bungee",sans-serif; font-weight:400; font-size:19px; margin:0 0 4px; color:var(--ink)}
+.trouble > p{color:var(--ink-2); margin:0 0 18px; font-size:14px}
+.tr{border-top:1px solid var(--rule); padding:16px 0}
+.tr h3{margin:0 0 6px; font-size:15px; font-weight:900; line-height:1.6}
+.tr p{margin:0; color:var(--ink-2); font-size:14px}
+
+.tail{margin-top:48px; color:var(--ink-2); font-size:14.5px; max-width:62ch}
+.tail h2{font-size:17px; color:var(--ink); margin:0 0 8px; font-weight:900}
+
+.lb[hidden]{display:none}
+.lb{position:fixed; inset:0; z-index:60; background:rgba(12,10,8,.97); overflow:auto; padding:70px 24px 40px}
+.lb img{display:block; margin:0 auto; max-width:none; background:#181513}
+.lb.fit img{width:100%; max-width:1600px; height:auto}
+.lbbar{position:fixed; top:0; left:0; right:0; height:56px; z-index:61; background:var(--panel); border-bottom:1px solid var(--rule-2); display:flex; align-items:center; gap:10px; padding:0 20px}
+.lbbar .name{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--ink-2); flex:1 1 auto; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+button{font-family:"JetBrains Mono",monospace; font-size:11.5px; letter-spacing:.08em; background:var(--panel-2); color:var(--ink); border:1px solid var(--rule-2); border-radius:2px; padding:7px 13px; cursor:pointer}
+button:hover{border-color:var(--amber); color:var(--amber-ink)}
+button:focus-visible{outline:2px solid var(--amber); outline-offset:2px}
+
+.viewchk{
+  display:flex; gap:12px; align-items:flex-start; margin:10px 0 0; padding:11px 14px;
+  border:1px solid var(--rule-2); border-radius:2px; background:var(--panel-2); font-size:13.5px; color:var(--ink-2);
+}
+.viewchk b{color:var(--ink)}
+.gout{
+  display:flex; gap:12px; align-items:flex-start; margin:8px 0 0; padding:11px 14px;
+  border:1px solid var(--amber); border-radius:2px; background:var(--amber-wash);
+  font-size:13.5px; color:var(--ink);
+}
+.gout::before{
+  content:"つなぐ"; flex:none; font-family:"Zen Kaku Gothic New",sans-serif; font-size:10px;
+  color:#241A0C; background:var(--amber); border-radius:2px; padding:2px 6px; margin-top:3px; font-weight:700;
+}
+.gout b{font-weight:900}
+.viewchk::before{
+  content:"3D VIEW"; flex:none; font-family:"JetBrains Mono",monospace; font-size:9px; letter-spacing:.12em;
+  color:var(--amber-ink); border:1px solid var(--amber); border-radius:2px; padding:2px 5px; margin-top:3px;
+}
+.nd em{font-style:normal; font-weight:400; color:var(--ink-3); font-size:11px; margin-left:2px}
+.en{font-style:normal; font-family:"JetBrains Mono",monospace; font-weight:400; color:var(--ink-3); font-size:10.5px; margin-left:6px}
+.body{min-width:0}
+@media (max-width:620px){
+  .nd{white-space:normal; align-items:flex-start}
+  .nd em{display:block; margin-left:0; line-height:1.4}
+  .nd::before{margin-top:6px}
+  .set > div{flex-direction:column; gap:2px}
+  .set dd{flex:1 1 auto; align-self:flex-start}
+}
+.newtag,.oldtag{
+  font-family:"JetBrains Mono",monospace; font-size:9.5px; letter-spacing:.1em; border-radius:9px;
+  padding:2px 7px; margin-left:6px; vertical-align:1px; white-space:nowrap;
+}
+.newtag{background:var(--amber); color:#241A0C; font-weight:700}
+.oldtag{background:var(--rule); color:var(--ink-2)}
+.gitag{
+  background:transparent; color:var(--sk-rot); border:1px solid var(--sk-rot); font-weight:700;
+  cursor:help;
+}
+.namemap{margin-top:14px}
+.namemap summary{
+  cursor:pointer; font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.1em;
+  color:var(--ink-3); list-style:none; padding:4px 0;
+}
+.namemap summary::-webkit-details-marker{display:none}
+.namemap summary::before{content:"\25B8"; color:var(--amber); margin-right:6px}
+.namemap[open] summary::before{content:"\25BE"}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+
+.dl{font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--amber-ink); text-decoration:none; border:1px solid var(--amber); border-radius:2px; padding:8px 14px; display:inline-block; background:var(--amber-wash)}
+.view{display:grid; grid-template-columns:minmax(0,340px) 1fr; gap:14px; align-items:start; margin-top:18px}
+.view.view-r{grid-template-columns:minmax(0,200px) 1fr}
+.view img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#0B0B0D; cursor:zoom-in}
+.view .viewchk{margin:0}
+@media (max-width:620px){ .view,.view.view-r{grid-template-columns:1fr} }
+.frames{display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:18px; max-width:640px}
+.frames figure{margin:0}
+.frames img{display:block; width:100%; height:auto; border:1px solid var(--rule-2); border-radius:3px; background:#000; cursor:zoom-in}
+.frames figcaption{font-family:"JetBrains Mono",monospace; font-size:10px; color:var(--ink-3); margin-top:4px; text-align:center}
+.ramp{margin:6px 0 0}
+.ramp img{display:block; width:100%; height:auto; border-radius:3px; cursor:zoom-in}
+.ramp figcaption{font-size:12.5px; color:var(--ink-2); margin-top:6px}
+.flow + .flow{margin-top:-4px}
+
+.dgm svg{width:100%; height:auto; display:block; border-radius:2px; user-select:text}
+.dgm figcaption{font-size:12px; color:var(--ink-3); margin-top:6px}
+ol.todo{margin:14px 0 0; padding:0; list-style:none; counter-reset:t; display:flex; flex-direction:column; gap:10px}
+ol.todo > li{counter-increment:t; display:grid; grid-template-columns:28px 1fr; gap:10px; align-items:start}
+ol.todo > li::before{content:counter(t); font-family:"Bungee",monospace; color:var(--amber); font-size:18px; line-height:1.4}
+ol.todo .lbl{font-family:"JetBrains Mono",monospace; font-size:11px; letter-spacing:.14em; color:var(--ink-3); display:block; margin-bottom:4px}
+ul.wires{margin:0; padding:10px 14px; list-style:none; border:1px solid var(--amber); background:var(--amber-wash); border-radius:2px;
+  font-size:13.5px; line-height:1.9}
+ul.wires li{white-space:normal}
+ul.wires li .to{color:var(--amber-ink); font-weight:700; padding:0 4px}
+.views{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:8px; margin-top:14px}
+.views figure{margin:0}
+.views img{width:100%; display:block; border-radius:2px; background:#000}
+.views figcaption{font-size:12px; color:var(--ink-3)}
+table.cue{border-collapse:collapse; width:100%; font-size:12.5px; margin-top:10px; font-family:"JetBrains Mono",monospace}
+table.cue th, table.cue td{border:1px solid var(--rule); padding:4px 6px; text-align:right; white-space:nowrap}
+table.cue th{background:var(--panel-2); font-family:"Zen Kaku Gothic New",sans-serif; font-weight:700; font-size:11.5px}
+table.cue td.l, table.cue th.l{text-align:left}
+table.cue td.off{color:var(--ink-3)}
+.tblwrap{overflow-x:auto}
+.pal{display:inline-block; width:14px; height:14px; border-radius:2px; vertical-align:-2px; margin-right:6px; border:1px solid var(--rule-2)}
+ol.todo .dgm{left:auto; width:100%; margin:8px 0 0}
+ol.todo > li > div{min-width:0}
+table.cue td.l:last-child{white-space:normal; min-width:16em}
+kbd{font-family:"JetBrains Mono",monospace; font-size:12px; border:1px solid var(--rule-2); border-bottom-width:2px; border-radius:3px; padding:0 5px; background:var(--panel)}
+</style>
+<style>.views a{display:block}.views img{border:1px solid var(--rule-2)}#noise,#map,#which,#twoout{scroll-margin-top:22px}.viewchk.see::before{content:"見え方"}</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="eyebrow">Blender 5.2 LTS / ビューレイヤー / AO ・ Z 深度 ・ ミスト ・ Cryptomatte</p>
+  <h1>AO と Z が<br><span class="amb">真っ白</span>…を直す。</h1>
+  <p class="lead">Blender 5.2 で試すと、パスそのものは<b>ちゃんと出ます</b>。<br>
+  真っ白・真っ黒になる原因は、ほとんどが <b>「初期値のまま」</b>と<b>「値の範囲」</b>。5.2 でも初期値のままだと起きます（このページの数値と画像は、講座の部屋モデルで実測）。<br>
+  <b>Z 深度だけはコンポジターで白黒の画像に直してから出す</b>のがいちばん迷いません。</p>
+  <div class="note" style="margin-top:18px"><b>このページの読み方</b><br>
+    各ステップは <b>開く場所・打つ値・つなぐ → 見え方</b> の順です。<br>
+    <span class="newtag">新規</span> ＝ここで新しく出す　<span class="oldtag">既存</span> ＝もう置いてある。<b>つなぐ</b> は 1 行 1 本。<br>
+    「仕組み」は折りたたんであります。やって見えてから開けばOK。</div>
+  <p style="margin-top:14px; display:flex; flex-wrap:wrap; gap:10px">
+    <a class="dl" href="14.html">◂ 第14回にもどる</a>
+  </p>
+</header>
+
+<section class="exhead" id="finished" style="margin-top:28px; border-top:0; padding-top:0">
+  <p class="eyebrow">Before / After</p>
+  <h2>同じ部屋・同じカメラで出した</h2>
+</section>
+<div class="views">
+  <figure><a href="assets/lec14/passes_beauty.png" target="_blank"><img src="assets/lec14/passes_beauty.png" alt="テストに使った部屋のレンダー" loading="lazy"></a><figcaption>テストした絵（部屋＋箱 2 つ）</figcaption></figure>
+  <figure><a href="assets/lec14/passes_z_raw.png" target="_blank"><img src="assets/lec14/passes_z_raw.png" alt="Z深度をそのまま画像にしたもの：ほぼ真っ白" loading="lazy"></a><figcaption>✕ Z をそのまま：真っ白（95%）</figcaption></figure>
+  <figure><a href="assets/lec14/passes_z_map.png" target="_blank"><img src="assets/lec14/passes_z_map.png" alt="Z深度を範囲マッピングで0〜1にしたもの：手前が黒く奥が白い" loading="lazy"></a><figcaption>◯ Z をコンポジターで変換（<a href="#s02">02</a>）</figcaption></figure>
+</div>
+
+<section class="trouble" id="map" style="margin-top:40px">
+  <h2>SYMPTOM MAP</h2>
+  <p>症状から、直す場所へ飛べます。</p>
+  <table class="attrs"><thead><tr><th>症状</th><th>原因</th><th>直す</th></tr></thead><tbody>
+  <tr class="warn"><td>Z が真っ白</td><td>中身が<b>メートルの数字</b>。画像は 1 より上が全部白なので、1 m より奥は真っ白</td><td><a href="#s02">02</a></td></tr>
+  <tr class="warn"><td>ミストが真っ黒</td><td>初期値が <b>開始 5 m ／ 深度 25 m</b>。部屋はほぼ 5 m 以内なので全部 0（黒）</td><td><a href="#s03">03</a></td></tr>
+  <tr class="warn"><td>AO が真っ白（EEVEE）</td><td>初期値の <b>オクルージョン距離 0.2 m</b> が短すぎて、輪郭にしか影が出ない</td><td><a href="#s04">04</a></td></tr>
+  <tr class="warn"><td>AO が真っ黒（Cycles）</td><td>初期値の <b>AO の距離 10 m</b> が部屋より大きく、どこも「囲まれている」扱い</td><td><a href="#s05">05</a></td></tr>
+  <tr class="warn"><td>AO がザラザラ（Cycles）</td><td>レンダーのデノイズは <b>AO パスには効かない</b></td><td><a href="#s05">05</a></td></tr>
+  <tr class="warn"><td>AO ・法線がうす灰色に濁る</td><td>ファイル出力の <b>レンダーとして保存</b> が ON（色の見え方の補正が掛かる）</td><td><a href="#s02">02</a></td></tr>
+  <tr class="warn"><td>パスがファイルに無い</td><td>出力が <b>画像（PNG など）</b>だと、合成した絵 1 枚しか書き出されない</td><td><a href="#s01">01</a></td></tr>
+  </tbody></table>
+</section>
+
+<section class="exhead" id="which">
+  <p class="eyebrow">Route / どっちで出す？</p>
+  <h2>コンポジターを通すのは、Z と AO だけ</h2>
+  <p>全部をコンポジター経由にする必要はありません。<b>EXR にそのまま入れて困らないもの</b>と、<b>白黒の画像にしておくと楽なもの</b>に分けます。</p>
+</section>
+<table class="attrs"><thead><tr><th>パス</th><th>出し方</th><th>理由</th></tr></thead><tbody>
+<tr><td>Cryptomatte</td><td><b>EXR（本線）</b>のまま</td><td>マスクの名前の情報が EXR に一緒に入る。PNG にはできない</td></tr>
+<tr><td>ミスト</td><td>EXR のままで OK<br>（白黒 PNG も一緒に出すと楽）</td><td>最初から 0〜1（黒〜白）の値。ワールドの設定を直すだけ</td></tr>
+<tr><td>Z 深度</td><td><b>コンポジター → 白黒 PNG</b></td><td>中身がメートルの数字なので、そのままだと AE でも真っ白</td></tr>
+<tr><td>AO</td><td><b>コンポジター → 白黒 PNG</b></td><td>「レンダーとして保存」を OFF にできる。Cycles ならデノイズも掛けられる</td></tr>
+</tbody></table>
+
+<div class="steps">
+
+<section class="step" id="s00">
+<div class="num">00<small>START</small></div><div class="body">
+<h2>いまの状態（第14回 03 の続き）</h2>
+<ol class="todo">
+<li><div><span class="lbl">ビューレイヤープロパティ → パス → データ</span><dl class="set"><div><dt>Z</dt><dd>✓ オン<span class="en">Z</span></dd></div><div><dt>ミスト</dt><dd>✓ オン<span class="en">Mist</span></dd></div></dl></div></li>
+<li><div><span class="lbl">ビューレイヤープロパティ → パス → ライト → その他</span><dl class="set"><div><dt>アンビエントオクルージョン</dt><dd>✓ オン<span class="en">Ambient Occlusion</span></dd></div></dl></div></li>
+<li><div><span class="lbl">ビューレイヤープロパティ → Cryptomatte</span><dl class="set"><div><dt>オブジェクト</dt><dd>✓ オン<span class="en">Object</span></dd></div></dl></div></li>
+</ol>
+<p class="viewchk see"><span><b>画像エディターで「深度」を表示すると真っ白</b>に見えますが、これは正常です。壊れていません（<a href="#s02">02</a> の仕組みを参照）。</span></p>
+</div></section>
+
+<section class="step" id="s01">
+<div class="num">01<small>EXR</small></div><div class="body">
+<h2>本線の出力を EXR にする（パスを全部入れる）</h2>
+<ol class="todo">
+<li><div><span class="lbl">出力プロパティ → 出力</span><dl class="set"><div><dt>いちばん上のフォルダ欄（出力パス）</dt><dd>//_out/main/<span class="en">Output Path</span></dd></div><div><dt>メディアタイプ</dt><dd>Multi-Layer EXR<span class="en">Media Type</span></dd></div></dl>
+<p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-2)">選ぶとファイルフォーマットが自動で OpenEXR マルチレイヤーになります。</p></div></li>
+</ol>
+<div class="note bad"><b>メディアタイプが「画像」（PNG など）のままだと、パスは 1 つも書き出されません。</b>書き出されるのは合成した絵 1 枚だけ（テストで確認）。</div>
+<div class="note"><b>フォルダ欄は空欄にしない。</b>あとの 02 で作る「ファイル出力」ノードとは別の書き出し口です。空欄でも書き出しは止まらず、思わぬ場所に出ます → <a href="#twoout">2 つの書き出し口</a></div>
+<details class="why"><summary>Blender 4 までと何が違う？</summary><div class="note">5.x では、出力の形式を選ぶ前に <b>メディアタイプ</b>（画像 ／ Multi-Layer EXR ／ 動画）を選ぶ形になりました。古い資料の「ファイルフォーマットで OpenEXR マルチレイヤーを選ぶ」は、5.x ではここのことです。</div></details>
+<details class="why"><summary>ファイル出力ノードで EXR を出すのはダメ？</summary><div class="note">出せますが、<b>本線の EXR と中身の形が違います</b>（テストで確認）。<br>
+本線：全部のパスが 1 つにまとまり、Z は <code>Depth.Z</code> という名前。Cryptomatte の情報も入る。<br>
+ファイル出力ノード：パスごとに別の区画（パート）に分かれ、Z は <code>Depth.V</code> という名前になる。<br>
+→ AE で読むときに迷わないよう、<b>EXR は本線で出す</b>のがおすすめ。ファイル出力ノードは PNG 用に使います。</div></details>
+</div></section>
+
+<section class="step" id="s02">
+<div class="num">02<small>Z → PNG</small></div><div class="body">
+<h2>Z を白黒の画像にして書き出す（コンポジター）</h2>
+<p class="goal">ここで AO ・ミストの PNG 用の口も一緒に作ります。つなぐのは <a href="#s03">03</a> 〜 <a href="#s05">05</a> で。</p>
+<figure class="dgm" style="left:auto; width:100%; margin:18px 0 0"><svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 1200 580" aria-label="ノードのつなぎ方">
+<rect width="1200" height="580" fill="#181513"/>
+<text x="30" y="44" font-family="'Helvetica Neue',Arial,sans-serif" font-weight="700"><tspan font-size="26" fill="#FF9A3C">02</tspan><tspan font-size="19" fill="#FFFFFF">  コンポジター（AO ・ミスト・Z をまとめて PNG に）</tspan></text>
+<line x1="30" y1="62" x2="1170" y2="62" stroke="#4A423B" stroke-width="1.5"/>
+<g font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif">
+<!-- Render Layers -->
+<rect x="40" y="100" width="270" height="250" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M40 138 L40 108 Q40 100 48 100 L302 100 Q310 100 310 108 L310 138 Z" fill="#8C3D50"/>
+<text x="56" y="126" font-size="17" font-weight="700" fill="#FFF">レンダーレイヤー</text>
+<rect x="226" y="109" width="72" height="20" rx="10" fill="#4A423B"/><text x="262" y="124" text-anchor="middle" font-size="11" font-weight="700" fill="#D9CFC2">既存</text>
+<text x="294" y="175" text-anchor="end" font-size="15" fill="#E8DFD2">画像</text><circle cx="310" cy="170" r="7" fill="#C7C29A"/>
+<text x="294" y="220" text-anchor="end" font-size="15" fill="#FFB454" font-weight="700">深度</text><circle cx="310" cy="215" r="7" fill="#9A9186"/>
+<text x="294" y="265" text-anchor="end" font-size="15" fill="#E8DFD2">ミスト</text><circle cx="310" cy="260" r="7" fill="#9A9186"/>
+<text x="294" y="310" text-anchor="end" font-size="15" fill="#E8DFD2">アンビエントオクルージョン</text><circle cx="310" cy="305" r="7" fill="#C7C29A"/>
+<!-- Group Output -->
+<rect x="880" y="80" width="270" height="100" rx="8" fill="#2C2724" stroke="#4A423B" stroke-width="1.5"/>
+<path d="M880 118 L880 88 Q880 80 888 80 L1142 80 Q1150 80 1150 88 L1150 118 Z" fill="#4A423B"/>
+<text x="896" y="106" font-size="17" font-weight="700" fill="#FFF">グループ出力</text>
+<rect x="1058" y="89" width="80" height="20" rx="10" fill="#5C544A"/><text x="1098" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="#D9CFC2">既存</text>
+<circle cx="880" cy="150" r="7" fill="#C7C29A"/><text x="898" y="155" font-size="15" fill="#E8DFD2">画像</text><text x="950" y="155" font-size="13" fill="#8A8076">見る用（いままで通り）</text>
+<!-- Map Range -->
+<rect x="450" y="170" width="260" height="190" rx="8" fill="#2C2724" stroke="#FF9A3C" stroke-width="2"/>
+<path d="M450 208 L450 178 Q450 170 458 170 L702 170 Q710 170 710 178 L710 208 Z" fill="#3D6A8C"/>
+<text x="466" y="196" font-size="17" font-weight="700" fill="#FFF">範囲マッピング</text>
+<rect x="622" y="179" width="76" height="20" rx="10" fill="#FF9A3C"/><text x="660" y="194" text-anchor="middle" font-size="11" font-weight="700" fill="#241A0C">新規</text>
+<text x="694" y="240" text-anchor="end" font-size="15" fill="#E8DFD2">結果</text><circle cx="710" cy="235" r="7" fill="#9A9186"/>
+<circle cx="450" cy="270" r="7" fill="#9A9186"/><text x="466" y="275" font-size="15" fill="#E8DFD2">値</text>
+<text x="466" y="305" font-size="13" fill="#FFB454">最小から 0.5 ／ 最大から 6</text>
+<text x="466" y="330" font-size="13" fill="#8A8076">最小へ 0 ／ 最大へ 1 ／ 範囲制限 ✓</text>
+<!-- Denoise (Cycles only) -->
+<rect x="450" y="410" width="260" height="120" rx="8" fill="#2C2724" stroke="#FF9A3C" stroke-width="2" stroke-dasharray="8 6"/>
+<path d="M450 448 L450 418 Q450 410 458 410 L702 410 Q710 410 710 418 L710 448 Z" fill="#5A4A8C"/>
+<text x="466" y="436" font-size="17" font-weight="700" fill="#FFF">デノイズ</text>
+<rect x="622" y="419" width="76" height="20" rx="10" fill="#FF9A3C"/><text x="660" y="434" text-anchor="middle" font-size="11" font-weight="700" fill="#241A0C">新規</text>
+<circle cx="450" cy="480" r="7" fill="#C7C29A"/><text x="466" y="485" font-size="15" fill="#E8DFD2">画像</text>
+<text x="694" y="485" text-anchor="end" font-size="15" fill="#E8DFD2">画像</text><circle cx="710" cy="480" r="7" fill="#C7C29A"/>
+<text x="466" y="515" font-size="13" fill="#8A8076">Cycles のときだけ（05）</text>
+<!-- File Output -->
+<rect x="880" y="240" width="270" height="240" rx="8" fill="#2C2724" stroke="#FF9A3C" stroke-width="2"/>
+<path d="M880 278 L880 248 Q880 240 888 240 L1142 240 Q1150 240 1150 248 L1150 278 Z" fill="#3D5A8C"/>
+<text x="896" y="266" font-size="17" font-weight="700" fill="#FFF">ファイル出力</text>
+<rect x="1058" y="249" width="80" height="20" rx="10" fill="#FF9A3C"/><text x="1098" y="264" text-anchor="middle" font-size="11" font-weight="700" fill="#241A0C">新規</text>
+<circle cx="880" cy="320" r="7" fill="#9A9186"/><text x="898" y="325" font-size="15" fill="#FFB454" font-weight="700">z</text><text x="930" y="325" font-size="13" fill="#8A8076">手前 黒 → 奥 白</text>
+<circle cx="880" cy="370" r="7" fill="#9A9186"/><text x="898" y="375" font-size="15" fill="#E8DFD2" font-weight="700">mist</text><text x="950" y="375" font-size="13" fill="#8A8076">（03）</text>
+<circle cx="880" cy="420" r="7" fill="#C7C29A"/><text x="898" y="425" font-size="15" fill="#E8DFD2" font-weight="700">ao</text><text x="930" y="425" font-size="13" fill="#8A8076">（04 ／ 05）</text>
+<text x="896" y="452" font-size="12" fill="#8A8076">PNG ／ BW ／ 16</text><text x="896" y="470" font-size="12" fill="#FFB454">レンダーとして保存 OFF</text>
+</g>
+<!-- wires -->
+<path d="M317 170 C600 170 600 150 873 150" stroke="#8A8076" stroke-width="3" fill="none"/>
+<path d="M317 215 C380 215 380 270 443 270" stroke="#FF9A3C" stroke-width="3.5" fill="none"/>
+<path d="M717 235 C800 235 790 320 873 320" stroke="#FF9A3C" stroke-width="3.5" fill="none"/>
+<path d="M317 260 C380 260 390 385 450 385 L760 385 C820 385 810 370 873 370" stroke="#FF9A3C" stroke-width="3.5" fill="none"/>
+<path d="M317 305 C380 305 380 480 443 480" stroke="#FF9A3C" stroke-width="3.5" fill="none"/>
+<path d="M717 480 C800 480 790 420 873 420" stroke="#FF9A3C" stroke-width="3.5" fill="none"/>
+<text x="30" y="562" font-family="'Hiragino Kaku Gothic ProN','Yu Gothic','Meiryo',sans-serif" font-size="14" fill="#8A8076">オレンジ ＝ 今回つなぐ線 ／ 点線の枠（デノイズ）は Cycles のときだけ。EEVEE は AO をファイル出力の ao に直結</text>
+</svg><figcaption>図の文字は選択・コピーできます</figcaption></figure>
+<ol class="todo">
+<li><div><span class="lbl">出すノード</span><div class="flow"><span class="nd">範囲マッピング<em>Map Range</em><span class="newtag">新規</span></span><span class="nd">ファイル出力<em>File Output</em><span class="newtag">新規</span></span></div>
+<p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-2)">追加 → ユーティリティ → 数式 → 範囲マッピング ／ 追加 → 出力 → ファイル出力</p></div></li>
+<li><div><span class="lbl">範囲マッピングの値</span><dl class="set">
+<div><dt>最小から</dt><dd>0.5<span class="en">From Min（m）</span></dd></div>
+<div><dt>最大から</dt><dd>6<span class="en">From Max（m）</span></dd></div>
+<div><dt>最小へ ／ 最大へ</dt><dd>0 ／ 1（そのまま）</dd></div>
+<div><dt>範囲制限</dt><dd>✓ オン（そのまま）<span class="en">Clamp</span></dd></div>
+</dl></div></li>
+<li><div><span class="lbl">ファイル出力の値（ノードを選んで N → ノード タブ）</span><dl class="set">
+<div><dt>ディレクトリ</dt><dd>//_out/passes/</dd></div>
+<div><dt>ファイル名</dt><dd>shot_</dd></div>
+<div><dt>メディアタイプ</dt><dd>画像<span class="en">Media Type: Image</span></dd></div>
+<div><dt>ノードフォーマット → ファイルフォーマット</dt><dd>PNG ／ BW ／ 16</dd></div>
+<div><dt>レンダーとして保存</dt><dd><b>オフ</b><span class="en">Save as Render</span></dd></div>
+<div><dt>画像 の ＋ で 3 つ作る</dt><dd>z ・ mist ・ ao</dd></div>
+</dl></div></li>
+<li><div><span class="lbl">つなぐ（Z の分）</span><ul class="wires">
+<li>レンダーレイヤー 深度<span class="to">→</span>範囲マッピング 値</li>
+<li>範囲マッピング 結果<span class="to">→</span>ファイル出力 z</li>
+</ul></div></li>
+</ol>
+<p class="viewchk see"><span><b>手前が黒、奥へ行くほど白</b>になれば成功。窓の外（何も無いところ）は白になります。</span></p>
+<div class="note"><b>0.5 と 6 の決め方：</b>カメラからいちばん手前の物までが「最小から」、いちばん奥の壁までが「最大から」（単位 m）。部屋ならこの数字から始めて、<b>奥の壁が白く飛んでいたら「最大から」を増やす</b>、全体が黒っぽければ減らす。手前を白にしたいときは「最小へ 1 ／ 最大へ 0」と逆に。</div>
+<div class="note bad"><b>「レンダーとして保存」は必ず OFF。</b>ON のままだと、絵を見やすくする補正（Filmic ／ AgX）が AO にも掛かり、<b>いちばん白いところでも 0.81 の灰色</b>に濁ります（テストで確認。OFF なら 1.0 の白）。</div>
+<div class="views">
+  <figure><a href="assets/lec14/passes_ao_asrender.png" target="_blank"><img src="assets/lec14/passes_ao_asrender.png" alt="レンダーとして保存ONのAO：全体が灰色に濁る" loading="lazy"></a><figcaption>✕ レンダーとして保存 ON：白が灰色に</figcaption></figure>
+  <figure><a href="assets/lec14/passes_ao_eevee_2.png" target="_blank"><img src="assets/lec14/passes_ao_eevee_2.png" alt="レンダーとして保存OFFのAO：白がしっかり白" loading="lazy"></a><figcaption>◯ OFF：白は白のまま</figcaption></figure>
+</div>
+<details class="why"><summary>仕組み：なぜ Z は真っ白？</summary><div class="note">
+Z（深度）の中身は <b>カメラからの距離（m）</b>です。テストの部屋では 0.76 〜 4.5 m。何も無い窓の外は 10,000,000,000 という特大の数字。<br>
+画像は <b>0 ＝ 黒、1 ＝ 白</b>、1 より上は全部白で表示されるので、<b>1 m より奥は真っ白</b>になります（テストで画面の 95%）。<br>
+→ 範囲マッピングで「0.5 m を黒、6 m を白」と決め直せば、0〜1 の白黒に収まります。<br>
+EXR の中の Z は数字のまま正しく入っているので、壊れているわけではありません。AE で使うなら、レベル補正で白の位置を 4〜6 あたりまで下げれば同じことができます。</div></details>
+<details class="why"><summary>「正規化」ノードじゃダメ？</summary><div class="note">
+正規化（追加 → ユーティリティ → 正規化）は、<b>その 1 枚の中のいちばん近い所を黒、いちばん遠い所を白</b>に自動でそろえます。静止画なら便利。<br>
+ただし <b>1 コマごとに基準が変わる</b>ので、アニメでは物が動いただけで全体の明るさが変わります。テストで、動いていない壁が箱を動かしただけで <b>0.28 → 0.35</b> に変化（範囲マッピングは変化 0）。<br>
+→ <b>アニメは範囲マッピング</b>で数字を固定。</div></details>
+</div></section>
+
+<section class="step" id="s03">
+<div class="num">03<small>MIST</small></div><div class="body">
+<h2>ミストの「開始」と「深度」を部屋に合わせる</h2>
+<ol class="todo">
+<li><div><span class="lbl">ワールドプロパティ → ミストパス</span><dl class="set">
+<div><dt>開始</dt><dd>5 → <b>0</b> m<span class="en">Start</span></dd></div>
+<div><dt>深度</dt><dd>25 → <b>6</b> m<span class="en">Depth</span></dd></div>
+<div><dt>減衰</dt><dd>二次式（そのまま）<span class="en">Falloff</span></dd></div>
+</dl></div></li>
+<li><div><span class="lbl">つなぐ</span><ul class="wires"><li>レンダーレイヤー ミスト<span class="to">→</span>ファイル出力 mist</li></ul></div></li>
+</ol>
+<div class="views">
+  <figure><a href="assets/lec14/passes_mist_ng.png" target="_blank"><img src="assets/lec14/passes_mist_ng.png" alt="初期値のミスト：窓の外以外が真っ黒" loading="lazy"></a><figcaption>✕ 初期値（開始 5 ／ 深度 25）：96% が真っ黒</figcaption></figure>
+  <figure><a href="assets/lec14/passes_mist_ok.png" target="_blank"><img src="assets/lec14/passes_mist_ok.png" alt="開始0深度6のミスト：手前が黒く奥が白い" loading="lazy"></a><figcaption>◯ 開始 0 ／ 深度 6：奥へ行くほど白</figcaption></figure>
+</div>
+<div class="note"><b>開始</b> ＝ ここまでは真っ黒（霧なし）。<b>深度</b> ＝ 開始からここまでの間で、だんだん白くなる距離。<b>「深度」は「最大から」と同じで、奥の壁までの距離</b>にします。</div>
+<details class="why"><summary>Cycles でミストパスの項目が見当たらない</summary><div class="note">Cycles のときは、ビューレイヤーでミストに ✓ を入れたあとで、ワールドプロパティに「ミストパス」が出てきます。閉じていたら ▸ を開く。</div></details>
+<details class="why"><summary>ミストと Z はどう違う？</summary><div class="note">ミストは最初から 0〜1 に収まるように作られた「霧用の Z」。輪郭もなめらか（アンチエイリアスが掛かる）。AE の空気遠近ならミストで十分。Z は「何 m 先か」を数字で持っているので、AE のカメラのボケ（被写界深度）用に向きます。</div></details>
+</div></section>
+
+<section class="step" id="s04">
+<div class="num">04<small>AO EEVEE</small></div><div class="body">
+<h2>AO（EEVEE）：オクルージョン距離をのばす</h2>
+<ol class="todo">
+<li><div><span class="lbl">ビューレイヤープロパティ → パス → ライト（アンビエントオクルージョンの下）</span><dl class="set">
+<div><dt>オクルージョン距離</dt><dd>0.2 → <b>2</b> m<span class="en">Occlusion Distance</span></dd></div>
+</dl></div></li>
+<li><div><span class="lbl">つなぐ</span><ul class="wires"><li>レンダーレイヤー アンビエントオクルージョン<span class="to">→</span>ファイル出力 ao</li></ul></div></li>
+</ol>
+<div class="views">
+  <figure><a href="assets/lec14/passes_ao_eevee_02.png" target="_blank"><img src="assets/lec14/passes_ao_eevee_02.png" alt="オクルージョン距離0.2：ほぼ真っ白で輪郭だけ" loading="lazy"></a><figcaption>✕ 0.2 m（初期値）：ほぼ真っ白、輪郭だけ</figcaption></figure>
+  <figure><a href="assets/lec14/passes_ao_eevee_2.png" target="_blank"><img src="assets/lec14/passes_ao_eevee_2.png" alt="オクルージョン距離2：部屋の隅や家具の足元に陰" loading="lazy"></a><figcaption>◯ 2 m：隅と家具まわりに陰</figcaption></figure>
+</div>
+<table class="attrs"><thead><tr><th>オクルージョン距離</th><th>平均の明るさ（1 ＝ 真っ白）</th></tr></thead><tbody>
+<tr class="warn"><td>0.2 m（初期値）</td><td>0.94</td></tr>
+<tr><td>0.5 m</td><td>0.92</td></tr>
+<tr><td>1 m</td><td>0.90</td></tr>
+<tr><td>2 m</td><td><b>0.88</b></td></tr>
+</tbody></table>
+<div class="note"><b>EEVEE の AO はもともと薄め</b>です。数字を上げても真っ黒にはならず、「白っぽいけど陰がある」がちょうどいい状態。濃さは AE で <b>乗算＋レベル補正</b> で決めます。<br>
+もっとくっきりした接地の陰が欲しいときは、Cycles の AO（<a href="#s05">05</a>）が向いています。</div>
+<details class="why"><summary>「高速 GI」の距離を変えても AO が変わらない</summary><div class="note">EEVEE の AO パスに効くのは、<b>ビューレイヤーのオクルージョン距離だけ</b>です。レンダープロパティの高速 GI 近似の距離や、ワールドの AO の距離を変えても、EEVEE の AO パスは変わりません（テストで確認）。</div></details>
+</div></section>
+
+<section class="step" id="s05">
+<div class="num">05<small>AO CYCLES</small></div><div class="body">
+<h2>AO（Cycles）：AO の距離を縮めて、デノイズを掛ける</h2>
+<ol class="todo">
+<li><div><span class="lbl">レンダープロパティ → ライトパス → 高速 GI 近似</span><dl class="set">
+<div><dt>AOの距離</dt><dd>10 → <b>1</b> m<span class="en">AO Distance</span></dd></div>
+</dl>
+<p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-2)">高速 GI 近似のチェックは OFF のままで OK。<b>項目がうすく表示されていても、数字を変えれば AO パスに効きます</b>（テストで確認）。</p></div></li>
+<li><div><span class="lbl">出すノード</span><div class="flow"><span class="nd">デノイズ<em>Denoise</em><span class="newtag">新規</span></span></div><p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-2)">追加 → フィルター → デノイズ</p></div></li>
+<li><div><span class="lbl">つなぐ</span><ul class="wires">
+<li>レンダーレイヤー アンビエントオクルージョン<span class="to">→</span>デノイズ 画像</li>
+<li>デノイズ 画像<span class="to">→</span>ファイル出力 ao</li>
+</ul></div></li>
+</ol>
+<div class="views">
+  <figure><a href="assets/lec14/passes_ao_cycles_10.png" target="_blank"><img src="assets/lec14/passes_ao_cycles_10.png" alt="AOの距離10m：ほぼ真っ黒" loading="lazy"></a><figcaption>✕ 10 m（初期値）：7 割が真っ黒</figcaption></figure>
+  <figure><a href="assets/lec14/passes_ao_cycles_grain.png" target="_blank"><img src="assets/lec14/passes_ao_cycles_grain.png" alt="AOの距離1m・デノイズなし：ザラザラ" loading="lazy"></a><figcaption>△ 1 m：陰は正しいがザラザラ</figcaption></figure>
+  <figure><a href="assets/lec14/passes_ao_cycles_dn.png" target="_blank"><img src="assets/lec14/passes_ao_cycles_dn.png" alt="AOの距離1m・デノイズノードあり：なめらか" loading="lazy"></a><figcaption>◯ 1 m ＋ デノイズノード</figcaption></figure>
+</div>
+<table class="attrs"><thead><tr><th>設定</th><th>平均の明るさ</th><th>ザラつき</th></tr></thead><tbody>
+<tr class="warn"><td>10 m（初期値）</td><td>0.07（真っ黒）</td><td>—</td></tr>
+<tr><td>1 m ／ 32 サンプル</td><td>0.84</td><td>0.015</td></tr>
+<tr><td>1 m ／ 128 サンプル</td><td>0.84</td><td>0.006</td></tr>
+<tr><td>1 m ／ 32 サンプル ＋ デノイズノード</td><td>0.84</td><td><b>0.001</b></td></tr>
+</tbody></table>
+<p style="font-size:12.5px; color:var(--ink-3); margin:6px 0 0">ザラつき ＝ となりのピクセルとの差（小さいほどなめらか）。レンダープロパティのデノイズは ON のままで測定。</p>
+<div class="note bad"><b>レンダーのデノイズは、合成した絵にしか効きません。</b>AO パスは素のまま。サンプルを 4 倍にしてもまだザラつくので、<b>デノイズノード</b>を通すのが早い。</div>
+<details class="why"><summary>仕組み：なぜ 10 m だと真っ黒？</summary><div class="note">AO は「その点から AO の距離まで光線を飛ばして、何かに当たったら暗くする」計算です。部屋は 2.3 m の天井と 5 m ほどの壁に囲まれているので、10 m だと<b>どこから飛ばしても必ず何かに当たる</b> → ほぼ全部が真っ黒。<br>距離を「家具の大きさくらい（0.5〜1 m）」にすると、隅や足元だけが暗くなります。</div></details>
+</div></section>
+
+<section class="step" id="s06">
+<div class="num">06<small>RENDER</small></div><div class="body">
+<h2>レンダーする</h2>
+<ol class="todo">
+<li><div><span class="lbl">いつも通り</span><dl class="set"><div><dt>アニメーションレンダリング</dt><dd><kbd>Ctrl</kbd>+<kbd>F12</kbd></dd></div></dl></div></li>
+<li><div><span class="lbl">できるもの</span><dl class="set">
+<div><dt>_out/main/（出力プロパティ）</dt><dd>0001.exr …<span class="en">全パス＋Cryptomatte</span></dd></div>
+<div><dt>_out/passes/（ファイル出力ノード）</dt><dd>shot_z0001.png …</dd></div>
+<div><dt></dt><dd>shot_mist0001.png …</dd></div>
+<div><dt></dt><dd>shot_ao0001.png …</dd></div>
+</dl></div></li>
+</ol>
+<div class="note">この手順のとおりに組んで、<b>EEVEE ・ Cycles の両方で</b>出し直して確認済み：z ・ mist ・ ao の PNG は真っ白・真っ黒にならず（白・黒になるのは窓の外の 5% だけ）、本線の EXR には Z ・ミスト・ AO ・ Cryptomatte がそろって入りました。</div>
+<details class="why"><summary>AE でのざっくりした使い道</summary><div class="note">
+<b>ao</b> ＝ 絵の上に <b>乗算</b>。隅と家具の足元が締まる。<br>
+<b>mist</b> ＝ 空気遠近。霧の色の平面を mist を使って奥ほど濃く乗せる。<br>
+<b>z</b> ＝ カメラのボケ（被写界深度）のマップ。<br>
+<b>Cryptomatte</b> ＝ 本線の EXR から。家具ごとのマスク。<br>
+くわしくは第15回（AE 撮影）で。</div></details>
+</div></section>
+
+</div><!-- /steps -->
+
+<section class="exhead" id="twoout">
+  <p class="eyebrow">Output / 2 つの書き出し口</p>
+  <h2>出力プロパティと、ファイル出力ノード</h2>
+  <p>どちらもレンダーの書き出しですが、<b>別々に動く 2 つの口</b>です。コンポジターでファイル出力ノードを使っても、出力プロパティの書き出しは止まりません。テストで確かめた結果です。</p>
+</section>
+<table class="attrs"><thead><tr><th></th><th>出力プロパティ（本線）</th><th>ファイル出力ノード</th></tr></thead><tbody>
+<tr><td>出すもの</td><td>合成した絵＋（EXR なら）全パス・Cryptomatte</td><td>ノードにつないだものだけ（z ・ mist ・ ao）</td></tr>
+<tr><td>書き出し先</td><td>出力プロパティのフォルダ欄</td><td>ノードの「ディレクトリ」</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>F12</kbd></td><td>毎コマ書き出す</td><td>毎コマ書き出す</td></tr>
+<tr class="warn"><td><kbd>F12</kbd>（静止画）</td><td>書き出さない（画像 → 保存で手動）</td><td><b>書き出す</b>（番号なしの shot_z.png など。毎回上書き）</td></tr>
+</tbody></table>
+<div class="steps">
+<section class="step" id="s07">
+<div class="num">Q&amp;A<small>OUTPUT</small></div><div class="body">
+<ol class="todo">
+<li><div><span class="lbl">出力プロパティのフォルダ欄は、空欄にしていい？</span><p style="margin:0">しない方がいいです。<b>空欄でも書き出しは止まらず</b>、Blender を起動したフォルダに 0001.exr … が出ます（テストでは .blend の隣ではなく、起動した場所に出た）。<br>→ <code>//_out/main/</code> のように <b>.blend の隣の専用フォルダ</b>を指定。</p></div></li>
+<li><div><span class="lbl">同じフォルダにしたら、上書きし合う？</span><p style="margin:0">名前が違うので消し合いません（0001.exr と shot_z0001.png）。ただ混ざると探しにくいので、<b>main と passes でフォルダを分ける</b>のがおすすめ。</p></div></li>
+<li><div><span class="lbl">両方書き出すと、時間が倍かかる？</span><p style="margin:0">かかりません。レンダー（絵を作る計算）は 1 回で、書き出しが 2 か所になるだけ。テストで 6 コマ：本線 EXR <b>2.86 秒</b> ／ 本線 JPEG <b>2.82 秒</b>。<br>差が出るのは<b>容量</b>：同じ 6 コマで EXR 15.5 MB、JPEG 0.1 MB（640×360 で測定。フル HD ならおよそ 9 倍）。</p></div></li>
+<li><div><span class="lbl">本線はいらない（PNG だけ欲しい）ときは？</span><p style="margin:0">本線は止められないので、メディアタイプを <b>画像 ／ JPEG</b> にして軽い確認用にしておく。<b>Cryptomatte を使うなら本線は EXR のまま</b>（PNG にはできない）。</p></div></li>
+</ol>
+<div class="note bad"><b>「上書き」を OFF にして出し直すと、PNG が古いまま。</b>出力プロパティ → 出力 → 上書き を OFF にすると、<b>本線のファイルが既にあるコマは丸ごと飛ばされ</b>、ファイル出力ノードの PNG も書き直されません（テストで 2 回目は 0 秒で終わり、全ファイルそのまま）。設定を変えて出し直すときは <b>上書き ON（初期値）</b>のまま。</div>
+<div class="note bad"><b>ファイル出力ノードが何も書き出さない</b>ときは、出力プロパティ → ポストプロセッシング → <b>コンポジティング</b> が OFF になっていないか確認（OFF だと本線しか出ません。テストで確認）。</div>
+</div></section>
+</div><!-- /steps -->
+
+<section class="trouble" id="trouble">
+  <h2>TROUBLE</h2>
+  <p>困ったら、ここから。</p>
+  <div class="tr"><h3>Blender の画像エディターで「深度」を見たら真っ白</h3><p>正常です。中身がメートルの数字なだけ → 書き出すときに <a href="#s02">02</a> で白黒にする。</p></div>
+  <div class="tr"><h3>z の PNG が、まだほとんど白（または黒）</h3><p>範囲マッピングの数字が部屋に合っていない → 白すぎたら「最大から」を増やす、黒すぎたら減らす（<a href="#s02">02</a>）。深度から直接ファイル出力につないでいないかも確認。</p></div>
+  <div class="tr"><h3>ミストが真っ黒</h3><p>ワールドのミストパスが初期値（開始 5 m）→ 開始 0 ／ 深度は奥の壁までの距離に（<a href="#s03">03</a>）。</p></div>
+  <div class="tr"><h3>AO がほぼ真っ白（EEVEE）</h3><p>オクルージョン距離 0.2 m のまま → 1〜2 m に（<a href="#s04">04</a>）。</p></div>
+  <div class="tr"><h3>AO が真っ黒・ザラザラ（Cycles）</h3><p>AO の距離 10 m のまま → 1 m に。ザラザラはデノイズノードで（<a href="#s05">05</a>）。</p></div>
+  <div class="tr"><h3>AO ・法線が全体にうす灰色</h3><p>ファイル出力の「レンダーとして保存」が ON → OFF に（<a href="#s02">02</a>）。</p></div>
+  <div class="tr"><h3>EXR を開いたら合成の絵しか入っていない／EXR にならない</h3><p>出力プロパティのメディアタイプが「画像」のまま → Multi-Layer EXR に（<a href="#s01">01</a>）。</p></div>
+  <div class="tr"><h3>知らないフォルダに 0001.exr がたくさんできた</h3><p>出力プロパティのフォルダ欄が空欄 → <code>//_out/main/</code> を指定（<a href="#twoout">2 つの書き出し口</a>）。</p></div>
+  <div class="tr"><h3>F12 で確認しただけなのに shot_z.png ができた／上書きされた</h3><p>ファイル出力ノードは F12 でも書き出します。確認中はノードを選んで <kbd>M</kbd>（ミュート）にしておくと止まる。</p></div>
+  <div class="tr"><h3>出し直したのに PNG が古いまま／ファイル出力が何も出ない</h3><p>「上書き」が OFF、または「コンポジティング」が OFF（<a href="#twoout">2 つの書き出し口</a>）。</p></div>
+  <div class="tr"><h3>アニメにしたら Z の明るさがコマごとにゆらぐ</h3><p>正規化ノードを使っている → 範囲マッピングで数字を固定（<a href="#s02">02</a>）。</p></div>
+  <div class="tr"><h3>古い Blender（4.1 以前の EEVEE）で AO パスが真っ白</h3><p>当時の EEVEE は、レンダープロパティの「アンビエントオクルージョン」にも ✓ が必要でした。5.x ではこの項目はなく、パスに ✓ だけで出ます（5.2 で確認。旧版はこのページでは未検証）。</p></div>
+</section>
+
+<div class="tail">
+  <p><a class="dl" href="14.html">◂ 第14回にもどる</a></p>
+</div>
+</div>
+</body>
+</html>

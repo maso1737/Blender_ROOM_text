@@ -251,6 +251,7 @@
           <div style="border:1px solid rgba(255,210,122,0.32); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,210,122,0.07),rgba(181,142,255,0.03))">
             <div style="font-family:'IBM Plex Mono',monospace; font-size:9px; letter-spacing:0.3em; color:#FFD27A; margin-bottom:8px">STEP 2 ── 光と影の成分</div>
             <div style="font-size:13.5px; line-height:1.95; color:rgba(248,239,255,0.82)">同じメニューの <span style="font-family:'IBM Plex Mono',monospace; color:#FFD27A">パス ▸ ライト(Light)</span> から <strong style="color:#FF7AC2">シャドウ(Shadow)</strong> や <strong style="color:#FFD27A">放射(Emission)</strong> をON。<span style="color:rgba(181,142,255,0.95); font-size:12px">※「データ」ではなく「ライト」の項目。</span></div>
+            <div style="margin-top:8px; font-size:12.5px; line-height:1.8; color:rgba(248,239,255,0.7)">AO や Z 深度が真っ白・真っ黒になったら ▸ <a href="14_passes.html" style="color:#5AE9FF">補足ページ（AO ・ Z 深度）</a></div>
           </div>
         </div>
 
@@ -285,7 +286,7 @@
             <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.12em; color:#FFD27A; text-align:center; line-height:1.6">STEP<br><span style="font-size:24px; font-family:'Cormorant Garamond',serif; font-style:italic; color:#FF7AC2">1</span></div>
             <div>
               <div style="font-size:15.5px; font-weight:900; color:#F8EFFF">フォーマットを指定する</div>
-              <div style="margin-top:6px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">出力プロパティ ▸ 出力で、ファイルフォーマットを <strong style="color:#5AE9FF">OpenEXRマルチレイヤー</strong> に。すべての分離パスが1枚に内包される魔法のフォーマット。</div>
+              <div style="margin-top:6px; font-size:13px; line-height:2; color:rgba(248,239,255,0.72)">出力プロパティ ▸ 出力で、メディアタイプを <strong style="color:#5AE9FF">Multi-Layer EXR</strong> に（OpenEXRマルチレイヤーになります。4.x まではファイルフォーマットで選択）。すべての分離パスが1枚に内包される魔法のフォーマット。</div>
             </div>
           </div>
           <div data-reveal="1" style="display:grid; grid-template-columns:54px 1fr; gap:18px; border:1px solid rgba(255,210,122,0.22); border-radius:14px; padding:20px 22px; background:linear-gradient(180deg,rgba(255,122,194,0.06),rgba(181,142,255,0.03)); align-items:center">
@@ -328,6 +329,14 @@
       <div style="margin-top:8px; font-size:18px; font-weight:900; line-height:1.5">背景を透過したら、ボケが切れた…を防ぐ</div>
       <div style="margin-top:6px; font-size:13px; line-height:1.9; color:rgba(248,239,255,0.75)">コンポジターのブルームは、透過 ON の PNG だとボケが消えます。「本体」と「ボケだけ」の2本で出して AE で加算すれば、見たままの光に。ノイズを抑えてもボケあしを変えない設定も。</div>
       <div style="margin-top:12px; display:inline-flex; align-items:center; gap:8px; height:30px; padding:0 14px; border:1px solid rgba(255,210,122,0.6); border-radius:8px; font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600; color:#FFD27A">くわしい手順を開く ▸</div>
+    </a>
+
+    <!-- EXTRA: AO / Z passes -->
+    <a href="14_passes.html" data-reveal="1" style="display:block; margin-top:18px; text-decoration:none; border:1px solid rgba(90,233,255,0.45); border-radius:14px; padding:22px 24px; background:linear-gradient(180deg,rgba(90,233,255,0.10),rgba(181,142,255,0.05)); color:#F8EFFF">
+      <div style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.3em; color:#5AE9FF">EXTRA ── AO ・ Z 深度 ・ ミスト</div>
+      <div style="margin-top:8px; font-size:18px; font-weight:900; line-height:1.5">AO や Z 深度が、真っ白・真っ黒・出ない…を直す</div>
+      <div style="margin-top:6px; font-size:13px; line-height:1.9; color:rgba(248,239,255,0.75)">原因はほとんど「初期値のまま」と「値の範囲」。Z はコンポジターで白黒の画像にしてから出す。ミスト・AO の距離の合わせ方、Cycles の AO のザラザラ対策まで、症状から引けます。</div>
+      <div style="margin-top:12px; display:inline-flex; align-items:center; gap:8px; height:30px; padding:0 14px; border:1px solid rgba(90,233,255,0.6); border-radius:8px; font-family:'IBM Plex Mono',monospace; font-size:11.5px; font-weight:600; color:#5AE9FF">くわしい手順を開く ▸</div>
     </a>
 
     <!-- SCREENSHOT SLOT -->

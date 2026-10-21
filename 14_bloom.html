@@ -400,7 +400,9 @@ PNG の深度 16 は、ボケのなだらかなグラデーションに段々が
 </ol>
 <div class="views"><figure><a href="assets/lec14/bloom_glow_only.png" target="_blank"><img src="assets/lec14/bloom_glow_only.png" alt="glow：黒背景にボケだけ" loading="lazy"></a><figcaption>glow ＝ 黒の上にボケだけ</figcaption></figure></div>
 <p class="viewchk"><b>glow が真っ黒なら</b>、グレアの「画像」ではなく「グレア」の出口から線が出ているか確認。</p>
-<details class="why"><summary>出力プロパティの出力先は？</summary><div class="note">いつもの出力（出力プロパティの出力先）もそのまま書き出されます。いらなければ出力先を空のフォルダにしておくか、そちらはプレビュー用と割り切ってOK。</div></details>
+<details class="why"><summary>出力プロパティの出力先は？</summary><div class="note">いつもの出力（出力プロパティの出力先）もそのまま書き出されます。ファイル出力ノードとは別の口で、止めることはできません。<br>
+<b>出力先は空欄にしない</b>（空欄でも書き出しは止まらず、Blender を起動したフォルダに出ます）。<code>//_out/main/</code> のように専用のフォルダを指定し、プレビュー用と割り切ってOK。書き出し時間はほとんど増えません。<br>
+くわしくは <a href="14_passes.html#twoout">2 つの書き出し口</a>（AO ・ Z 深度の補足ページ）。</div></details>
 </div></section>
 
 <section class="step" id="s04">
