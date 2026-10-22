@@ -14,7 +14,7 @@
 | `start.html` | シラバスマップ（全15回一覧）。各回カードから `01.html`〜`15.html` へリンク。 |
 | `01.html`〜`15.html` | 各講義ページ。 |
 | `14_bloom.html` | 第14回の補足「透過 × ブルーム」。14.html の EXTRA カードから入る。書式は light_music 手順書の CSS を流用。画像は `assets/lec14/`。数値は 2026-10-16 に Blender 5.2.1 で実測（作業スクリプトは `C:\_out\bloom_test\`）。 |
-| `14_passes.html` | 第14回の補足「AO ・ Z 深度 ・ ミストが真っ白／真っ黒／出ない」。14.html の 03 セクション内リンクと EXTRA カードから入る。書式は 14_bloom.html と同じ CSS。画像は `assets/lec14/passes_*.png`。数値は 2026-10-21 に Blender 5.2.0 で部屋モデル（`Integrations/Blender/room/Htype_20261021_clean.blend`）を使って実測（作業スクリプトは `Integrations/Blender/room/_passes_test/`）。 |
+| `14_passes.html` | 第14回の補足「AO ・ Z 深度 ・ ミストが真っ白／真っ黒／出ない」。14.html の 03 セクション内リンクと EXTRA カードから入る。書式は 14_bloom.html と同じ CSS。画像は `assets/lec14/passes_*.png`。カラーマネージメントは 表示 sRGB ／ ビュー 標準 ／ ルック なし が前提（2026-10-22 ユーザー指定）。数値は 2026-10-21〜22 に Blender 5.2.0 で部屋モデル（`Integrations/Blender/room/Htype_20261021_clean.blend`）を使って実測（作業スクリプトは `Integrations/Blender/room/_passes_test/`）。 |
 | `support.js` | DC ランタイム（React/`x-dc`）。**自動生成物。手で編集しない。** |
 | `text-edit.js` / `image-slot.js` | 講義ページ上のインライン編集・画像スロット用ツール。 |
 | `_ds/kinetic-stage-design-system-…/` | デザインシステム一式。`index.html` の描画に必須（欠けると動画が出ない）。 |

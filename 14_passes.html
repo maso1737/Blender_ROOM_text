@@ -266,7 +266,7 @@ ol.todo > li > div{min-width:0}
 table.cue td.l:last-child{white-space:normal; min-width:16em}
 kbd{font-family:"JetBrains Mono",monospace; font-size:12px; border:1px solid var(--rule-2); border-bottom-width:2px; border-radius:3px; padding:0 5px; background:var(--panel)}
 </style>
-<style>.views a{display:block}.views img{border:1px solid var(--rule-2)}#noise,#map,#which,#twoout{scroll-margin-top:22px}.viewchk.see::before{content:"見え方"}</style>
+<style>.views a{display:block}.views img{border:1px solid var(--rule-2)}#noise,#map,#which,#twoout,#normal{scroll-margin-top:22px}.viewchk.see::before{content:"見え方"}</style>
 </head>
 <body>
 <div class="wrap">
@@ -280,6 +280,8 @@ kbd{font-family:"JetBrains Mono",monospace; font-size:12px; border:1px solid var
     各ステップは <b>開く場所・打つ値・つなぐ → 見え方</b> の順です。<br>
     <span class="newtag">新規</span> ＝ここで新しく出す　<span class="oldtag">既存</span> ＝もう置いてある。<b>つなぐ</b> は 1 行 1 本。<br>
     「仕組み」は折りたたんであります。やって見えてから開けばOK。</div>
+  <div class="note" style="margin-top:10px"><b>テストしたときの設定</b>（レンダープロパティ → カラーマネージメント）<br>
+    表示 <b>sRGB</b> ／ ビュー <b>標準</b> ／ ルック <b>なし</b>。ここが違うと、レンダーの絵やプレイブラストの色の見え方が変わります（<a href="#normal">ノーマル</a> を参照）。</div>
   <p style="margin-top:14px; display:flex; flex-wrap:wrap; gap:10px">
     <a class="dl" href="14.html">◂ 第14回にもどる</a>
   </p>
@@ -304,7 +306,9 @@ kbd{font-family:"JetBrains Mono",monospace; font-size:12px; border:1px solid var
   <tr class="warn"><td>AO が真っ白（EEVEE）</td><td>初期値の <b>オクルージョン距離 0.2 m</b> が短すぎて、輪郭にしか影が出ない</td><td><a href="#s04">04</a></td></tr>
   <tr class="warn"><td>AO が真っ黒（Cycles）</td><td>初期値の <b>AO の距離 10 m</b> が部屋より大きく、どこも「囲まれている」扱い</td><td><a href="#s05">05</a></td></tr>
   <tr class="warn"><td>AO がザラザラ（Cycles）</td><td>レンダーのデノイズは <b>AO パスには効かない</b></td><td><a href="#s05">05</a></td></tr>
-  <tr class="warn"><td>AO ・法線がうす灰色に濁る</td><td>ファイル出力の <b>レンダーとして保存</b> が ON（色の見え方の補正が掛かる）</td><td><a href="#s02">02</a></td></tr>
+  <tr class="warn"><td>AO がうす灰色に濁る</td><td>ビューが Filmic ／ AgX のまま、ファイル出力の <b>レンダーとして保存</b> が ON</td><td><a href="#s02">02</a></td></tr>
+  <tr class="warn"><td>ノーマルが赤・青・黒だけ</td><td>ビューレイヤーのノーマルは <b>マイナスの値</b>を含む。PNG ではマイナスが黒になる</td><td><a href="#s08">N1</a></td></tr>
+  <tr class="warn"><td>プレイブラストのノーマルが濁る</td><td>ビューが Filmic ／ AgX。<b>標準</b>なら PNG でも濁らない</td><td><a href="#s09">N2</a></td></tr>
   <tr class="warn"><td>パスがファイルに無い</td><td>出力が <b>画像（PNG など）</b>だと、合成した絵 1 枚しか書き出されない</td><td><a href="#s01">01</a></td></tr>
   </tbody></table>
 </section>
@@ -343,6 +347,8 @@ kbd{font-family:"JetBrains Mono",monospace; font-size:12px; border:1px solid var
 </ol>
 <div class="note bad"><b>メディアタイプが「画像」（PNG など）のままだと、パスは 1 つも書き出されません。</b>書き出されるのは合成した絵 1 枚だけ（テストで確認）。</div>
 <div class="note"><b>フォルダ欄は空欄にしない。</b>あとの 02 で作る「ファイル出力」ノードとは別の書き出し口です。空欄でも書き出しは止まらず、思わぬ場所に出ます → <a href="#twoout">2 つの書き出し口</a></div>
+<details class="why"><summary>色深度は Float（ハーフ）でいい？</summary><div class="note">いいです。容量が約 25% 減ります（テストで 2.59 MB → 1.95 MB）。<br>
+ハーフにしても、<b>Z ・ミスト・ Cryptomatte は Blender が自動で Float（フル）のまま</b>書き出します（テストで確認）。ハーフになるのは絵と AO などの色のパスだけで、見た目は変わりません。</div></details>
 <details class="why"><summary>Blender 4 までと何が違う？</summary><div class="note">5.x では、出力の形式を選ぶ前に <b>メディアタイプ</b>（画像 ／ Multi-Layer EXR ／ 動画）を選ぶ形になりました。古い資料の「ファイルフォーマットで OpenEXR マルチレイヤーを選ぶ」は、5.x ではここのことです。</div></details>
 <details class="why"><summary>ファイル出力ノードで EXR を出すのはダメ？</summary><div class="note">出せますが、<b>本線の EXR と中身の形が違います</b>（テストで確認）。<br>
 本線：全部のパスが 1 つにまとまり、Z は <code>Depth.Z</code> という名前。Cryptomatte の情報も入る。<br>
@@ -434,10 +440,13 @@ kbd{font-family:"JetBrains Mono",monospace; font-size:12px; border:1px solid var
 </ol>
 <p class="viewchk see"><span><b>手前が黒、奥へ行くほど白</b>になれば成功。窓の外（何も無いところ）は白になります。</span></p>
 <div class="note"><b>0.5 と 6 の決め方：</b>カメラからいちばん手前の物までが「最小から」、いちばん奥の壁までが「最大から」（単位 m）。部屋ならこの数字から始めて、<b>奥の壁が白く飛んでいたら「最大から」を増やす</b>、全体が黒っぽければ減らす。手前を白にしたいときは「最小へ 1 ／ 最大へ 0」と逆に。</div>
-<div class="note bad"><b>「レンダーとして保存」は必ず OFF。</b>ON のままだと、絵を見やすくする補正（Filmic ／ AgX）が AO にも掛かり、<b>いちばん白いところでも 0.81 の灰色</b>に濁ります（テストで確認。OFF なら 1.0 の白）。</div>
+<div class="note bad"><b>「レンダーとして保存」は OFF にしておく。</b>ON だと、カラーマネージメントの<b>ビュー</b>が AO にも掛かります。<br>
+ビュー <b>標準</b>：ON でも OFF でも同じ（テストで差なし）。<br>
+ビュー <b>Filmic ／ AgX</b>（新しく作ったファイルの初期値は AgX）：<b>いちばん白いところでも 0.81 ／ 0.77 の灰色</b>に濁る。<br>
+→ どのビューでも安全なように OFF。</div>
 <div class="views">
-  <figure><a href="assets/lec14/passes_ao_asrender.png" target="_blank"><img src="assets/lec14/passes_ao_asrender.png" alt="レンダーとして保存ONのAO：全体が灰色に濁る" loading="lazy"></a><figcaption>✕ レンダーとして保存 ON：白が灰色に</figcaption></figure>
-  <figure><a href="assets/lec14/passes_ao_eevee_2.png" target="_blank"><img src="assets/lec14/passes_ao_eevee_2.png" alt="レンダーとして保存OFFのAO：白がしっかり白" loading="lazy"></a><figcaption>◯ OFF：白は白のまま</figcaption></figure>
+  <figure><a href="assets/lec14/passes_ao_asrender.png" target="_blank"><img src="assets/lec14/passes_ao_asrender.png" alt="レンダーとして保存ONのAO：全体が灰色に濁る" loading="lazy"></a><figcaption>✕ ビュー Filmic ＋ レンダーとして保存 ON：白が灰色に</figcaption></figure>
+  <figure><a href="assets/lec14/passes_ao_eevee_2.png" target="_blank"><img src="assets/lec14/passes_ao_eevee_2.png" alt="レンダーとして保存OFFのAO：白がしっかり白" loading="lazy"></a><figcaption>◯ OFF（またはビュー 標準）：白は白のまま</figcaption></figure>
 </div>
 <details class="why"><summary>仕組み：なぜ Z は真っ白？</summary><div class="note">
 Z（深度）の中身は <b>カメラからの距離（m）</b>です。テストの部屋では 0.76 〜 4.5 m。何も無い窓の外は 10,000,000,000 という特大の数字。<br>
@@ -565,10 +574,77 @@ EXR の中の Z は数字のまま正しく入っているので、壊れてい�
 <li><div><span class="lbl">出力プロパティのフォルダ欄は、空欄にしていい？</span><p style="margin:0">しない方がいいです。<b>空欄でも書き出しは止まらず</b>、Blender を起動したフォルダに 0001.exr … が出ます（テストでは .blend の隣ではなく、起動した場所に出た）。<br>→ <code>//_out/main/</code> のように <b>.blend の隣の専用フォルダ</b>を指定。</p></div></li>
 <li><div><span class="lbl">同じフォルダにしたら、上書きし合う？</span><p style="margin:0">名前が違うので消し合いません（0001.exr と shot_z0001.png）。ただ混ざると探しにくいので、<b>main と passes でフォルダを分ける</b>のがおすすめ。</p></div></li>
 <li><div><span class="lbl">両方書き出すと、時間が倍かかる？</span><p style="margin:0">かかりません。レンダー（絵を作る計算）は 1 回で、書き出しが 2 か所になるだけ。テストで 6 コマ：本線 EXR <b>2.86 秒</b> ／ 本線 JPEG <b>2.82 秒</b>。<br>差が出るのは<b>容量</b>：同じ 6 コマで EXR 15.5 MB、JPEG 0.1 MB（640×360 で測定。フル HD ならおよそ 9 倍）。</p></div></li>
+<li><div><span class="lbl">EXR の中の Z（真っ白）は、shot_z.png があれば消していい？</span><p style="margin:0">AE では <b>使わずに消して OK</b>（プロジェクトから外すだけで、EXR ファイルはそのまま）。<br>
+ただ Blender 側で <b>入れない設定にはできません</b>。ビューレイヤーの Z を切ると、コンポジターの「深度」も消えて shot_z.png が作れなくなるため。EXR は「ビューレイヤーで ✓ したパスは全部入る」作りです。<br>
+容量は EXR の約 1/4（テストで 2.59 MB → Z なし 1.88 MB）。気になるなら色深度を Float（ハーフ）に（<a href="#s01">01</a>）。<br>
+EXR の Z は真っ白に見えても中身は正しい距離（m）なので、あとで「手前と奥の範囲を変えたい」ときの<b>保険</b>になります（AE のレベル補正で白の位置を 4〜6 に）。<br>
+同じように <code>Composite.Combined</code> と <code>ViewLayer.Combined</code>、ミスト、AO も PNG と二重に入りますが、使うほうだけ使えば大丈夫です。</p></div></li>
 <li><div><span class="lbl">本線はいらない（PNG だけ欲しい）ときは？</span><p style="margin:0">本線は止められないので、メディアタイプを <b>画像 ／ JPEG</b> にして軽い確認用にしておく。<b>Cryptomatte を使うなら本線は EXR のまま</b>（PNG にはできない）。</p></div></li>
 </ol>
 <div class="note bad"><b>「上書き」を OFF にして出し直すと、PNG が古いまま。</b>出力プロパティ → 出力 → 上書き を OFF にすると、<b>本線のファイルが既にあるコマは丸ごと飛ばされ</b>、ファイル出力ノードの PNG も書き直されません（テストで 2 回目は 0 秒で終わり、全ファイルそのまま）。設定を変えて出し直すときは <b>上書き ON（初期値）</b>のまま。</div>
 <div class="note bad"><b>ファイル出力ノードが何も書き出さない</b>ときは、出力プロパティ → ポストプロセッシング → <b>コンポジティング</b> が OFF になっていないか確認（OFF だと本線しか出ません。テストで確認）。</div>
+</div></section>
+</div><!-- /steps -->
+
+<section class="exhead" id="normal">
+  <p class="eyebrow">Normal / 2 つのノーマル</p>
+  <h2>ビューレイヤーのノーマルと、プレイブラストのノーマルは別物</h2>
+  <p>どちらも「面の向き」を色にしたものですが、<b>向きの基準</b>と<b>値の範囲</b>が違うので、見た目も違います。</p>
+</section>
+<table class="attrs"><thead><tr><th></th><th>ビューレイヤーのノーマル</th><th>プレイブラストのノーマル</th></tr></thead><tbody>
+<tr><td>出し方</td><td>ビューレイヤー → パス → データ → ノーマル</td><td>ソリッド表示 → 照明 MatCap → <code>check_normal+y</code> でプレイブラスト</td></tr>
+<tr><td>向きの基準</td><td><b>ワールド</b>（部屋）。カメラが動いても同じ壁は同じ色</td><td><b>カメラ（画面）</b>。カメラが回ると色も変わる</td></tr>
+<tr><td>値</td><td>−1 〜 1（<b>マイナスあり</b>）。データ</td><td>0 〜 1 の色。見るための絵</td></tr>
+<tr class="warn"><td>PNG にすると</td><td>マイナスが黒になり、赤・青・黒だけに</td><td>ビューが Filmic ／ AgX だと濁る</td></tr>
+</tbody></table>
+<div class="views" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+  <figure><a href="assets/lec14/passes_normal_raw.png" target="_blank"><img src="assets/lec14/passes_normal_raw.png" alt="ビューレイヤーのノーマルをそのままPNGに：赤青黒だけ" loading="lazy"></a><figcaption>✕ ビューレイヤーのノーマル → そのまま PNG：画面の 44% が真っ黒</figcaption></figure>
+  <figure><a href="assets/lec14/passes_normal_01.png" target="_blank"><img src="assets/lec14/passes_normal_01.png" alt="ビューレイヤーのノーマルを0〜1に直したPNG" loading="lazy"></a><figcaption>◯ ×0.5＋0.5 で 0〜1 に直して PNG：真っ黒 0%</figcaption></figure>
+  <figure><a href="assets/lec14/passes_matcap_std.png" target="_blank"><img src="assets/lec14/passes_matcap_std.png" alt="MatCapノーマル・ビュー標準" loading="lazy"></a><figcaption>◯ MatCap ノーマル ／ ビュー 標準</figcaption></figure>
+  <figure><a href="assets/lec14/passes_matcap_agx.png" target="_blank"><img src="assets/lec14/passes_matcap_agx.png" alt="MatCapノーマル・ビューAgX：濁る" loading="lazy"></a><figcaption>✕ MatCap ノーマル ／ ビュー AgX：濁る</figcaption></figure>
+</div>
+<div class="steps">
+<section class="step" id="s08">
+<div class="num">N1<small>PASS</small></div><div class="body">
+<h2>ビューレイヤーのノーマルを PNG にする（コンポジター）</h2>
+<p class="goal">EXR のまま AE で使うならこの作業はいりません（EXR にはマイナスもそのまま入る）。PNG でそろえたいときだけ。</p>
+<ol class="todo">
+<li><div><span class="lbl">出すノード</span><div class="flow"><span class="nd">ベクトル演算<em>Vector Math</em><span class="newtag">新規</span></span></div><p style="margin:6px 0 0; font-size:13.5px; color:var(--ink-2)">追加 → ユーティリティ → ベクトル → ベクトル演算</p></div></li>
+<li><div><span class="lbl">ベクトル演算の値</span><dl class="set">
+<div><dt>種類</dt><dd>積和算<span class="en">Multiply Add</span></dd></div>
+<div><dt>乗数</dt><dd>0.5 ／ 0.5 ／ 0.5</dd></div>
+<div><dt>加数</dt><dd>0.5 ／ 0.5 ／ 0.5</dd></div>
+</dl></div></li>
+<li><div><span class="lbl">ファイル出力</span><dl class="set"><div><dt>画像 の ＋ で足す</dt><dd>normal（カラーモード RGB）</dd></div></dl></div></li>
+<li><div><span class="lbl">つなぐ</span><ul class="wires">
+<li>レンダーレイヤー ノーマル<span class="to">→</span>ベクトル演算 ベクトル</li>
+<li>ベクトル演算 ベクトル<span class="to">→</span>ファイル出力 normal</li>
+</ul></div></li>
+</ol>
+<p class="viewchk see"><span><b>床・壁・天井がパステル調の色に分かれれば成功。</b>真っ黒な面がなくなります。</span></p>
+</div></section>
+
+<section class="step" id="s09">
+<div class="num">N2<small>PLAYBLAST</small></div><div class="body">
+<h2>プレイブラストのノーマルは、ビューを「標準」に</h2>
+<ol class="todo">
+<li><div><span class="lbl">レンダープロパティ → カラーマネージメント</span><dl class="set">
+<div><dt>表示</dt><dd>sRGB</dd></div>
+<div><dt>ビュー</dt><dd><b>標準</b><span class="en">Standard</span></dd></div>
+<div><dt>ルック</dt><dd>なし</dd></div>
+</dl></div></li>
+</ol>
+<table class="attrs"><thead><tr><th>ビュー ／ 形式</th><th>色の鮮やかさ</th><th>標準 PNG との差</th></tr></thead><tbody>
+<tr><td>標準 ／ PNG</td><td><b>0.61</b></td><td>—</td></tr>
+<tr><td>標準 ／ EXR Float（フル）</td><td>0.61</td><td>0.0002（ほぼ同じ）</td></tr>
+<tr><td>標準 ／ EXR Float（ハーフ）</td><td>0.61</td><td>0.0002（ほぼ同じ）</td></tr>
+<tr class="warn"><td>Filmic ／ PNG</td><td>0.53</td><td>濁る</td></tr>
+<tr class="warn"><td>AgX ／ PNG</td><td>0.43</td><td>もっと濁る</td></tr>
+</tbody></table>
+<div class="note"><b>濁る原因は EXR かどうかではなく、ビュー</b>でした（テストで確認）。ビューが標準なら PNG で十分。Filmic ／ AgX のとき EXR だと濁らないのは、EXR にはビューが掛からないため。</div>
+<details class="why"><summary>AE で使うならどっち？</summary><div class="note">
+<b>ビューレイヤーのノーマル</b> ＝ 部屋基準なので、カメラが動いても「この壁はこっち向き」が変わらない。<b>動くカメラで、向きで光を足したい</b>ときに。<br>
+<b>プレイブラストのノーマル</b> ＝ 画面基準で、見た目がわかりやすい。<b>止め絵や、画面の向きでグラデを足したい</b>ときに手軽。</div></details>
 </div></section>
 </div><!-- /steps -->
 
@@ -580,7 +656,9 @@ EXR の中の Z は数字のまま正しく入っているので、壊れてい�
   <div class="tr"><h3>ミストが真っ黒</h3><p>ワールドのミストパスが初期値（開始 5 m）→ 開始 0 ／ 深度は奥の壁までの距離に（<a href="#s03">03</a>）。</p></div>
   <div class="tr"><h3>AO がほぼ真っ白（EEVEE）</h3><p>オクルージョン距離 0.2 m のまま → 1〜2 m に（<a href="#s04">04</a>）。</p></div>
   <div class="tr"><h3>AO が真っ黒・ザラザラ（Cycles）</h3><p>AO の距離 10 m のまま → 1 m に。ザラザラはデノイズノードで（<a href="#s05">05</a>）。</p></div>
-  <div class="tr"><h3>AO ・法線が全体にうす灰色</h3><p>ファイル出力の「レンダーとして保存」が ON → OFF に（<a href="#s02">02</a>）。</p></div>
+  <div class="tr"><h3>AO が全体にうす灰色</h3><p>ビューが Filmic ／ AgX で「レンダーとして保存」が ON → OFF に（<a href="#s02">02</a>）。</p></div>
+  <div class="tr"><h3>ノーマルの PNG が赤・青・黒だけ</h3><p>ビューレイヤーのノーマルはマイナスを含む → ×0.5＋0.5 してから PNG に（<a href="#s08">N1</a>）。EXR のままなら問題なし。</p></div>
+  <div class="tr"><h3>プレイブラストのノーマルが濁る</h3><p>カラーマネージメントのビューが Filmic ／ AgX → 標準 に（<a href="#s09">N2</a>）。</p></div>
   <div class="tr"><h3>EXR を開いたら合成の絵しか入っていない／EXR にならない</h3><p>出力プロパティのメディアタイプが「画像」のまま → Multi-Layer EXR に（<a href="#s01">01</a>）。</p></div>
   <div class="tr"><h3>知らないフォルダに 0001.exr がたくさんできた</h3><p>出力プロパティのフォルダ欄が空欄 → <code>//_out/main/</code> を指定（<a href="#twoout">2 つの書き出し口</a>）。</p></div>
   <div class="tr"><h3>F12 で確認しただけなのに shot_z.png ができた／上書きされた</h3><p>ファイル出力ノードは F12 でも書き出します。確認中はノードを選んで <kbd>M</kbd>（ミュート）にしておくと止まる。</p></div>
